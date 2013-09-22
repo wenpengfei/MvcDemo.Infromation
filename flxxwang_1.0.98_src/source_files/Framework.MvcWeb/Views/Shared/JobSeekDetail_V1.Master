@@ -1,0 +1,232 @@
+﻿<%@ Master Language="C#" Inherits="Infomation.Core.Mvc.JobSeekDetailViewMasterPage" %>
+
+<%@ Import Namespace="Infomation.Core.Extensions" %>
+<%@ Import Namespace="Framework.Extensions" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title><%=Job.Resume.RealName %> - 【<%=Job.Resume.RealName %>简历】 - <%=CurrentCity.Name %><%=SiteInfo.Name%></title>
+    <meta name="keywords" content="<%=Job.Resume.RealName %>,<%=Job.Resume.RealName %>简历" />
+    <meta name="description" content="<%=Job.Resume.RealName %>,求销售代表,交际能力较强,与人沟通方面不错,积极努力,认真负责,为目标打拼!,太平人寿业务员，电话销售人寿保险，约见客户，促成签单，维护客户，为客户做后续工作！课程顾问，主" />
+    <link type="text/css" rel="stylesheet" href="/Areas/fenlei/Content/ui6/zp/detail20110531.css" />
+
+    <script type="text/javascript" src="/Scripts/jquery-1.5.1-vsdoc.js"></script>
+    <script type="text/javascript" src="/Scripts/framework/framework.js"></script>
+    <%--<script type="text/javascript" src="/Scripts/framework/cookie.js?v20110101"></script>--%>
+    <%--<script type="text/javascript" src="/Scripts/area.js?v20110101"></script>--%>
+    <script type="text/javascript" src="/Areas/Fenlei/Scripts/Infomation.js?v20110101"></script>
+
+    <script type="text/javascript" src="/Areas/Fenlei/Scripts/zp/zpzhushou.js"></script>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <%--<form id="form1" runat="server">--%>
+    <div id="topbar"></div>
+    <%--<script type="text/javascript">
+        boot.require('business.topbar', function (Frame, topbar) {
+            topbar.init(); 
+        });
+    </script>--%>
+    <div class="w" id="header">
+        <a href="<%=Utils.RelativeWebRoot %>" id="minlogo" title="返回<%=SiteInfo.Name%>"><%=SiteInfo.Name%></a>
+        <span id="crumbs">
+            <%--<a href="/"><%=Job.City.Name %><%=SiteInfo.Name%></a>
+            <a href='<%=Job.SmallCategory.Url %>'><%=Job.City.Name %><%=Job.SmallCategory.Name %></a>
+            <a href="/hzshangcheng/qzyewu/">上城<%=Job.SmallCategory.Name %></a>
+            <a href="/xiaoyinghz/qzyewu/">小营销售</a>
+            <a href="http://hz.58.com/qzyewu/6434779547011x.shtml">张永虹的简历</a>--%>
+            <%foreach (var path in Job.InfoPath)
+              { %>
+              <%--<a href="<%=path.Url %>"><%=path.Text %></a>--%>
+              <%=path.Link(Html) %>
+            <%} %>
+        </span>
+    </div>
+
+    <div id="action"></div>
+        <div class="w headline">
+        <h1><%=Job.Resume.RealName %></h1>
+        <span class="sm">(<%=Job.Resume.SexName %>,<%=Job.Resume.Age %>岁)</span>
+        <div class="other">
+            发布时间：<%=Job.DateCreated.ToString("yyyy-MM-dd") %>
+            <span id="edit"></span>
+            <span></span>
+            浏览<em id="totalcount">0</em>次<span>|</span>
+            <a href="javascript:setbg('修改信息',520,200,'http://my.58.com/updateinfo/?infoid=6434779547011')">修改</a>
+        </div>
+    </div>
+
+    <div class="w">
+	    <div class="conleft">
+		    <div class="zcon">
+                <table width="" cellpadding="0" cellspacing="0" class="table">
+                    <tr>
+                        <th style="width:80px">求 职 位：</th><td style="width:140px"><%=Job.Resume.JobName %></td>
+                        <th style="width:80px">学　　历：</th><td style="width:140px"><%=Job.Resume.Education.DisplayName() %></td>
+                        <th style="width:80px">期望薪资：</th><td style="width:140px"><%=Job.Resume.Wage %></td>
+                    </tr>
+                    <tr>
+                        <th>目前职位：</th><td><%=Job.Resume.CurrentJob!=null?Job.Resume.CurrentJob.JobName:"无"%>&nbsp;</td>
+                        <th>工作年限：</th><td><%=Job.Resume.WorkYearStart %>-<%=Job.Resume.WorkYearEnd %>年</td>
+                        <th>现居住地：</th><td><%=Job.Resume.NowCity.Name %><%=Job.Resume.NowRegion.Name %><%=Job.Resume.NowCircle.Name %></td>
+                    </tr>
+                    <tr id="t_rowt" style="display:none">
+                        <th>电　　话：</th>
+                        <td colspan="3">
+                            <span class="phone" id="t_phone"></span>&nbsp;
+                            <span class="belong">(归属地：杭州)</span>
+                        </td>
+                        <th>电子邮箱：</th>
+                        <td><span id="t_email"></span></td>
+                    </tr>
+                    <tr>
+                        <th>概括自己：</th>
+                        <td colspan="5" style="width:580px">
+                            <%=Job.Resume.AboutMe %>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="caozuo" id="checklink">
+                <input class="in" type="button" value="查看联系方式" onclick="javascript:setbg('查看联系方式',450,110,'http://jianli.58.com/resumemsg/?resumeid=26337653134720&f=1&rand_code=' +  Math.random())"/>
+            </div>
+            <div class="function" id="t_rowb" style="display:none">
+				<a href="javascript:setbg('面试邀请',350,150,'http://qy.58.com/UI/Company/SendJobInvite.aspx?InfoID=6434779547011&f=1')"><span>发送面试邀请</span></a>
+                <a href="javascript:setbg('把该简历发送到手机',400,200,'http://my.58.com/downloadinfo/inputmobile/6434779547011/')"><span>转发到手机</span></a>
+                <a href="javascript:setbg('转发到邮箱',500,170,'http://jianli.58.com/outsendresume/?id=26337653134720')"><span>转发到邮箱</span></a>
+                <a href="http://jianli.58.com/saveresume?rid=26337653134720"><span>保存到电脑</span></a>
+            </div>
+            <h3><%=Job.Resume.RealName %>工作经验</h3><%=Job.Resume.RealName %>
+            <div class="description">
+                <p>
+                    2010年1月 - 2010年6月<span>|</span>
+                    深圳创明贸易杭州分公司<span>|</span>
+                    销售代表<span>|</span>
+                    2000-3000元/月<br />
+                    主要负责产品的销售以及售后服务，达成门店每月目标。
+                </p>
+            </div>
+            <div class="description">
+                <p>
+                    2010年11月 - 2011年1月<span>|</span>
+                    杭州创想教育咨询有限公司<span>|</span>
+                    销售代表<span>|</span>
+                    2000-3000元/月<br />
+                    课程顾问，主要负责约访家长到中心体验课程，并促成家长做会员，以及后期维护。
+                </p>
+            </div>
+            <div class="description">
+                <p>
+                    2011年2月 - 2011年6月<span>|</span>
+                    13857130890<span>|</span>
+                    保险经纪人<span>|</span>
+                    2000-3000元/月<br />
+                    太平人寿业务员，电话销售人寿保险，约见客户，促成签单，维护客户，为客户做后续工作！
+                </p>
+            </div>
+            <h3>张永虹教育经历</h3>
+            <div class="description">
+                <p>
+                    2003年9月 - 2006年6月<span>|</span>
+                    浙江省临安市昌化中学<span>|</span>
+                    理科
+                </p>
+                <p>
+                    2007年9月 - 2011年6月<span>|</span>
+                    浙江工业大学之江学院<span>|</span>
+                    广播电视新闻学
+                </p>
+            </div>
+            <h3>张永虹语言能力</h3>
+            <div class="description">
+                <p>英语：一般</p>
+            </div>
+		    <script type="text/javascript">
+		        var img_list = new Array();
+		        img_list.push('http://3.pic.58control.cn/jianlipic/big/n_12287070149124.jpg');
+		        img_list.push('http://1.pic.58control.cn/jianlipic/big/n_12287103371012.jpg');
+            </script>
+            <div id="img_player"></div>
+            <div class="clear"></div>
+        </div>
+	    <div class="conright">
+    	    <div class="rightbox pb50" id="search_box_ui_position" style="display:none;"></div>
+            <div class="rightbox">
+                <h4>销售相关简历</h3>
+                <ul class="rlist1">
+                    <%--<li><span>07-17</span><a href='http://hz.58.com/yewu/5331476684422x.shtml'>房产经纪人</a></li>
+                    <li><span>07-17</span><a href='http://hz.58.com/yewu/6511958601606x.shtml'>电话销售相信自己的来</a></li>
+                    <li><span>07-17</span><a href='http://hz.58.com/yewu/6491600965124x.shtml'>面料业务员</a></li>
+                    <li><span>07-17</span><a href='http://hz.58.com/yewu/6245695957762x.shtml'>房产经纪人</a></li>
+                    <li><span>07-17</span><a href='http://hz.58.com/yewu/6511953383940x.shtml'>置业顾问</a></li>
+                    <li><span>07-17</span><a href='http://hz.58.com/yewu/6511932848389x.shtml'>电话销售</a></li>--%>
+                    <%foreach (var item in JobSeek.SelectTop(6))
+                      {%>
+                        <li><span><%=item.DateCreated.ToString("MM-dd") %></span><a href='<%=item.Link.Url(Url) %>'><%=item.Resume.JobName %></a></li>
+                    <%} %>
+                </ul>
+            </div>
+            <div id="displayt58com"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="w footer">
+        <p class="shenming">
+            <a href="<%=Utils.RelativeWebRoot %>my/<%=Job.UserId %>/">看看<strong><%=Job.Resume.RealName %></strong>在<%=SiteInfo.Name%>还发布了些什么信息&raquo;</a><br />
+            <b>申明：</b>
+            该信息由<%=Job.Resume.RealName %>自行发布，其所涉及内容由<%=Job.Resume.RealName %>负责，信息真实性请用户自行辨识。请注意查看<%=Job.Resume.RealName %>是否通过<%=SiteInfo.Name%>身份证验证。
+        </p>
+        &copy; 2010 flxxwang.com <a href="http://www.58.com/about/" target="_blank">帮助中心</a>
+    </div>
+
+    <script type="text/javascript">
+        document.domain = '58.com';
+        var userid = GetCookieValue("UserID");
+        var username = GetCookieValue("UserName");
+        Counter58.userid = userid;
+        Counter58.uname = username;
+        Counter58.infoid = 6434779547011;
+        Counter58.listControl = "userlist";
+        Counter58.totalControl = "totalcount";
+        Counter58.create();
+        if (GetCookieValue("UserID") == "22272781") {
+            document.getElementById("edit").innerHTML = '<span>|</span><a href="http://my.58.com/infotopmanagement/6434779547011" target="_blank">置顶</a>';
+        }
+    </script>
+    <script type="text/javascript" src="http://links.58.com/s.js"></script> 
+    <div id="zpzs" class="history" style="display:none;top:133px;position:absolute;">
+        <script type="text/javascript" >
+            showzpzhushou("http://jianli.58.com/ajax/zpassistant");
+        </script>
+    </div>
+    <%--</form>--%>
+
+    <asp:ContentPlaceHolder ID="Scripts" runat="server"/>
+
+    <div style="display:none">
+    <%--谷歌、百度、Soso、youdao等广告--%>
+    <%--<script type="text/javascript">
+        var _gaq = _gaq || []; var site_name = "58"; var page_type = "detail";
+        _gaq.push(['pageTracker._setAccount', 'UA-877409-4']);
+        _gaq.push(['pageTracker._setDomainName', '.58.com']);
+        _gaq.push(['pageTracker._setAllowLinker', true]);
+        _gaq.push(['pageTracker._addOrganic', 'sogou', 'query']);
+        _gaq.push(['pageTracker._addOrganic', 'baidu', 'word']);
+        _gaq.push(['pageTracker._addOrganic', 'soso', 'w']);
+        _gaq.push(['pageTracker._addOrganic', 'youdao', 'q']);
+        boot.require('business.gaq, util.js', function (Frame, gaq, js) {
+            _gaq.push(['pageTracker._trackPageview', gaq("searchjob", "/detail/searchjob/qzyewu/")]);
+            Frame.init(function () {
+                js.append(('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js');
+                js.append('http://track.58.com/referrer2.js');
+            });
+        });
+    </script>--%>
+    </div>
+</body>
+</html>

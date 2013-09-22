@@ -1,0 +1,18 @@
+﻿#GGS_cal_ibg{width:229px;position:absolute;background-color:#FAFAFA;display:none; overflow:hidden}
+.GGS_cal_weekday{width:33px;height:18px;line-height:18px;text-align:center;float:left;color:#666;font-size:12px;}
+.GGS_cal_day{width:33px;height:18px;line-height:18px;text-align:center;float:left;font-size:12px;}
+.GGS_cal_curday{width:33px;height:18px; background:#d4e4f1;line-height:18px;color:#f00;text-align:center;float:left;font-size:12px;}
+.GGS_cal_sltday{width:33px;height:18px;line-height:18px; background:#d4e4f1;text-align:center;float:left;font-size:12px;}
+.GGS_cal_slt2day{width:33px;height:18px;line-height:18px;background-color:#d4e4f1;text-align:center;float:left;font-size:12px;}
+.clearfix:after { content: '.'; display: block; height: 0; clear: both; visibility: hidden; }
+.clearfix { width:231px;display: inline-table;}
+/* Hides from IE-mac \\*/
+ * html .clearfix {height: 1%;} .clearfix {display: block;}
+/* End hide from IE-mac */
+.f12{font-size:12px;}
+.ny{color:#000;}
+.nyr{color:#61829c;}
+.rl_b1{border:1px solid #486e92; background:#fff;}
+.rl_dt{color:#fff; background:#06c;}
+.rl_xz{color:#39c; background:#9cf; border-left:1px solid #39c; border-top:1px solid #39c;}
+.rl_hg{border:1px solid #f06;}

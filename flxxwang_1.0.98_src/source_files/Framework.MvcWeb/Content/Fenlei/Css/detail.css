@@ -1,0 +1,408 @@
+@charset "utf-8";
+/* 
+	58.com CopyRight All Reserved  
+	Create by Wendy on 2009-12-26 
+*/
+body,dl,ol,ul,li,dt,dd,p,h2,h3,h4,table,td,th{margin:0;padding:0;list-style:none;}
+body{background:#fff;font-family:verdana,"宋体";color:#000; font-size:14px;}
+a{color:#00C;text-decoration:none;cursor:pointer;}
+a:hover{color:#FF0508;text-decoration:underline;}
+a.link_red{color:#ff0508;}
+.clear{clear:both;font-size:0;height:0;overflow:hidden}.hc{display:none}.sc{display:block} img{ border:none;} .fr{ float:right;}.red{color:#ff0508;}
+.warp{width:1000px;margin:0 auto;}
+.redfont{ font-style:normal; color:#f00; font-size:14px; font-weight:bold}.font12{ font-size:12px}
+/* icon */
+.icon1{ background:url(http://pic2.58.com/n/images/txbackground.gif) no-repeat -7px -154px; display:inline-block; width:22px; height:17px; vertical-align:bottom; margin-right:5px;*margin-right:10px; }
+.icon2{ background:url(http://pic2.58.com/n/images/txbackground.gif) no-repeat -9px -188px; display:inline-block; width:17px; height:17px; vertical-align:bottom; margin-right:5px; }
+.icon3{ background:url(http://pic2.58.com/n/images/txbackground.gif) no-repeat -11px -223px; display:inline-block; width:14px; height:17px; vertical-align:bottom; margin-right:5px;*margin-right:10px; }
+.icon4{ background:url(http://pic2.58.com/n/images/txbackground.gif) no-repeat -7px -258px; display:inline-block; width:22px; height:17px; vertical-align:bottom;}
+.icon5{ background:url(http://pic2.58.com/n/images/txbackground.gif) no-repeat -7px -292px; display:inline-block; width:25px; height:17px; vertical-align:bottom }
+.icon6{ background:url(http://pic2.58.com/n/images/txbackground.gif) no-repeat -7px -328px; display:inline-block; width:36px; height:17px; vertical-align:bottom }
+.threeg{ background:url(http://pic2.58.com/n/images/txbackground.gif) no-repeat -91px -372px; display:inline-block; width:14px; height:10px; vertical-align:middle;_position:relative;_top:12px;}
+/* header */
+#header{background:url(http://pic2.58.com/n/images/detail/header-bg.gif) repeat-x;}
+#headerinside{width:1000px;height:60px;position:relative;margin:0 auto;}
+#logo{position:absolute;left:20px;top:8px}
+#navbar{position:absolute;top:32px;left:180px;font-size:12px;font-family:"宋体"}
+#logintext{position:absolute;right:20px;top:1px; z-index:999;font-size:12px}
+#logintext a{margin-left:5px}
+/* 标题栏 */
+.headline{ position:relative; height:28px; padding:30px 0 15px; border-bottom:1px solid #ccc;}
+h1{ font-size:24px; display:inline; margin:0 0 0 20px;}
+.remark{ font-style:normal; margin-left:10px;}
+.other{ position:absolute; right:20px; bottom:15px; color:#585858; font-size:12px}
+.other span{ color:#ccc; padding:0 10px;}.other span#edit{ padding:0;}
+/* 提示 */
+#topinfomsg{width:960px;margin:0 auto; background:#fffaaa; font-size:12px; padding:8px 20px; line-height:20px;}
+/* 信息及用户 */
+.info{ width:476px; display:block; padding:35px 0 0 20px; float:left;}
+.user{ width:460px; padding:0 0 0 40px; margin-top:35px; border-left:1px solid #ccc; float:left;}
+.info li{ padding-bottom:20px;}
+.info li i{ font-style:normal; color:#585858; display:inline-block; width:45px;}
+.info li i.z{ width:70px;}
+.info li .address{display:inline-block; width:385px; vertical-align:top}
+.info li.operate{ padding-top:13px; padding-bottom:0;}.operate a{ display:inline-block; text-decoration:underline; margin-right:30px;}
+.zpzp{ width:115px; height:40px; font-size:14px; font-weight:bold; margin-top:20px;}
+.userinfo li{ padding-bottom:20px;}.userinfo li.n,.userinfo li.nopb{ padding-bottom:0;}.userinfo li.n a{ display:inline-block; text-decoration:underline; margin-right:20px;}
+.userinfo li.b{ font-size:16px}.userinfo li.l{ border-top:1px dashed #ccc; padding-top:20px;}
+.userinfo li i{ font-style:normal; color:#585858; display:inline-block; width:70px; text-align:right; padding-right:1px;}
+.userinfo li img{ vertical-align:bottom;}
+.zhijie{background:yellow;color:#000000;display:inline-block;font-size:12px;font-style:normal;height:12px;line-height:14px;padding:3px 2px 4px 4px;*padding:4px 2px 2px 4px;}
+.zjtips{ font-size:12px; color:#999; margin-left:5px;}
+.avatar{ width:100px; height:100px; border:1px solid #f1f1f1; padding:3px; margin-left:71px; overflow:hidden;}
+.avatar a{ width:100px; height:100px; display:table-cell; vertical-align:middle; text-align:center; *display:block; *font-size:85px; overflow:hidden;}
+.avatar a img{ vertical-align:middle}
+.history{ font-size:12px; color:#585858;}
+.medium{ display:inline-block; font-style:normal; background:#FFF000; padding:1px 0 0 1px; font-size:12px}
+.phone,.qqmsn{ font-size:20px; color:#FF0508; font-weight:bold; table-layout:fixed; word-break:break-all; overflow:hidden; position:relative; top:2px;}
+.phone img{ position:relative;top:3px; left:-7px; vertical-align:middle;}
+.belong{ font-size:12px; color:#585858;}.belong a{ color:#666}
+.vip-yan{color:#00aa08;display:block;font-size:16px;font-style:normal;font-weight:bold;padding-top:20px;vertical-align:middle;}
+.vip-yan cite{background:url(http://pic2.58.com/n/images/txbackground.gif) no-repeat -8px -329px;display:inline-block;height:23px;margin-right:10px;vertical-align:middle;width:36px;}
+/* content */
+.content{ border-top:1px solid #ccc; margin-top:35px; padding-bottom:15px;}
+.conleft{ width:726px; margin-top:36px; padding-right:30px; float:left; overflow:hidden}
+.conright{ width:243px; margin-top:36px; margin-bottom:21px; float:right; overflow:hidden}
+.rightborder{ border-left:1px solid #ccc; padding-left:22px; min-height:10px; _height:10px;}
+.conleft p{ padding:0 20px 15px; line-height:28px; margin-top:-5px;}
+.imgs{ margin-left:20px;}
+.imgs li{ width:320px; height:320px; border:1px solid #f1f1f1; float:left; padding:5px; margin-right:20px; margin-bottom:20px; overflow:hidden;}
+.imgs li span{ width:320px; height:320px; display:table-cell; vertical-align:middle; text-align:center; *display:block; *font-size:265px;}
+.imgs li img{vertical-align:middle}
+.conright h3{ font-size:12px}
+.h3link a{ color:#000}
+.listtwo{ padding-bottom:50px; *padding-bottom:0;*margin-bottom:50px;}
+.listtwo td{ padding-top:20px; padding-right:12px; font-size:12px;}
+.road li{ font-size:12px; padding-top:20px;}
+.road li cite{ font-style:normal; color:#333;}.road li a:hover cite{ text-decoration:underline}
+.road li span{ float:right; color:#333}
+.road{ display:block; padding-bottom:50px;}
+.ullist li{ font-size:12px; padding-top:20px;}
+.ullist li span{ float:right; color:#999}
+.bigboxtitle{ border-bottom:1px solid #ccc; padding:15px 20px 15px;}
+.bigboxtitle h2{ font-size:14px;}
+.back{ font-size:12px; text-decoration:underline; float:right}
+.community{ padding-bottom:49px;}
+.xiaoquxin{ margin:0 0 0 20px;}
+.xiaoquxin li{ padding-top:20px; padding-right:20px;}
+.xiaoquxin li.xiaoquimages{ padding-right:0;}
+.xiaoquimages span{width:140px; height:140px; padding:3px; border:1px solid #f1f1f1; display:block; float:left; margin-right:14px;}
+.xiaoquimages a{ width:140px; height:140px; display:table-cell; vertical-align:middle; text-align:center; *display:block; *font-size:126px;}
+.xiaoquimages a img{ vertical-align:middle}
+.nav{ padding:17px 20px 20px; color:#f00}.nav a{ display:inline-block; margin-right:15px; text-decoration:underline}
+.more{ float:right}.more a{ font-weight:normal; text-decoration:underline}
+.othercommunity td{ padding-top:20px; font-size:12px; line-height:24px; vertical-align:top}
+.othercommunity .img{ padding-right:5px;}
+.othercommunity .img div{ border:1px solid #f1f1f1; width:80px; height:60px; overflow:hidden; padding:2px; display:table-cell; vertical-align:middle; text-align:center; *display:block; *font-size:45px;}.othercommunity .img div img{ vertical-align:middle; max-width:80px; max-height:60px;}
+.leftlist{ padding: 15px 20px 10px;}
+.leftlist h3{ font-size:14px; padding-bottom:10px;}
+.leftlist h3 span{ float:right; font-weight:lighter; font-size:12px}.leftlist h3 span a{ text-decoration:underline}
+.leftlist table{ width:100%;}
+.leftlist td{ padding-top:10px; padding-bottom:10px; border-top:1px solid #eee;}
+.job{ padding-bottom:35px; padding-top:35px;}
+.job h2{ font-size:16px; border-bottom:1px solid #ccc; padding:0 0 17px 20px; margin-top:20px; margin-bottom:15px}
+.job p{ padding:0 20px 15px; line-height:28px;word-wrap:break-word;}
+.paihangban{ width:100%; font-size:12px; margin-top:10px; padding-bottom:43px; *padding-bottom:0;*margin-bottom:43px;}
+.paihangban td{ padding:7px 0; border-bottom:1px dashed #F0F0F0}
+.paihangban .n td{ border:none}
+.paihangban td cite{ display:inline-block; width:14px; height:14px; background:url(http://pic2.58.com/n/images/detail/bottom_bg_gray.gif) no-repeat; color:#fff; text-align:center; line-height:14px; font-style:normal; font-size:11px}
+.paihangban td cite.top_bg_orange{background:url(http://pic2.58.com/n/images/detail/top_bg_orange.gif) no-repeat;}
+.f11{ font-size:11px}
+.jiamengguanggao{ padding-bottom:45px;}
+.jiamengguanggao h4{ font-size:14px; font-weight:lighter; margin-top:18px; margin-bottom:3px;}
+.jiamengguanggao h4.notitle{ margin-top:0;}
+.jiamengguanggao h4 a{ text-decoration:underline}
+.jiamengguanggao p{ font-size:14px; line-height:22px; padding-top:5px;}
+.jiamengguanggao p a{ font-size:14px; color:#333;}
+.jiamengguanggao p cite{ font-style:normal; color:#f00; font-weight:bold;}
+.wanglintong{ padding:10px 20px 0; width:960px;}
+.wanglintong p{ line-height:28px;}
+.wanglintong p.title{ padding-top:5px;}
+.wanglintong p.title a{ display:inline-block; margin-right:10px;}
+.wanglintong a.more{ float:none; display:inline-block; margin-left:5px;}
+.wltimg img{ border:1px solid #ccc; float:left; margin-right:15px; margin-top:12px;}
+.zhaoshangadlist li{ width:470px; height:93px; float:left; padding:20px 0 20px 20px;}
+.zhaoshangadlist li img{ float:left; margin-right:15px;}
+.zhaoshangadlist li p{ line-height:20px;}
+.zhaoshangadlist li p.t{ padding-bottom:5px;}
+.zhaoshangadlist li p.green{ padding-top:8px;}
+.zhaoshangadlist li p.green a{ color:#008000}
+.zhaoshangadlist li a{ text-decoration:underline}
+/* 特价机票 特价酒店 */
+.trainer{ width:446px; float:left; padding-bottom:22px; padding-left:20px;}
+.trainer h3{ font-size:14px;}
+.trainer h3 a{color:#000}
+.trainerul li{ width:46%; float:left; font-size:12px; padding-right:17px; padding-top:20px; height:15px; overflow:hidden}
+.trainerul li a:hover,.trainerul li a:hover em,.trainerul li a:hover span{ text-decoration:underline}
+.trainerul li span{ float:right}
+.trainerul li span b{ color:#f00}
+.trainerul li em{ color:#999; font-style:normal; margin-right:10px;}
+.hotel{ width:260px; float:right;}
+.hotel h3{ font-size:14px; text-indent:20px;}
+.hotel h3 a{color:#000}
+.hotelul li{ text-indent:20px; height:15px; *height:13px; overflow:hidden; padding-top:20px; font-size:12px; clear:both}
+.hotelul li b{ float:right; color:#f00;}
+.hotelul li a{ margin-right:10px; display:block; float:left; width:110px; height:14px; overflow:hidden}
+.hotelul li span{ display:block; width:80px; height:14px; overflow:hidden; float:left;}
+.mtbox{padding-top:36px;padding-bottom:22px;*padding-bottom:0;}.mtbox .trainer{ width:480px;overflow:hidden;padding-bottom:0;}.mtbox li.w{width:99%}
+/* footer */
+.footer{ text-align:center; font-size:12px; padding:10px 0 20px; border-top:1px solid #ccc;}.footer a{ text-decoration:underline}
+.footer .shenming{ text-align:left; line-height:18px; color:#585858; padding:10px 20px 20px; border-top:2px solid #E9F1FE}
+/* 广告 */
+.guanggao{ height:114px; border-top:1px solid #ccc; padding:20px 0;}
+.guanggao div{ width:486px; height:103px; padding:18px 5px 0 5px;  float:left;}
+#googlead_bottom{ position:relative}
+.g0{ text-align:right; margin:0px; padding:0px; line-height:100%;}.g0 a,.baidu .g0{ color:#999; font-size:12px;}
+.g1{ position:absolute; top:-5px; left:20px;}.g1 a{ color:#999; font-size:12px;}
+.g2{ text-align:center;}.g2 a,.baidu .g2{ font-size:16px; font-weight:bold; text-decoration:underline;}
+.g3{ text-align:center; color:#333; line-height:18px; padding:5px 20px 5px 20px; font-size:14px}.g3 a{ color:#000}
+.g4{ text-align:center; line-height:18px;}.g4 a{ color:#008000; font-size:14px; text-decoration:underline}
+.baidu .g4{ color:#000; font-size:14px;}
+#baiduad{ width:490px; border-left:1px solid #ccc; position:relative}
+#baiduad .g0{ position:absolute; top:-5px; right:20px;}
+.hotelright li{ padding-top:18px; font-size:12px; clear:both}
+.hotelright li span{ display:none}
+.hotelright li a{ margin-right:10px; display:block; float:left; width:130px; height:13px; overflow:hidden}
+.hotelright li b{ float:right; color:#f00;}
+.detailad{ padding:23px 0 0 23px; border-left:1px solid #ccc;}
+/* 分享帖子 */
+.share{ padding:20px;}
+.share h2{ font-size:14px;}
+.weibo{ padding:20px 0;}
+.weibo a{ display:inline-block; width:60px; height:20px; text-align:center; padding-top:40px; margin-right:20px; margin-bottom:10px; font-size:12px; background-image:url(http://pic2.58.com/n/images/detail/share-logos.png);_background-image:url(http://pic2.58.com/n/images/detail/share-logos.gif); background-repeat:no-repeat}
+.sina{ background-position:-35px 0;}
+.wangyi{ background-position:17px 0;}
+.bai{ background-position:-305px 0;}
+.souhu{ background-position:-90px 0;}
+.qq{ background-position:-142px 0;}
+.renren{ background-position:-201px 0;}
+.shuoke139{ background-position:-259px 0;}
+.chouti{ background-position:-353px 0;}
+.tqq{ background-position:-402px 0;}
+.copyurl{ padding:20px 0;}
+.urltext{ width:300px; height:20px; font-family:Arial;}
+.cofrimurl{ height:28px; width:60px; font-size:12px}
+/* 成功提示 */
+.right-tip{ padding:20px; height:200px; text-align:center; padding-top:85px; font-size:16px; font-weight:bold; color:#169B00; background:url(http://pic2.58.com/n/images/detail/right-img.gif) no-repeat center 40px; letter-spacing:1px;}
+.tc-close{width:60px;height:26px;font-size:14px; *margin-top:20px;}
+/* 删帖 */
+.delete{ padding:20px;}
+.delete h2{ font-size:14px;}
+.login-delete{ padding:20px 0 40px;}
+.weidenglu{ font-size:12px; font-weight:bold; color:#f00; padding-bottom:10px;}
+.mima{ height:20px; vertical-align:middle}
+.delete-button{ height:28px; vertical-align:middle}
+.mimatishi{ position:absolute; left:0; bottom:-15px; font-size:12px; color:#f00}
+.dingwei{ position:relative; display:inline-block;}
+.phone-delete{ padding:20px 0 35px;}
+.green1{ color:#009900}
+.phone-tishi{ color:#585858; font-size:12px}
+/* 收藏 */
+.shoucang{ padding:30px 20px; text-align:center}
+.shoucang a{ text-decoration:underline}
+.shoucang input,.shoucang select{ vertical-align:middle}
+.smallbutton{ width:50px; height:24px;}
+.cj{ font-size:12px; font-family:"宋体"; display:inline-block; margin-left:10px;}
+.chuangjian{ width:265px; height:38px; padding-top:22px; background:url(http://pic2.58.com/n/images/detail/cj-bg.gif) no-repeat; margin:0 auto;}
+.shoucangjianame{ width:120px; font-size:12px; color:#ccc; height:16px; line-height:16px;}
+.shoucang h2{ font-size:16px; color:#009900; background:url(http://pic2.58.com/n/images/detail/right-img.gif) no-repeat; width:100px; height:30px; margin:0 auto; padding-left:30px; line-height:30px; margin-bottom:35px;}
+/* 投递简历 */
+.toujianli{ width:600px;}
+.tjl-caozuo{ border-bottom:1px solid #ccc; padding:20px; background:#fff}
+.tjl-caozuo span{ float:right; margin-top:7px; margin-right:18px;}.tjl-caozuo span a{ font-size:12px; text-decoration:underline}
+.tjl-caozuo input{ width:55px; height:26px; vertical-align:middle}
+.userjl{ height:300px; background:#f9f9f9; border-top:1px solid #f5f5f5; overflow-y:scroll; position:relative; padding-bottom:20px;}
+.userjl table{ margin-bottom:30px; margin-left:10px;}
+.userjl table.edit{ margin-left:20px;}
+.userjl td{ padding:20px 0 0 10px;}
+.userjl td.pdright{ padding-right:50px;}
+.userjl td cite{ font-style:normal; color:#585858}
+.userjl h2{ border-bottom:1px solid #ccc; padding:3px 3px 8px; margin:20px; font-size:14px; font-weight:lighter}
+.userjl p{ padding:0 20px; line-height:24px;}
+.editimg img{ border:1px solid #ccc; vertical-align:middle; margin-right:10px;}
+.right-tip-one{ padding:20px; width:400px; height:200px; text-align:center; padding-top:50px;}
+.right-tip-one h2{ height:29px; line-height:35px; font-size:16px; color:#169B00; letter-spacing:1px; margin:0 auto 25px; text-align:center;}
+.right-tip-one h2 img{ vertical-align:middle;}
+.right-tip-one h2.shibai{ color:#f00}
+.right-tip-one p{ line-height:30px;}.right-tip-one p a{ text-decoration:underline}.right-tip-one p cite{ font-style:normal}
+.right-tip-one .tc-close{ margin-top:20px;}
+.mianshiyaoqing{ padding:20px;}
+.mianshiyaoqing td{ padding-bottom:10px; padding-right:5px;}
+.mianshiyaoqing textarea{ color:#666; font-size:14px}
+.mianshiyaoqing td.gray{ color:#585858}
+.fasong{ width:80px; height:26px; font-size:14px; margin-top:10px;}
+/* 个人简历信息 */
+.personalinfo{ padding:35px 20px 0 20px;}.personalinfo table{ width:100%;}
+.personalinfo th{ font-weight:lighter; color:#585858; padding-bottom:12px; line-height:24px; text-align:left; vertical-align:top}
+.personalinfo td{ padding-bottom:12px; vertical-align:top; line-height:24px;}
+.personalinfo td .phone{ top:0; *top:-4px; vertical-align:top}
+.mianshi{ background:#f7f7f7; padding:20px; margin:35px 0 0; *margin:35px 0 20px;}
+.mianshi input{ height:28px; font-size:14px; vertical-align:middle}.mianshi a{ text-decoration:underline;}
+/* 下发短信 */
+.duanxin{ width:520px; height:230px; padding:30px 20px 10px;}
+.duanxinleft{ width:175px; height:225px; background:url(http://pic2.58.com/n/images/detail/duanxin_bg.gif) no-repeat; padding-right:20px; float:left;}
+.duanxinleft h2{ font-size:12px; font-weight:normal; color:#666; padding:9px 10px;}
+.duanxinleft p{ font-size:13px; line-height:22px; color:#fff; padding:0 15px;}
+.duanxinright{ width:320px; float:left;}
+.duanxinright p{ text-align:center; letter-spacing:1px; line-height:26px;}
+.duanxinright p.ga{ font-size:12px; color:#666; line-height:18px;}.ga cite{ font-style:normal}
+.ziduan{font-size:12px; margin-left:10px;}.ziduan th{ font-weight:normal; text-align:right; padding-right:10px; padding-bottom:12px;}.ziduan td{ padding-bottom:12px;}
+.ziduantext1{ width:170px;}.ziduantext2{ width:50px;}.duanxinright a{ text-decoration:underline}
+.ziduanbtn{ height:28px; margin-top:5px;}
+.duanxinright h3{ font-size:16px; text-align:center; vertical-align:middle; padding:40px 0;}.duanxinright h3 img{ vertical-align:middle}
+.green{ color:#169B00}.chufa{ display:block; padding:20px 0; height:26px; position:relative;}.tis{ position:absolute; bottom:-5px; left:80px; color:#f00; font-size:12px}.phonewrong{background:url(http://pic2.58.com/n/images/grzx/logots.gif) no-repeat scroll 4px 4px #FFF2F2;border:1px solid #FF8080;padding:4px 10px 3px 26px;font-size:12px}.dingweiyong{width:320px;height:40px}
+
+.ads{border-top:1px solid #ccc; padding:30px 0 0;}
+.adsleft{float:left; width:731px; padding-right:25px;}
+.ads .road{ padding-bottom:35px;}.ads .road li{ *padding-top:17px;}
+/* 联系方式 */
+.contact{ width:170px; height:40px; font-size:16px;}
+*html .contact{ width:169px; height:39px; font-size:16px; background:url(http://pic2.58.com/n/images/detail/contact_bg.gif) no-repeat; border:none;}
+.tips{ font-size:12px; padding:30px 30px 0; line-height:20px;}
+.daojishi{ font-size:12px; width:230px; height:30px; margin:30px 0;}
+.contactcon{ padding:15px 0; margin:17px 30px 20px; border-top:1px solid #ddd; line-height:30px;}
+.sendmessage{ display:inline-block; margin-left:60px; text-decoration:underline}
+.jubao{ margin:0 30px; padding-bottom:24px; font-size:12px; line-height:24px;}
+.gray{ color:#585858}
+.jubao input{ vertical-align:middle;}
+.jubaosubmit{ width:50px; height:20px; font-size:12px}
+.data{padding:0 20px;}
+.data table{width:100%;border-top:1px solid #e8e8e8;border-left:1px solid #e8e8e8;margin-bottom:10px;}
+.data th{font-weight:lighter;background:#f7f7f7;border-top:1px solid #fff;border-left:1px solid #fff;border-bottom:1px solid #e8e8e8;border-right:1px solid #e8e8e8;padding:10px 0;color:#555}
+.data td{padding:10px;border-bottom:1px solid #e8e8e8;border-right:1px solid #e8e8e8;}
+.data p{padding:0 0 5px 0;margin-top:0}
+.pt-yan{display:inline-block;font-size:12px;font-style:normal;margin-top:10px;color:#f00}
+
+/* 2010-12-13 js*/
+.fe_window_mask{left:0px;top:0px;filter:Alpha(Opacity=30);opacity:0.3;background-color:#000000;z-index:9996;}
+.fe_window {position:fixed;_position:absolute;z-index:9997;}
+.fe_window .outer{position:relative;}
+.fe_window .contains{position:absolute;background:#fff;z-index:9999}
+.fe_window .frame{background:#000;opacity:0.4;filter:alpha(opacity=40);position:absolute;top:0;left:0; z-index: 9998;}
+.fe_window .contains .topbar{background-image: url(http://pic2.58.com/n/images/messageboxcontainer_bg.gif); background-attachment: initial; background-origin: initial; background-clip: initial; background-color: initial; background-position: initial initial; background-repeat: repeat no-repeat; }
+.fe_window .contains .topbar .title{font:700 14px/26px "宋体";margin-left:10px;color:#fff;width:50%}
+.fe_window .contains .topbar .closebtn{display:block;width:12px;height:12px;background:url("http://pic2.58.com/n/images/post/background.gif") no-repeat 0 -429px;line-height:100px;overflow:hidden;margin:6px;float:right}
+.fe_window .contains iframe{}
+.fe_window .contains .load{font-size:14px;background:url(http://pic2.58.com/n/images/loading.gif) no-repeat center center;margin-left:-60px;padding-left:90px;text-align:center;color:#666}
+.fe_window .contains .bottombar{}
+
+/* 2010-12-18 by chen*/
+.fanglist{}
+.fanglist li{ height:65px; margin-top:20px; font-size:12px; line-height:24px;} 
+.fanglist li div.img{ float:left; margin-top:5px; margin-right:10px; _margin-right:7px; border:1px solid #f1f1f1; width:80px; height:60px; overflow:hidden;}
+.fanglist li div.img a{ width:80px; height:60px; display:block; display:table-cell; *display:block; *font-size:52px; vertical-align:middle; text-align:center;}
+.fanglist li div.img img{ vertical-align:middle;}
+.fangli{}
+.fangli li{ margin-top:12px; font-size:12px; line-height:20px; color:#585858;}
+.twoitem{ padding-bottom:50px;}
+.xiaoqu2{ margin:0 20px; border-top:1px solid #eee;}
+.xiaoqu2 li{ padding:20px 20px 0 0;}
+.xiaoqupic{ float:left; width:94px; height:94px;}
+.xiaoqupic img{ border:1px solid #eee;}
+
+.iteminfo{ padding-top:20px; margin:auto 20px 30px;  border-top:1px solid #eee;}
+.itemlist{}
+.itemlist li{ margin-top:20px;}
+.xiaoquhead{ text-align:center;}
+.xiaoqulist{ text-align:center; line-height:1.5em;}
+.xiaoqulist li{ margin:20px 0px 0px 0px; font-size:12px;}
+.xiaoqulist_img{ height:80px; width:80px; padding:1px; border:1px solid #eee;  margin:0px auto 10px;}
+.map_des{ margin:20px auto; }
+.xiaoqutitle{ padding-top:46px !important;}
+#action{ clear:both; width:952px !important; display:none; padding:5px 10px; margin:10px auto 0px; background:#FFFAAA; height:26px; line-height:26px;}
+.agrey{ text-decoration:underline;  color:#585858;}
+#newuser .medium{ margin-left:5px;}
+.fangcount{ margin-left:10px;}
+#newuser .icon1,#newuser .icon2,#newuser .icon3{ margin-right:10px;}
+.userinfo li.shortpd { padding-bottom: 15px;}
+
+.link_under{ text-decoration:underline;}
+.relative{ position:relative;}
+.gototop{ font:normal 12px/16px Arial, sans-serif; color:#333; position:absolute; top:10px; right:20px;}
+.gototop a{ color:#333; text-decoration:none;}
+
+/*小区相册/地图*/
+
+.mapcon{ clear:both; position:relative; padding:10px 0px 0px 20px; width:700px; overflow:auto; background:#fff;}
+.mapcon_l{float:left;width:430px; position:relative;}
+.maph2{font-size:12px;color:#999; font-weight:normal; height:20px; line-height:20px; margin-bottom:10px;}
+.map_biaoji{ border: 2px solid #333; background:#fff; font-size:12px;line-height:18px;height:18px;width:70px; text-align:center; position:absolute;right:5px;top:5px}
+.map_biaoji a{color:#000}
+.map_biaoji a:hover{color:#f00}
+a.mapseebig{margin-top:7px; float:right; background:url(http://pic2.58.com/images/5_0/newxq/fdj.gif) no-repeat left; text-indent:20px}
+.mapcon_r{float:right;padding-top:30px;width:240px}
+/* 地图切换标签*/
+.hottab{background:url(http://pic2.58.com/images/5_0/newxq/soutab_1.gif) repeat-x 0px -365px  #fff; height:30px; width:180px; padding:0px 10px 0px 30px;margin-bottom:15px;z-index:999; position:relative}
+.hottab a{ display:block; font-size:12px; padding:3px 6px; margin:1px 4px 4px 0;float:left; line-height:16px;}
+.hottab a.selected{ color:#000; font-weight:bold; border:1px solid #CECECE; border-bottom:none; background:url(http://pic2.58.com/images/5_0/newxq/soutab_1.gif)  repeat-x 0px -28px #EDF4FC; margin:0 3px}
+.hottab a.selected span{ display:block; background:#f00; height:1px;}
+.hottabright{  background:url(http://pic2.58.com/images/5_0/newxq/soutab_1.gif) no-repeat 0px -230px;width:30px; height:15px; position:absolute; right:0px;top:18px;}
+.hottableft{  background:url(http://pic2.58.com/images/5_0/newxq/soutab_1.gif) no-repeat 0px -91px;width:30px; height:15px; position:absolute; left:0px;top:18px;}
+
+.map_zhoubian{padding:0 20px;width:180px; margin:0 auto}
+.map_zhoubian li{ float:left;width:60px; font-size:12px; overflow:hidden;line-height:35px;height:35px;color:#032BAE}
+.map_zhoubian li input{ vertical-align:middle;_margin-top:-3px}
+
+.map_bus{font-size:12px}
+.map_perimeter,.map_subway,.map_busstop,.map_busTop{width:220px;margin:0 auto}
+.map_bus .map_busTop .keyword{ background:url(http://pic2.58.com/images/5_0/soutab_2.gif) no-repeat -2px -3px; width:125px; height:18px; padding-top:5px; border:1px solid #A7A6AA; vertical-align:middle; margin-left:11px; margin-right:5px;} 
+.btn{ /*background:url(http://pic2.58.com/images/5_0/soutab_2.gif) no-repeat -245px 1px; border:none; color:#fff;*/ line-height:28px;height:28px;color:#000;vertical-align:middle} 
+.scrolldiv_bus,.scrolldiv_subway,.scrolldiv_perimeter{width:220px;overflow:auto; overflow-x:hidden;margin:0 auto}
+.scrolldiv_bus{height:185px; }
+.scrolldiv_subway{height:295px; }
+.scrolldiv_perimeter{height:226px; }
+.scrolldiv_bus ul,.scrolldiv_subway ul,.scrolldiv_perimeter ul{width:210px}
+/*公交 地铁*/
+.ulbus li,.ulsubway li,.ulperimeter li{padding-left:23px;line-height:22px;margin-bottom:10px; }
+.ulbus li{}
+.ulsubway li{}
+.ulperimeter li{}
+/* 智能提示 */
+.tooltip{border:1px solid #7996ae;background:#fff;margin-top:-3px;line-height:200%;*margin-left:-5px}
+.tooltip li{height:26px;padding-left:5px;overflow:hidden}
+.tooltip li a{color:#666;font-size:13px;text-decoration:none}
+.tooltip li a b{color:#002cad}.tooltip li .tool_r{float:right;color:#090;font-size:11px}
+.tooltip li.selected a b,.tooltip li.selected a,.tooltip li.selected .tool_r{color:#fff}
+.tooltip li.selected,.tag_options li.open_hover{background:#36C;color:#FFF}#tooltipdiv1{width:152px}
+.tooltip{-webkit-box-shadow:2px 2px 1px #ddd;-moz-box-shadow:2px 2px 1px #ddd;box-shadow:2px 2px 1px #ddd}
+/* 周边服务 */
+.ulzhoubian{ width:220px; height:24px; padding-left:5px; position:relative; overflow:hidden;}
+.ulzhoubian li{ float:left; width:24px; height:24px; overflow:hidden; margin-right:18px; margin-bottom:10px;}
+.ulzhoubian li a{ display:block; width:24px; height:24px; text-indent:-9999px;}
+.zb_icon1{ background:url(http://pic2.58.com/n/images/zb_icon.gif) no-repeat 0px 0px;}
+.zb_icon2{ background:url(http://pic2.58.com/n/images/zb_icon.gif) no-repeat -36px 0px;}
+.zb_icon3{ background:url(http://pic2.58.com/n/images/zb_icon.gif) no-repeat -72px 0px;}
+.zb_icon4{ background:url(http://pic2.58.com/n/images/zb_icon.gif) no-repeat -108px 0px;}
+.zb_icon5{ background:url(http://pic2.58.com/n/images/zb_icon.gif) no-repeat -144px 0px;}
+.zb_icon6{ background:url(http://pic2.58.com/n/images/zb_icon.gif) no-repeat -180px 0px;}
+.zb_icon7{ background:url(http://pic2.58.com/n/images/zb_icon.gif) no-repeat -216px 0px;}
+.zb_icon8{ background:url(http://pic2.58.com/n/images/zb_icon.gif) no-repeat -252px 0px;}
+.li_i1{ background:url(http://pic2.58.com/n/images/zb_icon1.gif) no-repeat left 4px;}
+.li_i2{ background:url(http://pic2.58.com/n/images/zb_icon2.gif) no-repeat left 4px;}
+.li_i3{ background:url(http://pic2.58.com/n/images/zb_icon3.gif) no-repeat left 4px;}
+.li_i4{ background:url(http://pic2.58.com/n/images/zb_icon4.gif) no-repeat left 4px;}
+.li_i5{ background:url(http://pic2.58.com/n/images/zb_icon5.gif) no-repeat left 4px;}
+.li_i6{ background:url(http://pic2.58.com/n/images/zb_icon6.gif) no-repeat left 4px;}
+.li_i7{ background:url(http://pic2.58.com/n/images/zb_icon7.gif) no-repeat left 4px;}
+.li_i8{ background:url(http://pic2.58.com/n/images/zb_icon8.gif) no-repeat left 4px;}
+.li_ibus{ background:url(http://pic2.58.com/n/images/zb_iconbus.gif) no-repeat left 4px;}
+.li_isubway{ background:url(http://pic2.58.com/n/images/zb_iconsubway.gif) no-repeat left 4px;}
+
+/* 火车票 add 2011-01-13 */
+.piaotitle{ border-bottom: 1px solid #eee; padding:20px 5px 20px 20px;}
+.piaotitle span{ margin-right:32px;}
+.piaotitle span.tuan58{ margin-right:0px; display:none;}
+.piaotitle span a{ text-decoration:underline;}
+em.wap58{ border:none; margin-left:5px; margin-bottom:-2px;}
+
+/* 演出票 add 2011-01-17 */
+.related{ padding:15px 20px;}
+.related h3{ font-size:14px; margin-bottom:15px; padding-top:15px; border-top:1px solid #eee;}
+.related h4{ font-size:14px; margin-bottom:5px; font-weight:normal;}
+.related dl{ clear:both; margin-bottom:20px;}
+.related dt{ float:left; width:80px; height:80px; margin:5px 15px 5px 0px }
+.related dd{ line-height:28px; font-size:14px;}
+.related dd .aboutmore a{ text-decoration:underline;}
+
+#freeticket {bottom: 20px; position: absolute; right: 20px; font-size:12px; text-decoration: underline;}
+.ra{ font-size:14px; color:#585858;}

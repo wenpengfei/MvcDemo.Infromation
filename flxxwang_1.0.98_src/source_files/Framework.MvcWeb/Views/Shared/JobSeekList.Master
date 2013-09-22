@@ -1,0 +1,496 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewMasterPage" %>
+<%@ Import Namespace="Infomation.Core.Extensions" %>
+<%@ Import Namespace="Framework.Extensions" %>
+<%@ Import Namespace="Infomation.Core.Mvc" %>
+
+<asp:Content ID="ContentHead" ContentPlaceHolderID="Head" runat="server">
+    <%var ViewTag = ViewData["ViewTag"] as ViewTag; %>
+    <title><%=ViewTag.Interface.PageTitle%></title>
+    <meta name="description" content="<%=ViewTag.Interface.PageDescription %>" />
+    <meta name="keywords" content="<%=string.IsNullOrEmpty(ViewTag.SEO.Keywords)?"":ViewTag.SEO.Keywords+" " %><%=ViewTag.Interface.PageKeywords %>" />
+    <link type="text/css" href="/Content/Fenlei/ui6/zp/list.css?v1" rel="stylesheet" />
+    <%--<style type="text/css">@import url("/Content/Fenlei/ui6/topbar.css");</style>--%>
+    <%--<script type="text/javascript" src="/fenlei/js/comm_js/boot_listpage_version.js?v1"></script>--%>
+    <script type="text/javascript" src="/Content/Fenlei/Scripts/comm_js/boot_debug.js?v1"></script>
+    <script type="text/javascript" src="/Content/Fenlei/Scripts/comm_js/a6dcb394cdabecc1ea4ef10385e63cdb.js?v31"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+
+<asp:Content ID="ContentMain" ContentPlaceHolderID="Main" runat="server">
+    <%
+        var routeData = (HttpContext.Current.Handler as MvcHandler).RequestContext.RouteData;
+        var ViewTag = ViewData["ViewTag"] as ViewTag;
+        var city=ViewTag.City;
+    %>
+    <div id="header">
+        <a href="<%=Url.Action("Default","Home") %>" id="minlogo"><%=ViewTag.City.ShortName %><%=SiteInfo.Name%></a>
+        <span id="crumbs">
+            <%
+                foreach (var item in ViewTag.Interface.InfoPath)
+                {
+                    %>
+                        <%=item.Link(Html) %>
+                    <%
+                }
+            %>
+        </span>
+    </div>
+
+    <div id="selection">
+        <div id="searchbar">
+            <span class="text text3">
+                <input type="text" class="keyword" id="keyword1" value="" fdv="请输入职位名称" name="b_q" para="key" />
+            </span>
+            <span class="btn btn3">
+                <input type="button" value="搜简历" id="searchbtn1" class="button" />
+            </span>
+            <i class="clear"></i>
+        </div>
+        <dl class="secitem" id="zhiweilist">
+            <dt>职位：</dt>
+            <dd>
+                <ul>
+                    <%
+                        if (ViewTag.ObjectType == null)
+                        {
+                            %>
+                                <li><a href="<%=Url.RemoveRouteValues(routeData,new string[]{"objecttype","pageindex"}) %>" class='select'>全部</a></li>
+                            <%
+                        }
+                        else
+                        {
+                            %>
+                                <li><a href="<%=Url.RemoveRouteValues(routeData,new string[]{"objecttype","pageindex"}) %>">全部</a></li>
+                            <%
+                        }
+                    %>
+    
+                    <%
+                        foreach (var obj in ViewTag.Interface.ObjectTypeCollection)
+                        {
+                            if (ViewTag.ObjectTypeId == obj.Id)
+                            {
+                                %>
+                                <li>
+                                    <a href="<%=Url.AddRouteValues(routeData,new{objecttype=obj.Id,pageindex=1}) %>" class='select'><%=obj.Name%></a>
+                                    <%--<i>
+                                        <%
+                                        if (ViewTag.Region == null)
+                                        {
+                                            %>
+                                            <%=JobSeek.RecordCount(city,(JobType)obj.Id).Sum(item=>item.Value)%>
+                                            <%
+                                        }
+                                        else
+                                        {
+                                            %>
+                                            <%=JobSeek.RecordCount(city,(JobType)obj.Id).Where(item=>item.Key==ViewTag.RegionId).Sum(item=>item.Value)%>
+                                            <%
+                                        }
+                                        %>
+                                    </i>--%>
+                                </li>
+                                <%
+                            }
+                            else
+                            {
+                                %>
+                                <li>
+                                    <a href="<%=Url.AddRouteValues(routeData,new{objecttype=obj.Id,pageindex=1}) %>"><%=obj.Name%></a>
+                                    <%--<i>
+                                    <%
+                                    if (ViewTag.Region == null)
+                                    {
+                                        %>
+                                        <%=JobSeek.RecordCount(city,(JobType)obj.Id).Sum(item=>item.Value)%>
+                                        <%
+                                    }
+                                    else
+                                    {
+                                        %>
+                                        <%=JobSeek.RecordCount(city,(JobType)obj.Id).Where(item=>item.Key==ViewTag.RegionId).Sum(item=>item.Value)%>
+                                        <%
+                                    }
+                                    %>
+                                    </i>--%>
+                                </li>
+                                <%
+                            }
+                        }
+                    %>
+
+                </ul>
+            </dd>
+        </dl>
+        <div class="clear"></div>
+
+        <dl class="secitem">
+            <dt>区域：</dt>
+            <dd id="regions">
+                <%
+                    if (ViewTag.Region == null)
+                    {
+                        %>
+                            <a href="<%=Url.RemoveRouteValues(routeData,new string[]{"region","pageindex"})%>" class='select'>全<%=ViewTag.City.ShortName%></a>
+                        <%
+                    }
+                    else
+                    {
+                         %>
+                            <a href="<%=Url.RemoveRouteValues(routeData,new string[]{"region","pageindex"})%>">全<%=ViewTag.City.ShortName%></a>
+                        <%
+                    }
+                 %>
+
+                 <%
+                     foreach (var region in ViewTag.Regions)
+                     {
+                         if (ViewTag.RegionId == region.Id)
+                         {
+                             %>
+                                <a href="<%=Url.AddRouteValues(routeData,new{region=region.Id,pageindex=1}) %>" class='select'><%=region.Name%></a>
+                             <%
+                         }
+                         else
+                         {
+                             %>
+                                <a href="<%=Url.AddRouteValues(routeData,new{region=region.Id,pageindex=1}) %>"><%=region.Name%></a>
+                             <%
+                         }
+                     }
+                  %>
+            </dd>
+        </dl>
+        <i class="shadow"></i>
+    </div>
+
+    <div id="filter">
+        <%bool isPartJob = routeData.Values["action"].ToString().ToLower().StartsWith("jianzhi"); %>
+        <h1 class="tabs">
+            <a href="<%=Url.Action("s2", "post",new{values=isPartJob?"qiuzhijz":"qiuzhi"})%>" class="pubbtn">登记简历&raquo;</a>
+            <a href="<%=Url.Action("s2", "post",new{values=isPartJob?"zhaopinjz":"zhaopin"})%>" class="pubbtn">发布招聘信息&raquo;</a>
+            <a href='<%=Url.Action(null,"zhaopin") %>' class="tabA"><span><%=ViewTag.Interface.ListLink.LinkText%>招聘信息</span></a>
+            <a href="" class="tabA select"><span><%=ViewTag.Interface.ListLink.LinkText%>求职简历</span></a>
+        </h1>
+    </div>
+
+    <div id="main">
+        <div id="infolist">
+            <table cellspacing="0" cellpadding="0" class="tblist">
+                <col width="220" /><col width="180" /><col /><col /><col /><col /><col /><col width="110" />
+                <tr class="filterbar">
+                    <td>求职位</td>
+                    <td>目前职位</td>
+                    <td class="tc">姓名</td>
+                    <td class="tc">
+                        <div class="container">
+                            <div class="pophead">性别</div>
+                            <div class="popcontent wdate">
+                                <div class="lev1_list"></div>
+                                <i class="shadow"></i>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="tc">
+                        <div class="container">
+                            <div class="pophead">年龄</div>
+                            <div class="popcontent wdate">
+                                <div class="lev1_list"></div>
+                                
+                                <i class="shadow"></i>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="tc">
+                        <div class="container">
+                            <div class="pophead">学历</div>
+                            <div class="popcontent wdate">
+                                <div class="lev1_list"></div>
+                                <i class="shadow"></i>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="tc">
+                        <div class="container">
+                            <div class="pophead">工作年限</div>
+                            <div class="popcontent wdate">
+                                <div class="lev1_list"></div>
+                                <i class="shadow"></i>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="pd">
+                        <div class="container">
+                            <div class="pophead">发布时间</div>
+                            <div class="popcontent wdate">
+                                <div class="lev1_list"></div>
+                                <i class="shadow"></i>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                 
+                <script type="text/javascript">
+                    var l = 'hz';
+                    $.Jos41.init({
+                        D1: { t: "data", d: [
+                                             { t: '不限', u: '<%=Url.RemoveRouteValue(routeData,"sex") %>', ispar: false },
+                                             { t: '男', u: '<%=Url.AddRouteValue(routeData,"sex",1) %>', ispar: false },
+                                             { t: '女', u: '<%=Url.AddRouteValue(routeData,"sex",0) %>', ispar: false }
+                                            ]
+                        },
+                        D2: { t: "data", d: [
+                                             { t: '不限', u: '<%=Url.RemoveRouteValues(routeData,new string[]{"minage","maxage"}) %>', ispar: false },
+                                             { t: '16-20岁', u: '<%=Url.AddRouteValues(routeData,new{minage=16,maxage=20}) %>', ispar: false },
+                                             { t: '21-30岁', u: '<%=Url.AddRouteValues(routeData,new{minage=21,maxage=30}) %>', ispar: false },
+                                             { t: '31-40岁', u: '<%=Url.AddRouteValues(routeData,new{minage=31,maxage=40}) %>', ispar: false },
+                                             { t: '41-50岁', u: '<%=Url.AddRouteValues(routeData,new{minage=41,maxage=50}) %>', ispar: false },
+                                             { t: '50岁以上', u: '<%=Url.AddRouteValues(routeData,new{minage=50,maxage=-1}) %>', ispar: false }
+                                            ]
+                        },
+                        D3: { t: "data", d: [
+                                             { t: '不限', u: '<%=Url.RemoveRouteValue(routeData,"xueli") %>', ispar: false },
+                                             { t: '技校', u: '<%=Url.AddRouteValue(routeData,"xueli",Convert.ToInt32(Education.A)) %>', ispar: false },
+                                             { t: '高中', u: '<%=Url.AddRouteValue(routeData,"xueli",Convert.ToInt32(Education.B)) %>', ispar: false },
+                                             { t: '中专', u: '<%=Url.AddRouteValue(routeData,"xueli",Convert.ToInt32(Education.C)) %>', ispar: false },
+                                             { t: '大专', u: '<%=Url.AddRouteValue(routeData,"xueli",Convert.ToInt32(Education.D)) %>', ispar: false },
+                                             { t: '本科', u: '<%=Url.AddRouteValue(routeData,"xueli",Convert.ToInt32(Education.E)) %>', ispar: false },
+                                             { t: '硕士', u: '<%=Url.AddRouteValue(routeData,"xueli",Convert.ToInt32(Education.F)) %>', ispar: false },
+                                             { t: '博士', u: '<%=Url.AddRouteValue(routeData,"xueli",Convert.ToInt32(Education.G)) %>', ispar: false }
+                                            ]
+                        },
+                        D4: { t: "data", d: [
+                                             { t: '不限', u: '<%=Url.RemoveRouteValues(routeData,new string[]{"minyear","maxyear"}) %>', ispar: false },
+                                             { t: '无经验', u: '<%=Url.AddRouteValues(routeData,new{minyear=0,maxyear=0}) %>', ispar: false },
+                                             { t: '1-3年', u: '<%=Url.AddRouteValues(routeData,new{minyear=1,maxyear=3}) %>', ispar: false },
+                                             { t: '3-5年', u: '<%=Url.AddRouteValues(routeData,new{minyear=3,maxyear=5}) %>', ispar: false },
+                                             { t: '5-10年', u: '<%=Url.AddRouteValues(routeData,new{minyear=5,maxyear=10}) %>', ispar: false },
+                                             { t: '10年以上', u: '<%=Url.AddRouteValues(routeData,new{minyear=10,maxyear=-1}) %>', ispar: false }
+                                            ]
+                        },
+                        D5: { t: "data", d: [
+							                 { t: "全部时间", u: '<%=Url.RemoveRouteValue(routeData,"days") %>', ispar: false },
+							                 { t: "一天以内", u: '<%=Url.AddRouteValue(routeData,"days",1) %>', ispar: false },
+							                 { t: "三天以内", u: '<%=Url.AddRouteValue(routeData,"days",3) %>', ispar: false },
+							                 { t: "七天以内", u: '<%=Url.AddRouteValue(routeData,"days",7) %>', ispar: false }
+							                ]
+                        },
+//                        D5: { t: "data", d: [
+//							                 { t: "全部时间", u: "", p: [{ v: "postdate", t: ""}] },
+//							                 { t: "一天以内", u: "", p: [{ v: "postdate", t: "", f: { t: "tq", d: { DA: -1, format: "yyyyMMdd00"}}}] },
+//							                 { t: "三天以内", u: "", p: [{ v: "postdate", t: "", f: { t: "tq", d: { DA: -3, format: "yyyyMMdd00"}}}] },
+//							                 { t: "七天以内", u: "", p: [{ v: "postdate", t: "", f: { t: "tq", d: { DA: -7, format: "yyyyMMdd00"}}}] }
+//							                ]
+//                        }
+                    });
+
+                    var d = { f: "searchjob", p: "qzyewu", l: l };
+                    $("#keyword1").val(unescape(unescape($.query.get("key"))));
+                    $("#keyword1").keydown(function (e) { if (e.keyCode == 13) { $.Jos41u.init("searchjob", "zhaojianzhi", d) } });
+                    $("#searchbtn1").click(function () { $.Jos41u.init("searchjob", "zhaojianzhi", d); });
+                    if (location.search.indexOf('key=') != -1) {
+                        var cc = document.getElementById('zhiweilist'),
+	                         lis = cc.getElementsByTagName('li');
+                        for (var i = 0, leni = lis.length; i < leni; i++) {
+                            if (lis[i].childNodes && lis[i].childNodes.length == 2 && lis[i].childNodes[1].innerHTML == '0') {
+                                lis[i].style.display = 'none';
+                            }
+                        }
+                    }
+                </script>
+                
+                <tr>
+                    <td colspan="8" style="border:none;height:auto;padding:0" class="dev">
+                        <%--<div id="top_google_ad"></div>--%>
+                        <%--广告位置--%>
+
+                        <%
+                            if (SiteInfo.IsTaojen)
+                            {
+                                %>
+                                <%--960*90首页横幅--%>
+                                <%=UnionAd.Baidu_960_90.Code %>
+                                <%
+                            }
+                            else
+                            {
+                                %>
+                                <%--728 x 90 - 首页横幅--%>
+                                <%=UnionAd.Google_728_90.Code %>
+                                <%    
+                            }
+                        %>
+                    </td>
+                </tr>
+                 
+                 <%
+                     foreach (var item in (ViewData["ViewTag"] as ViewTag).PagedList)
+                     {
+                         var job = item as JobSeek;
+                         %>
+                         <tr>
+                            <td>
+                                <%--下面这一行不要换行，不然显示提示会有问题--%>
+                                <a href="<%=job.Link.Url(Url) %>" rel="nofollow" target="_blank" tips="t" class="t"><%=job.JobName %></a><span class="hc"><h2><%=job.Resume.RealName %><cite>(<%=job.Resume.SexName %>，<%=job.Resume.Age %>岁)</cite></h2>
+                                <table cellpadding="0" cellspacing="0" class="zhanshi">
+                                    <tr class="zhanshibg">
+                                        <td width="50%">目前职位：<%=job.Resume.CurrentJob!=null?job.Resume.CurrentJob.JobName:"无" %></td>
+                                        <td width="50%">学 &nbsp; 历：<%=job.Resume.Education.DisplayName() %></td>
+                                    </tr>
+                                    <tr>
+                                        <td>薪资要求：<%=job.Resume.WageMin %>-<%=job.Resume.WageMax %>元/月</td>
+                                        <td>工作年限：<%=job.Resume.WorkYearStart %>-<%=job.Resume.WorkYearEnd %>年</td>
+                                    </tr>
+                                    <tr class="zhanshibg">
+                                        <td colspan="2">现居住地：
+                                            <%=job.Resume.NowCity.Name %>
+                                            <%=job.Resume.NowRegion!=null?job.Resume.NowRegion.Name:"" %>
+                                            <%=job.Resume.NowCircle!=null?job.Resume.NowCircle.Name:"" %>
+                                        </td>
+                                    </tr>
+                                </table>
+                                    <%=job.Resume.AboutMe.RemoveHtml().Left(200,"...") %>
+                                </span>
+                                <%if (job.PictureList().Count > 0)
+                                  { %>
+                                    <span class="ico tu" title="<%=job.PictureList().Count %>图"></span>
+                                <%} %>
+                            </td>
+                            <td><%=job.Resume.CurrentJob!=null?job.Resume.CurrentJob.JobName:"无" %></td>	
+                            <td class="tc"><a href="<%=job.Link.Url(Url) %>" title="<%=job.Resume.RealName %>" target="_blank" class="c_58"><%=job.Resume.RealName %></a></td>
+                            <td class="tc"><%=job.Resume.SexName %></td>
+                            <td class="tc"><%=job.Resume.Age %>岁</td>
+                            <td class="tc"><%=job.Resume.Education.DisplayName() %></td>
+                            <td class="tc"><%=job.Resume.WorkYearStart %>-<%=job.Resume.WorkYearEnd %>年</td>
+	                        <td class="tc"><%=job.DateCreated.ToPublishTimeString() %></td>
+                        </tr>
+                         <%
+                     }
+                 %>  
+                 
+       <tr>
+        <td colspan="8" style="border:none;height:auto;padding:0" class="dev">
+            <%--<div id="bottom_google_ad"></div>--%>
+
+            <%
+                if (SiteInfo.IsTaojen)
+                {
+                    %>
+                    <%--960*90首页横幅--%>
+                    <%=UnionAd.Baidu_960_90.Code %>
+                    <%
+                }
+                else
+                {
+                    %>
+                    <%--728 x 90 - 首页横幅--%>
+                    <%=UnionAd.Google_728_90.Code %>
+                    <%    
+                }
+            %>
+        </td>
+      </tr>             
+    </table>
+    
+        <%--<div class="pager">
+            <strong><span>1</span></strong>&nbsp;<a href="/qzyewu/pn2/"><span>2</span></a>&nbsp;<a href="/qzyewu/pn3/"><span>3</span></a>&nbsp;<a href="/qzyewu/pn4/"><span>4</span></a>&nbsp;<a href="/qzyewu/pn5/"><span>5</span></a>&nbsp;<a href="/qzyewu/pn6/"><span>6</span></a>&nbsp;<a href="/qzyewu/pn7/"><span>7</span></a>&nbsp;<a href="/qzyewu/pn8/"><span>8</span></a>&nbsp;<a href="/qzyewu/pn9/"><span>9</span></a>&nbsp;<a class="next" href="/qzyewu/pn2/"><span>下一页</span></a>&nbsp;
+        </div>--%>
+
+        <div class="pager">
+            <%=Html.RenderPager(Html.Pager(ViewTag.PagedList)) %>
+        </div>
+
+        <%--<%=Html.Pager(ViewTag.PagedList,
+            new PagerOptions
+            {
+                CssClass = "pager",
+                CurrentPagerItemWrapperFormatString = "<strong><span>{0}</span></strong>",
+                NumericPagerItemWrapperFormatString = "<span>{0}</span>",
+                SeparatorHtml = "&nbsp;",
+                ShowFirstLast=false,
+                
+            })%>--%>
+    </div>
+  <div class="cright" id="rightAdframe" style="display:none;"><div id="ad1" class="adbox"></div><div id="ad19"></div></div>
+</div>
+
+    <div id="links">
+        <i class="line"></i>
+        <div class="links">
+        <%=ViewTag.City.Name%><%=ViewTag.Interface.ListLink.LinkText%>求职频道为您提供<%=ViewTag.City.Name%><%=ViewTag.Interface.ListLink.LinkText%>求职信息，在此有大量<%=ViewTag.City.Name%><%=ViewTag.Interface.ListLink.LinkText%>求职信息供您选择，您可以免费查看和发布
+        <a href="<%=ViewTag.Interface.ListLink.Url(Url) %>" target="_blank"><%=ViewTag.Interface.ListLink.LinkText%>求职</a>信息。
+    </div>
+    <i class="line"></i>
+    <ul class="links">
+        <%
+            foreach (var link in ViewTag.Interface.CityLinks)
+            {
+                %>
+                <li><%=link.Link(Html) %></li>
+                <%
+            }
+        %>
+        <li><a href='<%=Url.Action("Index","jianli") %>'>简历模板</a></li>
+        <%--<li><a href='<%=Url.Action("yingjiesheng","qiuzhi") %>'>应届生求职网</a></li>--%>
+
+        <li><a href='<%=ViewTag.Interface.ListLink.Url(Url) %>'><%=ViewTag.City.Name%><%=ViewTag.Interface.ListLink.LinkText%>求职</a></li>
+        <%foreach (var obj in ViewTag.Interface.ObjectTypeCollection)
+          { %>
+          <li><a href='<%=Url.AddRouteValue(routeData,"objecttype",obj.Id) %>'><%=ViewTag.City.Name%><%=obj.Name %>求职</a></li>
+        <%} %>
+    </ul>
+    </div>
+
+    <div id="footer">&copy; flxxwang.com <a id="askicon" target="_blank" title="有问题请与taojen客服进行对话" rel="nofollow" href="http://flxxwang.com/help/">帮助中心</a></div>
+
+    <script type="text/javascript">
+        var listpn = 1; if (!listpn) {
+            $("#bangzb").hide()
+        }
+    </script>
+    <script type="text/javascript">
+        var ad_json = {};
+        var ad_type = 0;
+        var isopen = true; 
+    </script>
+    <script type="text/javascript">
+        //信息hover
+        boot.require('dom, anim.hover', function (Frame, dom, hover) {
+            var cc = dom.get('infolist'),
+	    trs = cc.getElementsByTagName('tr');
+            Frame.each(trs, function (item) {
+                hover.bind(item, 'active');
+            });
+        });
+        $(".selector").each(function () {
+            $(this).hover(
+        function () {
+            $(this).addClass("hover")
+        },
+        function () {
+            $(this).removeClass("hover")
+        });
+        });
+        ///////标红////	
+        boot.require('business.highlight', function (Frame, highlight) {
+            highlight.init($("#infolist a.t"), '');
+        });
+</script> 
+
+<div id="zpzs" class="history" style="display:none;top:282px;position:absolute;">
+<script type="text/javascript" >
+    var s = '<ul>';
+    s+='<li class="history_title">招聘助手</li>';
+    s += '<li><span class="s1"></span><a href="<%=Url.Action("yixiazaijianli","my") %>" target="_blank">已下载简历</a></li>';
+    //s+='<li><span class="s5"></span><a href="http://my.toajen.com/xinxiguanli/?menu=5" target="_blank">收到的简历</a></li>';
+    s += '<li><span class="s2"></span><a href="<%=Url.Action("fasongmianshi","my") %>" target="_blank">发送的面试邀请</a></li>';
+    s += '<li class="pb5"><span class="s3"></span><a href="<%=Url.Action("s2","post",new{values="zhaopin"}) %>" target="_blank">发布招聘信息</a></li>';
+    s += '<li class="history_bottom"><span class="s4"></span><a href="<%=Url.Action("gongsiziliao","my") %>" target="_blank">修改公司信息</a></li>';
+    s+='</ul>';
+    s+='<a class="gtop" id="gototop" href="javascript:void(0);" onclick="zptop();"></a>';
+    callback(s);
+</script>
+</div>
+    <asp:ContentPlaceHolder ID="Scripts" runat="server"/>
+</asp:Content>

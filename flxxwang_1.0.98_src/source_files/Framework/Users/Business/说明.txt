@@ -1,0 +1,2 @@
+﻿ProfileCommon为公共属性.如果需要扩展Profile属性，可采用类的组合，就是定义一个Profile类，该类中定义一个ProfileCommon对象,这样
+做的好处是便于Profile的扩展.

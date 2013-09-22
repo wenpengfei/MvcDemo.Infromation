@@ -1,0 +1,56 @@
+﻿//测试用例:
+			var query = Lovewall.Entities.Skip(800);
+            var query = Lovewall.Entities.Take(100);
+            var query = Lovewall.Entities.Skip(800).Take(100);
+
+            //用例1:
+            //var query = Lovewall.Entities;//ok
+
+            //用例2:
+            //var query = from obj in Lovewall.Entities where obj.Id > 379 select obj;//ok
+            //用例3:
+            //var query = from obj in Lovewall.Entities where obj.Id > 379 orderby obj.Id descending select obj;//ok
+
+            //用例4:
+            //var query = from obj in Lovewall.Entities where obj.Id > 379 orderby obj.Id descending select obj;
+            //var q = query.Skip(1).Take(100);//ok
+
+            //用例5:
+            //var query = from obj in Lovewall.Entities where obj.Id > 379 orderby obj.Id descending select obj;
+            //var q = query.First();//ok.没数据时报错.(报错是对的)
+            ////var q = query.FirstOrDefault();//ok.没数据时返回null.
+            //Console.WriteLine(q.Id + ":" + q.Content + ":" + q.DateCreated);
+
+            //用例6:ok
+            //var query = from obj in Lovewall.Entities where obj.Id > 370 select new { A = obj.Id, B = obj.Content, C = obj.DateCreated };
+            //var q = query.Skip(1).Take(3);
+
+            //用例7:
+            //var array = new int[] { 4, 6, 380 };
+            //var query = from obj in Lovewall.Entities
+            //            where obj.Id > 0 && array.Contains(obj.Id)
+            //            //where obj.Content.StartsWith("我")
+            //            orderby obj.Id descending, obj.Content
+            //            orderby obj.DateCreated
+            //            //select obj;
+            //            select new { A = obj.Id, B = obj.Content, C = obj.DateCreated };//ok
+            //"orderby obj.Id descending,obj.Content"对应sql:"order by id desc,content asc",表达式为OrderByDescending...ThenBy
+            //"orderby obj.Id descending orderby obj.Content",对应sql:"select * (select .. order by id desc) order by content asc"等同于order by content asc,id desc,即排序顺序反过来(系统的Linq to sql生成的sql就是这样倒过来的),表达式为OrderByDescending...OrderBy
+
+            //用例8:
+            ////var query = from obj in Lovewall.Entities where obj.Id > 100 group obj by obj.Content into g select g.Count();//ok
+            //var query = from obj in Lovewall.Entities where obj.Id > 100 group obj by obj.Content into g select g.Min(item => item.Id);//ok
+            ////var query = from obj in Lovewall.Entities where obj.Id > 100 group obj by obj.Content into g select g;//ok
+            //var q = query.Skip(0).Take(2);//ok
+            ////var q = query.FirstOrDefault();
+
+            //用例9:
+            //var query = from obj in Lovewall.Entities where obj.Id > 379 select new { A = obj.Id,B=obj.Content,C=obj.DateCreated };
+            //var q = query.FirstOrDefault();
+            //Console.WriteLine(q.A + ":" + q.B + ":" + q.C);
+
+            //用例10:ok
+            //var minId = "379";
+            ////var query=from obj in Lovewall.Entities 
+            ////          where obj.Id>Convert.ToInt32(minId)
+            ////          select obj;

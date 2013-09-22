@@ -1,0 +1,282 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewMasterPage" %>
+<%@ Import Namespace="Infomation.Core.Extensions" %>
+<%@ Import Namespace="Framework.Extensions" %>
+<%@ Import Namespace="Infomation.Core.Mvc" %>
+
+<asp:Content ID="ContentHead" ContentPlaceHolderID="Head" runat="server">
+    <%
+        var ViewTag = ViewData["ViewTag"] as ViewTag;
+        var Recruit = ViewTag.Info as Recruit;
+    %>
+    <title><%=Recruit.PageTitle %></title>
+    <meta name="description" content="<%=ViewTag.Info.PageDescription %>" />
+    <meta name="keywords" content="<%=string.IsNullOrEmpty(ViewTag.SEO.Keywords)?"":ViewTag.SEO.Keywords+" " %><%=ViewTag.Info.PageKeywords %>" />
+    <link href="/Telerik.Web.UI/Skins/Window.css" type="text/css" rel="Stylesheet" />
+    <link href="/Telerik.Web.UI/Skins/Default/Window/Default.css" type="text/css" rel="Stylesheet" />
+    <script type="text/javascript" src="/Telerik.Web.UI/Common/Core.js"></script>
+    <script type="text/javascript" src="/Telerik.Web.UI/Common/Popup/PopupScripts.js"></script>
+    <script type="text/javascript" src="/Telerik.Web.UI/Common/jQueryPlugins.js"></script>
+    <script type="text/javascript" src="/Telerik.Web.UI/Window/RadWindowScripts.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="/Content/Fenlei/ui6/zp/detail_zp_20110915.css" />
+    <script type="text/javascript" src="/Content/Fenlei/Scripts/5_1/comm_js/boot_finalpage_version.js?version=20110308"></script>
+    <script type="text/javascript" src="/Content/Fenlei/Scripts/zp/zpzhushou_915.js"></script>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+
+<asp:Content ID="ContentMain" ContentPlaceHolderID="Main" runat="server">
+    <%
+        var routeData = (HttpContext.Current.Handler as MvcHandler).RequestContext.RouteData;
+        var ViewTag = ViewData["ViewTag"] as ViewTag;
+        var Recruit = ViewTag.Info as Recruit;
+    %>
+<div class="w" id="header">
+    <a href="<%=Url.Action("Default","Home") %>" id="minlogo" title="返回<%=SiteInfo.Name%>"><%=SiteInfo.Name%></a>
+    <span id="crumbs">
+        <%foreach (var path in Recruit.InfoPath)
+            { %>
+            <%=path.Link(Html) %>
+        <%} %>
+    </span>
+</div>
+<div id="action"></div>
+
+<div class="content">
+	<div id="topinfomsg">
+        <font color="#000000">
+            <strong>提示：</strong> 
+            ① 凡收取<font color="#10ade4">服装费、伙食费、押金、报名费</font>等各种费用，告知“无需任何条件、直接面试”，要求职者“加qq联系”或内容中带电话的信息均都是骗子。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            ② 谨慎对待公司信息不规范的信息，切记任何单位扣留身份证都是违法，请直接拨打110报警！　
+            <%--<a href="http://about.flxxwang.com/106.html#f" target="_blank"><u>更多案例</u></a>--%>
+        </font>
+    </div>
+    <div class="contentin">
+    	<div class="headline">
+            <h1><%=Recruit.JobName %></h1>
+            <ul class="other">
+                <li>发布时间：<%=Recruit.DateCreated.ToString("yyy-MM-dd") %></li>
+                <li>浏览<em id="totalcount">0</em>次</li>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $(".father").hover(function () {
+                            $(this).addClass("hover");
+                        }, function () {
+                            $(this).removeClass("hover");
+                        });
+                    });
+              </script>
+            <%--<li class="father">
+                <span style="color:#3950BF;cursor:pointer">管理信息</span>
+                <span class="arrow"></span>
+                <div class="edit">
+                    <a class="ed_a" href="#"><i></i>刷新</a>
+                    <a class="ed_b" href="#"><i></i>修改</a>
+                    <a class="ed_c" href="#"><i></i>删除</a>
+                    <p class="xuxian"></p>
+                    <a class="ed_d" href="#"><i></i>置顶</a><span>（提高3.5倍效果）</span>
+                </div>
+            </li>--%>
+        </ul>
+        </div>
+  
+  	<div class="companymini">
+        <p>
+            <a href="<%=Url.Action("Index", "qy", new {id=Recruit.CompanyId })%>" target="_blank"><%=Recruit.Company.CompanyName %></a>
+            <%--<cite class="vip-yan" title="营业执照已验证"></cite>--%>
+        </p>
+        <p>
+            <span class="c_4d">公司行业：</span>
+            <%=Recruit.Company.Trade==null?string.Empty:Recruit.Company.Trade.Name %>
+            <span class="line"></span>
+            <span class="c_4d">公司性质：</span>
+            <%=Recruit.Company.Type==null?string.Empty:Recruit.Company.Type.Name%>
+            <span class="line"></span>
+            <span class="c_4d">公司规模：</span>
+            <%=Recruit.Company.Size==null?string.Empty:Recruit.Company.Size.DisplayName%>
+        </p>
+    </div>
+        
+    <h3>职位信息</h3>
+    <div class="zcon">
+        <span class="c_4d">薪资范围：</span>5000-8000元/月<br />
+        <span class="c_4d">学历要求：</span>不限<br />
+        <span class="c_4d">招聘人数：</span>若干<br />
+        <span class="c_4d">工作经验：</span>不限<br />
+        <span class="c_4d">工作区域：</span>
+        <%--<a href='/job.shtml' class="black">杭州</a>&nbsp;-&nbsp;
+        <a href="/xihuqu/yewu/" class="black">西湖</a>&nbsp;-&nbsp;
+        <a href="/wensanlu/yewu/" class="black">文三路</a>--%>
+        <%if (Recruit.City != null)
+            { %>
+        <a href='<%=Recruit.ParentLink.Url(Url) %>' class="black"><%=Recruit.City.Name %></a>
+        <%} %>
+
+        <%if (Recruit.Region != null)
+            { %>
+        &nbsp;-&nbsp;<a href='<%=Url.Action(routeData.Values["smallcategory"].ToString(), new { region = Recruit.RegionId.Value }) %>' class="black"><%=Recruit.Region.Name %></a>
+        <%} %>
+        <%if (Recruit.Circle != null)
+            { %>
+        &nbsp;-&nbsp;<a href='<%=Url.Action(routeData.Values["smallcategory"].ToString(),new{region=Recruit.RegionId.Value,circle=Recruit.CircleId.Value}) %>' class="black"><%=Recruit.Circle.Name %></a>
+        <%} %>
+        <br />
+        <input class="in"  type="button" value="" onclick="jobApply()" />
+    </div>
+    <div class="description">
+        <span class="c_4d">
+            <strong>职位描述</strong>
+        </span><br />
+        <span id="comp-paste-div-3755">
+            <%=Recruit.JobDescription %>
+        </span>
+    </div>
+    <h3>公司介绍</h3>
+        <div class="com">
+            <%=Recruit.Company.Content %>
+            <div id="imgPlayer">
+            <%--显示大图--%>
+            <div id="image_wrap">
+                <img src="/Content/scrollable/gallery/img/blank.gif" />
+            </div>
+            <!-- "previous page" action -->
+            <a class="prev browse left"></a>
+            <div class="scrollable">   
+               <div class="items">
+               <%
+                   var picturList=ViewTag.Info.PictureList();
+                    for (var i=0;i<picturList.Count;i++)
+                    {
+                        if (i % 5 == 0)
+                        {
+                            %>
+                            <div>
+                            <%
+                        }
+                        %>
+                            <img src="<%=picturList[i] %>" />
+                        <%
+                        if(i%5==4||i==picturList.Count-1)
+                        {
+                            %>
+                            </div>
+                            <%
+                        }
+                    }
+                %>
+               </div>
+            </div>
+            <!-- "next page" action -->
+            <a class="next browse right"></a>
+        </div>
+
+            <div class="clear"></div>
+        </div>
+        <h3>联系方式</h3>
+        <div class="contant">
+        	<span class="c_4d">联系方式：</span>
+                <span class="phone">
+                    <%--<img src='#' />--%>
+                    <%=Recruit.Company.Phone %>
+                </span><br />
+                <span class="c_4d">联 &nbsp;系 人：</span><%=Recruit.Company.ContactPerson %><br />
+    		    <span class="c_4d">联系地址：</span><%=Recruit.Company.Address %>        
+        </div>
+        <div class="caozuo">
+        	<input class="in"  type="button" value="" onclick="jobApply()" />
+            <a href="<%=Url.Action("position", "qy", new {id=Recruit.CompanyId,type=Recruit.WorkType.ToString() })%>">该公司其他职位&raquo;</a>
+            <a class="c02" title="收藏信息" href="#">收藏</a>
+            <a class="c03" title="举报该信息" href="#">举报</a>
+        </div>
+        <div class="footad">
+            <%--<div id="googlead_list"></div>--%>
+            <%--广告位置--%>
+
+            <%
+                if (SiteInfo.IsTaojen)
+                {
+                    %>
+                    <%--728*90首页横幅--%>
+                    <%=UnionAd.Baidu_728_90.Code %>
+                    <%
+                }
+                else
+                {
+                    %>
+                    <%--728 x 90 - 首页横幅--%>
+                    <%=UnionAd.Google_728_90.Code %>
+                    <%    
+                }
+            %>
+        </div>
+        
+    </div>
+</div>
+<div class="footer">
+    <p class="shenming">
+    申明：该信息由用户自行发布，请认真阅读信息描述，内容中所涉及承诺均由用户自行负责。</p>
+    &copy;2010&nbsp;flxxwang.com &nbsp;
+    <%--<a href="http://about.flxxwang.com/" target="_blank">帮助中心</a>--%> &nbsp; &nbsp; 
+    举报招聘欺诈邮箱：<span style="color:#3950BF;">postmaster@flxxwang.com</span>
+</div>
+
+<div id="zpzs" class="history" style="position:fixed;top:146px;_position:absolute;_top:expression(eval(document.documentElement.scrollTop+146));">
+    <script type="text/javascript" >
+        width = 977;
+        var s = '<ul>';
+        s+='<li class="history_title">求职助手</li>';
+        s += '<li><span class="s1"></span><a href="<%=Url.Action("jianli","my") %>" target="_blank">简历投递记录</a></li>';
+        //s += '<li><span class="s2"></span><a href="#") >面试邀请</a><i></i> </li>';
+        s += '<li class="pb5"><span class="s3"></span><a href="<%=Url.Action("s2","post",new{values="qiuzhi"}) %>" target="_blank">填写简历</a></li>';
+        s += '<li class="history_pic"><span class="s4"></span><a href="<%=Url.Action("jianli","my") %>" target="_blank">修改简历</a></li>';
+        s+='</ul>';
+        s+='<a class="gtop"  style="display: none" id="gototop" href="#" onclick="zptop();"></a>';
+        callback(s);
+    </script>
+</div>
+
+<div>
+    <div style="display: none;" id="radWindow">
+        <div id="radWindow_C"></div>
+        <input id="radWindow_ClientState" name="radWindow_ClientState" type="hidden"/>
+    </div>
+</div>
+<script type="text/javascript">
+    var oWnd = $create(Telerik.Web.UI.RadWindow, { "skin": "Default" }, null, null, $get("radWindow"));
+    var recruit = {Id:<%=Recruit.Id %>,UserId:<%=Recruit.UserId %>,CompanyId:<%=Recruit.Company.Id %>};
+    function jobApply() {
+        if (!$info.isLogin()) {
+            oWnd.set_title("申请职位");
+            oWnd.setSize(800, 600);
+            //wnd.set_iconUrl("");
+            oWnd.setUrl('<%=Url.Action("poplogin","my") %>');
+            oWnd.set_visibleStatusbar(false);
+            oWnd.set_modal(true);
+            oWnd.add_close(OnClientClose);
+            oWnd.Show();
+        }
+        else {
+            selectResume();
+        }
+    }
+    function OnClientClose(oWnd, eventArgs) {
+        var arg=eventArgs.get_argument();
+        if (arg==true) {
+            selectResume();
+        }
+    }
+    function selectResume() {
+        oWnd.remove_close(OnClientClose);
+        oWnd.set_title("选择简历");
+        oWnd.setSize(800, 600);
+        //wnd.set_iconUrl("");
+        oWnd.setUrl('<%=Url.Action("xuanzejianli","job") %>');
+        oWnd.set_visibleStatusbar(false);
+        oWnd.set_modal(true);
+        //wndLogin.add_close(OnClientClose);
+        oWnd.Show();
+    }
+</script>
+<asp:ContentPlaceHolder ID="Scripts" runat="server"/>
+</asp:Content>

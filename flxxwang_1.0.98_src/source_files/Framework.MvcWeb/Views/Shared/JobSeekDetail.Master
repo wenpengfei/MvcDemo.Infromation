@@ -1,0 +1,448 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewMasterPage" %>
+<%@ Import Namespace="Infomation.Core.Extensions" %>
+<%@ Import Namespace="Framework.Extensions" %>
+<%@ Import Namespace="Infomation.Core.Mvc" %>
+
+<asp:Content ID="ContentHead" ContentPlaceHolderID="Head" runat="server">
+    <%
+        var ViewTag = ViewData["ViewTag"] as ViewTag;
+        var Job = ViewTag.Info as JobSeek;
+    %>
+    <title><%=Job.Resume.RealName %> - 【<%=Job.Resume.RealName %>简历】 - <%=ViewTag.City.Name%><%=SiteInfo.Name%></title>
+    <meta name="description" content="<%=ViewTag.Info.PageDescription %>" />
+    <meta name="keywords" content="<%=string.IsNullOrEmpty(ViewTag.SEO.Keywords)?"":ViewTag.SEO.Keywords+" " %><%=ViewTag.Info.PageKeywords %>" />
+    <link href="/Telerik.Web.UI/Skins/Window.css" type="text/css" rel="Stylesheet" />
+    <link href="/Telerik.Web.UI/Skins/Default/Window/Default.css" type="text/css" rel="Stylesheet" />
+    <script type="text/javascript" src="/Telerik.Web.UI/Common/Core.js"></script>
+    <script type="text/javascript" src="/Telerik.Web.UI/Common/Popup/PopupScripts.js"></script>
+    <script type="text/javascript" src="/Telerik.Web.UI/Common/jQueryPlugins.js"></script>
+    <script type="text/javascript" src="/Telerik.Web.UI/Window/RadWindowScripts.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="/Content/Fenlei/ui6/zp/detail_qz_20110804.css" />
+    <script type="text/javascript" src="/Content/Fenlei/Scripts/5_1/comm_js/boot_finalpage_version.js?version=20110308"></script>
+    <script type="text/javascript" src="/Content/Fenlei/Scripts/zp/zpzhushou_915.js"></script>
+    <%--<base target="_blank" />--%><%--这句话会让RadWindow报错--%>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+
+<asp:Content ID="ContentMain" ContentPlaceHolderID="Main" runat="server">
+    <%
+    var ViewTag = ViewData["ViewTag"] as ViewTag;
+    var Job = ViewTag.Info as JobSeek;
+%>
+<div class="w" id="header">
+    <a href="<%=Url.Action("Default","Home") %>" id="minlogo" title="返回<%=SiteInfo.Name%>"><%=SiteInfo.Name%></a>
+    <span id="crumbs">
+        <%foreach (var path in Job.InfoPath)
+            { %>
+            <%=path.Link(Html) %>
+        <%} %>
+    </span>
+</div>
+<div id="action"></div>
+<div class="content">
+	<div class="contentin">
+		<div class="headline">
+            <h1><%=Job.Resume.Name %></h1>
+            <span class="sm">(<%=Job.Resume.SexName %>,<%=Job.Resume.Age %>岁)</span>
+            <ul class="other">
+                <li>发布时间：<%=Job.DateCreated.ToString("yyyy-MM-dd") %></li>
+                <li>浏览<em id="totalcount">0</em>次</li>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $(".father").hover(function () {
+                            $(this).addClass("hover");
+                        }, function () {
+                            $(this).removeClass("hover");
+                        });
+                    });
+                </script>
+                <%--<li class="father">
+                    <span style="color:#3950BF;cursor:pointer">管理信息</span>
+                    <span class="arrow"></span>
+                    <div class="edit">
+                        <a class="ed_a" href="#"><i></i>刷新</a>
+                        <a class="ed_b" href="#"><i></i>修改</a>
+                        <a class="ed_c" href="#"><i></i>删除</a>
+                        <p class="xuxian"></p>
+                        <a class="ed_d" href="#"><i></i>置顶</a><span>（提高3.5倍效果）</span>
+                    </div>
+                </li>--%>
+            </ul>
+        </div>
+
+        <div class="zcon">
+            <table width="100%" cellpadding="0" cellspacing="0">
+        	    <tr>
+                    <td width="40%">
+                        <span class="c_4d">求 &nbsp;职 位：</span>
+                        <%=Job.JobName %>
+                    </td>
+                    <td>
+                        <span class="c_4d">期望薪资：</span><%=Job.Wage %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="c_4d">目前职位：</span>
+                        <%=Job.Resume.CurrentJob!=null?Job.Resume.CurrentJob.JobName:"无"%>
+                    </td>
+                    <td>
+                        <span class="c_4d">学 &nbsp; &nbsp; &nbsp;历：</span>
+                        中专/技校
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="c_4d">工作经验：</span>
+                        <%=Job.Resume.WorkYearStart %>-<%=Job.Resume.WorkYearEnd %>年
+                    </td>
+                    <td>
+                        <span class="c_4d">现居住地：</span>
+                        <%=Job.Resume.NowCity.Name %><%=Job.Resume.NowRegion.Name %><%=Job.Resume.NowCircle.Name %>
+                    </td>
+                </tr>
+                <tr id="t_rowt" style="display:<%=Convert.ToBoolean(this.ViewData["Favorite"])?"":"none"%>">
+                    <td>
+                        <span class="c_4d">联系电话：</span>
+                        <span class="phone" id="t_phone">
+                            <%=Convert.ToBoolean(this.ViewData["Favorite"]) ? Job.Resume.Phone : ""%>
+                        </span>
+                    </td>
+                    <td>
+                        <span class="c_4d">电子邮箱：</span>
+                        <span id="t_email">
+                            <%=Convert.ToBoolean(this.ViewData["Favorite"]) ? Job.Resume.Email : ""%>
+                        </span>
+                    </td>
+                </tr>
+            </table>
+            <p>
+                <span class="c_4d"><strong>自我评价</strong></span><br />
+                <%=Job.AboutMe %>
+            </p>
+        </div>
+        
+    <div class="caozuo" id="checklink" style="display:<%=Convert.ToBoolean(this.ViewData["Favorite"])?"none":""%>;">
+        <%--<a href="#" >
+            <span>查看联系方式</span>
+        </a>--%>
+        <a href="javascript:contactInfo()" >
+            <span>查看联系方式</span>
+        </a>
+    </div>
+    <div class="caozuo" id="t_rowb" style="display:<%=Convert.ToBoolean(this.ViewData["Favorite"])?"":"none"%>">
+        <a href="javascript:sendInvite()"><span>发送面试邀请</span></a>
+        <%--<a href="#"><span>转发到手机</span></a>
+        <a href="#"><span>转发到邮箱</span></a>
+        <a href="#"><span>保存到电脑</span></a>--%>
+    </div>
+
+    <%--工作经验--%>
+    <%
+        if (Job.Resume.WorkExperienceList.Count > 0)
+        {
+            %>
+            <h3><%=Job.Resume.RealName %>工作经验</h3>
+            <div class="description">
+                <ul>
+                <%
+                    foreach (var item in Job.Resume.WorkExperienceList)
+                    {
+                        %>
+                        <li>
+                            <strong><%=item.CompanyName %></strong><br />
+                            <%=item.StartYear %>-<%=item.StartMonth %> 至 <%=item.EndYear %>-<%=item.EndMonth %><span class="geli"></span>
+                            任职<%=item.JobName %><span class="geli"></span>
+                            薪资<%=item.Wage %><br />
+                            <span class="gz">工作职责：</span>
+                            <span class="nl"><%=item.WorkContent %></span>
+                            <div class="clear"></div>
+                        </li>
+                        <%
+                    }
+                %>
+                </ul>
+            </div>
+            <%
+        }
+    %>
+    
+    <%--教育经历--%>
+    <%
+        if (Job.Resume.EduBackgroundList.Count > 0)
+        {
+            %>
+            <h3><%=Job.Resume.RealName %>教育经历</h3>
+            <div class="description pt10">
+                <%
+                    foreach(var item in Job.Resume.EduBackgroundList)
+                    {
+                        %>
+                            <p>
+                            <%=item.StartYear %>-<%=item.StartMonth %> 至 <%=item.EndYear %>-<%=item.EndMonth %><span class="geli"></span>
+                            <%=item.School %><span class="geli"></span>
+                            <%=item.Profession %>专业
+                            </p>
+                        <%    
+                    }
+                %>
+            </div>
+            <%    
+        }
+    %>            
+    
+    <%--语言能力--%>
+    <%
+        if (Job.Resume.LanguageSkillList.Count > 0)
+        {
+            %>
+            <h3><%=Job.Resume.RealName %>语言能力</h3>
+            <div class="description pt10">
+                <p>
+                    <%=Job.Resume.LanguageSkillList[0].Language %>：<%=Job.Resume.LanguageSkillList[0].Skill %>
+                    <%
+                        for (int i = 1; i < Job.Resume.LanguageSkillList.Count; i++)
+                        {
+                            %>
+                            <span class="geli"></span><%=Job.Resume.LanguageSkillList[i].Language %>：<%=Job.Resume.LanguageSkillList[i].Skill %>
+                            <%
+                        }
+                    %>
+                </p>
+            </div>
+            <%
+        }
+    %>
+    
+    <%--专业证书--%>
+    <%
+        if (Job.Resume.CertificateList.Count > 0)
+        {
+            %>
+            <h3><%=Job.Resume.RealName %>专业证书</h3>
+            <div class="description pt10">
+            <%
+                foreach (var item in Job.Resume.CertificateList)
+                {
+                    %>
+                    <p>
+                        <%=item.Name %> &nbsp; &nbsp; <%=item.CertYear %>年<%=item.CertMonth %>月由<%=item.CertOrg %>颁发
+                    </p>
+                    <%
+                }
+            %>
+            </div>
+            <%
+        }
+    %>
+    
+    <%
+        if (Job.Resume.PictureList.Count > 0)
+        {
+            %>
+            <h3><%=Job.Resume.RealName %>照片/作品</h3>
+            <div class="description">
+                <div id="imgPlayer">
+            <%--显示大图--%>
+            <div id="image_wrap">
+                <img src="/Content/scrollable/gallery/img/blank.gif" />
+            </div>
+            <!-- "previous page" action -->
+            <a class="prev browse left"></a>
+            <div class="scrollable">   
+               <div class="items">
+               <%
+                   var picturList=ViewTag.Info.PictureList();
+                    for (var i=0;i<picturList.Count;i++)
+                    {
+                        if (i % 5 == 0)
+                        {
+                            %>
+                            <div>
+                            <%
+                        }
+                        %>
+                            <img src="<%=picturList[i] %>" />
+                        <%
+                        if(i%5==4||i==picturList.Count-1)
+                        {
+                            %>
+                            </div>
+                            <%
+                        }
+                    }
+                %>
+               </div>
+            </div>
+            <!-- "next page" action -->
+            <a class="next browse right"></a>
+        </div>
+            </div>
+            <%
+        }
+    %>
+    
+    <%
+        if (Job.WorkType == WorkType.Part)
+        {
+            %>
+            <h3><%=Job.Resume.RealName %>空余时间</h3>
+            <div class="description">
+                <tr>
+                    <td style='padding-top:15px; line-height:24px; padding-left:5px; font-size:12px;'>
+                        <table cellpadding='0' cellspacing='0' class='time'>
+                            <tr>
+                                <td class='tg'>&nbsp;</td>
+                                <td class='tg'>星期一</td>
+                                <td class='tg'>星期二</td>
+                                <td class='tg'>星期三</td>
+                                <td class='tg'>星期四</td>
+                                <td class='tg'>星期五</td>
+                                <td class='tg'>星期六</td>
+                                <td class='tg'>星期日</td>
+                            </tr>
+                            <tr>
+                                <td class='tg'>上午</td>
+                                <%
+                                    foreach (var item in Job.Resume.FreeTimeList)
+                                    {
+                                        %>
+                                        <td><%=item.AM ? "√" : "&nbsp;"%></td>
+                                        <%
+                                    }
+                                %>
+                            </tr>
+                            <tr>
+                                <td class='tg'>下午</td>
+                                <%
+                                    foreach (var item in Job.Resume.FreeTimeList)
+                                    {
+                                        %>
+                                        <td><%=item.PM ? "√" : "&nbsp;"%></td>
+                                        <%
+                                    }
+                                %>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>      
+            </div>
+            <%
+        }
+     %>
+
+    <%--<a name="qzd"></a>
+    <div id="qzd" class="qzdp" style="display:none">
+        <h4>点评窦爱祥的简历 <span style="color:#939393;font-size:12px;font-weight:lighter">(<span style="color:#f00">点评简历，每日赠送免费简历下载数</span>)</span></h4>
+        <script src="http://dianping.flxxwang.com/js/dianping.js" type="text/javascript"></script>
+        <div id="ifmScore" class="dianping"></div>
+        <script type="text/javascript">dianpingInit("qzd", "ifmScore", 27543329803924);</script>
+    </div>--%>
+    <div class="clear"></div>
+    <div class="footad">
+        <%--广告位置--%>
+
+            <%
+                if (SiteInfo.IsTaojen)
+                {
+                    %>
+                    <%--728*90首页横幅--%>
+                    <%=UnionAd.Baidu_728_90.Code %>
+                    <%
+                }
+                else
+                {
+                    %>
+                    <%--728 x 90 - 首页横幅--%>
+                    <%=UnionAd.Google_728_90.Code %>
+                    <%    
+                }
+            %>
+    </div>
+</div>
+</div>
+
+<div class="footer">
+    <p class="shenming">申明：该信息由<%=Job.Resume.RealName %>自行发布，其所涉及内容由<%=Job.Resume.RealName %>负责，信息真实性请用户自行辨识。</p>
+    &copy; 2010 flxxwang.com 
+    <%--<a href="http://about.flxxwang.com/" target="_blank">帮助中心</a>--%>
+</div>
+<%--<script type="text/javascript">
+    var userid = GetCookieValue("UserID");
+    var username = GetCookieValue("UserName");
+    Counter58.userid = userid;
+    Counter58.uname = username;
+    Counter58.infoid = 7640456264456;
+    Counter58.listControl = "userlist";
+    Counter58.totalControl = "totalcount";
+    Counter58.create();
+</script>--%>
+<div id="zpzs" class="history" style="position:fixed;top:146px;_position:absolute;_top:expression(eval(document.documentElement.scrollTop+146));">
+    <script type="text/javascript" >
+        //showzpzhushou("http://jianli.flxxwang.com/ajax/zpassistant", 977);
+        width = 977;
+        var s = '<ul>';
+        s+='<li class="history_title">招聘助手</li>';
+        s += '<li><span class="s1"></span><a href="<%=Url.Action("yixiazaijianli","my") %>" target="_blank">已下载简历</a></li>';
+        //s+='<li><span class="s5"></span><a href="http://my.flxxwang.com/xinxiguanli/?menu=5" target="_blank">收到的简历</a></li>';
+        s += '<li><span class="s2"></span><a href="<%=Url.Action("fasongmianshi","my") %>" target="_blank">发送的面试邀请</a></li>';
+        s += '<li class="pb5"><span class="s3"></span><a href="<%=Url.Action("s2","post",new{values="zhaopin"}) %>" target="_blank">发布招聘信息</a></li>';
+        s += '<li class="history_bottom"><span class="s4"></span><a href="<%=Url.Action("gongsiziliao","my") %>" target="_blank">修改公司信息</a></li>';
+        s+='</ul>';
+        s+='<a class="gtop" id="gototop" href="javascript:void(0);" onclick="zptop();"></a>';
+        callback(s);
+    </script>
+</div>
+<div>
+    <div style="display: none;" id="radWindow">
+        <div id="radWindow_C"></div>
+        <input id="radWindow_ClientState" name="radWindow_ClientState" type="hidden"/>
+    </div>
+</div>
+<script type="text/javascript">
+    var oWnd = $create(Telerik.Web.UI.RadWindow, { "skin": "Default" }, null, null, $get("radWindow"));
+    function contactInfo() {
+        if (!$info.isLogin()) {
+            oWnd.set_title("查看联系方式");
+            oWnd.setSize(800, 600);
+            //wnd.set_iconUrl("");
+            oWnd.setUrl('<%=Url.Action("poplogin","my") %>');
+            oWnd.set_visibleStatusbar(false);
+            oWnd.set_modal(true);
+            oWnd.add_close(OnClientClose);
+            oWnd.Show();
+        }
+        else {
+            resumeDown();
+        }
+    }
+    function OnClientClose(oWnd, eventArgs) {
+        var arg = eventArgs.get_argument();
+        if (arg==true) {
+            resumeDown();
+        }
+    }
+    function resumeDown() {
+        oWnd.remove_close(OnClientClose);
+        oWnd.set_title("查看联系方式");
+        oWnd.setSize(800, 600);
+        oWnd.setUrl('<%=Url.Action("resumefavorite","job",new{values=Job.Resume.Id}) %>');
+        oWnd.set_visibleStatusbar(false);
+        oWnd.set_modal(true);
+        oWnd.Show();
+    }
+    function sendInvite() {
+        oWnd.set_title("面试邀请");
+        oWnd.setSize(800, 600);
+        oWnd.setUrl('<%=Url.Action("sendinvite","job",new{values=Job.Id}) %>');
+        oWnd.set_visibleStatusbar(false);
+        oWnd.set_modal(true);
+        //oWnd.add_close(OnClientClose);
+        oWnd.Show();
+    }
+</script>
+<asp:ContentPlaceHolder ID="Scripts" runat="server"/>
+
+</asp:Content>

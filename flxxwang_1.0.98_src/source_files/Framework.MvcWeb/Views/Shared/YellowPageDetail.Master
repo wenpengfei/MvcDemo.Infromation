@@ -1,0 +1,298 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewMasterPage" %>
+<%@ Import Namespace="Infomation.Core.Mvc" %>
+<%@ Import Namespace="Infomation.Core.Extensions" %>
+<%@ Import Namespace="Framework.Extensions" %>
+
+<asp:Content ID="ContentHead" ContentPlaceHolderID="Head" runat="server">
+    <%
+        var ViewTag = ViewData["ViewTag"] as ViewTag;
+        var YellowPage = ViewTag.Info as YellowPage;
+    %>
+    <title><%=YellowPage.PageTitle %></title>
+    <meta name="description" content="<%=ViewTag.Info.PageDescription %>" />
+    <meta name="keywords" content="<%=string.IsNullOrEmpty(ViewTag.SEO.Keywords)?"":ViewTag.SEO.Keywords+" " %><%=ViewTag.Info.PageKeywords %>" />
+    <link href="/Content/Fenlei/ui6/yp/detail0512.css?v20110101" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="/Content/Fenlei/Scripts/comm_js/boot_listpage_version.js"></script>
+    <script src="/Scripts/jquery.tools.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="/Content/scrollable/gallery/scrollable-horizontal.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/scrollable/gallery/scrollable-buttons.css" />
+    <style type="text/css">
+    .scrollable,.items div,#image_wrap
+    {
+        width:600px;
+    }
+    #image_wrap
+    {
+        height:450px;
+	    margin:15px 0 15px 40px;
+	    /*padding:15px 0;*/
+	    text-align:center;
+	    /* some "skinning" */
+	    background-color:#efefef;
+	    border:2px solid #fff;
+	    outline:1px solid #ddd;
+	    -moz-ouline-radius:4px;
+    }
+    #image_wrap img
+    {
+        width:600px; 
+        height:450px;
+    }
+    .scrollable,.items div
+    {
+        height:100px;
+    }
+    .scrollable img 
+    {
+        width:100px;
+        height:75px;
+        margin:12px 5px 12px 21px;
+    }
+    </style>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+
+<asp:Content ID="ContentMain" ContentPlaceHolderID="Main" runat="server">
+    <%
+        var ViewTag = ViewData["ViewTag"] as ViewTag;
+        var YellowPage = ViewTag.Info as YellowPage;
+    %>
+    <div class="w" id="header">
+        <a href="<%=Url.Action("Default","Home") %>" id="minlogo" title="返回<%=SiteInfo.Name%>首页"><%=SiteInfo.Name%></a>
+        <span id="crumbs">
+            <a href="<%=Url.Action("Default","Home") %>"><%=ViewTag.City.Name%><%=SiteInfo.Name%></a>
+            <a href='<%=ViewTag.Info.ParentLink.Url(Url) %>'><%=ViewTag.Info.ParentLink.LinkText%></a>
+            <%
+                if ((YellowPage.Category as YellowPageCategory).BigType == YellowPageBigType.LvYouXiuXian
+                        || (YellowPage.Category as YellowPageCategory).BigType == YellowPageBigType.ShangWu
+                        || (YellowPage.Category as YellowPageCategory).BigType == YellowPageBigType.ShengHuo
+                        || (YellowPage.Category as YellowPageCategory).BigType == YellowPageBigType.ZhaoShang)
+                {
+                    %>
+                        <a href="<%=Url.Action((ViewTag.Info.Category as YellowPageCategory).BigType.ToString(), "huangye")%>"><%=ViewTag.City.Name%><%=(ViewTag.Info.Category as YellowPageCategory).BigType.DisplayName()%></a>
+                    <%
+                }
+            %>
+            <a href='<%=ViewTag.Info.ListLink.Url(Url) %>'><%=ViewTag.City.Name%><%=ViewTag.Info.ListLink.LinkText%>信息</a>
+        </span>
+    </div>
+    <div id="action"></div>
+    <div class="w headline">
+	    <h1><%=ViewTag.Info.Detail.Title%></h1>
+        <div class="other">
+            发布时间：<%=ViewTag.Info.DateCreated.ToString("yyyy-MM-dd")%><span></span>
+            <%--浏览<em id="totalcount">0</em>次--%>
+        </div>
+    </div>
+ 
+    <div id="sbar1"></div>
+    <div class="w">
+	    <div class="conleft">
+            <div id="user">
+                <div id="newuser"></div>      
+                <ul class="userinfo">
+                    <li>
+                        <i>联系电话：</i>
+                        <span class="phone tel"><%=YellowPage.Phone%></span>
+                        <%--<span class="belong">(归属地：杭州)</span>--%>
+                    </li>  
+                </ul>
+            </div>
+            <h2>详细信息</h2>
+            <ul id="info">
+                <%
+                    var objType = YellowPage.ObjectTypeCollection.FirstOrDefault(item => item.Id == YellowPage.ObjectType);
+                    if (objType != null)
+                    {
+                        %>
+                        <li><i class="z">类别：</i><a href="<%=Url.Action(YellowPage.Category.Code, YellowPage.Category.Parent.Code, new { objecttype=objType.Id }) %>"><%=objType.Name%></a></li>
+                        <%
+                    }
+                %>
+                <%
+                    if (YellowPage.Price != null)
+                    {
+                        %>
+                        <li><i class="z">价格：</i>
+                            <%
+                                if (YellowPage.Price == 0)
+                                {
+                                    %>
+                                    面议
+                                    <%
+                                }
+                                else
+                                {
+                                    %>
+                                    <em class="redfont"><%=YellowPage.Price%></em>元
+                                    <%
+                                }
+                            %>
+                        </li>
+                        <%
+                    }
+                %>
+                <%
+                    if (!string.IsNullOrWhiteSpace(YellowPage.Address))
+                    {
+                        %>
+                        <li><i class="z">详细地址：</i><%=YellowPage.Address %></li>
+                        <%
+                    }
+                %>	        
+            </ul>
+            <div class="clear xian"></div>
+            <div class="maincon">
+                <span id="comp-paste-div-8179">
+                    <%=YellowPage.Content%>
+                </span>
+            </div>
+            <p>联系我时，请说是在<%=SiteInfo.Name%>上看到的，谢谢！</p>	
+            <%--<div class="caozuo">
+                <span class="c01"><a id="cz_share"  title="分享信息" href="#">分享</a></span>
+                <span class="c02"><a id="cz_favorite" title="收藏信息" href="#">收藏</a></span>
+                <span class="c03"><a title="举报该信息" href="#">举报</a></span>
+                <span class="c04"><a title="把该信息发送到手机" href="#')">发送到手机</a></span>
+            </div>--%>
+		    
+            <%var picturList = ViewTag.Info.PictureList(); %>
+            <div id="imgPlayer" <%=(picturList == null || picturList.Count == 0) ? "style='display:none;'" : ""%>>
+            <%--显示大图--%>
+            <div id="image_wrap">
+                <img src="/Content/scrollable/gallery/img/blank.gif" />
+            </div>
+            <!-- "previous page" action -->
+            <a class="prev browse left"></a>
+            <div class="scrollable">   
+               <div class="items">
+               <%
+                    for (var i=0;i<picturList.Count;i++)
+                    {
+                        if (i % 5 == 0)
+                        {
+                            %>
+                            <div>
+                            <%
+                        }
+                        %>
+                            <img src="<%=picturList[i] %>" />
+                        <%
+                        if(i%5==4||i==picturList.Count-1)
+                        {
+                            %>
+                            </div>
+                            <%
+                        }
+                    }
+                %>
+               </div>
+            </div>
+            <!-- "next page" action -->
+            <a class="next browse right"></a>
+        </div>
+
+            <div style="display:none;" id="search_list_ui_position" class="beinterest"></div>
+            <div class="clear"></div>
+            
+            <%--iframe显示公司信息--%>
+            <%--<iframe name="gsInfo" id="gsInfo" src="<%=Url.Action("gsInfo", "HuangYe", new {Id=(HttpContext.Current.Handler as MvcHandler).RequestContext.RouteData.Values["id"] })%>" width="100%" height="312" scrolling="no" style="border: none;" frameborder="0" ></iframe>--%>
+
+            <div class="clear"></div>
+            <div class="footad">
+        	    <%--<div id="googlead_list"></div>--%>
+                <%--广告位置--%>
+
+            <%
+                if (SiteInfo.IsTaojen)
+                {
+                    %>
+                    <%--728*90首页横幅--%>
+                    <%=UnionAd.Baidu_728_90.Code %>
+                    <%
+                }
+                else
+                {
+                    %>
+                    <%--728 x 90 - 首页横幅--%>
+                    <%=UnionAd.Google_728_90.Code %>
+                    <%    
+                }
+            %>
+            </div>
+        </div>
+
+        <div class="conright">
+            <%--广告位置--%>
+
+            <%
+                if (SiteInfo.IsTaojen)
+                {
+                    %>
+                    <%--160*600宽幅摩天楼--%>
+                    <%=UnionAd.Baidu_160_600.Code %>
+                    <%
+                }
+                else
+                {
+                    %>
+                    <%--160 x 600 - 宽幅摩天大楼--%>
+                    <%=UnionAd.Google_160_600.Code %>
+                    <%    
+                }
+            %>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div id="sbar2"></div>
+    <div class="warp footer">
+        &copy; flxxwang.com 
+        <%--<a id="askicon" target="_blank" title="有问题请与<%=SiteInfo.Name%>客服进行对话" href="http://flxxwang.com/about/v5/">与<%=SiteInfo.Name%>对话</a>--%>
+    </div>
+
+    <div style="display:none">
+    </div>
+
+<script type="text/javascript">
+    $(function () {
+        $(".scrollable").scrollable();
+        $(".items img").click(function () {
+
+            // see if same thumb is being clicked
+            if ($(this).hasClass("active")) { return; }
+
+            // calclulate large image's URL based on the thumbnail URL (flickr specific)
+            var url = $(this).attr("src").replace("_t", "");
+
+            // get handle to element that wraps the image and make it semi-transparent
+            var wrap = $("#image_wrap").fadeTo("medium", 0.5);
+
+            // the large image from www.flickr.com
+            var img = new Image();
+
+
+            // call this function after it's loaded
+            img.onload = function () {
+
+                // make wrapper fully visible
+                wrap.fadeTo("fast", 1);
+
+                // change the image
+                wrap.find("img").attr("src", url);
+
+            };
+
+            // begin loading the image from www.flickr.com
+            img.src = url;
+
+            // activate item
+            $(".items img").removeClass("active");
+            $(this).addClass("active");
+
+            // when page loads simulate a "click" on the first image
+        }).filter(":first").click();
+    });
+</script>
+<asp:ContentPlaceHolder ID="Scripts" runat="server"/>
+</asp:Content>

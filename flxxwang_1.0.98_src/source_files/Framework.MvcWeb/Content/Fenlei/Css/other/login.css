@@ -1,0 +1,77 @@
+/* CSS Document */
+body,dl,ol,ul,li,dt,dd,p,h2,h3{margin:0;padding:0;list-style:none}
+body{background:#F5F8FF url(http://pic2.58.com/n/images/v_bg.gif) repeat-y center 0;font-family:Arial,"宋体"; padding-right:2px; *padding:0px}
+a{color:#0000cc; cursor:pointer} a:hover { color:#FF0508;} img {border:none; vertical-align:middle;}
+body,.f12 {font-size:12px}
+.tac {text-align:center;}
+#header,.cb,#footer{width:990px;margin:0 auto;clear:both;overflow:hidden;background:#fff}
+.cb{ min-height:500px; _height:500px;}
+#footer p {text-align:center; line-height:24px; border-top:1px solid #d0dcf0; background:#F5F8FF;}
+.inp {font-size:14px; height:22px; line-height:22px; overflow:hidden; vertical-align:middle; border:1px solid #A5ACB2}
+.inw {width:180px;}
+.btns {width:95px; height:30px; text-align:center; line-height:32px; cursor:pointer; font-size:14px; vertical-align:middle; background:url(http://pic2.58.com/n/images/other/buts.gif) no-repeat; border:none;}
+.btn_reg {width:212px; height:32px;  background:url(http://pic2.58.com/n/images/other/but_reg.gif) no-repeat; border:none;}
+.pdt10 {padding-top:10px;}
+.fgrey {color:#666;} .red{ color:#f00}
+.fred {color:#ff0508;} .fgreen {color:#009900;} .fora {color:#FF9933;} .flv {color:#B8D96A;}
+.chenggong{ display:inline-block; height:19px; background:url(http://pic2.58.com/n/images/post/background.gif) no-repeat -162px -79px; padding-left:25px; vertical-align:middle; padding-right:5px;}
+.action{ display:inline-block; height:23px; background:#dce8fa url(http://pic2.58.com/n/images/post/background.gif) no-repeat -158px -121px; padding-left:30px; vertical-align:middle; padding-right:5px;}
+.wrong,.v_false{ display:inline-block; height:23px; background:#ffc6c6 url(http://pic2.58.com/n/images/post/background.gif) no-repeat -158px -163px; padding-left:30px; vertical-align:middle; padding-right:5px;}
+.yzm {border:1px solid #ccc;}
+
+.chenggong1, .action1, .wrong1 { display:inline-block; vertical-align:top; padding-right:5px; font-size:12px; color:#000; position:relative; padding-left:40px}
+.chenggong1{ width:19px; height:24px; background:url(http://pic2.58.com/n/images/post/background.gif) no-repeat -162px -75px;}
+.action1,.wrong1{ width:300px; height:20px; padding-top:3px; background:url(http://pic2.58.com/n/images/post/verification.gif) no-repeat 0 0;}
+.action1{ background:url(http://pic2.58.com/n/images/post/verification.gif) no-repeat 0 0;}
+.action1 .action_po,.wrong1 .action_po{ position:absolute; left:33px; top:0;}
+.action1 .action_po_top{ display:block; width:287px; padding:5px 10px 0; min-height:10px; _height:10px; background:url(http://pic2.58.com/n/images/post/verification.gif) no-repeat -33px 0;}
+.action1 .action_po_bot{ display:block; width:307px; height:5px; background:url(http://pic2.58.com/n/images/post/verification.gif) no-repeat -33px -185px; overflow:hidden;}
+.action_color{ border:1px solid #006BD7; background:#fafafa}
+.wrong1{ background:url(http://pic2.58.com/n/images/post/verification.gif) no-repeat 0 -190px;}
+.wrong1 .action_po_top{ display:block; width:287px; padding:5px 10px 0; min-height:10px; _height:10px; background:url(http://pic2.58.com/n/images/post/verification.gif) no-repeat -33px -190px;}
+.wrong1 .action_po_bot{ display:block; width:307px; height:5px; background:url(http://pic2.58.com/n/images/post/verification.gif) no-repeat -33px -375px; overflow:hidden;}
+.wrong_color{ border:1px solid #e40000; background:#fdf8f8}
+
+/* header */
+#header {position:relative;}
+#logo,#cityName,#logintext{position:absolute}
+#headerinside{background:url(http://pic2.58.com/n/images/h_bg.gif) repeat-x;height:60px}
+#logo{left:20px;top:8px}
+#cityName{z-index:1000;top:20px;left:180px;padding-top:3px;line-height:22px;font-size:26px; font-weight:700;}
+#logintext{right:20px;top:5px;z-index:999}#logintext a{margin-left:5px}
+/*登录注册*/
+.tbl_login {margin:30px 0 40px;}
+.tbl_login td {line-height:24px; font-size:14px; color:#585858}
+.tbl_login td.fblk, .fblk p {color:#000;}
+.xiy {width:521px; background:#f1f1f1; border:1px solid #ccc; padding:8px;}
+.lgbox {width:160px; margin-left:20px; background:#f8faff; padding:20px 10px; margin-bottom:10px;}
+.tarea {width:501px; *width:503px; height:120px; padding:8px; font-size:13px; line-height:18px;}
+.bt{ padding:20px 0 40px 60px; width:220px; background:url(http://pic2.58.com/n/images/post/background.gif) no-repeat 0px -248px; font-weight:bold; font-size:16px; color:#479D06}
+.mima_a,.mima_b,.mima_c,.mima_d {width:90px; height:6px; border:1px solid #ccc; padding:1px; line-height:1%; font-size:1%;}
+.mima_a p,.mima_b p,.mima_c p,.mima_d p { height:6px; font-size:1%; line-height:1%;}
+.mima_a p {width:25%;background:#FF3300;}
+.mima_b p {width:50%; background:#FF9933; }
+.mima_c p {width:75%; background:#B8D96A; }
+.mima_d p {width:100%; background:#009933;}
+.warn{ background:url(http://pic2.58.com/n/images/other/warn.gif) no-repeat 0 40px; padding:46px 0 15px 40px; font-size:18px; font-weight:bold; color:#f00}
+
+/* 2010-1-14 房产版网邻通发布成功 */
+.f16{ font-size:16px;}
+.kftel {position:absolute;top:30px;	right:20px;}
+.yanzheng {	display:inline-block;margin-right:35px;}
+/* icon */
+.icon1{ background:url(http://pic2.58.com/n/images/txbackground.gif) no-repeat -6px -153px; display:inline-block; width:25px; height:20px; vertical-align:middle}
+.icon2{ background:url(http://pic2.58.com/n/images/txbackground.gif) no-repeat -5px -187px; display:inline-block; width:25px; height:20px;vertical-align:middle }
+.icon3{ background:url(http://pic2.58.com/n/images/txbackground.gif) no-repeat -7px -222px; display:inline-block; width:25px; height:20px; vertical-align:middle}
+.icon4{ background:url(http://pic2.58.com/n/images/txbackground.gif) no-repeat -7px -256px; display:inline-block; width:25px; height:20px; vertical-align:middle}
+.icon5{ background:url(http://pic2.58.com/n/images/txbackground.gif) no-repeat -7px -292px; display:inline-block; width:25px; height:20px; vertical-align:middle; }
+.icon6{ background:url(http://pic2.58.com/n/images/txbackground.gif) no-repeat -7px -328px; display:inline-block; width:36px; height:23px; vertical-align:middle}
+.icon1_b{ background:url(http://pic2.58.com/n/images/txbackground.gif) no-repeat -68px -153px; display:inline-block; width:25px; height:20px; vertical-align:middle}
+.icon2_b{ background:url(http://pic2.58.com/n/images/txbackground.gif) no-repeat -67px -187px; display:inline-block; width:25px; height:20px; vertical-align:middle}
+.icon3_b{ background:url(http://pic2.58.com/n/images/txbackground.gif) no-repeat -68px -222px; display:inline-block; width:25px; height:20px; vertical-align:middle}
+.icon4_b{ background:url(http://pic2.58.com/n/images/txbackground.gif) no-repeat -68px -257px; display:inline-block; width:25px; height:20px; vertical-align:middle}
+.icon6_b{ background:url(http://pic2.58.com/n/images/txbackground.gif) no-repeat -69px -328px; display:inline-block; width:36px; height:23px; vertical-align:middle}
+
+.company{ font-size:14px; margin-top:20px;}
+.company td{ padding-right:5px; vertical-align:top;}
+.combut{ text-align:center;}.combut input{ width:60px; height:26px; font-size:14px; margin-top:20px;}

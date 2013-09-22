@@ -1,0 +1,190 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/Post/poststep.Master" Inherits="System.Web.Mvc.ViewMasterPage" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <asp:ContentPlaceHolder ID="head" runat="server" />
+</asp:Content>
+<asp:Content ID="Content4" ContentPlaceHolderID="PublishCount" runat="server">
+    <asp:ContentPlaceHolder ID="PublishCount" runat="server" />
+</asp:Content>
+<asp:Content ID="Content5" ContentPlaceHolderID="TopMsg" runat="server">
+    1、培训公司、培训中心/学校等教育培训机构，请选择机构发布信息。<BR>2、大学生、在职/专业培训教师等教员身份的个体，请选择个人发布信息。 <BR>3、正确选择机构和个人发布信息，否则将被删除。<BR>4、发布重复信息或灌水信息，信息将会被删除，严重者将锁定帐户。<A href="http://about.flxxwang.com/89.html?categid=1#b" target=_blank><U>查看版规 </U></A>
+</asp:Content>
+<asp:Content ID="Content6" ContentPlaceHolderID="Main" runat="server">
+    <table cellpadding="0" cellspacing="0" class="box1" id="formTb"> 
+    <tr> 
+        <td class="t"> <b class="red">*</b> 标 题： </td> 
+        <td> <input  maxLength=25 type="text" name="Title" f="{0}" id="Title" value='' class="text1" /> <span id="Title_Tip"></span> </td> 
+    </tr> 
+    <tr id="trobjecttype"> 
+        <td class="t"> <b class="red">*</b> <asp:ContentPlaceHolder ID="ObjectTypeLabel" runat="server" /><%--科 目--%>： </td> 
+        <td> 
+            <asp:ContentPlaceHolder ID="ObjectType" runat="server" />
+            <span id="ObjectType_Tip"></span> 
+        </td> 
+    </tr> 
+    <tr id="tt" style="display: none" class="pb"> 
+        <td class="t"><%--<span id="InfoTagLabel">选择标签</span>--%> 选择标签： </td> 
+        <td> 
+            <asp:ContentPlaceHolder ID="InfoTag" runat="server" />
+            <span id="infotag_Tip"></span> 
+        </td> 
+    </tr>
+    <asp:ContentPlaceHolder ID="Rows" runat="server" /> 
+    <tr id="trdizhi"> 
+        <td class="t"> <b class="red">*</b> 地 址： </td> 
+        <td> 
+            <input  maxLength=50 class="text1" type="text" id="dizhi" f="{0}" name="dizhi" value='' /> 
+            <span id="dizhi_Tip"></span> 
+        </td> 
+    </tr>
+    <tr id="trgongjiao"> 
+        <td class="t"> 公 交： </td> 
+        <td> <input class="text1" type="text" f="{0}" id="gongjiao" name="gongjiao" value='' /><span id="gongjiao_Tip"></span> </td> 
+    </tr> 
+    <tr> 
+        <td class="t"> <b class="red">*</b><span id="ContentLabel">补充说明：</span> <%--补充说明--%>： </td> 
+        <td> <textarea  maxLength=2000 name="Content" class="textarea2" id="Content"></textarea> <span id="Content_Tip"></span> </td> 
+    </tr>
+    <tr>
+        <td class="t"> </td> 
+        <td>
+            <div id="uploadPic" value=""></div> 
+            <script type="text/javascript">
+                $info.Uploader.init();
+            </script>
+        </td>
+    </tr> 
+    <tr> 
+        <td class="t"> <b class="red">*</b> 联系人： </td> 
+        <td> <input type="text" name="goblianxiren" id="goblianxiren" value='' class="text2"  maxLength=6 /> <span id="goblianxiren_Tip"></span> </td> 
+    </tr> 
+    <tr> 
+        <td class="t"> <b class="red">*</b> 手机或电话： </td> <td> <input   class="text2" type="text" id="Phone" name="Phone" value='' /> <span id="Phone_Tip"></span> </td> 
+    </tr>  
+    <tr> 
+        <td class="t"> </td> 
+        <td> <input type="submit" id="fabu" class="fabu1" value="　　发布　　" ct="submit" />  </td> 
+    </tr> 
+</table>
+</asp:Content>
+<asp:Content ID="Content7" ContentPlaceHolderID="PostScript" runat="server">
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //showTag();
+            //            $('#ObjectType').get(0).onchange = showTag; 
+//            $.formValidator.initConfig({ formid: "aspnetForm", errorfocus: true, btnid: 'fabu', fun: function () {
+//                post();
+//                return false;
+//            }
+//            });
+            $("#Title").formValidator({ tipid: "Title_Tip", onfocus: "6-25个字，不能填写电话和特殊符号<br/>标题将被展示在详情页和列表页最醒目的位置", q2b: true }).regexValidator({ regexp: "^[\\s\\S]*$#^[\\s\\S]{6,}$#^(.){6,25}$", onerror: "请输入标题#标题不足6个字#6-25个字，不能填写电话和特殊符号！" }).functionValidator({ fun: function (val, elem) { return $.formValidator.IsSimple(val); }, onerror: '标题太过简单' });
+            //            $('#ObjectType').formValidator({ tipid: 'ObjectType_Tip', onfocus: '' }).functionValidator({ fun: function (val, elem) { return val != ''; }, onerror: '科目不能为空' }); 
+            //$('#yingyeshijian').formValidator({ tipid: 'yingyeshijian_Tip', onfocus: '请按格式输入，如：08:00-24:00', q2b: true, 'defaultvalue': '08:00-24:00' }).regexValidator({ regexp: "\\d{2,2}:\\d{2,2}-\\d{2,2}:\\d{2,2}", onerror: "请按格式输入，如：08:00-18:00" });
+            $('#dizhi').formValidator({ tipid: 'dizhi_Tip', onfocus: '请填写详细地址', q2b: true }).regexValidator({ regexp: "\\S+#^(.){2,50}$#^([^\\s]\\s{0,3}(?!([0-9０１２３４５６７８９零一二三四五六七八九壹贰叁肆伍陆柒捌玖]{6})))+$#^[\\w\\[\\]\\(\\)\\{\\}\\.\\s,\\-\\*，。（）【】“”—‘’\\u4e00-\\u9fa5]*$", onerror: "请输入地址#地址不足2个字#地址里不能填写电话#地址里不能输入特殊字符" });
+            $('#Content').formValidator({ tipid: 'Content_Tip', onfocus: '10~2000个字之间，不能填写电话、QQ等联系方式或特殊符号，否则信息将会被删除' }).regexValidator({ regexp: "^[\\s\\S]*$#^[\\s\\S]{10,}$#^([\\s\\S]){10,2000}$", onerror: "请填写补充说明#补充说明不足10个字#补充说明应在10~2000个字之间，不能填写电话、QQ等联系方式" });
+            $('#goblianxiren').formValidator({ tipid: 'goblianxiren_Tip', onfocus: '2~6个字，不能填写电话和联系方式', q2b: true }).regexValidator({ regexp: "\\S+#^(.){2,6}$#^[\\w\\d\\s\\u4e00-\\u9fa5]*$", onerror: "请输入联系人#联系人不足2个字#联系人不能填写特殊符号" });
+            $('#Phone').formValidator({ tipid: 'Phone_Tip', onfocus: '请正确填写电话号码，分机可以用“-”分开。', q2b: true }).regexValidator({ regexp: "(^(0\\d{2,3})?-?([2-9]\\d{6,7})(-\\d{1,5})?$)|(^((\\(\\d{3}\\))|(\\d{0}))?(13|14|15|18)\\d{9}$)|(^(400|800)\\d{7}(-\\d{1,5})?$)|(^(95013)\\d{6,8}$)", onerror: "电话填写错误。<br/>请参照格式填写：87654321-001或138********" });
+        });
+        //        function showTag() {
+        //            $.c.sale.gettag(14286, 2996, 'ObjectType', 0, "tagul", "tt");
+        //            setTimeout($.j.initTagCheck, 1000);
+        //        }
+    </script>
+    <script type="text/javascript">
+        function FillData(obj) {
+            if (obj == null) {
+                return;
+            }
+            obj.Title = $("#Title").val();
+            obj.ObjectType = parseInt($("#ObjectType").val(), 10);
+            obj.Address = $("#dizhi").val();
+            obj.Bus = $("#gongjiao").val();
+            obj.Content = $("#Content").val();
+            obj.ContactPerson = $("#goblianxiren").val();
+            obj.Phone = $("#Phone").val();
+            obj.BusTime = $("#yingyeshijian").val();
+
+            var Tags = $(':checkbox[name="Tag"]:checked');
+            if (Tags.length >= 1) {
+                obj.Tag1 = parseInt($(Tags[0]).val(), 10);
+            }
+            if (Tags.length >= 2) {
+                obj.Tag2 = parseInt($(Tags[1]).val(), 10);
+            }
+            if (Tags.length >= 3) {
+                obj.Tag3 = parseInt($(Tags[2]).val(), 10);
+            }
+            if (Tags.length >= 4) {
+                obj.Tag4 = parseInt($(Tags[3]).val(), 10);
+            }
+            if (Tags.length >= 5) {
+                obj.Tag5 = parseInt($(Tags[4]).val(), 10);
+            }
+            if (Tags.length >= 6) {
+                obj.Tag6 = parseInt($(Tags[5]).val(), 10);
+            }
+            if (Tags.length >= 7) {
+                obj.Tag7 = parseInt($(Tags[6]).val(), 10);
+            }
+            if (Tags.length >= 8) {
+                obj.Tag8 = parseInt($(Tags[7]).val(), 10);
+            }
+            if (Tags.length >= 9) {
+                obj.Tag9 = parseInt($(Tags[8]).val(), 10);
+            }
+            if (Tags.length >= 10) {
+                obj.Tag10 = parseInt($(Tags[9]).val(), 10);
+            }
+            if (Tags.length >= 11) {
+                obj.Tag11 = parseInt($(Tags[10]).val(), 10);
+            }
+            if (Tags.length >= 12) {
+                obj.Tag12 = parseInt($(Tags[11]).val(), 10);
+            }
+
+            var TrainWays = $(':checkbox[name="fuwuleixing"]:checked');
+            obj.TrainWay = "";
+            if (TrainWays.length >= 1) {
+                obj.TrainWay += "," + $(TrainWays[0]).val();
+            }
+            var TrainWays = $(':checkbox[name="fuwuleixing"]:checked');
+            if (TrainWays.length >= 2) {
+                obj.TrainWay += "," + $(TrainWays[1]).val();
+            }
+            var TrainWays = $(':checkbox[name="fuwuleixing"]:checked');
+            if (TrainWays.length >= 3) {
+                obj.TrainWay += "," + $(TrainWays[2]).val();
+            }
+            var TrainWays = $(':checkbox[name="fuwuleixing"]:checked');
+            if (TrainWays.length >= 4) {
+                obj.TrainWay += "," + $(TrainWays[3]).val();
+            }
+            var TrainWays = $(':checkbox[name="fuwuleixing"]:checked');
+            if (TrainWays.length >= 5) {
+                obj.TrainWay += "," + $(TrainWays[4]).val();
+            }
+            if (obj.TrainWay != "") {
+                obj.TrainWay = obj.TrainWay.slice(1);
+            }
+            else {
+                obj.TrainWay = null;
+            }
+
+            obj.UserId = GetUserId();
+            
+            obj.CityId = GetCityId();
+            obj.RegionId = GetRegionId();
+            obj.CircleId = GetCircleId();
+            obj.TId = GetTId();
+            if ($("#Pic").val() != "") {
+                obj.Pictures = $("#Pic").val();
+            }
+        }
+        //    function clearPicValue() {//保留
+        //        var c = $("#pdv:hidden"); if (c.length > 0) {
+        //            $('#Pic').val(''); $('#PicDesc').val('');
+        //        }
+        //    }
+        $("#mydear").hide();
+    </script>
+    <asp:ContentPlaceHolder ID="PostScript" runat="server" />
+</asp:Content>

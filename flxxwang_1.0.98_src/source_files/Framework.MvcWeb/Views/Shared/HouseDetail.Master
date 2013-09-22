@@ -1,0 +1,120 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/InfoDetail.Master" Inherits="System.Web.Mvc.ViewMasterPage" %>
+<%@ Import Namespace="Infomation.Core.Extensions" %>
+<%@ Import Namespace="Infomation.Core.Mvc" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="TopInfoMsg" runat="server">
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="Main" runat="server">
+    <%
+    var ViewTag = ViewData["ViewTag"] as ViewTag; 
+    var house = ViewTag.Info as IHouse;
+%>
+<div class="w">
+    <div class="leftcol">
+        <div class="row">
+            <asp:ContentPlaceHolder ID="Info" runat="server">
+            </asp:ContentPlaceHolder>
+            <div class="user">
+    	        <div id="newuser"></div>
+                <ul class="vuser">
+                    <li class="call_2">
+                        <i class="z">联系电话：</i><span class="phone"><%=house.Phone %></span>
+                        <%--<span class="belong">（归属地：杭州）</span>--%>
+                    </li>
+                    <li class="call_2">
+                        <i class="z">联系人：</i><%=house.ContactPerson %>
+                    </li>
+                    <%--<li>
+                        <i></i>
+                        <span class="f12">
+                            <a target="_blank" href="#">查看此电话发帖记录</a>
+                        </span>
+                    </li>--%>
+                </ul>
+                <ul class="userinfo">
+                    <%--<li class="n">
+                        <i>&nbsp;</i>
+                        <a title="进入我的网上店铺" target="_blank" href='#'>进入我的网上店铺</a> &nbsp;
+                    </li>--%>
+                </ul> 
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="content">
+            <div class="maincon">
+                <%--<SPAN id=comp-paste-div-657>九莲新村，一室户小<a class='kw_link' target='_blank' href='http://hz.flxxwang.com/sou/jh_单间/'>单间</a>，有自己的厨房和<a class='kw_link' target='_blank' href='http://hz.flxxwang.com/sou/jh_卫生间/'>卫生间</a>，工作在附近的年<BR>轻人住在这里是很方便的！房间简洁干净，<a class='kw_link' target='_blank' href='http://hz.flxxwang.com/sou/jh_房源/'>房源</a>充足的缘故，这边可 以月付，所以不用担心签长期合同，当然了，租久一点么房东更开心 ！如果你来过九莲应该知道这里是文三路最热闹的地方，边上是小学 和幼儿园，所以治安环境不用担心！对面是颐高数码城，楼下是九莲 新村公交站，这里的车子太多了，179/290/74/13/516/15路等等..<BR>&nbsp;&nbsp;&nbsp; <SPAN id=comp-paste-div-657>房子是老<a class='kw_link' target='_blank' href='http://hz.flxxwang.com/sou/jh_小区/'>小区</a>房，面积不大，足够住两个人了！对刚来杭州工作的小<BR>两口或者即将毕业实习的大学生来说都是不错的选择~因为是老房子， 价格真的是很便宜了，所以大家别太挑剔哦，空调热水器都装好的， 宽带和有线电视也有，随时可以使用，稍微打扫一下就是个温馨的小 家！有兴趣或者周围有意想租的朋友可以介绍来，我们有专业的业务 员带领看房&nbsp;</SPAN><BR>&nbsp;<SPAN id=comp-paste-div-657>PS友情提示：市区的<a class='kw_link' target='_blank' href='http://hz.flxxwang.com/sou/jh_小户型/'>小户型</a>已经不多，欲租从速！都是现房，随时可<BR>以看，房源循环很大，每天都有入住和<a class='kw_link' target='_blank' href='http://hz.flxxwang.com/sou/jh_出租/'>出租</a>掉的，所以速度是最重要 的哦~已经租掉的我们会直接将房源下线，所以只要你看到的，房子就 还在。马上打电话，我们会随时准备陪您找到合适的房子！ </SPAN></SPAN>--%>
+                <%=ViewTag.Info.Detail.Content%>
+            </div>
+            <p>联系我时，请说是在<%=SiteInfo.Name%>上看到的，谢谢！</p>
+            <%var picturList = ViewTag.Info.PictureList(); %>
+            <div id="imgPlayer" <%=(picturList == null || picturList.Count == 0) ? "style='display:none;'" : ""%>>
+                <%--显示大图--%>
+                <div id="image_wrap">
+                    <img src="/Content/scrollable/gallery/img/blank.gif" />
+                </div>
+                <!-- "previous page" action -->
+                <a class="prev browse left"></a>
+                <div class="scrollable">   
+                    <div class="items">
+                    <%
+                        for (var i=0;i<picturList.Count;i++)
+                        {
+                            if (i % 5 == 0)
+                            {
+                                %>
+                                <div>
+                                <%
+                            }
+                            %>
+                                <img src="<%=picturList[i] %>" />
+                            <%
+                            if(i%5==4||i==picturList.Count-1)
+                            {
+                                %>
+                                </div>
+                                <%
+                            }
+                        }
+                    %>
+                    </div>
+                </div>
+                <!-- "next page" action -->
+                <a class="next browse right"></a>
+            </div>
+
+            <div class="clear"></div> 
+
+            <div style="display:none;" id="search_list_ui_position" class="beinterest"></div>              
+            <div class="clear"></div>
+            <div class="footad pt20">
+        	    <%--<div id="googlead_list"></div>--%>
+                <div></div>
+            </div>
+	    </div>
+        <div class="clear"></div>
+    </div>
+    <div class="rightcol">
+        <%--广告位置--%>
+
+            <%
+                if (SiteInfo.IsTaojen)
+                {
+                    %>
+                    <%--160*600宽幅摩天楼--%>
+                    <%=UnionAd.Baidu_160_600.Code %>
+                    <%
+                }
+                else
+                {
+                    %>
+                    <%--160 x 600 - 宽幅摩天大楼--%>
+                    <%=UnionAd.Google_160_600.Code %>
+                    <%    
+                }
+            %>
+    </div>
+    <div class="clear"></div>
+</div>
+</asp:Content>

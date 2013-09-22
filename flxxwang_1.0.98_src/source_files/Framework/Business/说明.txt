@@ -1,0 +1,56 @@
+﻿1、Database db 在子类中可以进行重写，如：
+private Database _db;
+public override Database db
+{
+    get
+    {
+        if(_db==null)
+        {
+            _db=DatabaseFactory.CreateDatabase("BlogConnectionString");
+        }
+        return _db;
+    }
+}
+注意事项
+db.AddInParameter(cmd, "@Tag", DbType.String, entity.Tag);//entity.Tag为byte?类型。注意:这是有问题的，例如当entity.Tag=53,则保存到数据库中的值为5而不是53,正确
+的写法为:
+db.AddInParameter(cmd, "@Tag", DbType.Byte, entity.Tag);
+(总之,实际是什么类型,就设置成什么类型)
+
+2、一种错误的使用情况，如：
+public class Profile:ModelBase<Profile,int>
+{
+}
+
+public AuthorProfile:Profile
+{
+}
+
+AuthorProfile pc=AuthorProfile.Select(1) as AuthorProfile;
+得到的结果pc总是为null
+
+原因：AuthorProfile.Select()的返回值是Profile,根本不可能转换为AuthorProfile.
+
+正确的使用：(见Framework.Users.dll中的Profile)
+public abstract class Profile<TYPE,KEY>:ModelBase<TYPE,KEY>
+{
+	//////
+	定义一些属性
+	//////
+}
+public AuthorProfile:Profile<AuthorProfile,int>
+{
+}
+
+/////////////////////////////
+数据类型对照:
+  数据库       C#
+  float      double
+  real        float
+  tinyint     byte
+  smallint   short
+   int        int
+  bigint     long
+
+  //////////////////
+  待改进的地方:

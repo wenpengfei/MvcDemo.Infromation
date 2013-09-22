@@ -1,0 +1,659 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="Infomation.Core.Mvc.InfoBaseViewMasterPage" %>
+<%@ Import Namespace="Infomation.Core.Extensions" %>
+<%@ Import Namespace="Framework.Common" %>
+<%@ Import Namespace="Framework.Extensions" %>
+<%@ Import Namespace="Infomation.Core.Mvc" %>
+<%@ Import Namespace="Framework.Seo" %>
+
+<asp:Content ID="ContentHead" ContentPlaceHolderID="Head" runat="server">
+    <%
+        var ViewTag = ViewData["ViewTag"] as ViewTag;
+     %>
+    <title><%=ViewTag.Interface.PageTitle%></title>
+    <meta name="description" content="<%=ViewTag.Interface.PageDescription %>" />
+    <meta name="keywords" content="<%=string.IsNullOrEmpty(ViewTag.SEO.Keywords)?"":ViewTag.SEO.Keywords+" " %><%=ViewTag.Interface.PageKeywords %>" />
+    <link href="/Content/Fenlei/assets/css/list.css" type="text/css" rel="Stylesheet" />
+    <script type="text/javascript" src="/Scripts/framework/Area/city_debug.js"></script>
+    <%--<script type="text/javascript" src="/Scripts/framework/urlhelper.js?v20110101"></script>--%>
+    <asp:ContentPlaceHolder ID="Head" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+
+<asp:Content ID="ContentMain" ContentPlaceHolderID="Main" runat="server">
+    <%
+        var routeData = (HttpContext.Current.Handler as MvcHandler).RequestContext.RouteData;
+        var request = (HttpContext.Current.Handler as MvcHandler).RequestContext.HttpContext.Request;
+        var ViewTag = ViewData["ViewTag"] as ViewTag;
+        var ContainBiz=ViewTag.Interface.ContainsProperty("IsBiz");
+        var curInfoType = string.Empty;
+        var objType = ViewTag.ObjectType;
+        if (objType == null)
+        {
+            curInfoType = ViewTag.Interface.Category.Name;
+        }
+        else
+        {
+            curInfoType = objType.Name;
+        }
+          
+    %>
+    <div id="header">
+        <a href="<%=Url.Action("Default","Home") %>" id="minlogo"><%=ViewTag.City.ShortName %><%=SiteInfo.Name%></a>
+        <span id="crumbs">
+            <%
+                foreach (var item in ViewTag.Interface.InfoPath)
+                {
+                    %>
+                    <%=item.Link(Html) %>
+                    <%
+                }
+            %>
+        </span>
+    </div>
+
+    <div id="selection">
+        <%
+            if (ViewTag.Interface.ObjectTypeCollection != null && ViewTag.Interface.ObjectTypeCollection.Count > 0)
+            {
+                %>
+                <dl class="secitem">
+                    <dt>类型：</dt>
+                    <dd>
+                        <%
+                            if (ViewTag.ObjectType == null)
+                        {
+                            %>
+                                <a href="<%=Url.RemoveRouteValues(routeData,new string[] { "objecttype","tag","pageindex" })%>" class='select'>全部</a>
+                            <%
+                        }
+                        else
+                        {
+                            %>
+                                <a href="<%=Url.RemoveRouteValues(routeData,new string[] { "objecttype","tag","pageindex" })%>">全部</a>
+                            <%
+                        }
+                        %>
+    
+                        <%
+                            foreach (var obj in ViewTag.Interface.ObjectTypeCollection)
+                            {
+                                if (ViewTag.ObjectTypeId == obj.Id)
+                                {
+                                    %>
+                                    <a href="<%=Url.AddRouteValues(routeData,new{objecttype=obj.Id,tag=0,pageindex=1}) %>" class='select'><%=obj.Name%></a>
+                                    <%
+                                }
+                                else
+                                {
+                                    %>
+                                    <a href="<%=Url.AddRouteValues(routeData,new{objecttype=obj.Id,tag=0,pageindex=1}) %>"><%=obj.Name%></a>
+                                    <%
+                                }
+                            }
+                        %>
+                    </dd>
+                </dl>
+                <%
+            }
+        %>
+        
+
+        <%
+            //if (ViewTag.ObjectType!=null&&ViewTag.Interface.TagCollection != null && ViewTag.Interface.TagCollection.Count > 0)
+            if (ViewTag.ObjectType != null && ViewTag.Interface.TagCollection != null && ViewTag.Interface.TagCollection.Count > 0)
+            {
+                var tagCollection = ViewTag.Interface.TagCollection.Where(item => item.ObjectTypeId == ViewTag.ObjectTypeId);
+                if (tagCollection.Count() > 0)
+                {
+                    %>
+                    <dl class="secitem">
+                        <dt>小类：</dt>
+                        <dd>
+                            <%
+                        if (ViewTag.Tag == null)
+                        {
+                                %>
+                                    <a href="<%=Url.RemoveRouteValues(routeData,new string[]{"tag","pageindex"})%>" class='select'>全部</a>
+                                <%
+                        }
+                        else
+                        {
+                                %>
+                                    <a href="<%=Url.RemoveRouteValues(routeData,new string[]{"tag","pageindex"})%>">全部</a>
+                                <%
+                        }
+                            %>
+    
+                            <%
+                        foreach (var obj in tagCollection)
+                        {
+                            if (ViewTag.TagId == obj.Id)
+                            {
+                                        %>
+                                        <a href="<%=Url.AddRouteValues(routeData,new{tag=obj.Id,pageindex=1}) %>" class='select'><%=obj.Name%></a>
+                                        <%
+                            }
+                            else
+                            {
+                                        %>
+                                        <a href="<%=Url.AddRouteValues(routeData,new{tag=obj.Id,pageindex=1}) %>"><%=obj.Name%></a>
+                                        <%
+                            }
+                        }
+                            %>
+                        </dd>
+                    </dl>
+                    <%
+                }
+            }
+        %>
+        
+        <%
+            if ((ViewTag.Interface.ObjectTypeCollection == null || ViewTag.Interface.ObjectTypeCollection.Count == 0) && ViewTag.Interface.TagCollection!=null&&ViewTag.Interface.TagCollection.Count > 0)
+            {
+                %>
+                <dl class="secitem">
+                    <dt>类型：</dt>
+                    <dd>
+                        <%
+                            if (ViewTag.Tag == null)
+                        {
+                            %>
+                                <a href="<%=Url.RemoveRouteValues(routeData,new string[]{"tag","pageindex"})%>" class='select'>全部</a>
+                            <%
+                        }
+                        else
+                        {
+                            %>
+                                <a href="<%=Url.RemoveRouteValues(routeData,new string[]{"tag","pageindex"})%>">全部</a>
+                            <%
+                        }
+                        %>
+    
+                        <%
+                            foreach (var obj in ViewTag.Interface.TagCollection)
+                            {
+                                if (ViewTag.TagId == obj.Id)
+                                {
+                                    %>
+                                    <a href="<%=Url.AddRouteValues(routeData,new{tag=obj.Id,pageindex=1}) %>" class='select'><%=obj.Name%></a>
+                                    <%
+                                }
+                                else
+                                {
+                                    %>
+                                    <a href="<%=Url.AddRouteValues(routeData,new{tag=obj.Id,pageindex=1}) %>"><%=obj.Name%></a>
+                                    <%
+                                }
+                            }
+                        %>
+                    </dd>
+                </dl>
+                <%
+            }
+        %>
+
+        <dl class="secitem">
+            <dt>区域：</dt>
+            <dd id="regions">
+                <%
+                    if (ViewTag.Region == null)
+                    {
+                        %>
+                            <a href="<%=Url.RemoveRouteValues(routeData,new string[]{"region","pageindex"})%>" class='select'>全<%=ViewTag.City.ShortName%></a>
+                        <%
+                    }
+                    else
+                    {
+                         %>
+                            <a href="<%=Url.RemoveRouteValues(routeData,new string[]{"region","pageindex"})%>">全<%=ViewTag.City.ShortName%></a>
+                        <%
+                    }
+                 %>
+
+                 <%
+                     foreach (var region in ViewTag.Regions)
+                     {
+                         if (ViewTag.RegionId == region.Id)
+                         {
+                             %>
+                                <a href="<%=Url.AddRouteValues(routeData,new{region=region.Id,pageindex=1}) %>" class='select'><%=region.Name%></a>
+                             <%
+                         }
+                         else
+                         {
+                             %>
+                                <a href="<%=Url.AddRouteValues(routeData,new{region=region.Id,pageindex=1}) %>"><%=region.Name%></a>
+                             <%
+                         }
+                     }
+                  %>
+            </dd>
+        </dl>
+
+        <%
+            if (!(ViewTag.Interface is HouseHire)
+                &&!(ViewTag.Interface is Carpool)
+                &&!(ViewTag.Interface is IEducation)
+                &&!(ViewTag.Interface is IFriend)
+                &&!(ViewTag.Interface is PetGive)
+                &&!(ViewTag.Interface is TicketTrain)
+                &&!(ViewTag.Interface is TicketAirplane))
+            {
+                %>
+                <dl class="secitem">
+                    <dt>价格：</dt>
+                    <dd id="priceRange">
+                        <a <%=ViewTag.PriceRange==null?"class='select'":"" %> href="<%=Url.RemoveRouteValues(routeData, new string[] { "pricerange", "minprice", "maxprice" }) %>">全部</a>
+                        <a <%=ViewTag.PriceRange==1?"class='select'":"" %> href="<%=Url.AddRouteValues(routeData,new{pricerange=1,minprice=0,maxprice=50}) %>">50元以下</a>
+                        <a <%=ViewTag.PriceRange==2?"class='select'":"" %> href="<%=Url.AddRouteValues(routeData,new{pricerange=2,minprice=50,maxprice=100}) %>">50-100元</a>
+                        <a <%=ViewTag.PriceRange==3?"class='select'":"" %> href="<%=Url.AddRouteValues(routeData,new{pricerange=3,minprice=100,maxprice=200}) %>">100-200元</a>
+                        <a <%=ViewTag.PriceRange==4?"class='select'":"" %> href="<%=Url.AddRouteValues(routeData,new{pricerange=4,minprice=200,maxprice=500}) %>">200-500元</a>
+                        <a <%=ViewTag.PriceRange==5?"class='select'":"" %> href="<%=Url.AddRouteValues(routeData,new{pricerange=5,minprice=500,maxprice=1500}) %>">500-1500元</a>
+                        <a <%=ViewTag.PriceRange==6?"class='select'":"" %> href="<%=Url.AddRouteValues(routeData,new{pricerange=6,minprice=2000,maxprice=3000}) %>">2000-3000元</a>
+                        <a <%=ViewTag.PriceRange==7?"class='select'":"" %> href="<%=Url.AddRouteValues(routeData,new{pricerange=7,minprice=3000,maxprice=-1}) %>">3000元以上</a>
+
+                
+                        <span class="prifilter">
+                            <span class="text text2">
+                                <input id="minPrice" type="text" para="minprice" muti="1" size="3"  min="0" name="b_q" value='<%=ViewTag.MinPrice %>' /><%--onkeyup="cknum(this)"--%>
+                                -  
+                                <input id="maxPrice" type="text" muti="1" para="minprice" size="3"  min="0" name="b_q" value='<%=ViewTag.MaxPrice %>'/><%--onkeyup="cknum(this)"--%>  
+                                元 
+                            </span>
+                            <span class="btn btn2">
+                                <input type="button" value="价格筛选" onclick="priceQuery()" />
+                            </span>
+                        </span>
+                    </dd>
+                </dl>
+                <%
+            }
+        %>
+        
+        <%
+            if (ViewTag.Interface is CarSecondHand)
+            {
+                %>
+                <dl class="secitem">
+                    <dt>供需：</dt>
+                    <dd>
+                        <a href="<%=Url.Action("ershouche")%>" class='select'>转让</a>
+                        <a href="<%=Url.Action("ershoucheqg")%>">求购</a>
+                    </dd>
+                </dl>
+                <%
+            }
+            else if(ViewTag.Interface is CarBuy)
+            {
+                %>
+                <dl class="secitem">
+                    <dt>供需：</dt>
+                    <dd>
+                        <a href="<%=Url.Action("ershouche")%>">转让</a>
+                        <a href="<%=Url.Action("ershoucheqg")%>" class='select'>求购</a>
+                    </dd>
+                </dl>
+                <%
+            }
+        %>
+
+        <div class="secitem" id="keyfilter">
+            <span class="text">
+                <input type="text" para="key" name="b_q" id="keyword1" fdv="" class="keyword" value="<%=ViewTag.KeyWord %>" />
+            </span>
+            <span class="btn">
+                <input type="button" id="searchbtn1" onclick="keywordQuery();" value="搜索" />
+            </span>
+        </div>
+        <div id="selected" class="bar"></div>
+        <i class="shadow"></i>
+    </div>
+
+    <div id="filter">
+        <div class="tabs" id="tabs">
+            <a href="<%=ViewTag.Interface.PostLink.Url(Url) %>" target="_blank" class="pubbtn">免费发布<%=ViewTag.PostLinkText%>&raquo;</a>
+            <a <%=ViewTag.IsBiz==null?"class='select'":"" %> href="<%=Url.RemoveRouteValues(routeData,new string[]{"biz","pageindex"}) %>"><span>全部物品</span></a>
+            <%
+                if (ContainBiz)//有个人与商家之分.
+                {
+                    %>
+                        <a <%=ViewTag.IsBiz==false?"class='select'":"" %> href="<%=Url.AddRouteValues(routeData,new{biz=0,pageindex=1}) %>"><span>个人闲置</span></a>
+                        <a <%=ViewTag.IsBiz==true?"class='select'":"" %> href="<%=Url.AddRouteValues(routeData,new{biz=1,pageindex=1}) %>"><span>商家出售</span></a>
+                    <%
+                }
+            %>
+        </div>
+        <div class="filterbar">
+            <h1>
+                <%=ViewTag.Interface.City.ShortName %>
+                <%=curInfoType %>
+            </h1>
+            
+            <%--<a href="zhiding.html" target="_blank" class="tip_ding">
+                <span class="c_r">置顶</span>，让信息效果更好
+            </a>--%>
+            <%--<a href="#" rel="nofollow" onclick="g2({selpic:1});return false" class="filterico toText">
+                <span>切换到文本</span>
+            </a>--%>
+            <span class="filterico selector">
+                <span>发布日期</span>
+                <ul class="hc" style="width:79px">
+                    <li><a href="#" rel="nofollow" name="b_s" para="postdate" cv="3" onclick="dateQuery(3);return false">三天内</a></li>
+                    <li><a href="#" rel="nofollow" name="b_s" para="postdate" cv="7" onclick="dateQuery(7);return false">一周内</a></li>
+                    <li><a href="#" rel="nofollow" name="b_s" para="postdate" cv="30" onclick="dateQuery(30);return false">一月内</a></li>
+                    <li><a href="#" rel="nofollow" onclick="dateQuery(null);return false">全部时间</a></li>
+                    <i class="shadow"></i>
+                </ul>
+            </span>
+            <span class="checkbox">
+                <input name="" type="checkbox" value="" id="ispic" onclick="isPicQuery(this)" <%=ViewTag.IsPic==true?"checked='checked'":"" %>/>
+                <label for="ispic">有图</label>
+            </span>
+            <i class="clear"></i>
+        </div>
+    </div>
+
+    <div id="main">
+        <div id="infolist">
+            <table cellspacing="0" cellpadding="0" class="tbimg">
+                <col width="80" />
+                <col width="100" />
+                <col />
+                <col width="60" />
+
+                    <%if (ContainBiz)
+                      { %>
+                    <tr id="trPersonal"><td class="dev" colspan="4"><%=ViewTag.Interface.City.ShortName %><%=curInfoType %>- 个人信息 [<a href="<%=Url.AddRouteValues(routeData,new{biz=0,pageindex=1}) %>" title="只看个人信息">只看个人</a>]</td></tr>
+                    <%} %>
+
+                    <tr>
+                        <td colspan="4" class="google">
+                            <%--<div id="top_google_ad"></div>--%>
+                            <%--广告位置--%>
+                            
+                            <%
+                                if (SiteInfo.IsTaojen)
+                                {
+                                    %>
+                                    <%--960*90首页横幅--%>
+                                    <%=UnionAd.Baidu_960_90.Code %>
+                                    <%
+                                }
+                                else
+                                {
+                                    %>
+                                    <%--728 x 90 - 首页横幅--%>
+                                    <%=UnionAd.Google_728_90.Code %>
+                                    <%    
+                                }
+                            %>
+                        </td>
+                    </tr>
+                    
+                    <asp:Repeater ID="Repeater" runat="server" DataSource='<%#(ViewData["ViewTag"] as ViewTag).PagedList %>'>
+                        <ItemTemplate>
+                            <tr>
+                                <td class="img"><a href="<%#InfoUrl(Container.DataItem,Url) %>" target="_blank">
+                                    <img src="<%#Container.DataItem.Conver() %>" /></a>
+                                </td>
+                                <td class="tc"><%#PriceToString(Container.DataItem) %></td>
+                                <td class="t">
+                                    <a href="<%#InfoUrl(Container.DataItem,Url) %>" target="_blank" class="t"><%#Eval("Title") %></a>
+                                    <span class="ico area"><%#ArearLink(Container.DataItem) %></span>
+                                    <span class="ico tu" style="display:<%#PictureListToDisplay(Container.DataItem) %>"></span>
+                                </td>
+                                <td class="pd"><%#DateCreated(Container.DataItem,"MM-dd") %></td>
+                            </tr>
+                        </ItemTemplate>
+                      </asp:Repeater>
+                    
+
+                    <asp:Repeater ID="RepeaterPersonal" runat="server" DataSource='<%#(ViewData["ViewTag"] as ViewTag).PagedListPersonal %>'><%--DataSource='<%#PagedListPersonal%>'--%>
+                        <ItemTemplate>
+                            <tr>
+                                <td class="img"><a href="<%#InfoUrl(Container.DataItem,Url) %>" target="_blank">
+                                    <img src="<%#Container.DataItem.Conver() %>" /></a>
+                                </td>
+                                <td class="tc"><%#PriceToString(Container.DataItem) %></td>
+                                <td class="t">
+                                    <a href="<%#InfoUrl(Container.DataItem,Url) %>" target="_blank" class="t"><%#Eval("Title") %></a>
+                                    <span class="ico area"><%#ArearLink(Container.DataItem) %></span>
+                                    <span class='ico biz' style="display:<%#BizToDisplay(Container.DataItem) %>">商家</span>
+                                    <span class="ico tu" style="display:<%#PictureListToDisplay(Container.DataItem) %>"></span>
+                                </td>
+                                <td class="pd"><%#DateCreated(Container.DataItem,"MM-dd") %></td>
+                            </tr>
+                        </ItemTemplate>
+                      </asp:Repeater>
+
+
+                      <%if (ContainBiz)
+                        { %>
+                      <tr id="trBiz"><td colspan="4" class="dev"><%=ViewTag.Interface.City.ShortName %><%=curInfoType %> - 商家信息 [<a href="<%=Url.AddRouteValues(routeData,new{biz=1,pageindex=1}) %>" title="只看商家信息">只看商家</a>]</td></tr>
+                      <%} %>  
+                      
+                      <asp:Repeater ID="RepeaterBiz" runat="server" DataSource='<%#(ViewData["ViewTag"] as ViewTag).PagedListBiz%>'><%--DataSource='<%#PagedListBiz%>'--%>
+                        <ItemTemplate>
+                            <tr>
+                                <td class="img"><a href="<%#InfoUrl(Container.DataItem,Url) %>" target="_blank">
+                                    <img src="<%#Container.DataItem.Conver() %>" /></a>
+                                </td>
+                                <td class="tc"><%#PriceToString(Container.DataItem) %></td>
+                                <td class="t">
+                                    <a href="<%#InfoUrl(Container.DataItem,Url) %>" target="_blank" class="t"><%#Eval("Title") %></a>
+                                    <span class="ico area"><%#ArearLink(Container.DataItem) %></span>
+                                    <span class='ico biz' style="display:<%#BizToDisplay(Container.DataItem) %>">商家</span>
+                                    <span class="ico tu" style="display:<%#PictureListToDisplay(Container.DataItem) %>"></span>
+                                </td>
+                                <td class="pd"><%#DateCreated(Container.DataItem,"MM-dd") %></td>
+                            </tr>
+                        </ItemTemplate>
+                        </asp:Repeater>
+                          
+                     <tr>
+                        <td colspan="4" class="google">
+                            <%--<div id="taobao"></div>--%>
+                        </td>
+                    </tr> 
+                    <tr>
+                        <td colspan="4" class="google">
+                            <%--<div id="bottom_google_ad"></div>--%>
+                            <%--广告位置--%>
+
+                            <%
+                                if (SiteInfo.IsTaojen)
+                                {
+                                    %>
+                                    <%--960*90首页横幅--%>
+                                    <%=UnionAd.Baidu_960_90.Code %>
+                                    <%
+                                }
+                                else
+                                {
+                                    %>
+                                    <%--728 x 90 - 首页横幅--%>
+                                    <%=UnionAd.Google_728_90.Code %>
+                                    <%    
+                                }
+                            %>
+                        </td>
+                    </tr>
+                </table>
+
+            <%--<div class="pager">
+                <strong><span>1</span></strong>&nbsp;
+                <a href="/bangong/pn2/"><span>2</span></a>&nbsp;
+                <a href="/bangong/pn3/"><span>3</span></a>&nbsp;
+                <a href="/bangong/pn4/"><span>4</span></a>&nbsp;
+                <a href="/bangong/pn5/"><span>5</span></a>&nbsp;
+                <a href="/bangong/pn6/"><span>6</span></a>&nbsp;
+                <a href="/bangong/pn7/"><span>7</span></a>&nbsp;
+                <a href="/bangong/pn8/"><span>8</span></a>&nbsp;
+                <a href="/bangong/pn9/"><span>9</span></a>&nbsp;
+                <a href="/bangong/pn10/"><span>10</span></a>&nbsp;
+                <a href="/bangong/pn11/"><span>11</span></a>&nbsp;
+                <a class="next" href="/bangong/pn2/"><span>下一页</span></a>&nbsp; 
+            </div>--%>
+
+            <%
+                var applyPager = ViewTag.PagedList;
+                if (ContainBiz)
+                {
+                    if (ViewTag.IsBiz == null)
+                    {
+                        applyPager = ViewTag.PagedListBiz.TotalPageCount > ViewTag.PagedListPersonal.TotalPageCount ? ViewTag.PagedListBiz : ViewTag.PagedListPersonal;
+                    }
+                    else if (ViewTag.IsBiz == true)
+                    {
+                        applyPager = ViewTag.PagedListBiz;
+                    }
+                    else
+                    {
+                        applyPager = ViewTag.PagedListPersonal;
+                    }
+                }
+            %>
+
+            <div class="pager">
+                <%=Html.RenderPager(Html.Pager(applyPager))%>
+            </div>
+
+            <%--<%=Html.Pager(applyPager,
+            new PagerOptions
+            {
+                CssClass = "pager",
+                CurrentPagerItemWrapperFormatString = "<strong><span>{0}</span></strong>",
+                NumericPagerItemWrapperFormatString = "<span>{0}</span>",
+                SeparatorHtml = "&nbsp;",
+                ShowFirstLast=false,
+                
+            })%>--%>
+            
+            <div id="infocont">
+                <a href="<%=ViewTag.Interface.PostLink.Url(Url) %>" target="_blank">马上发布一条<%=ViewTag.PostLinkText%>信息&raquo;</a>
+            </div>
+        </div>
+        <div id="rightframe"><div id="ad19"></div></div>
+    </div>
+
+    <div id="links">
+        <i class="line"></i>
+        <div class="links">
+            <%=ViewTag.Interface.City.ShortName %>二手<%=ViewTag.PostLinkText%>频道为您提供<%=ViewTag.Interface.City.ShortName %>二手<%=ViewTag.PostLinkText%>信息，在此有大量<%=ViewTag.Interface.City.ShortName %>二手<%=ViewTag.PostLinkText%>信息供您选择，您可以免费查看和发布<a href="<%=ViewTag.Interface.PostLink.Url(Url) %>" target="_blank">二手<%=ViewTag.PostLinkText%></a>信息。<%=ViewTag.PostLinkText%>板块内的信息内容系用户自行发布，其真实性、合法性由发布人负责，flxxwang.com不提供任何保证，亦不承担任何法律责任。
+        </div>
+        <i class="line"></i>
+        <ul class="links">
+            <%
+                foreach (var link in ViewTag.Interface.CityLinks)
+                {
+                    %>
+                    <li><%=link.Link(Html) %></li>
+                    <%
+                }
+             %>
+        </ul>
+        <i class='line'></i>
+        <div class='links'>
+            <strong>友情链接</strong>:
+            <%
+                foreach (var item in ViewTag.Interface.FriendLinks)
+                {
+                    %>
+                    <%=item.Link(Html, new { target = "_blank" })%>&nbsp;
+                    <%
+                }
+            %>
+            <%--<a href="/link.html" target="_blank">更多>></a>
+            <a href="#" target="_blank">自动申请链接</a>--%>
+        </div>
+    </div>
+
+    <div id="footer">
+        &copy; flxxwang.com 
+        <%--<a id="askicon" target="_blank" title="有问题请与<%=SiteInfo.Name%>客服进行对话" href="http://about.flxxwang.com/v5/">与<%=SiteInfo.Name%>对话</a>--%>
+    </div>
+
+    <script type="text/javascript">
+        //hover效果
+        $(".haschild").each(function () {
+            $(this).hover(function () { $(this).addClass("hover") }, function () { $(this).removeClass("hover") });
+        })
+
+        $(function () {
+            $("#infolist tr").each(function () {
+                $(this).hover(function () { $(this).addClass("bg") }, function () { $(this).removeClass("bg") });
+            })
+        })
+        $(".selector").each(function () {
+            $(this).hover(function () { $(this).addClass("hover") }, function () { $(this).removeClass("hover") });
+        })
+    </script>
+    
+    <script type="text/javascript">
+        function priceQuery() {
+            <%
+                if (Spider.GetSearchEngine(request) == SearchEngine.None)
+                {
+                    %>
+                        var minPrice = $("#minPrice").val();
+                        var maxPrice = $("#maxPrice").val();
+                        var url = '<%=Url.AddRouteValues(routeData,new{pricerange=0,minprice="__minprice",maxprice="__maxprice"}) %>'
+                        url = url.replace("__minprice", minPrice).replace("__maxprice", maxPrice);
+                        window.location.href = url;
+                    <%
+                }
+             %>
+        }
+        function isPicQuery(sender) {
+            <%
+                if (Spider.GetSearchEngine(request) == SearchEngine.None)
+                {
+                    %>
+                        var url = '<%=Url.AddRouteValue(routeData,"pic","__pic") %>'
+                        if ($(sender).attr("checked")) {
+                            url = url.replace("__pic", 1);
+                        }
+                        else {
+                            url = url.replace("__pic", 0);
+                        }
+                        window.location.href = url;
+                    <%
+                }
+             %>
+        }
+        function dateQuery(days) {
+            <%
+                if (Spider.GetSearchEngine(request) == SearchEngine.None)
+                {
+                    %>
+                        var url = '<%=Url.AddRouteValue(routeData,"days","__days") %>'
+                        if (days == null) {
+                            url = url.replace("__days", -1);
+                        }
+                        else {
+                            url = url.replace("__days", days);
+                        }
+                        window.location.href = url;
+                    <%
+                }
+             %>
+        }
+        function keywordQuery() {
+            <%
+                if (Spider.GetSearchEngine(request) == SearchEngine.None)
+                {
+                    %>
+                        var url = '<%=Url.AddRouteValue(routeData,"wd","__keyword") %>'
+                        var wd = $('#keyword1').val()
+                        url = url.replace("__keyword", wd);
+                        url = encodeURI(url);
+                        window.location.href =url ;
+                    <%
+                }
+             %>
+        }
+    </script>
+
+    <asp:ContentPlaceHolder ID="Scripts" runat="server"/>
+</asp:Content>

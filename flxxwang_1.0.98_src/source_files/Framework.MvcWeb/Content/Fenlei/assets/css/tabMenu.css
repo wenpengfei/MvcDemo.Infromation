@@ -1,0 +1,66 @@
+.tabMenu,.tabMenu ul 
+{    
+    list-style: none;
+}
+.tabMenu     
+{
+    float: left;
+}
+.tabMenu > li 
+{
+    float: left;
+}
+.tabMenu li a 
+{
+    display: block;    
+    /*height: 2em;    
+    line-height: 2em;*/
+    height:50px;
+    line-height:50px;    
+    padding: 0 1.5em;    
+    text-decoration: none;
+}
+.tabMenu ul 
+{
+    position: absolute;    
+    display: none;z-index: 999;
+}
+.tabMenu ul li a     
+{
+    width: 80px;
+}
+.tabMenu li:hover ul.noJS     
+{
+    display: block;
+} 
+
+
+/* Main menu------------------------------------------*/
+.tabMenu     
+{
+    font-family: Arial;    
+    font-size: 12px;    
+    background: #2f8be8;
+}
+.tabMenu > li > a     
+{
+    color: #fff;    
+    font-weight: bold;
+}
+.tabMenu > li:hover > a     
+{
+    background: #f09d28;    
+    color: #000;
+} /* Submenu------------------------------------------*/
+.tabMenu ul     
+{
+    background: #f09d28;
+}
+.tabMenu ul li a     
+{
+    color: #000;
+}
+.tabMenu ul li:hover a     
+{
+    background: #ffc97c;
+}

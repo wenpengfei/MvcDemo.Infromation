@@ -1,0 +1,39 @@
+@charset "utf-8";
+/* CSS Document */
+	#uploadPic ul { list-style-type:none; margin:0px; padding:0px; }
+    #uploadPic li { float:left; width:82px; height:88px; margin:0 5px 5px 0; padding-bottom:3px; overflow:hidden; background:#eee; position:relative}
+    #uploadPic .displayimg { width:80px; height:60px; border:1px solid #ccc; overflow:hidden; background:#fff}
+	.previous{ display:inline-block; width:13px; height:12px; background:url(http://pic2.58.com/n/images/post/pre-next-delete.gif) no-repeat 0 -7px; line-height:100px; vertical-align:middle; overflow:hidden; margin:7px 33px 0 12px;}
+	.previous:hover{ background:url(http://pic2.58.com/n/images/post/pre-next-delete.gif) no-repeat 0 -19px;}
+	.previous:active{ background:url(http://pic2.58.com/n/images/post/pre-next-delete.gif) no-repeat 0 -7px;}
+	.next{ display:inline-block; width:13px; height:12px; background:url(http://pic2.58.com/n/images/post/pre-next-delete.gif) no-repeat -14px -7px; line-height:100px;vertical-align:middle; overflow:hidden; margin:7px 0 0;}
+	.next:hover{ background:url(http://pic2.58.com/n/images/post/pre-next-delete.gif) no-repeat -14px -19px;}
+	.next:active{ background:url(http://pic2.58.com/n/images/post/pre-next-delete.gif) no-repeat -14px -7px;}
+	.delete{ display:block; width:13px; height:12px; background:url(http://pic2.58.com/n/images/post/closeyes.gif) no-repeat 0 0; line-height:100px; overflow:hidden; position:absolute; top:3px; right:3px; z-index:999}
+	.delete:hover{ background:url(http://pic2.58.com/n/images/post/close-hover.gif) no-repeat 0 0;}
+	.front-cover{ position:absolute; bottom:5px; *bottom:0px; left:30px; color:#666}
+    #uploadPic div { clear:both; }
+    #uploadPic input.picDesc { width:80px; *width:78px; text-align:center; margin:0; border:1px solid #7F9DB9; margin-top:2px; display:none;}
+    #uploadPic span.upload_error { background-color:#FFD7D7; color:#000; padding:4px; font-family:Tahoma; line-height:24px;}
+    .cls_divUploader {height:24px; background-color:Transparent;}
+    .loadbutton{ width:74px; height:21px; background:url(http://pic2.58.com/n/images/post/loadbutton.gif); display:inline-block; position:relative; overflow:hidden; vertical-align:middle; float:left; margin-right:5px}
+	#fileUploadInput { position:absolute; top:-2px; right:-2px; font-size:36px; filter:alpha(opacity:0); opacity: 0;}
+	.upload_ok{ font-family:Tahoma}
+	.tag3{ float:left;}
+	.tag3 li{ width:20%;}
+	.box1 td p{ width:800px;}
+	.box1 td p.p1{ width:410px;}
+	.c1,.c2,.action_po{ z-index:0}
+	.fudong1{ height:270px; overflow:hidden; z-index:9999}
+	.fudong iframe{ z-index:998}
+	.jingjiren{ display:inline-block; width:16px; height:16px; background:url(http://pic2.58.com/images/5_0/newxq/icon_ask.gif) no-repeat; cursor:pointer; position:relative; top:5px; _top:3px; z-index:10; margin-right:10px}
+	.jingjirencon{ position:absolute; top:-50px; left:20px; z-index:999; width:320px; padding:10px 15px 0; overflow:hidden; font-size:12px; background:#FFFAE2; border:1px solid #F5E190; color:#4b4b4b}
+	.jingjirencon p{ font-weight:bold; color:#CE2200; padding-bottom:5px;}
+	.jingjirencon span{ display:block; margin-bottom:10px;}
+	#topinfomsg{ background:#FFFAF0; color:#000; padding:10px; line-height:20px; margin-right:15px; margin-left:5px;}
+	#topinfomsg a{ font-size:12px; color:#00c; text-decoration:underline}#topinfomsg a:hover{ color:red}
+.content .choose a{font-size:12px}
+.choose{position:relative;display:block;float:left;width:140px;margin-right:7px;}.setboxline{height:3px;background:#fff;position:absolute;top:19px;left:1px;width:100%;z-index:1000}
+.choose span{display:block;width:137px;height:17px;line-height:15px;padding:3px 0 0 3px;border:1px solid #A5ACB2;margin-right:5px;background:#fff url(http://pic2.58.com/n/images/list/downarrow.gif) no-repeat right center;cursor:pointer;}
+.setbox{position:absolute;top:20px;left:0;background:#fff;border:1px solid #A5ACB2;padding:5px 12px 5px 12px;z-index:1000;}
+.setbox td{padding:10px 0 5px;}.linetwo{border-bottom:1px solid #A5ACB2}

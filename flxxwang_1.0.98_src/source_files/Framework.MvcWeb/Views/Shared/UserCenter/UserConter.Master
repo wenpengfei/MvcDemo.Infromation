@@ -1,0 +1,145 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewMasterPage" %>
+<%@ Import Namespace="Framework.Extensions" %>
+
+<asp:Content ID="ContentHead" ContentPlaceHolderID="Head" runat="server">
+    <link href="/Content/Fenlei/ui6/my/css/user.css?tmp=12312" rel="stylesheet" type="text/css" media="all" />
+    <title>用户中心首页</title>
+    <asp:ContentPlaceHolder ID="Head" runat="server" />
+</asp:Content>
+
+<asp:Content ID="ContentMain" ContentPlaceHolderID="Main" runat="server">
+    <%
+        var cityCode = Framework.Utility.CookieManager.GetCookie("city");
+        if (string.IsNullOrWhiteSpace(cityCode))
+        {
+            cityCode = "bj";
+        }
+    %>
+	<div id="container" class="win1000">
+		<div id="header" class="win1000">
+			<a id="logo" href="<%=Url.Action("Default","Home",new{city=cityCode}) %>">
+                <img alt="中文最大生活信息门户" src="/Content/Fenlei/assets/images/logo/logo.gif">
+            </a>
+			<div id="cityname" class="passwordname"><span>用户中心</span></div>
+			<div id="fb-new"><a tongji="post" target="_blank" href="<%=Url.Action("Index","Post",new{city=cityCode}) %>">免费发布信息</a></div>
+		</div>
+		<div class="wraper-border"></div><!--wraper border-->
+		<div id="wraper" class="clearfix">
+			<div class="lmenu left" id="lmenu">
+				<ul>
+					<li id="inbo"><i></i><a href="<%=Url.Action("Index") %>" tongji='index'>管理信息</a></li>
+					<li><i></i>管理账户
+					<ul class="listmenu clearfix">
+						<li id="gerenjianli"><a href="<%=Url.Action("jianli") %>" hisindex='2' tongji='resumeinfoextend'>我的简历</a></li>
+						<%--<script>
+							function showcompany(data) {
+							    if (data == 1) {
+							        document.write('<li id="gongsiziliao"><a href="/companyinfoextend/" hisindex="3" tongji="companyinfoextend">公司资料</a></li>');
+							        document.write('<li id="fasongmianshi"><a href="/interviewinvitesend/" hisindex="16" tongji="fasongmianshi">发送的面试邀请</a></li>');
+							        document.write('<li id="yixiazaijianli"><a href="/favoriteresumelist/" hisindex="17" tongji="yixiazaijianli">已下载简历</a></li>');
+							    }
+							}
+						</script>--%>
+                        <li id="gongsiziliao"><a href="<%=Url.Action("gongsiziliao") %>" hisindex="3" tongji="companyinfoextend">公司资料</a></li>
+						<li id="fasongmianshi"><a href="<%=Url.Action("fasongmianshi") %>" hisindex="16" tongji="fasongmianshi">发送的面试邀请</a></li>
+						<li id="yixiazaijianli"><a href="<%=Url.Action("yixiazaijianli") %>" hisindex="17" tongji="yixiazaijianli">已下载简历</a></li>							
+						<li id="xiugaimima"><a href="<%=Url.Action("mima") %>" hisindex='4' tongji='password'>修改密码</a></li>
+						<li id="yonghurenzheng"><a href="#" hisindex='5' tongji='authmail'>用户认证</a></li><%--<%=Url.Action("renzheng") %>--%>
+						<li id="xinyongmingxi"><a href="#" hisindex='6' tongji='pay_mycredit'>信用明细</a></li><%--<%=Url.Action("xinyong") %>--%>
+						<li id="wodehaoyou"><a href="#" hisindex='7' tongji='friend'>我的好友</a></li><%--<%=Url.Action("haoyou") %>--%>
+						<li id="wodejifen"><a href="#" hisindex='11' tongji='jifenkefu'>我的积分</a></li><%--<%=Url.Action("jifen") %>--%>
+					</ul>
+				</li>
+				<li><i></i>余额管理
+					<ul class="listmenu clearfix">
+						<li id="zhanghuyue"><a href="#" hisindex='8' tongji='paycenter_balanceparent'>账户余额</a></li><%--<%=Url.Action("zhanghuyue") %>--%>
+						<li id="yuemingxi"><a href="#" hisindex='9' tongji='paycenter_balanceflowparent'>余额明细</a></li><%--<%=Url.Action("yuemingxi") %>--%>
+						<li id="yuechongzhi"><a href="#" hisindex='10' tongji='paycenter_torecharge'>余额充值</a></li><%--<%=Url.Action("yuechongzhi") %>--%>
+					</ul>
+				</li>					
+				<li><i></i>其他服务
+					<ul class="listmenu clearfix">
+						<li id="zhuanhu"><a href="#" hisindex='13' tongji='huzhuan'>taojen呼转</a><span class="hot"></span></li>
+						<li id="xiangce"><a href="#" hisindex='14' tongji='xiangce'>相册</a></li>
+						<li id="wodetuangou"><a href="#" target="_blank" tongji='wodetuangou'>我的团购</a></li>
+						<li id="jiaoyou"><a href="#" target="_blank" tongji='jiaoyou'>同城交友</a></li>
+					</ul>
+				</li>
+			</ul>
+			</div><!--lmenu-->
+			<div id="right-con-user" class="right">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                </asp:ContentPlaceHolder>
+			</div><!--right con-->
+		</div><!--wraper-->
+		<div class="wraper-border"></div><!--wraper border-->
+		<%--<div id="q-yj">
+            <a href="#" target="_blank">我要提意见</a>
+        </div>--%>
+	</div><!--container-->
+	<div id="footer">
+        &copy; 2011 flxxwang.com 
+        <%--<a target="_blank" href="http://about.flxxwang.com/v5/">帮助中心</a>--%>
+    </div>
+	<script type="text/javascript">
+	    try {
+	        if (menuid) {
+	            $("#" + menuid).addClass("open");
+	        }
+	    } catch (ex) { }
+	    $(function () {
+	        $("a[tongji]").each(function (i) {
+	            $(this).click(function () {
+	                //tongjiClick($(this).attr("tongji"));
+	            });
+	        });
+	        $("a[hisindex]").each(function () {
+	            $(this).click(function () {
+	                //addHis($(this).attr("hisindex"));
+	            });
+	        }); 
+	    });
+	    function addHis(index) {
+	        // 信息管理和发布不加入cookie
+	        if (index == 1 || index == 0) return;
+	        var key = "myvisithistory37800967";
+	        var his = fe.cookie.get(key);
+	        if (his == null) {
+	            setMyHisCookie(key, index);
+	        } else {
+	            var arr = his.split(',');
+	            var exist = false;
+	            for (var i = 0; i < arr.length; i++) {
+	                if (arr[i] == index) {
+	                    exist = true;
+	                    break;
+	                }
+	            }
+	            if (!exist) {
+	                if (arr.length < 6) {
+	                    his = index + "," + his;
+	                    setMyHisCookie(key, his);
+	                } else {
+	                    arr.pop();
+	                    var arrtmp = arr.reverse();
+	                    arr.push(index);
+	                    arrtmp = arrtmp.reverse();
+	                    his = arrtmp.join(',');
+	                    setMyHisCookie(key, his);
+	                }
+	            }
+	        }
+	    }
+	    function setMyHisCookie(key, his) {
+	        var now = new Date;
+	        var d = new Date(now.getFullYear(), now.getMonth() + 1, now.getUTCDate());
+	        fe.cookie.set(key, his, d, "/", "my.flxxwang.com");
+	    }
+	    function tongjiClick(key) {
+	        _gaq.push(['pageTracker._trackEvent', 'taojen_my', 'menu', key]);
+	    }
+	</script>
+    
+    <asp:ContentPlaceHolder ID="Scripts" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>

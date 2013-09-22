@@ -1,0 +1,105 @@
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <link href="/Areas/fenlei/Content/ui6/topbar.css" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" src="/Scripts/jquery-1.5.1.min.js"></script>
+    <script type="text/javascript" src="/Areas/Fenlei/Scripts/topbar.js"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <div id="topbar">
+       <div class="w pos">
+            <%--用于首页--%>
+            <div class="bar_left">
+                <h2>杭州</h2> <span id="ipconfig">[<a href="http://www.58.com/changecity/" target="_self">切换城市</a>]</span><span class="gap">|</span>
+
+                <span class="tuan">
+                    <a target="_blank" href="http://t.58.com/{1}/{3}">58团购</a>
+                    <span id="tuanlist" class="c_999"><a href="#">动态显示团购信息...</a></span>
+                </span>
+            </div>
+
+            <%--用于用户中心--%>
+            <div class="bar_left">
+                <a href="http://{1}.58.com/">58同城首页</a><span class="gap">|</span>
+                <a href="http://t.58.com/">58团购</a><span class="gap">|</span><%--列表页面显示--%>
+                <a href="http://vip.58.com/" title="切换到VIP用户中心">切换到VIP用户中心</a>
+            </div>
+
+            <div class="bar_right">
+                <div id="modify"><%--用于列表页面--%>
+                    <a href="http://{1}.58.com/">58同城首页</a><span class="gap">|</span>
+                </div>
+                <div id="myfeet" class="haschild">
+                    浏览记录
+                    <span class="arrow"></span>
+                    <div id="myfeetBox" class="hc">
+                        <h4 style="margin:0px">最近浏览的筛选条件</h4>
+                        <ul id="feet_final">
+                            <li>数据加载中...</li>
+                            <li>数据加载中...</li>
+                            <li>数据加载中...</li>
+                        </ul>
+                        <h4 style="margin:0px">最近浏览的信息</h4>
+                        <ul id="Ul1">
+                            <li>数据加载中...</li>
+                            <li>数据加载中...</li>
+                            <li>数据加载中...</li>
+                        </ul>
+                        <i class="shadow"></i>
+                    </div>
+                    <!---气泡--->
+                    <div id="myfeet_tooltip" class="msgTips">
+                        <i class="msgTips_arrow"></i>
+                        <div class="msgTips_con">您的浏览可以被记录啦！</div>
+                        <i class="shadow"></i>
+                    </div>
+                </div>
+                <div id="minsearch" class="haschild">
+                    搜索<span class="arrow"></span>
+                    <div id="minsearchBox" class="hc">
+                        <input class="keyword" autocomplete="off" value="" id="minsearchkeyword" type="text">
+                        <input id="minsearchsearchbtn" type="button" value="">
+                            <i class="shadow"></i>
+                    </div>
+                </div>
+                <div id="login">
+                    <a href="#4">登录</a><span class="gap">|</span>
+                    <a href="#5">注册</a>
+                </div>
+                <div id="sitemap" class="haschild">
+                    导航<span class="arrow"></span>
+                    <div id="sitemapBox" class="hc">
+                        <div class="maplist">
+                            <a href="{5}house.shtml">房产</a>：<a href="{5}zufang/">租房</a> &nbsp; <a href="{5}ershoufang/">买房</a> &nbsp; <a href="{5}duanzu/">短租</a><br>
+                            <a href="{5}sale.shtml">二手</a>：<a href="{5}diannao/">电脑</a> &nbsp; <a href="{5}shouji/">手机</a> &nbsp; <a href="{5}jiadian/">家电</a><br>
+                            <a href="{5}job.shtml">招聘</a>：<a href="{5}yewu/">销售</a> &nbsp; <a href="{5}kefu/">客服</a> &nbsp; <a href="{5}zpshengchankaifa/">普工</a><br>
+                            <a href="{5}car.shtml">车辆</a>：<a href="{5}ershouche/">汽车</a> &nbsp; <a href="{5}zuche/">租车</a> &nbsp; <a href="{5}pinche/">拼车</a><br>
+                            <a href="{5}searchjob.shtml">求职</a> &nbsp; <a href="{5}jianzhi.shtml">兼职</a> &nbsp; <a href="{5}huangye/">黄页</a> &nbsp; <a href="/jiaoyu.shtml">培训</a><br>
+                            <a href="{5}piaowu.shtml">票务</a> &nbsp; <a href="{5}lvyouxiuxian.shtml">旅游</a> &nbsp; <a href="{5}pets.shtml">宠物</a> &nbsp; <a href="{5}jiaoyou.shtml">交友</a>
+                        </div>
+                        <div class="mapfuc">
+                            <a href="http://t.58.com/{1}/{3}" class="c_r">同城团购&nbsp;&nbsp;&nbsp;每日一团»</a><br>
+                            <a href="http://post.58.com/{4}/">免费发布</a> &nbsp;<a href="http://about.58.com/info/del-menu.html">删除信息</a><br>
+                            <a href="http://about.58.com/yinsibaohu.html?utm_source=top-navigation&utm_medium=58call&utm_campaign=link-click">58隐私保护助手</a><br>
+                            <a href="http://wap.58.com/wap.html">手机畅游58同城</a> <br>
+                            <a href="http://vip.58.com/product/index.html">58同城网邻通</a><br>
+                            <a class="fduihua" href="http://about.58.com/">帮助中心</a>
+                        </div>
+                        <i class="shadow"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <asp:ContentPlaceHolder ID="MainContent" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+</body>
+</html>

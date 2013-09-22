@@ -1,0 +1,78 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Data.Common;
+
+namespace Framework.Business
+{
+    public interface IModel<TYPE,KEY>
+        where TYPE : ModelBase<TYPE, KEY>, new()
+    {
+        TYPE Insert();
+
+
+        /// <summary>
+        /// 标志删除数据,请接着调用Save()方法
+        /// </summary>
+        TYPE Delete();
+
+
+        /// <summary>
+        /// 标志更新数据,请接着调用Save()方法
+        /// </summary>
+        TYPE Update();
+
+
+        //////////////////////////////////////////////////////////
+        int DataUpdate(string Sql, List<System.Data.Common.DbParameter> DbParameters);
+
+        List<TYPE> DataDelete(List<ModelBase<TYPE, KEY>> list);
+        int DataDelete(KEY PrimaryKey);
+        int DataDelete(List<KEY> PrimaryKeys);
+        int DataDeleteAll();
+        int DataDeleteAll(List<System.Data.Common.DbParameter> DbParameters);
+        int DataDeleteAll(string Sql, List<System.Data.Common.DbParameter> DbParameters);
+
+
+        TYPE DataSelect(KEY PrimaryKey);
+        TYPE DataSelect(string SqlQuery);
+
+
+
+        List<TYPE> DataSelectAll();
+        List<TYPE> DataSelectAll(string SqlQuery);
+
+
+
+        List<TYPE> DataSelectAll(int Skip, int Take);
+        List<TYPE> DataSelectAll(string SqlQuery, int Skip, int Take);
+        List<TYPE> DataSelectAll(List<System.Data.Common.DbParameter> DbParameters);
+        List<TYPE> DataSelectAll(string SqlQuery, List<System.Data.Common.DbParameter> DbParameters);
+        List<TYPE> DataSelectAll(List<System.Data.Common.DbParameter> DbParameters, int Skip, int Take);
+        List<TYPE> DataSelectAll(string SqlQuery, List<System.Data.Common.DbParameter> DbParameters, int Skip, int Take);
+
+
+
+        List<TYPE> DataSelectTop(int ItemCount);
+        List<TYPE> DataSelectTop(string SqlQuery, int ItemCount);
+        List<TYPE> DataSelectTop(List<System.Data.Common.DbParameter> DbParameters, int ItemCount);
+        List<TYPE> DataSelectTop(string SqlQuery, List<System.Data.Common.DbParameter> DbParameters, int ItemCount);
+
+
+
+        List<TYPE> DataSelectPaging(int PageSize, int PageIndex);
+        List<TYPE> DataSelectPaging(int PageSize, int PageIndex, GenerateSqlForSelectCurrentPage<TYPE> generatesql);
+        List<TYPE> DataSelectPaging(int PageSize, int PageIndex, GenerateSqlForSelectCurrentPage<TYPE> generatesql, List<DbParameter> DbParameters);
+
+
+        List<TYPE> DataSelectPaging(List<System.Data.Common.DbParameter> DbParameters, int PageSize, int PageIndex);
+        List<TYPE> DataSelectPaging(string SqlQuery, List<System.Data.Common.DbParameter> DbParameters, int PageSize, int PageIndex);
+
+
+        int DataRecordCount(string SqlQuery);
+        int DataRecordCount();
+        int DataRecordCount(List<System.Data.Common.DbParameter> DbParameters);
+        int DataRecordCount(string SqlQuery, List<System.Data.Common.DbParameter> DbParameters);
+    }
+}

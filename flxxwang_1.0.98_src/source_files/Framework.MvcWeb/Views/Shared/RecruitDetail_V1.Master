@@ -1,0 +1,275 @@
+﻿<%@ Master Language="C#" Inherits="Infomation.Core.Mvc.RecruitDetailViewMasterPage" %>
+
+<%@ Import Namespace="Infomation.Core.Extensions" %>
+<%@ Import Namespace="Framework.Extensions" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title><%=Recruit.PageTitle %></title>
+    <meta name="description" content="房产经纪人,职位描述和待福利遇 : 1、良好的表达和语言沟通能力，敏捷的思维； 2、有强烈的赚钱欲望； 3、无经验者，公司提供系统、完善的培训，有经验优先。 4、有强烈的进取心，吃苦耐劳，有团队精神，能胜任高压力" />
+    <link type="text/css" rel="stylesheet" href="/Areas/fenlei/Content/ui6/zp/detail_zp_20110705.css" />
+
+    <script type="text/javascript" src="/Scripts/jquery-1.5.1-vsdoc.js"></script>
+    <script type="text/javascript" src="/Scripts/framework/framework.js?v20110101"></script>
+    <%--<script type="text/javascript" src="/Scripts/framework/cookie.js?v20110101"></script>--%>
+    <%--<script type="text/javascript" src="/Scripts/area.js?v20110101"></script>--%>
+    <script type="text/javascript" src="/Areas/Fenlei/Scripts/Infomation.js?v20110101"></script>
+
+    <script type="text/javascript" src="/Areas/Fenlei/Scripts/zp/zpzhushou.js"></script>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <%--<form id="form1" runat="server">--%>
+    <div id="topbar"></div>
+
+    <%--<script type="text/javascript">
+        boot.require('business.topbar', function (Frame, topbar) { topbar.init(); });
+        boot.require('util.cookie, widgets.window', function (Frame, cookie, win) {
+            if (cookie.get('zhaopin-warring') != 'end') {
+                setbg('温馨提示', 675, 350, 'http://www.58.com/job/detail_zp_tips.html', false)
+            }
+        });
+    </script>--%>
+
+    <div class="w" id="header">
+        <a href="<%=Utils.RelativeWebRoot %>" id="minlogo" title="返回<%=SiteInfo.Name%>"><%=SiteInfo.Name%></a>
+        <span id="crumbs">
+            <%--<a href="/">杭州58同城</a>
+            <a href='/yewu/'>杭州销售招聘</a>
+            <a href="/xiacheng/yewu/">下城销售招聘</a>
+            <a href="/chaohui/yewu/">朝晖销售招聘</a>--%>
+            <%foreach (var path in Recruit.InfoPath)
+              { %>
+              <%--<a href="<%=path.Url %>"><%=path.Text %></a>--%>
+              <%=path.Link(Html) %>
+            <%} %>
+        </span>
+    </div>
+
+    <div id="action"></div>
+
+    <div class="w headline">
+        <h1><%=Recruit.JobName %></h1>
+        <div class="other">
+            发布时间：<%=Recruit.DateCreated.ToString("yyyy-MM-dd") %><span></span>
+            浏览<em id="totalcount">0</em>次
+            <cite id="edit"></cite>
+            <span></span>
+            <a href="javascript:setbg('修改信息',520,200,'http://my.58.com/updateinfo/?infoid=6292630601349')">修改</a>
+            <span></span>
+            <a href="javascript:setbg('删除信息',520,200,'http://my.58.com/deleteinfo/?infoid=6292630601349')">删除</a>
+        </div>
+    </div>
+
+    <div class="w">
+        <div id="topinfomsg">
+            <font color="#000000">
+                <strong>提示：</strong> 
+                ① 凡收取<font color="#ff0000">服装费、伙食费、押金、报名费</font>等各种费用，告知“无需任何条件、直接面试”，要求职者“加qq联系”或内容中带电话的信息均都是骗子。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                ② 谨慎对待公司信息不规范的信息，切记任何单位扣留身份证都是违法，请直接拨打110报警！　
+                <a href="http://about.58.com/106.html#f" target="_blank">
+                    <u>更多案例</u>
+                </a>
+            </font>
+        </div>
+    </div>
+
+    <div class="w">
+	    <div class="conleft">
+            <div class="companymini">
+        	<p>
+                <a href="<%=Recruit.Company.Url(Url) %>" target="_blank"><%=Recruit.Company.CompanyName %></a>
+                <cite class="noyz"><cite>&nbsp;</cite>营业执照未验证</cite>            			
+			</p>
+            <p class="f12">
+                公司行业：中介/专业服务<span></span>
+                公司性质：外商独资/办事处<span></span>
+                公司规模：100-499人
+            </p>
+        </div>
+        <div class="zcon">
+            <table width="" cellpadding="0" cellspacing="0" class="table">
+        	    <tr>
+            	    <th style="width:80px">招聘人数：</th><td style="width:140px"><%=Recruit.RecruitCount %>人</td>
+                    <th style="width:80px">学历要求：</th><td style="width:140px"><%=Recruit.Education %></td>
+                    <th style="width:80px">工作年限：</th><td style="width:140px"><%=Recruit.WorkYear %></td>
+                </tr>
+                <tr>
+            	    <th>薪资范围：</th><td><%=Recruit.Wage %></td>
+                    <th>工作区域：</th>
+                    <td>
+                        <%--<a href='/job.shtml' class="gray">杭州</a>
+                        &nbsp;-&nbsp;<a href="/xiacheng/yewu/" class="gray">下城</a>
+                        &nbsp;-&nbsp;<a href="/chaohui/yewu/" class="gray">朝晖</a>--%>
+                         <%if (Recruit.City != null)
+                          { %>
+                        <a href='<%=Recruit.ParentLink.Url(Url) %>' class="gray"><%=Recruit.City.Name %></a>
+                        <%} %>
+
+                        <%if (Recruit.Region != null)
+                          { %>
+                        &nbsp;-&nbsp;<a href='javascript::$info.setRegion("<%=Recruit.RegionId %>");location.href="<%=Recruit.Link.Url(Url) %>"' class="gray"><%=Recruit.Region.Name %></a>
+                        <%} %>
+                        <%if (Recruit.Circle != null)
+                          { %><%=Recruit.RegionId %>
+                        &nbsp;-&nbsp;<a href='javascript::$info.setRegion("<%=Recruit.RegionId %>");location.href="<%=Recruit.Link.Url(Url) %>"' class="gray"><%=Recruit.Circle.Name %></a>
+                        <%} %>
+                    </td>
+                    <th>联 系 人：</th><td><%=Recruit.ContactPerson %></td>
+                </tr>
+                <tr>
+            	    <th>联系电话：</th>
+                    <td colspan="5">
+                        <span class="phone">
+                            <img src='http://image.58.com/showphone.aspx?t=v55&v=B06BC7C2150B645F2AF3B8E9D6EBE72DC' />
+                        </span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="caozuo">
+        	<input class="in"  type="button" value="立即投简历" onclick="javascript:setbg('投简历',450,150,'http://jianli.58.com/SendJobApply/?infoid=6292630601349&f=1')" />
+            <span class="c04"><a title="把该信息发送到手机" href="javascript:setbg('把该信息发送到手机',400,200,'http://my.58.com/downloadinfo/inputmobile/6292630601349/')">把该信息发送到手机</a></span>
+            <span class="c02"><a title="收藏信息" href="javascript:setbg('收藏信息',400,200,'http://my.58.com/AddFavorite/?infoid=6292630601349')">收藏</a></span>
+            <span class="c01"><a title="分享信息" href="javascript:setbg('分享信息',610,270,'http://my.58.com/fenxiang/?infoid=6292630601349')">分享</a></span>
+            <span class="c03"><a title="举报该信息" href="javascript:setbg('举报该信息',380,300,'http://about.58.com/Complain.aspx?infoid=6292630601349')">举报</a></span>
+        </div>
+
+        <h3>职位描述</h3>
+        <div class="description">
+        	<div class="maincon">
+                <%--职位描述和待福利遇 : 
+                1、良好的表达和语言沟通能力，敏捷的思维； 
+                2、有强烈的赚钱欲望； 
+                3、无经验者，公司提供系统、完善的培训，有经验优先。 
+                4、有强烈的进取心，吃苦耐劳，有团队精神，能胜任高压力工作 
+                5、目标明确，要赚钱就来。 
+                7、1500+提成+五险一金,
+
+                工作职责： 
+                1、负责信息资源的开发工作： 
+                2、负责门店到访客户的接待工作： 
+                3、负责意向客户的及时回访与服务跟进工作； 
+                4、负责意向客户的现场带看与专业推荐； 
+                5、负责客户成交合同签约的协助工作；--%>
+                <%=Recruit.JobDescription %>
+            </div>
+        </div>
+        <h3 class="mt15">公司介绍</h3>
+        <div class="description">
+            <p>
+                <%--中原集团旗下中原地产杭州区域公司网址：http://zj.centaline.com.cn/中原集团旗下中原地产杭州区域公司网址：http://zj.centaline.com.cn/中原集团旗下中原地产杭州区域公司网址：http://zj.centaline.com.cn/--%>
+                <%=Recruit.Company.Content %>
+            </p>
+            <p>
+                地址：<%=Recruit.Company.Address %> 
+            </p>
+        </div>
+        <script type="text/javascript">
+            var img_list = new Array();
+            img_list.push("http://3.pic.58control.cn/p1/tiny/n_12004049349635.jpg");
+            img_list.push("http://2.pic.58control.cn/p1/tiny/n_12004051497729.jpg");
+        </script>
+        <div id="img_player" style="display:none"></div>
+
+        <div class="clear"></div>
+
+        <div class="caozuo" style="padding:23px 0 38px 10px">
+        	<input class="in"  type="button" value="立即投简历" onclick="javascript:setbg('投简历',300,120,'http://jianli.58.com/SendJobApply/?infoid=6292630601349&f=1')" />
+            <span class="c04"><a title="把该信息发送到手机" href="javascript:setbg('把该信息发送到手机',400,200,'http://my.58.com/downloadinfo/inputmobile/6292630601349/')">把该信息发送到手机</a></span>
+            <span class="c02"><a title="收藏信息" href="javascript:setbg('收藏信息',400,200,'http://my.58.com/AddFavorite/?infoid=6292630601349')">收藏</a></span>
+            <span class="c01"><a title="分享信息" href="javascript:setbg('分享信息',610,270,'http://my.58.com/fenxiang/?infoid=6292630601349')">分享</a></span>
+            <span class="c03"><a title="举报该信息" href="javascript:setbg('举报该信息',380,300,'http://about.58.com/Complain.aspx?infoid=6292630601349')">举报</a></span>
+        </div>
+    
+        <script type="text/javascript">
+            //            document.domain = "58.com";
+            function dyniframesize(iframename) {
+                var pTar = null;
+                try {
+                    if (document.getElementById) {
+                        pTar = document.getElementById(iframename);
+                    }
+                    else {
+                        eval('pTar = ' + iframename + ';');
+                    }
+                    pTar.style.display = "block"
+
+                    var bHeight = pTar.contentWindow.document.body.scrollHeight;
+                    var dHeight = pTar.contentWindow.document.documentElement.scrollHeight;
+                    var height = Math.max(bHeight, dHeight);
+                    pTar.height = height;
+                } catch (ex) { }
+            }
+            function removeHTMLElement() {
+                var nodes = $(".company")[0].children[0].children;
+                for (var i = 0; i < nodes.length; i++) {
+                    console.log(nodes[i].outerHTML)
+                    console.log(nodes[i].innerHTML)
+                    $(".company")[0].children[0].innerHTML = $(".company")[0].children[0].innerHTML.replace(nodes[i].outerHTML, nodes[i].innerHTML);
+                }
+            }
+        </script>
+        <iframe id="gsInfo1" name="gsInfo1" src="http://qy.58.com/CompanyAllJobPosition_mini.aspx?userid=48404218" width="100%" height="0" scrolling="no"  onload="dyniframesize('gsInfo1')" frameborder="0"></iframe> 
+
+        <div class="footad">
+        	<span style="display:none;" id="keyword">
+                <!-- google_ad_section_start -->
+                杭州 全职招聘 销售 高薪
+                <!-- google_ad_section_end -->
+            </span>
+            <div id="googlead_list"></div>
+        </div>
+    </div>
+
+    <div class="conright">
+        <div class="rightbox pb50" id="search_box_ui_position" style="display:none;"></div>
+        <div id="sideAD"></div>     
+        <div id="smallAd"></div>
+    </div>
+    <div class="clear"></div>
+</div>
+
+<div class="w footer">
+    <p class="shenming">
+        申明：该信息由用户自行发布，请认真阅读信息描述，内容中所涉及承诺均由用户自行负责。
+    </p>
+    &copy; 2010 &nbsp;flxxwang.com &nbsp;
+    <a href="http://flxxwang.com/about" target="_blank">帮助中心</a>
+    <span style="color:#f00;padding-left:30px;">举报招聘欺诈邮箱：zptousu@flxxwang.com</span>
+</div>
+
+<div id="zpzs" class="history" style="display:none;top:133px;position:absolute;">
+    <script type="text/javascript" >
+        showzpzhushou("http://qy.58.com/jobhelper.aspx");
+    </script>
+</div>
+
+<div style="display:none">
+    <script type="text/javascript">
+        var _gaq = _gaq || []; var site_name = "58"; var page_type = "detail";
+        _gaq.push(['pageTracker._setAccount', 'UA-877409-4']);
+        _gaq.push(['pageTracker._setDomainName', '.58.com']);
+        _gaq.push(['pageTracker._setAllowLinker', true]);
+        _gaq.push(['pageTracker._addOrganic', 'sogou', 'query']);
+        _gaq.push(['pageTracker._addOrganic', 'baidu', 'word']);
+        _gaq.push(['pageTracker._addOrganic', 'soso', 'w']);
+        _gaq.push(['pageTracker._addOrganic', 'youdao', 'q']);
+        boot.require('business.gaq, util.js', function (Frame, gaq, js) {
+            _gaq.push(['pageTracker._trackPageview', gaq("job", "/detail/job/yewu/")]);
+            Frame.init(function () {
+                js.append(('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js');
+                js.append('http://track.58.com/referrer2.js');
+            });
+        });
+    </script>
+</div>
+
+<%--</form>--%>
+<asp:ContentPlaceHolder ID="Scripts" runat="server"/>
+</body>
+</html>

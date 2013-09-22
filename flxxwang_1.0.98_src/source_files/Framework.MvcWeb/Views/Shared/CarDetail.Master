@@ -1,0 +1,125 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/InfoDetail.Master" Inherits="System.Web.Mvc.ViewMasterPage" %>
+<%@ Import Namespace="Infomation.Core.Extensions" %>
+<%@ Import Namespace="Infomation.Core.Mvc" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="TopInfoMsg" runat="server">
+<div id="topinfomsg">
+    <font color="#000000">
+        <strong>提示：</strong>
+        ①要求<font color="#000000">预付定金、加Q详聊、邮寄交易</font>等均存在欺骗行为！<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        ②价格低廉、内容里留有电话的要谨慎！<%--<a href="#" target=_blank><font color=#ff0000>摩托车防骗手册</font></a>--%><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        ③谨防以任何形式冒用58网址的钓鱼网站！<%--<a href="#" target=_blank><font color=#ff0000>钓鱼网站防骗手册</font></a>--%> 
+    </font>
+</div>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="Main" runat="server">
+<%
+    var ViewTag = ViewData["ViewTag"] as ViewTag;
+    var car = ViewTag.Info as ICar;
+%>
+<div class="w">
+    <div class="leftcol">
+        <div class="row">
+            <asp:ContentPlaceHolder ID="Info" runat="server">
+            </asp:ContentPlaceHolder>
+            <div class="user">
+    	        <div id="newuser"></div>
+                <ul class="userinfo"></ul>
+                <ul class="vuser nomargin">
+                    <li class="call_2">
+                        <i>联系电话：</i><span class="phone"><%=car.Phone %></span>
+                        <span class="belong"><%--（归属地：杭州）--%></span>
+                    </li>
+                    <%--<li>
+                        <i></i>
+                        <span class="f12">
+                            <a target="_blank" href="#">查看此电话发帖记录</a>
+                        </span>
+                    </li>--%>
+                </ul>
+                <ul class="userinfo">
+                    <li>
+                        <i>QQ/MSN：</i>
+                        <%--<img src='#' />--%>
+                        <%=car.QQOrMSN %>
+                    </li>
+                    <li class="n"><i>&nbsp;</i></li>
+                </ul> 
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="content">
+                <div class="maincon">
+                    <%=ViewTag.Info.Detail.Content%>
+                </div>
+                <p>联系我时，请说是在<%=SiteInfo.Name%>上看到的，谢谢！</p>
+
+                <%var picturList = ViewTag.Info.PictureList(); %>	
+                <div id="imgPlayer" <%=(picturList == null || picturList.Count == 0) ? "style='display:none;'" : ""%>>
+                    <%--显示大图--%>
+                    <div id="image_wrap">
+                        <img src="/Content/scrollable/gallery/img/blank.gif" />
+                    </div>
+                    <!-- "previous page" action -->
+                    <a class="prev browse left"></a>
+                    <div class="scrollable">   
+                       <div class="items">
+                       <%
+                            for (var i=0;i<picturList.Count;i++)
+                            {
+                                if (i % 5 == 0)
+                                {
+                                    %>
+                                    <div>
+                                    <%
+                                }
+                                %>
+                                    <img src="<%=picturList[i] %>" />
+                                <%
+                                if(i%5==4||i==picturList.Count-1)
+                                {
+                                    %>
+                                    </div>
+                                    <%
+                                }
+                            }
+                        %>
+                       </div>
+                    </div>
+                    <!-- "next page" action -->
+                    <a class="next browse right"></a>
+                </div>
+
+                <div class="clear"></div>
+                <div style="display:none;" id="search_list_ui_position" class="beinterest"></div>
+                <div class="clear"></div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="rightcol">
+        <%--广告位置--%>
+
+        <%
+            if (SiteInfo.IsTaojen)
+            {
+                %>
+                <%--160*600宽幅摩天楼--%>
+                <%=UnionAd.Baidu_160_600.Code %>
+                <%
+            }
+            else
+            {
+                %>
+                <%--160 x 600 - 宽幅摩天大楼--%>
+                <%=UnionAd.Google_160_600.Code %>
+                <%    
+            }
+        %>
+    </div>
+    <div class="clear"></div>
+</div>
+
+</asp:Content>

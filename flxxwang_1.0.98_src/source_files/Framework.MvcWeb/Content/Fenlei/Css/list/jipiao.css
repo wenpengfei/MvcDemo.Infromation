@@ -1,0 +1,65 @@
+@charset "utf-8";
+/* CSS Document */
+#recommendbar u,#plainDate1{background-image:url(http://pic2.58.com/n/images/list/jipiao.gif)!important}
+#jipiaosearch{margin:11px 0 0 0;width:990px}
+i.text input{text-align:left;padding-left:3px;font-family:Verdana}
+i.text #keyword1{font-family:'宋体'}
+#recommendbar{height:26px;font:14px/26px Verdana;border-top:solid 1px #89a8d1;background:#F3F6FF;padding:7px 0 8px 60px;position:relative}
+#recommendbar u{display:block;position:absolute;left:0;top:-2px;background:url() no-repeat 0 0;height:60px;width:60px}
+#rdlist{padding-bottom:5px;overflow:hidden;zoom:1}
+#rdlist li{width:320px;padding:0 0 0 10px;float:left;line-height:35px;height:35px;border-bottom:solid 1px #f5f5f5;color:#999;white-space:nowrap}
+#rdlist li span{display:block}
+#rdlist li .rdc1{float:right;width:120px}
+#rdlist li .rdc2{float:left;width:60px}
+#rdlist li .rdc3{margin:0 120px 0 80px}
+#rdlist li .rdc1 i{color:red;font-style:normal}
+#plainDate1{width:111px;font-size:12px;margin-right:10px;background:url() no-repeat right -59px #fff}
+
+/* --------名店样式表--------------- */
+.mouter{background:#fff;_overflow:hidden;width:990px;margin:0 auto}
+.mouter .inner{width:990px}
+.mdul li{float:left;position:relative;cursor:pointer;display:inline-block;margin:10px 10px 0 0}
+#md1 li{height:80px;padding:0 0 0 18px;width:170px;overflow:hidden}
+#md1 li.cimg div{width:18px;height:80px;position:absolute;left:0;top:0;background:url(http://pic2.58.com/images/newcopy/icon_golden.gif) no-repeat} 
+#md2 li{height:70px;width:176px;line-height:18px;border:1px solid #E0E0FF;padding:3px 5px 5px 5px;color:#777;z-index:999;background:#fff}
+#md2 h4{font-size:13px;margin:0;color:#027FCE;padding:1px 0;height:17px;height:18px;overflow:hidden}
+#md2 li div{display:none;position:absolute}
+#md2 li.focus a,#md2 li.focus a h4,#md2 li.focus a span,.d2_img li.focus a,#md2 li.focus a.icon_phone:hover{color:#E11425}
+#md2 li.focus a:hover{text-decoration:none}
+#md2 li.focus{border:1px solid #FA7882;background:#FFFBF9;z-index:9999}
+#md2 li.focus div{display:block;top:77px;z-index:1000;border:1px solid #fa7882;border-top:none;left:-1px;width:176px;height:20px;padding:0 5px;background:#FFFBF9}
+#md2 li.focus a.icon_phone{display:block;white-space:nowrap;height:18px;line-height:18px;padding:0 0 0 15px;_height:16px;_padding-top:2px;color:#333;background:url(http://pic2.58.com/images/newcopy/icon_phone.gif) no-repeat 0 center}
+#md2 li a span{color:#027FCE;font-weight:700;height:10px}
+#md2 li a p{color:#777;height:35px;overflow:hidden}
+#md2 li a h4 span{float:right}
+#md2 li.none{background:url(http://pic2.58.com/images/5_0/m2_default_new.gif) #fff;text-align:center;cursor:default;overflow:hidden;_height:73px;} 
+#md2 li.none a{font-size:16px;color:#666;font-weight:700;display:block;margin:30px 0px 0px 40px;*margin:35px 0px 0px 40px}
+
+#md3,#md4{clear:both;overflow:hidden}
+#md3 a{width:485px;display:inline-block;margin:10px 10px 0 0}
+
+#md4 li{background:#fff;border:1px solid #E0E0FF;padding:7px;width:469px;height:82px/* #E1ECFA */}
+#md4 li div{color:#666;float:right;line-height:1.5;margin-left:10px;width:225px}
+#md4 .img{float:left;height:80px;width:230px}
+#md4 li .t{font-size:14px;font-weight:800}
+#md4 li div p{height:40px;overflow:hidden}
+#md4 li div b{color:#C22121;font-size:14px;font-family:tahoma}
+#md4 li div label{display:none}
+#md4 li.focus .t{color:#c22121}
+#md4 li.focus{background:#FFFBF9;border:1px solid #FA7882;color:#FF0000;left:0;position:relative;top:0;z-index:1000;overflow:hidden}
+#md4 li.focus div label{background:#FFFBF9;border:solid 1px #FA7882;border-top:none;display:block;left:-1px;padding:0 7px 4px;margin-top:-4px;position:absolute;text-indent:245px;top:96px;width:469px}
+/* layer */
+#blackbg{opacity:0.5;filter:alpha(opacity=50);background:#000;position:absolute;left:0;top:0;width:100%;z-index:1000}
+#blackcontent{left:50%;top:50%;border:4px solid #81A7DF;position:fixed;z-index:9999;_position:absolute;_top:expression((document.documentElement.scrollTop || document.body.scrollTop) + Math.round(50 * (document.documentElement.offsetHeight || document.body.clientHeight) / 100))}
+/*////////////新名店//////////*/
+#md5 .des,#md5 .focus .images{display:none;cursor:pointer}
+#md5 li{width:188px;height:80px;_height:83px}
+#md5 .images img{width:188px;height:80px}
+#md5 .focus .des{display:block;overflow:hidden;border:solid 1px #E0E0FF;padding:3px 5px 7px 5px;width:176px;height:68px;_height:71px;background:#fff;line-height:1.5;text-align:center}
+#md5 .focus .des p{white-space:nowrap;overflow:hidden;line-height:1.8}
+#md5 .focus .des h3{font-size:14px;white-space:nowrap;width:176px;overflow:hidden}
+#md5 .focus .desphone{color:#E11425;font-weight:700}
+#md5.wider li,#md5.wider .images img{width:237px}
+#md5.wider .focus .des,#md5.wider .focus .des h3{width:226px}
+#GGS_cal{z-index:999}
+#topinfomsg{line-height:20px;padding:10px;border-bottom:solid 1px #ddd}

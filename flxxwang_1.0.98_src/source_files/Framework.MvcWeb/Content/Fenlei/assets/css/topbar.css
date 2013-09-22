@@ -1,0 +1,56 @@
+﻿@charset "utf-8";
+/* For topbar By lisheng@58.com 20110428 */
+.tuan sup,.arrow,#minsearch,#myfeet li,#minsearchsearchbtn,#topbar,.msgTips_arrow,.msgTips_close,.msgTips_con,.ntTips_con{background-image:url(http://pic2.58.com/ui6/index/topbar.png)!important}/* topbarBg */
+#topbar{width:100%;height:36px;background:url() repeat-x;color:#666;font:12px/2 Arial,Tahoma,"宋体";-webkit-text-size-adjust:none}
+#topbar ul,#topbar p,#topbar input{margin:0;padding:0}
+#topbar li{list-style:none}#topbar a{color:#00c;cursor:pointer;text-decoration:none}
+#topbar a:hover{color:#f00;text-decoration:underline}.hc{display:none}.sc{display:block}
+#topbar input{font-family:Tahoma;font-size:12px}
+#topbar .w,#topbar .warp{width:1000px;margin:0 auto;clear:both;line-height:32px}
+#topbar a{color:#666}
+#myfeet p a,#topbar .mapfuc a,#sitemapBox strong a{color:#00c}
+#topbar .chocecity a:hover{color:#f00508;text-decoration:none}
+#topbar .mapfuc a.c_r,#topbar a:hover{color:#f00}
+#topbar #link_city_change{color:#00c;margin-left:5px}
+.bar_left{float:left;word-spacing:1px;padding-left:10px}
+.bar_right{float:right}
+.bar_left h2{margin:0;padding:0;display:inline;font-weight:700;font-size:16px;color:#f00}
+.bar_left .tuan{display:inline-block;position:relative;padding-right:30px}
+#modify,#login,#topbar .haschild{float:left}
+.tuan sup,.arrow{display:block;position:absolute;width:7px;height:4px;overflow:hidden;top:14px;right:10px}
+.tuan sup{width:26px;height:12px;top:3px;right:2px;background:url() no-repeat 0 -102px}
+.arrow{background:url() no-repeat 0 -156px}.gap{color:#ccc;margin:0 6px;font-family:'宋体';*font-family:Tahoma}
+.hover .hc{display:block;position:absolute;top:33px;zoom:1;border:1px solid #dcdcdc;border-top:none;background:#fff;padding:10px}
+#topbar .haschild{padding:0 25px 0 10px;position:relative;z-index:999;height:33px;line-height:33px}
+#topbar .hover{background:#fff;border-left:solid 1px #dcdadc;border-right:solid 1px #dcdadc;z-index:999;margin:0 -1px}
+#topbar .hover .arrow{background-position:-7px -156px}
+#topbar #minsearch{padding-left:25px;background:url() no-repeat -12px -123px}
+#topbar #minsearch.hover{background:url() no-repeat -12px -123px #fff}
+#minsearch.hover{background-color:#fff}
+#minsearchBox{left:-1px;width:211px;overflow:hidden;height:26px}
+#topbar #minsearchkeyword{width:127px;padding:5px;height:14px;line-height:14px;border:1px solid #cdcdcd;float:left}
+#topbar #minsearchsearchbtn{float:left;margin-left:10px;cursor:pointer;width:62px;height:26px;background:url() 0 -56px no-repeat;border:0}
+#myfeetBox{width:215px;left:-1px}#sitemapBox{width:138px;right:-1px;_right:-2px;line-height:22px}
+#modify{margin-right:-10px}
+#myfeet .line{border-bottom:solid 1px #f3f3f3;margin-bottom:3px}
+#myfeet li{height:30px;line-height:30px;border-top:1px solid #f3f3f3;padding-left:18px;background:url() 3px -174px no-repeat}
+#login{line-height:33px;padding:0 8px;position:relative}
+#sitemapBox .maplist{border-bottom:1px solid #f3f3f3;padding-bottom:5px;font-family:tahoma;+font-family:Arial}
+#sitemapBox .mapfuc{padding-top:3px}.mapfuc a.fduihua{background:url(http://pic2.58.com/ui6/index/bgpic.gif) no-repeat right -505px;padding-right:22px}
+#sitemapBox br{line-height:0}.shadow{display:block;clear:both;border-top:solid 1px #ddd;width:100%;background:#f0f0f0;height:1px;line-height:0;font-size:0;overflow:hidden;position:absolute;left:0;bottom:-3px;_padding:0 10px;opacity:0.4;filter:alpha(opacity=40);z-index:-1}
+#topbar #sitemapBox .shadow,#topbar .order .shadow{_bottom:-4px}/* msgTips */
+.msgTips{position:absolute;z-index:999;color:#000;top:31px;left:0;_overflow-x:hidden;border:solid 1px #e7d95f;border-radius:2px;-moz-border-radius:2px;-webkit-border-radius:2px;padding:0 1px 1px 1px;background:#fefacc;width:232px}
+.msgTips_arrow{position:absolute;top:-7px;left:14px;width:14px;height:8px;z-index:9;background-position:0 -242px}.msgTips_con{border-top:1px solid #fff;background:url() no-repeat 5px -252px;line-height:20px;padding:5px 20px 5px 25px}
+.msgTips .shadow{border-top:none;bottom:-2px;background:#dedede}
+.msgTips_close{position:absolute;right:8px;top:11px;width:10px;height:11px;overflow:hidden;background-position:0 -229px;cursor:pointer;z-index:999}/* nTalker */
+.ntTips{right:-84px;width:170px}
+.ntTips_con{padding:5px 20px 5px 5px;line-height:20px;background:url() no-repeat 0 -9999px #FFFBCC}
+.ntTips_con .num{color:#FD7A0E;font:bold 14px Arial,sans-serif;margin-right:3px}
+#topbar .ntTips_con a{color:#00c;text-decoration:none}
+.user_id,.user_center,.user_ntalker,.user_i{margin:0 5px;line-height:32px}
+.user_ntalker{margin-left:0}
+.user_ntalker img{vertical-align:middle}
+.pos{position:relative;z-index:700;}.bar_right{ position:absolute;top:0;right:0}/*首页提示*/
+#infomsg{background:none; color:#000; width:auto; text-align:right; padding:5px; line-height:16px; border:none; margin:5px; position:absolute; right:0px; bottom:0px;z-index:1000}
+.close{background:url(http://pic2.58.com/ui6/index/topbar.png) no-repeat 0 -229px; width:9px; height:9px; margin:0; padding:0; display:inline-block;float:right; text-decoration:none; overflow:hidden}
+.close:hover{background-position:-17px -229px}

@@ -1,0 +1,331 @@
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+<%@ Import Namespace="Framework.Common" %>
+<%@ Import Namespace="Framework.Extensions" %>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <%
+        var routeData = (HttpContext.Current.Handler as MvcHandler).RequestContext.RouteData;
+    %>
+    <script type="text/javascript" src="/Scripts/jquery-ui-1.9m6/jquery-1.6.2.js"></script>
+    <script type="text/javascript" src="/Scripts/jquery-ui-1.9m6/ui/jquery.effects.core.js"></script>
+    <script type="text/javascript" src="/Scripts/jquery-ui-1.9m6/ui/jquery.ui.core.js"></script>
+    <script type="text/javascript" src="/Scripts/jquery-ui-1.9m6/ui/jquery.ui.widget.js"></script>
+    <script type="text/javascript" src="/Scripts/jquery-ui-1.9m6/ui/jquery.ui.position.js"></script>
+    <script type="text/javascript" src="/Scripts/jquery-ui-1.9m6/ui/jquery.ui.menu.js"></script>
+    <script type="text/javascript" src="/Scripts/jquery-ui-1.9m6/ui/jquery.ui.autocomplete.js"></script>
+    <link href="/content/fenlei/assets/css/autocomplete.css" type="text/css" rel="Stylesheet" />
+
+
+    <script type="text/javascript" src="/Scripts/MicrosoftAjax.js"></script>
+
+    <script type="text/javascript" src="/Scripts/framework/common.js"></script>
+    <script src="/Scripts/framework/framework.js" type="text/javascript"></script>
+    <script src="/Scripts/framework/cookie.js" type="text/javascript"></script>
+    <script src="/Content/Fenlei/Scripts/Infomation.js?v20121213" type="text/javascript"></script>
+    <script src="/Content/Fenlei/Scripts/user.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var __jsoninfo = { city: '<%=routeData.Values["city"] %>', tid: '<%=routeData.Values["tid"] %>' };
+    </script>
+
+    <link rel="shortcut icon" href="/content/fenlei/assets/images/favicon.ico" />
+    <link href="/Content/Fenlei/ui6/topbar.css" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" src="/Content/Fenlei/Scripts/topbar.js"></script>
+
+    
+    <script src="/Scripts/framework/db.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/Content/Fenlei/Scripts/model.js"></script>
+    <asp:ContentPlaceHolder ID="Head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body style="text-align:center;">
+<%
+    
+    var controller = routeData.Values["controller"].ToString().ToLower();
+    var action = routeData.Values["action"].ToString().ToLower();
+    bool isHomeDefault = controller == "home" && action == "default";
+    bool isUserCenter = controller == "my";
+    
+    City city=null;
+    string cityName=null;
+    string cityCode=null;
+    if (routeData.Values.ContainsKey("city"))
+    {
+        cityCode = routeData.Values["city"].ToString();
+    }
+    else
+    {
+        cityCode = Framework.Utility.CookieManager.GetCookie("city");
+    }
+    if (string.IsNullOrWhiteSpace(cityCode))
+    {
+        cityCode = "bj";
+    }
+    if (!string.IsNullOrWhiteSpace(cityCode))
+    {
+        city = City.GetCityByCode(cityCode);
+        cityName = city.ShortName;
+    }
+    var tid = routeData.Values["tid"];
+    var webRoot = "/" + routeData.Values["city"];
+%>
+
+<%
+    if (!isUserCenter && Request.Url.ToString().IndexOf("taojen.com") > 0 && controller != "post" && action != "action" && controller!="my")
+    {
+        %>
+        <script type="text/javascript">
+            if (new Date().getMinutes() % 2 == 0) {
+                location.href = location.href.replace('taojen.com', 'flxxwang.com')
+            }
+        </script>
+        <%
+    }
+%>
+
+<% 
+    if(controller=="home"&&action=="default")
+    {
+        %>
+        <script type="text/javascript">
+            $(function () {
+                $("#curtainAd").animate({ height: 500 }, 5000, 'easeInOutCubic', function () {
+                    $(this).animate({ height: 0 }, 5000, 'easeInOutCubic', function () {
+                        $(this).hide();
+                    });
+                });
+            });
+        </script>
+        <div id="curtainAd" style=" text-align:center; height:0px;">
+            <div class="screenWidth" style="width:1148px; display:inline-block">
+                <a href='http://cylnz.taobao.com' target="_blank">
+                    <script type="text/javascript">
+                        document.write("<img src='/Content/Fenlei/Images/Ads/ad" + (new Date().getDay()+1) + ".jpg' />");
+                    </script>
+                </a>
+            </div>
+        </div>
+        <%
+    }
+%>
+<div id="topbar" style="text-align:left;">
+    <div class="w pos">
+        <%--用于首页、列表页、详细页--%>
+        <div class="bar_left">
+            <%
+                if (!isUserCenter)
+                {
+                    %>
+                        <h2><%=cityName %></h2>
+                        <span id="ipconfig">[<a href="/<%=tid %>?changecity" target="_self">切换城市</a>]</span>
+                        <span class="gap">|</span>
+                        <%--团购--%>
+                        <span class="tuan">
+                            <%--<a target="_blank" href="http://t.flxxwang.com">taojen团购</a>
+                            <span id="tuanlist" class="c_999"><a href="#">动态显示团购信息...</a></span>--%>
+                            <%--<span style="display:none;">美容，整形</span>--%><%--控制广告相关性--%>
+                            <%--<a href="/tongji/shuoming"><span style="color:Red;">网站推广，2元一贴，50 IP 1 元 ，请情请点击查看</span></a>--%>
+                            <a target="_blank" href="http://cylnz.taobao.com"><span style="color:Red;">彩衣岭时尚前卫女装</span></a>
+                            <span class="gap">|</span>
+                            <a href="/lovewall/" target="_blank"><span style="color:#10ace5;">爱墙网,免费发布祝福,永久珍藏,永久免费.</span></a>
+                        </span>
+                    <%    
+                }
+            %>
+        
+
+            <%--切换到VIP用户中心,用户非用户中心页面,是VIP用户中才显示。(这一块暂时不要)--%>
+            <%--
+            <div class="bar_left">
+                <a href="http://vip.flxxwang.com/" style="color:#0000CC;" title="切换到VIP用户中心">切换到VIP用户中心</a>
+            </div>
+            --%>
+
+
+            <%--用于用户中心--%>
+            <%
+                if (isUserCenter)
+                {
+                    %>
+                
+                        <a href="<%=Url.Action("Default","Home",new{city=cityCode}) %>"><%=SiteInfo.Name%>首页</a><span class="gap">|</span>
+                        <%--<a href="http://t.flxxwang.com/">Taojen团购</a><span class="gap">|</span>--%> <%--列表页面显示--%>
+                        <%--<a href="http://vip.flxxwang.com/" title="切换到VIP用户中心">切换到VIP用户中心</a>--%> <%--是VIP用户中才显示。(这一块暂时不要)--%>
+                
+                    <%
+                }
+            %>
+        </div>
+
+        <div class="bar_right">
+            <%--用于非用户中心的非首页--%>
+            <%
+                if (!isUserCenter && !isHomeDefault)
+                {
+                    %>
+                    <div id="modify">
+                        <a href="<%=Url.Action("Default","Home",new{city=cityCode}) %>"><%=SiteInfo.Name%>首页</a><span class="gap">|</span>
+                    </div>
+                    <%
+                }
+            %>
+            
+            <div id="myfeet" class="haschild">
+                浏览记录
+                <span class="arrow"></span>
+                <div id="myfeetBox" class="hc">
+                    <%--<h4 style="margin:0px">最近浏览的筛选条件</h4>
+                    <ul id="feet_final">
+                        <li>数据加载中...</li>
+                        <li>数据加载中...</li>
+                        <li>数据加载中...</li>
+                    </ul>--%>
+                    <h4 style="margin:0px">最近浏览的信息</h4>
+                    <ul id="feet_info">
+                        <%--<li>数据加载中...</li>
+                        <li>数据加载中...</li>
+                        <li>数据加载中...</li>--%>
+                    </ul>
+                    <i class="shadow"></i>
+                </div>
+                <%--气泡:只对初入网站的人进行提示,用cookie判断是否为初入网站.保证气泡只显示一次,当用户鼠标划过气泡，或者5秒后自动隐藏--%>
+                <div id="myfeet_tooltip" class="msgTips">
+                    <i class="msgTips_arrow"></i>
+                    <div class="msgTips_con">您的浏览可以被记录啦！</div>
+                    <i class="shadow"></i>
+                </div>
+            </div>
+            <%
+                if (!isHomeDefault)
+                {
+                    %>
+                    <div id="minsearch" class="haschild">
+                        搜索<span class="arrow"></span>
+                        <div id="minsearchBox" class="hc">
+                            <input class="keyword" autocomplete="off" value="" id="minsearchkeyword" type="text">
+                            <input id="minsearchsearchbtn" type="button" value="">
+                                <i class="shadow"></i>
+                        </div>
+                    </div>
+                    <%
+                }
+            %>
+            
+            <div id="login">
+            <%
+                if (string.IsNullOrWhiteSpace(Framework.Utility.CookieManager.GetCookie("userId")))
+                {
+                    %>
+                    <a href="<%=Url.Action("Login","My") %>">登录</a><span class="gap">|</span>
+                    <a href="<%=Url.Action("Reg","My") %>">注册</a>
+                    <%
+                }
+                else
+                {
+                    %>
+                       <%=Framework.Utility.CookieManager.GetCookie("userName") %>
+                       &nbsp;
+                       <%=Html.ActionLink("我的Taojen", "Index", "My")%>
+                       &nbsp;
+                       <a href="#" onclick="javascript:$info.logout();return false;">退出</a> 
+                    <%
+                }
+            %>
+                
+            </div>
+            <%--导航--%>
+            <div id="sitemap" class="haschild">
+                导航<span class="arrow"></span>
+                <div id="sitemapBox" class="hc">
+                    <div class="maplist">
+                        <a href="<%=webRoot+"/fangchan" %>">房产</a>：<a href="<%=webRoot+"/fangchan/zufang" %>">租房</a> &nbsp; <a href="<%=webRoot+"/fangchan/ershoufang" %>">买房</a> &nbsp; <a href="<%=webRoot+"/fangchan/duanzu" %>">短租</a><br>
+                        <a href="<%=webRoot+"/tiaozao" %>">二手</a>：<a href="<%=webRoot+"/tiaozao/diannao" %>">电脑</a> &nbsp; <a href="<%=webRoot+"/tiaozao/shouji" %>">手机</a> &nbsp; <a href="<%=webRoot+"/tiaozao/jiadian" %>">家电</a><br>
+                        <a href="<%=webRoot+"/zhaopin" %>">招聘</a>：<a href="<%=webRoot+"/zhaopin/yewu" %>">销售</a> &nbsp; <a href="<%=webRoot+"/zhaopin/kefu" %>">客服</a> &nbsp; <a href="<%=webRoot+"/zhaopin/shengchankaifa" %>">普工</a><br>
+                        <a href="<%=webRoot+"/che" %>">车辆</a>：<a href="<%=webRoot+"/che/ershouche" %>">汽车</a> &nbsp; <a href="<%=webRoot+"/huangye/zuche" %>">租车</a> &nbsp; <a href="<%=webRoot+"/che/pinche" %>">拼车</a><br>
+                        <a href="<%=webRoot+"/qiuzhi" %>">求职</a> &nbsp; <a href="<%=webRoot+"/qiuzhi/jianzhi" %>">兼职</a> &nbsp; <a href="<%=webRoot+"/huangye" %>">黄页</a> &nbsp; <a href="<%=webRoot+"/jiaoyu"%>">培训</a><br>
+                        <a href="<%=webRoot+"/piaowu" %>">票务</a> &nbsp; <a href="<%=webRoot+"/huangye/lvyouxiuxian" %>">旅游</a> &nbsp; <a href="<%=webRoot+"/chongwu" %>">宠物</a> &nbsp; <a href="<%=webRoot+"/jiaoyou" %>">交友</a>
+                    </div>
+                    <div class="mapfuc">
+                        <%--<a href="#" class="c_r">同城团购&nbsp;&nbsp;&nbsp;每日一团»</a><br>--%>
+                        <a href="/lovewall" class="c_r">爱墙</a><br />
+                        <a href="<%=webRoot+"/post" %>">免费发布</a> &nbsp;<%--<a href="#">删除信息</a>--%><br>
+                        <%--<a href="#">Taojen隐私保护助手</a><br>--%>
+                        <%--<a href="#">手机畅游Taojen网</a> <br>--%>
+                        <%--<a href="#"><%=SiteInfo.Name%>网邻通</a><br>--%>
+                        <%--<a class="fduihua" href="#">帮助中心</a>--%>
+                    </div>
+                    <i class="shadow"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%
+    var seoInfoList = ViewData["SeoInfoList"] as IEnumerable<IInfo>;
+    if (seoInfoList != null)
+    {
+        foreach (var info in seoInfoList)
+        {
+            if (info is YellowPage)
+            {
+                %>
+                    <h1><%=info.Link.Link(Html)%></h1>
+                <%                
+            }
+            else if (info is Recruit)
+            {
+                var recruit=info as Recruit;
+                 %>
+                    <h1><a href='<%=info.Link.Url(Url) %>'><%=recruit.JobName %></a></h1>
+                <%               
+            }
+            else if (info is JobSeek)
+            {
+                var jobseek = info as JobSeek;
+                %>
+                    <h1><a href='<%=info.Link.Url(Url) %>'><%=jobseek.JobName%></a></h1>
+                <%
+            }
+            else
+            {
+                %>
+                    <h1><%=info.Link.Link(Html)%></h1>
+                <%
+            }
+            
+        }
+        
+    }
+%>
+
+<div style="width:1200px;display:inline-block; text-align:left;">
+    <asp:ContentPlaceHolder ID="Main" runat="server">
+        
+    </asp:ContentPlaceHolder>
+</div>
+
+<script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-26929121-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function () {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+</script>
+
+<div style="display:none;">
+    <script type="text/javascript">
+        var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+        document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F6500c0b919d3d8e37db64dba3329109d' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script language="javascript" type="text/javascript" src="http://js.users.51.la/3273253.js"></script>
+    <noscript><a href="http://www.51.la/?3273253" target="_blank"><img alt="<%=SiteInfo.Name%> -- taojen.com" src="http://img.users.51.la/3273253.asp" style="border:none" /></a></noscript>
+    <script type="text/javascript" src="/Areas/Tongji/Content/tongji.js"></script>
+</div>
+</body>
+</html>

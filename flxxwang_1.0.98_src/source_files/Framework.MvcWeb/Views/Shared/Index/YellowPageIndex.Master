@@ -1,0 +1,61 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewMasterPage" %>
+<%@ Import Namespace="Framework.Common" %>
+
+<asp:Content ID="ContentHead" ContentPlaceHolderID="Head" runat="server">
+<%var city = ViewData["City"] as City; %>
+<title>【<%=city.ShortName %>黄页114查询】 - <%=city.ShortName %><%=SiteInfo.Name%></title>
+<meta name="Keywords" content="<%=city.ShortName %>黄页,<%=city.ShortName %>商家,<%=city.ShortName %>黄页114查询" />
+<meta name="Description" content="<%=SiteInfo.Name%><%=city.ShortName %>黄页,是最全面的<%=city.ShortName %>本地生活服务类商家信息展示平台,是真实性和时效性最好的<%=city.ShortName %>黄页信息。它提供了<%=city.ShortName %>搬家,<%=city.ShortName %>家政,<%=city.ShortName %>月嫂,<%=city.ShortName %>保洁,<%=city.ShortName %>回收,<%=city.ShortName %>装修,<%=city.ShortName %>餐饮,<%=city.ShortName %>旅游等几百类生活服务类商家黄页信息。" />
+<asp:ContentPlaceHolder ID="Style" runat="server">
+</asp:ContentPlaceHolder>
+<script type="text/javascript" src="/content/fenlei/Scripts/comm_js/1.js"></script>
+<%--<script type="text/javascript" src="/content/fenlei/Scripts/5_1/72/43.js"></script>--%>
+<script type="text/javascript" src="/content/fenlei/Scripts/comm_js/boot_toplist_version.js"></script>
+<script type="text/javascript">
+//    var win = new GetToolTipWindow('tooltipdiv', 'keyword', '3', '79', '', true);
+//    win.setSearchButton('searchbtn');
+//    writeCookie("city", "hz", "flxxwang.com", "30", "/");
+</script>
+<script  type="text/javascript">
+    var _bdhm_top = 0;
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    var _bdhm_tim = new Image(1, 1);
+    _bdhm_tim.id = "bdhmPerimg";
+    _bdhm_tim.src = _bdhmProtocol + "hm.baidu.com/_tt.gif?si=850d0ecfa2c2e6e4dce8e4dbe08821b6&rnd=" + Math.round(Math.random() * 2147483647);
+    _bdhm_tim.onload = function () { _bdhm_top = 1; }
+</script>
+</asp:Content>
+
+<asp:Content ID="ContentMain" ContentPlaceHolderID="Main" runat="server">
+<%var city = ViewData["City"] as City; %>
+<div id="header">
+    <div id="headerinside">
+        <a href="<%=Url.Action("Default","Home") %>" id="logo" target="_self">
+            <img src="/Content/Fenlei/assets/images/logo/logo.gif" alt="中文最大生活信息门户"/>
+        </a>
+        <div id="searchbar">
+            <i id="key">
+                <input type="text" id="keyword" class="keyword" value="请输入类别名称或关键字" />
+            </i>
+            <input type="button" name="button" class="btnall" id="searchbtn" onclick="SearchUrlUtility.SearchKeyClick('','',1)" value="同城搜索" onmousemove="this.className='btnal2'" onmouseout="this.className=''" />
+            <div class="clear"></div>
+            <asp:ContentPlaceHolder ID="HotSearch" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <%--<script type="text/javascript">
+            SetCurWindowLoadComplete();
+            SetCurWindowLoadComplete = function () { };
+        </script>--%>
+    <div >
+    <a href="<%=Url.Action("s2","post",new{values="huangye"}) %>" id="fabu">免费发布信息</a>
+</div></div>
+</div>
+
+<asp:ContentPlaceHolder ID="Rows" runat="server">
+</asp:ContentPlaceHolder>
+<script type="text/javascript">
+    $(function () {
+        $("a").attr("target", "_blank");
+    });
+</script>
+</asp:Content>

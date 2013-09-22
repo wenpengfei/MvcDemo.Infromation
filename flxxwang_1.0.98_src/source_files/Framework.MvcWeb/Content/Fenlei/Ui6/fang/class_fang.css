@@ -1,0 +1,177 @@
+﻿html{background:#fff}/* some reset */
+body,form,h1,h2,h3,h4,ul,ol,li,dl,dd,dt,p,hr,input{margin:0;padding:0}
+body{color:#333;font:12px/2 Arial,Tahoma,"宋体";-webkit-text-size-adjust:none}
+h1,h2,h3,h4{font-size:100%}
+img{border:none}ul{list-style:none}
+a{color:#00c;cursor:pointer;text-decoration:none}
+a:hover,.area a:hover,.c_58:hover
+{
+    /*color:#f00;*/
+    color:#10ade4;
+    text-decoration:underline
+}
+.f12{font-size:12px}.f14{font-size:14px}
+.c_999{color:#999}.c_g{color:green}.c_r,a.t b{color:#f00}.c_ccc{color:#ccc}.c_58{color:#585858}
+.select a,a.select,.select{color:#000;font-weight:700;text-decoration:none}
+.u{text-decoration:underline}
+.unline{text-decoration:none;border:none}.hc{display:none}.sc{display:block}
+.clear,.line{display:block;clear:both;font-size:0;height:0;line-height:0;overflow:hidden}.tc,.center{text-align:center}.tr{text-align:right}
+input{font-family:Tahoma;font-size:12px}.radio{margin:0;vertical-align:middle}
+/* background */
+#searchBox,#searchBox .text,#searchBox .text input,#searchBox .btn,
+.btn input,#crumbs a,.tabs a,.tabs a span,.tabs strong span,.tabs strong,.filterbar,.filterico,.filterico span,.ico,
+.pager a,
+.pager a span,
+.pager strong,
+.pager strong span,
+.pager a:hover,
+.pager a:hover span,
+.recently,.recently span,
+.hotarea dt,
+.hotarea dt span,.gotop,a.par,.savapar,.order a,#RelateWord span.gap{background-image:url(/content/fenlei/assets/images/list/sprites.png)!important;background-repeat:no-repeat}
+
+/* frame */
+.w,#header,#selection,#main,#links,#footer,#RelateWord{width:1000px;margin:0 auto;clear:both}
+#main{position:relative;z-index:98;}
+
+/* header */
+#header{overflow:hidden;position:relative;padding:5px 0 5px 100px;width:900px}
+#crumbs a{float:left;display:inline-block;padding:0 0 0 18px;margin-top:11px;background:url() no-repeat 2px -600px;white-space:nowrap}
+#logo,#minlogo{position:absolute;left:10px;top:10px;text-indent:-100em}
+#minlogo:focus,#logo:focus,#searchBox .text input:focus{outline:none}
+#logo
+{
+    width:189px;height:50px;top:15px;
+    background:url(/Content/Fenlei/assets/images/logo/logo.gif) no-repeat
+}
+#minlogo
+{
+    width:102px;height:25px;
+    background:url(/Content/Fenlei/assets/images/logo/minilogo.gif)
+}
+
+/* btns */
+.btn,.text,.btn input,.text input{display:inline-block;float:left;border:0;height:21px;line-height:21px}
+.btn,.text{margin:0 3px 0 0}
+.text input{border:solid 1px #ccc;padding:1px 0 0 3px}
+.btn{border-width:1px;border-style:solid;border-color:#ccc #999 #999 #ccc;padding:0 1px 1px 0;background:#E7E7E7}
+.btn input{background-position:right -309px;padding:0 5px 5px 5px;text-align:center;cursor:pointer}
+.btn:hover{text-decoration:none}
+.text2,.text2 input,.btn2,.btn2 input{height:17px;line-height:17px}
+.text3,.text3 input,.btn3,.btn3 input{height:27px;line-height:27px}.btn3 input{font-weight:700;font-size:14px}
+/* bigsearch */
+#searchBox{float:left;overflow:hidden;zoom:1;background:url() repeat-x 0 -441px;height:42px;line-height:42px;margin-bottom:6px;}
+#searchBox .text{border:none;background-position:-114px -399px;height:42px;padding-left:33px;margin:0;height:42px}
+#searchBox .text input{width:500px;border:none;margin:10px 0 0 0;line-height:22px;height:22px}
+#searchBox .btn{background:url() repeat-x -3px -399px;height:42px;border:none;margin:0;}
+#searchBox .btn input{background:url() no-repeat -1000px 0;height:32px;font-weight:700;width:110px;padding:0;margin:5px 0;color:#fff;font-size:16px}
+#fabu{background:url(/Content/Fenlei/Ui6/index/searbut.gif) no-repeat 0 0}
+#fabu{background-position:-682px 0;width:118px;height:35px;line-height:35px;display:inline-block;font-size:14px;font-weight:bold;color:#000;text-align:center;float:left;cursor:pointer; margin:3px 0 0 20px}
+#fabu:hover{color:#ff0000;text-decoration:underline}
+
+/* tips */
+#keyword1{width:167px}
+.tooltip{border:1px solid #ccc;background:#fff;margin:-2px 0 0 1px;margin:-3px 0 0 0\0;_margin:-3px 0 0 -1px}
+.tooltip li{padding:0 5px;overflow:hidden;zoom:1}
+.tooltip li a{color:#666;text-decoration:none}
+.tooltip li a b{color:#002cad}.tooltip li .tool_r{float:right;color:#090;font-size:11px}
+.tooltip li.selected a b,.tooltip li.selected a,.tooltip li.selected .tool_r{color:#fff}
+.tooltip li.selected,.tag_options li.open_hover{background:#FD7A0E;color:#FFF}
+#tooltipdiv1{width:170px}
+#tooltipdiv,#tooltipdiv_G{margin:-1px 0 0 -29px;_margin:-1px 0 0 -28px;width:514px;padding:8px}
+
+/*class*/
+.sorts{width:1000px;margin:0 auto 10px auto;clear:both; position:relative}
+.sortstop{background:url(/content/fenlei/images/djxq/ymm.jpg) no-repeat 20px bottom;border:1px solid #dde2e5;padding:22px 0 0 185px;height:160px;}
+.numsorts{padding-left:20px; margin-bottom:8px; font-size:14px}
+.numsorts span{padding-left:5px;padding-right:30px;overflow:hidden;font-style:normal;line-height:28px;color:#666;}
+.numsorts span i{font:11px/28px Verdana;color:#666;margin:0 5px}
+.ico_building,.ico_house{ background:url(/content/fenlei/ui6/fang/images/ico_house.gif) no-repeat;}
+.ico_house{background-position:0 7px}
+.ico_building{ background-position:0 -32px;}
+.uls{display:block;padding:0px 0 5px 0px;zoom:1;overflow:hidden;}
+.uls li{width:270px;padding:0 10px 10px 0px;float:left;}
+.uls li.npad{padding:0 0 10px 0px;}
+.uls h2{font-size:12px;padding-left:10px;border-bottom:1px solid #eee;font-weight:lighter; line-height:31px;}
+.uls p{padding-left:10px;line-height:24px;zoom:1; margin-top:5px;}
+.uls p a{white-space:nowrap; margin-right:10px; display:inline-block; float:left;color:#666}
+.uls li a:hover
+{
+    /*color:#f00*/
+    color:#10ade4;
+}
+.bests{height:180px; overflow:hidden; margin-bottom:10px; position:relative; }
+.bests ul{ padding:20px 0 0 0;height:130px; overflow:hidden;display:block}
+.bests li{width:165px;height:130px;float:left; text-align:center; line-height:24px; color:#666; overflow: hidden}
+.bests li .scrpicimg{width:85px; height:65px;overflow:hidden; position:relative; display:block; margin:0 auto 10px auto;}
+.bests li .scrpicimg a img{vertical-align:middle;width:80px;height:60px; display:block; overflow:hidden; margin:0 auto;z-index:98}
+.ico15{ display:block; width:15px;height:16px; overflow:hidden; position:absolute;right:0;bottom:0;z-index:99}
+.bests li b,.pri{ font-size:14px;color:#f00;padding-right:3px;}
+.ztad{clear:both;width:830px;height:90px; overflow:hidden;}
+.ztad img{display:block;width:830px;height:90px; overflow:hidden}
+#infolist.cleft{width:830px;float:left}
+.tblist{width:100%;color:#585858; float:left}
+.tblist td{padding:0; vertical-align:top; text-align:center;border-bottom:solid 1px #eee;padding:5px 10px;line-height:28px}
+.tblist td.t{ text-align:left}
+.tblist td.t .t_a{padding-right:5px;}
+.tblist td.t .c_58 { text-decoration:underline}
+tr.bg{background:#fffee5}
+.sortsright{float:right; width:158px;font-size:12px;line-height:28px;border:solid 1px #dde2e5;display:block;position:relative;zoom:1; margin-bottom:10px;}
+.bests h2,.sortsright h2{margin:0;padding:0 10px;font-size:14px;background:#f8f8f8;border:solid 1px #fff}
+.item{padding:5px 10px 5px 12px;border-top:solid 1px #dde2e5}
+.item li{clear:both;height:30px;line-height:30px;}
+/*right pic*/
+
+#rightframe.cright{width:160px;float:right;}
+.crpic{width:160px; margin:0; overflow:hidden;}
+.crpic a{display:table-cell; overflow:hidden; float:left; clear:left}
+.crpic img {max-width:160px; _width: expression(this.width > 160 ? '160px': true); max-height:200px; _height: expression(this.height > 200 ? '200px': true); vertical-align:middle; float:none; text-align:center; margin-bottom:10px;  overflow:hidden}
+
+/* tab */
+#filter{z-index:99;border-bottom:solid 2px #ff7200;}
+.tabs{padding:0 0 28px 10px;}
+.tabs a,.tabs strong{float:left;display:inline-block;padding:0 2px 0 0;background-position:right -123px;margin:3px 4px 0 0;height:25px;color:#333}
+.tabs a:hover
+{
+    text-decoration:none;
+    color:#f00
+}
+.tabs a span,.tabs strong span{display:inline-block;padding:0 8px 0 10px;height:25px;line-height:25px;line-height:2\9;overflow:hidden;font-size:14px;background-position:0 -148px}
+.tabs .select,.tabs strong{background:url() no-repeat right -67px #fd7a0e;margin-top:0;height:28px;color:#fff}
+.tabs .select:hover{color:#fff}
+.tabs .select span,.tabs strong span{background-position:0 -95px;height:28px;line-height:28px;line-height:32px\9}
+.tabs a cite{font-style:normal;font-size:12px;padding-left:3px}
+.tabs a.pubbtn{float:right;font:700 14px/2 verdana;color:#f00;margin:0 8px 0 0;background-position:-1000px 0}.tabs a.pubbtn:hover{color:#eb0000}
+
+.height10{height:10px; margin:0; padding:0;clear:both;font-size:0;line-height:10px}
+/* infocount */
+#infocont{margin:30px 0 30px 0;text-align:center}
+#infocont a{ font-weight:700; padding-right:15px;}
+/* link Area */
+#links .line{border-bottom:1px solid #e1e1e1}
+#links a{color:#585858}
+/* hotarea */
+.hotarea{padding:10px;position:relative;line-height:22px;height:50px;overflow:hidden;border-top:solid 2px #9f9f9f}
+.hotarea dt{height:22px;text-align:center;float:left;cursor:pointer;margin:0 3px 0 0}
+.hotarea dt.select{background-position:0 -239px;color:#fff;font-weight:400}
+.hotarea dt.select span{background-position:right -239px;overflow:hidden;height:22px;line-height:22px}
+.hotarea dd{position:absolute;top:38px;left:11px;display:none;height:22px;overflow:hidden}
+.hotarea dd a{margin-right:1em;height:22px;float:left;white-space:nowrap}
+/* morelink  */
+.nearby,.links{width:980px;padding:10px;overflow:hidden;_zoom:1;}
+.nearby li{float:left;white-space:nowrap;width:10em;margin-right:1.3em;overflow:hidden}
+.line1{border-top:solid 2px #9f9f9f;display:block;clear:both;font-size:0;height:0;line-height:0;overflow:hidden}
+.links li{float:left;white-space:nowrap;width:10em;margin-right:1.3em;overflow:hidden}
+/* noresult */
+#noresult{padding:30px 0 0 40px;font:14px/2 Tahoma}
+#noresult strong{color:red}
+.nr{padding-left:50px}
+/* footer */
+#footer{text-align:center;border-top:solid 1px #e1e1e1;padding:10px 0 30px 0}
+
+/* 近期热点 找房愿望树 */
+.hotnews{clear:both;color:#999;padding-left:37px;margin-bottom:10px;}
+.hotnews a{color:#999; margin-right:10px;}
+.xytree{color:#537916;width:149px;height:70px; position:absolute;right:4px;bottom:2px;}
+.xytree a{color:#537916;display:block;width:143px;height:58px;padding-top:12px;padding-left:6px;overflow:hidden; background:url(/content/fenlei/images/djxq/ctree.jpg) no-repeat right bottom;}
+.xytree a:hover{color:#537916;}

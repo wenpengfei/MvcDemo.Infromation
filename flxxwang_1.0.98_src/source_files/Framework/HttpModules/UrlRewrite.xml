@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <UrlRewrite Url="http://(*).taojen.com(*)" RewriteTo="http://www.taojen.com/(0)(1)"></UrlRewrite>
+</Root>

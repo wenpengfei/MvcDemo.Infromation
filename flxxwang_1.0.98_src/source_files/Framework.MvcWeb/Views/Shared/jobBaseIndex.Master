@@ -1,0 +1,121 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewMasterPage" %>
+<%@ Import Namespace="Framework.Common" %>
+
+<asp:Content ID="ContentHead" ContentPlaceHolderID="Head" runat="server">
+    <%var city = ViewData["City"] as City; %>
+<title>【<%=city.ShortName %>招聘网|<%=city.ShortName %>人才网|<%=city.ShortName %>人才市场】- <%=city.ShortName %><%=SiteInfo.Name%></title>
+<meta name="keywords" content="<%=city.ShortName %>招聘网,<%=city.ShortName %>人才网,<%=city.ShortName %>人才市场" />
+<meta name="description" content="<%=SiteInfo.Name%><%=city.ShortName %>招聘频道是免费的<%=city.ShortName %>人才招聘信息发布平台,提供海量<%=city.ShortName %>招聘职位信息：<%=city.ShortName %>招聘销售、客服、餐饮、房地产、美容美发等数百种行业招聘信息。<%=city.ShortName %>人才市场首选<%=SiteInfo.Name%><%=city.ShortName %>招聘。" />
+<link type="text/css" rel="stylesheet" href="/Content/Fenlei/ui6/index/job11721.css?20118116" /> 
+<%--<script type="text/javascript" src="/Content/Fenlei/Scripts/jianli/jquery.js"></script>--%>
+<%--<script type="text/javascript" src="/Content/Fenlei/Scripts/comm_js/boot_toplist_version.js"></script>--%>
+<asp:ContentPlaceHolder ID="Head" runat="server">
+</asp:ContentPlaceHolder>
+</asp:Content>
+
+<asp:Content ID="ContentMain" ContentPlaceHolderID="Main" runat="server">
+    <%
+        var routeData = (HttpContext.Current.Handler as MvcHandler).RequestContext.RouteData;
+    var controller = routeData.Values["controller"].ToString().ToLower();
+    var city = ViewData["City"] as City;
+%>
+<div id="header">
+    <div id="headerinside">
+        <div id="logo">
+            <a href="<%=Url.Action("Default","Home") %>">
+                <img src="/Content/Fenlei/assets/images/logo/logo.gif" alt="中文最大生活信息门户"/>
+            </a>
+            <a href="" id="logotxt"><span><%=controller == "qiuzhi" ? "求职" : "招聘"%></span></a>
+        </div>
+    </div>
+</div>
+
+<div class="search_index">
+    <div class="search_tab">
+        <ul>
+            <div class="post">
+                <a href="<%=Url.Action("s2","post",new{values="zhaopin"}) %>" target="_blank"><i class="mfzp"></i>发布招聘&raquo;</a>
+                <a href="<%=Url.Action("s2","post",new{values="qiuzhi"}) %>" target="_blank"><i class="djjl"></i>登记简历&raquo;</a>
+            </div>
+            <li id="li1"<%=controller == "zhaopin" ? " class='selected'" : ""%> onclick="$('#keyword').val($('#keyword').val());addSheet ('.tooltip{width:405px; margin-left:1px}')">
+                <i class="zgzpic"></i>
+                <a href="javascript:void(0);">我要找工作</a>
+            </li>
+            <li id="li2"<%=controller == "qiuzhi" ? " class='selected'" : ""%> onclick="$('#keyword').val($('#keyword').val());addSheet ('.tooltip{width:297px; margin-left:0px}')">
+                <i class="sjlpic"></i>
+                <a href="javascript:void(0);">我要搜简历</a>
+            </li>
+        </ul>
+        <div class="clear tabgc"></div>
+    </div>
+    <div class="search_keyword<%=controller == "qiuzhi" ? " sjlstyle" : ""%>">
+        <span id="search_text" class="zgztxt"><%=controller == "qiuzhi" ? "搜简历" : "找工作"%></span>
+        <div class="search_list fl" id="search_list">
+            <input type="hidden" id="hidcondition" name="hidcondition" value="1" />
+            <span id="condition">职位名称</span>
+            <div id="condition_pop" class="selectlist hc">
+                <a href='javascript:void(0)' onclick='setConditionVal(this,1)'>职位名称</a>
+                <a href='javascript:void(0)' onclick='setConditionVal(this,3)'>公司名</a>
+                <a href='javascript:void(0)' onclick='setConditionVal(this,4)'>人名</a>
+            </div>
+        </div>
+        <span class="search_input fl">
+            <input type="text" id="keyword" class="c_ccc" autocomplete="off" fdv="请输入职位关键词" onfocus="this.className='';$('#search_list').addClass('slbc');" />
+        </span>
+        <div style="z-index:10;" class="search_city fl">
+            <span id="spanLiveCity" sid="79" sdir="hz">
+            <%=city.ShortName %>
+            </span>
+            <div class="zhankai" id="divLiveCity" style="display:none"></div>
+        </div>
+        <div style="z-index:10;" class="search_btn">
+            <input type="button" id="searchbtn" onclick="Search()" value="搜索" />
+        </div>
+        <div class="clear"></div>
+        <span class="hot" id="hot">
+            热门搜索：
+            <a href="<%=Url.Action("renli") %>" target="_blank">行政</a>
+            <a href="<%=Url.Action("caiwu") %>" target="_blank">会计</a>
+            <a href="<%=Url.Action("caiwu",new{objecttype=5}) %>" target="_blank">软件工程师</a>
+            <a href="<%=Url.Action("guanggao",new{objecttype=9}) %>" target="_blank">平面设计</a>
+            <a href="<%=Url.Action("chaoshishangye",new{objecttype=4}) %>" target="_blank">导购</a>
+            <a href="<%=Url.Action("yewu") %>" target="_blank">销售</a>
+            <a href="<%=Url.Action("lvyoujiudian",new{objecttype=5}) %>" target="_blank">服务员</a>
+            <a href="<%=Url.Action("jiazhengbaojie",new{objecttype=1}) %>" target="_blank">保安</a>
+        </span>
+        <span class="hot" id="hot2" style="display:none">
+            热门搜索：
+            <a href="<%=Url.Action("renli") %>" target="_blank">行政</a>
+            <a href="<%=Url.Action("caiwu") %>" target="_blank">会计</a>
+            <a href="<%=Url.Action("caiwu",new{objecttype=5}) %>" target="_blank">软件工程师</a>
+            <a href="<%=Url.Action("guanggao",new{objecttype=9}) %>" target="_blank">平面设计</a>
+            <a href="<%=Url.Action("chaoshishangye",new{objecttype=4}) %>" target="_blank">导购</a>
+            <a href="<%=Url.Action("yewu") %>" target="_blank">销售</a>
+            <a href="<%=Url.Action("lvyoujiudian",new{objecttype=5}) %>" target="_blank">服务员</a>
+            <a href="<%=Url.Action("jiazhengbaojie",new{objecttype=1}) %>" target="_blank">保安</a>
+        </span>
+    </div>
+    <div style="display:none"">
+        <input type="checkbox" checked="checked" id="eduabove" name="eduabove" style="margin:2px;*margin:0; vertical-align:middle" />
+        <input type="checkbox"  id="expabove" name="expabove" style="margin:2px;*margin:0; vertical-align:middle; display:none;" />
+    </div>
+</div>
+   
+<%--<script type="text/javascript">
+    $(document).ready(function () { InitSearch(); });
+</script>--%>
+
+<asp:ContentPlaceHolder ID="Rows" runat="server">
+</asp:ContentPlaceHolder>
+
+<div id="footer">
+    &copy; 2010 flxxwang.com
+    <%--<a href="http://about.flxxwang.com/" id="askicon" style="margin-left:10px">联系客服</a>--%>
+    <%--<a href="/joblist.shtml" style="margin-left:10px">杭州招聘导航</a>--%>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $("a").attr("target", "_blank");
+    });
+</script>
+</asp:Content>

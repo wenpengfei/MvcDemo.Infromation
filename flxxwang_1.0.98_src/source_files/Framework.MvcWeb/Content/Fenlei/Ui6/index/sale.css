@@ -1,0 +1,138 @@
+body,dl,ol,ul,li,dt,dd,p,h2,h3,form{margin:0;padding:0;list-style:none}
+body{/*background:#F5F8FF;*/color:#333;font-family:Arial,"宋体";font-size:12px}
+a{cursor:pointer;color:#00C;text-decoration:none}a:hover{color:#FF0508;text-decoration:underline}
+img{border:none}.f12{font-size:12px}.f14{font-size:14px}.red{color:#f00}a.lb{color:#585858;font-size:12px;text-decoration:underline}a.lb:hover{color:#FF0508}.c_999{color:#999}.c_g{color:green}.c_r{color:#FF0508}.select a,a.select{color:#000;font-weight:700;text-decoration:none}
+.u{text-decoration:underline}.unline{text-decoration:none;border:none}.hc{display:none;}.sc{display:block;}
+.clear,.line{clear:both;font-size:0;height:0;overflow:hidden}.tc,.center{text-align:center}.tr{text-align:right}
+.lb{color:#585858;font-size:12px;}.f14,a.t{font-size:14px}.c_666,.c_666 a{color:#666}
+.ico{margin-left:2px}
+.bar_left .tuan,.bar_left .gap{display:none}
+/*header*/
+#headerinside{width:990px;margin:0 auto;clear:both;height:75px; position:relative; z-index:666}
+#logo{position:absolute;left:15px;top:20px}
+#logo span{ height:32px; border-left:1px solid #e6e6e6; margin-left:10px; padding-left:10px; display:inline-block; white-space:nowrap; position:absolute; top:7px; left:152px}
+#logo span b{font-size:24px; color:#4d4d4d; margin-top:8px; display:inline-block}
+#logo:hover,#logo a:hover{text-decoration:none}
+#searchbar{position:absolute;left:390px;top:26px; line-height:26px; overflow:hidden}#searchbar i{font-style:normal}#key,#keyword,#searchbtn,#fabu{background-image:url(/Content/Fenlei/assets/images/topbar.png) !important}#key{background:url() repeat-x 0 -320px; height:30px; padding:2px 0; display:inline-block; float:left}#keyword{background:url() no-repeat 0 -285px; width:303px;height:22px; line-height:22px; padding:4px 0; border:none; padding-left:38px; float:left; display:inline-block; overflow:hidden}.keyword{color:#ccc}.keyword2{color:#000}#searchbtn{background:url() no-repeat 0 -358px;width:123px;height:35px; font-size:16px; font-weight:bold; cursor:pointer; overflow:hidden; text-align:center; color:#fff; line-height:33px; line-height:32px\0; padding-bottom:4px;border:none; float:left}#searchbtn.btnal2{text-decoration:underline}
+#fabu{position:absolute;right:0;top:26px; background:url() no-repeat 0 -395px; width:118px; height:35px; line-height:35px; display:inline-block; font-size:14px; font-weight:bold; color:#000; text-align:center; float:left;cursor:pointer;}
+.tooltip{width:324px; padding:8px;border:1px solid #dcdadc;background:#fff;margin-top:-4px;line-height:200%}.tooltip ul{width:100%; overflow:hidden}.tooltip li{height:26px;overflow:hidden;padding-left:5px}.tooltip li a{text-decoration:none;color:#666;font-size:13px}.tooltip li a b{color:#002cad}.tooltip li .tool_r{float:right;color:#008000;font-size:11px}.tooltip li.selected a b,.tooltip li.selected a,.tooltip li.selected .tool_r{color:#FFF8D8}.tooltip li.selected{background:#f97d03;cursor:pointer;color:#FFF8D8; padding-right:8px;}.closewindow{float:right;margin:-5px 5px 0 0;}#searchbar i{font-style:normal}
+/* footer  */
+#footer {font-size:12px;line-height:180%;margin:0 auto;padding:10px 0;text-align:center;width:990px; margin-top:10px; border-top:1px solid #ccc}
+.wrap{width:990px; margin:15px auto 0;}
+.wrap2{width:990px; margin:15px auto 0; overflow:hidden}
+.mt0{margin-top:0}.mt10{margin-top:10px}
+/*类别选择*/
+.wrap h2,.wrap2 h2{ background:#f5f5f5; border-bottom:1px solid #dbdbdb; padding:0 10px; font-size:14px; border-top:1px solid #fff; line-height:32px}
+.wrap h2 span.fr,.wrap2 h2 span.fr{float:right; font-weight:lighter; font-size:12px;}
+.wrap2 h2 span.fr select{vertical-align:middle;}
+.lbsear{width:216px; height:285px; float:left; border-top:1px solid #dbdbdb; margin-right:10px;}
+.wrap .lbsear .lhb{ border-left:1px solid #dbdbdb; border-right:1px solid #dbdbdb}
+.content a{ font-size:14px}
+.ym-tab{ background:url(/content/fenlei/images/other/sale_l_bg.gif) no-repeat 192px 13px #fff; float:left; width:214px; clear:left; height:35px; line-height:35px; text-indent:10px; color:#0000cc;border:1px solid #dbdbdb; border-bottom:1px solid #f1f1f1; border-top:none; }
+.current{ float:left; width:216px; height:36px; position:relative;z-index:666; }
+.current .dlb{ display:block; width:218px; height:36px; line-height:36px; background:url(/content/fenlei/ui6/index/sale_sel_bg.gif) #fff no-repeat; position:absolute; top:-2px; left:0px; z-index:1000; text-indent:15px; color:#000; text-decoration:none; overflow:hidden}
+.ym-tab .dlb,.ym-tab .dlb a,.current .dlb a{font-size:14px; color:#00C}
+.current .dlb a:hover{font-weight:bold;color:#10ade4;}
+.ym-submnu{ position:absolute; top:-36px; left:216px; z-index:999; width:435px; border:2px solid #10ace5; padding:10px; padding-top:5px; background:#fff; display:none;}
+.ym-submnu li{ width:100%; height:auto; line-height:22px; border-bottom:1px solid #f1f1f1; float:left; clear:left; padding:5px 0;}
+.current .ym-submnu li a{ color:#00C; text-decoration:none; font-weight:normal;  background:none; line-height:22px; position:inherit; top:auto; left:auto; overflow:hidden; font-size:12px; width:auto; height:auto; text-indent:0; text-align:left; float:left}.current .ym-submnu li a:hover{ text-decoration:underline; color:#f00}
+.current .ym-submnu li b{ width:85px; padding:0 6px 0 2px; height:auto; float:left; display:inline-block; overflow:hidden}
+.current .ym-submnu li b a{font-weight:bold}
+.current .ym-submnu li span{width:340px; float:left; display:inline-block}
+.current .ym-submnu li span a{padding:0px 8px 0 10px; margin:4px 0; border-left:1px solid #ccc; height:14px; line-height:14px; white-space:nowrap; float:left}
+.current a.over{ color:#000; text-decoration:none; cursor:auto}
+.ym-tab#bgno{ border-bottom:1px solid #dbdbdb}
+.ym-submnu li.btno{border-bottom:none; padding-bottom:0}
+/*rollbox*/
+.rollbox{width:500px; height:265px; padding:10px; border:1px solid #dbdbdb; margin-left:10px;overflow:hidden;}
+.rollbox .leftbotton{ background:url(/content/fenlei/images/other/salepic.jpg) no-repeat 0 0; width:19px; height:19px;overflow:hidden;float:left;display:inline;margin:55px 15px 0 5px;cursor:pointer;}
+.rollbox .rightbotton{background:url(/content/fenlei/images/other/salepic.jpg) no-repeat -21px 0; width:19px; height:19px;overflow:hidden;float:right;display:inline;margin:55px 5px 0 0px;cursor:pointer;}
+.rollbox .leftbotton:hover{background-position: 0px -21px}
+.rollbox .rightbotton:hover{background-position: -21px -21px}
+.rollbox .cont{width:430px; height:180px; overflow:hidden;float:left; padding-top:15px}
+.rollbox .scrcont{width:10000000px;}
+.rollbox .cont .scrpic li{width:135px; margin-right:10px; text-align:center; float:left; line-height:28px; color:#666}
+.rollbox .cont .scrpic .scrpicimg{width:135px; height:100px; text-align:center; display: table-cell;  vertical-align:middle; *display: block; *font-size: 87px; *font-family:Arial; }
+.rollbox .cont .scrpic .scrpicimg img{vertical-align:middle; max-height:100px; max-width:135px; height: expression(this.height > 100 ? '100px': true); width: expression(this.width > 135 ? '135px': true)}
+.rollbox .cont .scrpic li b{font-size:18px; color:#f00}
+.rollbox .cont .scrpic a{white-space:nowrap}
+.rollbox #list_scr1,.rollbox #list_scr2{float:left;}
+.rollinfo{width:100%; float:left; border-top:1px solid #f1f1f1; padding-top:15px; overflow:hidden}
+.rollinfo li{background:url(/content/fenlei/images/other/salepic.jpg) no-repeat -85px 13px; height:26px; line-height:28px; width:49%; float:left; text-indent:10px}
+/*杂七杂八*/
+.rightxt{width:234px; float:right; overflow:hidden}
+.rightxt p{padding:9px 10px; padding-right:0; line-height:28px; overflow:hidden}
+.rightxt a{margin-right:20px; white-space:nowrap; display:inline-block}
+.zaqi{width:232px; border:1px solid #dbdbdb; float:right;}
+.seartxt{width:232px; border:1px solid #dbdbdb; height:165px; _height:164px; overflow:hidden}
+.seartxt a{margin-right:30px}.seartxt p{text-align:center}
+/*热门跳蚤*/
+.sale_hot{border:1px solid #dbdbdb;}
+.shotul ul{margin:10px 15px; padding-right:0; overflow:hidden}
+.shotul li{width:19.9%; float:left; color:#666; height:36px; line-height:36px; font-size:12px}
+.shotul li a{font-size:14px}
+/*最新发布*/
+.newfb{ padding:0 0 15px 27px; overflow:hidden}.newfb ul{width:100%; overflow:hidden}
+.newfb li{width:134px; margin:20px 26px 0 0; float:left; text-align:center; line-height:28px; color:#666; white-space:nowrap; overflow: hidden}
+.newfb li .scrpicimg{width:130px; height:100px; padding:1px; border:1px solid #f1f1f1; text-align:center; display: table-cell; overflow:hidden; vertical-align:middle; *display: block; *font-size: 87px; *font-family:Arial;}
+.newfb li .scrpicimg img{vertical-align:middle; max-height:100px; max-width:130px; height: expression(this.height > 100 ? '100px': true); width: expression(this.width > 130 ? '130px': true)}
+.newfb li b{font-size:18px; color:#f00}
+/**/
+.wbody{width:490px; float:left; overflow:hidden}
+.mt15{margin-top:15px}
+.wbody.fr{float:right}
+.wbody h2 .fr a{font-size:12px; margin-left:10px}
+.wbody .sale_hot{height:276px; overflow:hidden}
+/*跳蚤商城*/
+.salesc{overflow:hidden; padding-left:1px}.salesc ul{width:100%; overflow:hidden}
+.salesc li{width:140px; padding:10px 0; float:left; border-right:1px solid #f1f1f1; color:#cbcbcb; line-height:22px; text-align:center;}
+.salesc li a{color:#666}.salesc li p{text-align:left; padding-left:10px; overflow:hidden}.salesc li.bno{border-right:none}
+.salesc li i{background:url(/content/fenlei/images/other/salepic.jpg) no-repeat 0 -40px; width:88px; height:60px; display:inline-block; margin:15px 0 10px; overflow:hidden}
+.salesc li i.scsj{background-position:0 -102px}
+.salesc li i.scjd{background-position:0 -169px}
+.salesc li i.scmy{background-position:0 -239px}
+.salesc li i.scbg{background-position:0 -306px}
+.salesc li i.scwt{background-position:0 -370px}
+.salesc li i.scqt{background-position:0 -434px}
+/* infolist */
+.tblist,.tbimg{width:100%;background:#FFF}
+/* 数据列 */
+.tbimg td{border-bottom:1px solid #ddd;padding:10px; padding-right:0; height:60px; color:#666;line-height:28px; overflow:hidden}
+.tbimg td.img{width:80px}
+.tbimg td.img div{width:80px;height:60px;overflow:hidden;position:relative;background:#fff;text-align:center}
+.tbimg td.img a img{vertical-align:middle;width:80px;height:60px}
+.tbimg td.price b{color:#FF0508;font:700 18px Arial;margin-right:2px}
+.tbimg td.price{text-align:center;white-space:nowrap; padding-right:10px;}
+.tbimg .dev td,.tblist .dev td{line-height:20px;height:20px;background:#fff;color:#000;white-space:nowrap}
+.tbimg td.t{padding-left:15px}
+/* 控件样式 */
+i.btn,i.btn input,i.btn a
+,.tag_select,.tag_select span,.tag_select_hover,.tag_select_hover span,.tag_select_open,.tag_select_open span
+,.switch,#selected a{background-image:url(/content/fenlei/images/list/selinput.gif)!important}
+i.btn input,.selects,i.text input,i.dev,.select_box,i.btn a{padding:0;margin:0 3px 0 0;display:inline-block;float:left;height:22px;line-height:22px;white-space:nowrap;font-style:normal}
+.select_box{position:relative;z-index:99}.tag_select,.tag_select span,.tag_select_hover,.tag_select_hover span,.tag_select_open,.tag_select_open span{height:24px;line-height:24px;font-size:12px;display:block;float:left;white-space:nowrap}.tag_select{background:url() no-repeat 0 0 #fff;padding:0 0 0 10px}.tag_select span{background:url() no-repeat right 0 #fff;padding:0 18px 0 0}.tag_select_open,.tag_select_hover{background:url() no-repeat 0 -24px #fff;padding:0 0 0 10px}.tag_select_open span,.tag_select_hover span{background:url() no-repeat right -24px #fff;padding:0 18px 0 0}.tag_options{background:#fff;display:block;border:solid 1px #7f9db9;font-size:12px}.tag_options li{padding-left:10px;height:22px;cursor:pointer;white-space:nowrap}.tag_options.cols li{float:left;padding:0 3px}.select_dev{display:none}.tag_select_open .select_dev{display:block}.tag_options.cols{padding:6px 7px}
+.tag_options li.open_hover{background:#36C;color:#FFF}#tooltipdiv1{width:152px}
+/* 筛选区域 */
+#sift{background:#f5f5f5; border-bottom:1px solid #dbdbdb;  font-size:14px; border-top:1px solid #fff; padding:5px 10px 4px 10px;height:26px;line-height:26px;position:relative;z-index:9; color:#333}
+.shif b{float:left}
+.shif span{display:inline-block;}
+.shif span em{font-style:normal; float:left}
+.shif span.hc{display:none}
+i.text input{text-align:center}
+i.text #keyword1{text-align:left;padding:0 0 0 3px}
+.shif .inputbox{position:relative;z-index:10}
+.shif .focusbox{position:relative;z-index:99}
+/* morelink  */
+.line{border-bottom:1px solid #e1e1e1;background:#f1f1f1;height:0}
+.links,.friendlink{padding:10px 0 0 40px; line-height:200%; overflow:hidden}
+.links li{float:left;white-space:nowrap;width:135px;line-height:200%; overflow:hidden}
+.links li a,.friendlink a{color:#585858;}
+.mb10{margin-bottom:10px}.friendlink a{ margin-left:10px; overflow:hidden;}.friendlink{padding-left:10px}
+/*shenqi*/.shenqi{background:url() no-repeat 10px 0; width:100%; height:100px; position:relative;overflow:hidden}.czjhbg{background:url(/content/fenlei/ui6/index/czjhbg.png) #fff repeat-x 0 0; width:100%; overflow:hidden}#sqswf{background:url(/content/fenlei/ui6/index/shenqi.jpg) no-repeat 10px 0;}#mxswf{position:absolute; right:0px; bottom:0px; display:inline-block; text-align:right;overflow:hidden}#mxswf embed{ width:366px; height:100px; vertical-align:top;}.sqbg{background:url(/content/fenlei/ui6/index/czjhbg.png) #fff repeat-x 0 0;}/*明星转让二手物品*/.mxgyzr{padding:20px 10px; padding-right:0}.mxgyzr ul{width:100%; overflow:hidden}.mxgyzr li{ width:103px; float:left; line-height:18px; padding:0 9px; text-align:center}.mxgyzr li img{width:99px; border:1px solid #f1f1f1; padding:1px; margin-bottom:5px}.mxgyzr li a:hover{text-decoration:none; color:#f00}
+/*跳蚤全部分类*/
+.sale_list{padding:0 10px; overflow:hidden}
+.sale_list ul{width:100%; padding:10px 0; overflow:hidden; border-bottom:1px solid #f1f1f1}
+.sale_list li{width:300px; float:left; padding-right:20px; line-height:24px; overflow:hidden}
+.sale_list li h3{font-size:14px; margin-bottom:5px}
+.sale_list li a{margin-right:10px; white-space:nowrap}
+.sale_list .saleqt a{font-size:14px; width:49%; float:left; margin-right:0}

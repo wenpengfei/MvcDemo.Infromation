@@ -1,0 +1,87 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/post/poststep.Master" Inherits="System.Web.Mvc.ViewMasterPage" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <asp:ContentPlaceHolder ID="head" runat="server" />
+</asp:Content>
+<asp:Content ID="Content4" ContentPlaceHolderID="PublishCount" runat="server">
+    <asp:ContentPlaceHolder ID="PublishCount" runat="server" />
+</asp:Content>
+<asp:Content ID="Content5" ContentPlaceHolderID="TopMsg" runat="server">
+</asp:Content>
+<asp:Content ID="Content6" ContentPlaceHolderID="Main" runat="server">
+    <table cellpadding="0" cellspacing="0" class="box1" id="formTb">
+    <asp:ContentPlaceHolder ID="FormRows" runat="server" />
+    <tr> 
+        <td class="t"> <b class="red">*</b> 补充说明： </td> 
+        <td> <textarea  maxLength=2000 name="Content" class="textarea2" id="Content"></textarea> 
+            <span id="Content_Tip"></span> 
+        </td> 
+    </tr> 
+    <tr id="pdv">
+        <td class="t"> </td> 
+        <td>
+            <div id="uploadPic" value=""></div> 
+            <script type="text/javascript">
+                $info.Uploader.init();
+            </script>
+        </td>
+    </tr> 
+    <tr> 
+        <td class="t"> <b class="red">*</b> 联系人： </td> 
+        <td> 
+            <input type="text" name="goblianxiren" id="goblianxiren" value='' class="text2"  maxLength=6 /> &nbsp; 
+            <input class="base" type="checkbox" value="1" id="IsBiz" name="IsBiz"  />我是商家 <span id="goblianxiren_Tip"></span> 
+        </td> 
+    </tr> 
+    <tr> 
+        <td class="t"> <b class="red">*</b> 手机或电话： </td> 
+        <td> <input class="text2" type="text" id="Phone" name="Phone" value=''   /> <span id="Phone_Tip"></span> </td> 
+    </tr> 
+    <tr>
+        <td class="t">QQ或MSN：</td><td><input class="text2" type="text" qtb="true" value='' id="IM" name="IM" /> <span id="IM_Tip"></span></td>
+    </tr>  
+    <tr> 
+        <td class="t"> </td> 
+        <td> <input type="submit" id="fabu" class="fabu1" value="　　发布　　" ct="submit" />  </td> 
+    </tr>
+    </table>
+</asp:Content>
+<asp:Content ID="Content7" ContentPlaceHolderID="PostScript" runat="server">
+    <asp:ContentPlaceHolder ID="PostScript" runat="server" />
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#goblianxiren').formValidator({ tipid: 'goblianxiren_Tip', onfocus: '2~6个字，不能填写电话和联系方式', q2b: true }).regexValidator({ regexp: "\\S+#^(.){2,6}$#^[\\w\\d\\s\\u4e00-\\u9fa5]*$", onerror: "请输入联系人#联系人不足2个字#联系人不能填写特殊符号" });
+        $("#Phone").formValidator({ tipid: "Phone_Tip", onfocus: "请正确填写电话号码，分机可以用“-”分开", q2b: true }).inputValidator({ onerror: "请填写电话号码" }).regexValidator({ regexp: "(^(0\\d{2,3})?-?([2-9]\\d{6,7})(-\\d{1,5})?$)|(^((\\(\\d{3}\\))|(\\d{0}))?(13|14|15|18)\\d{9}$)|(^(400|800)\\d{7}(-\\d{1,5})?$)|(^(95013)\\d{6,8}$)", onerror: "电话填写错误。<br/>请参照格式填写：87654321-001或138********" });
+        $('#IM').formValidator({ tipid: 'IM_Tip', onfocus: '只能填写一个qq或msn。<br>格式如：123456 或 myname@flxxwang.com', q2b: true, 'empty': true }).regexValidator({ regexp: "(^[1-9]\\d{4,9}$)|(^\\w+((-\\w+)|(\\.\\w+))*\\@[A-Za-z0-9]+((\\.|-)[A-Za-z0-9]+)*\\.[A-Za-z0-9]+$)", onerror: "QQ或MSN输入错误" });
+    });
+</script>
+<script type="text/javascript">
+    function FillData(obj) {
+        if (obj == null) {
+            return;
+        }
+        obj.Content = $("#Content").val();
+        obj.ContactPerson = $("#goblianxiren").val();
+        obj.Phone = $("#Phone").val();
+        obj.QQOrMSN = $("#IM").val();
+        obj.IsBiz = $("#IsBiz").attr("checked");
+        obj.UserId = GetUserId();
+        
+        obj.CityId = GetCityId();
+        obj.RegionId = GetRegionId();
+        obj.CircleId = GetCircleId();
+        obj.TId = GetTId();
+        if ($("#Pic").val() != "") {
+            obj.Pictures = $("#Pic").val();
+        }
+
+    }
+    //    function clearPicValue() {//保留
+    //        var c = $("#pdv:hidden"); if (c.length > 0) {
+    //            $('#Pic').val(''); $('#PicDesc').val('');
+    //        }
+    //    }
+    $("#topinfomsg").hide();
+    $("#mydear").hide();
+    
+</script>
+</asp:Content>

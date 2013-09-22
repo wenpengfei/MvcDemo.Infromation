@@ -1,0 +1,315 @@
+﻿body,dl,ol,ul,li,dt,dd,p,h2,h3
+{
+    margin:0;padding:0;list-style:none
+}
+body
+{
+    font-family:Arial,"宋体";color:#333; font-size:12px
+}
+a
+{
+    color:#00C;text-decoration:none;cursor:pointer
+}a:hover
+{
+    color:#FF0508;text-decoration:underline
+}
+.clear
+{
+    clear:both;font-size:0;height:0;overflow:hidden
+}
+img
+{
+    border:none
+}
+.fr
+{
+    float:right
+}
+#headerinside,.cb,.morelink,#footer
+{
+    width:990px;margin:0 auto;clear:both;padding:0 5px;overflow:hidden
+}
+.cb
+{
+    height:1%; margin-top:-5px
+}
+a.link_red,.c_b a.red,a.fduihua
+{
+    color:#ff0508
+}
+a.fduihua
+{
+    text-decoration:underline; font-weight:bold
+}
+#header
+{
+    background:url(http://pic2.58.com/n/images/h_bg.gif) repeat-x; width:100%
+}
+#headerinside
+{
+    height:60px; position:relative
+}
+#logo
+{
+    position:absolute;left:20px;top:8px
+}
+#cityName
+{
+    position:absolute;z-index:1000;top:5px; color:#000;left:185px;padding-top:3px;line-height:22px;font-weight:700;font-size:26px;text-align:center
+}
+#cityName a
+{
+    font-size:12px;text-decoration:underline;font-weight:400
+}
+#logintext
+{
+    position:absolute;right:20px;top:1px; z-index:999;font-size:12px
+}
+#logintext a
+{
+    margin-left:5px
+}
+#wap
+{
+    position:absolute; top:20px; right:20px; padding-left:16px; font-size:12px; font-weight:bold; line-height:20px
+}
+#wap a,#fabu a
+{
+    text-decoration:underline
+}
+#searchbar
+{
+    position:absolute;left:320px;top:14px
+}
+#keyword
+{
+    border:1px solid #A7A6AA;float:left;width:280px;height:19px;padding-top:6px;padding-left:5px
+}
+.keyword
+{
+    color:#ccc
+}
+.keyword2
+{
+    color:#000
+}
+#searchbtn
+{
+    width:80px;height:29px;margin:0 0 0 5px
+}
+#fabu
+{
+    position:absolute;right:180px;top:18px; *top:20px; top:20px\9;font-size:16px; color:#f00; font-weight:bold
+}
+#fabu a
+{
+    color:#f00
+}
+.tooltip
+{
+    width:285px;*width:286px;border:1px solid #A7A6AA;background:#fff;margin-top:-3px;line-height:200%
+}
+.tooltip li
+{
+    height:26px;overflow:hidden;padding-left:5px
+}
+.tooltip li a
+{
+    text-decoration:none;color:#666;font-size:13px
+}
+.tooltip li a b
+{
+    color:#002cad
+}
+.tooltip li .tool_r
+{
+    float:right;color:#008000;font-size:11px
+}
+.tooltip li.selected a b,.tooltip li.selected a,.tooltip li.selected .tool_r
+{
+    color:#fff
+}
+.tooltip li.selected
+{
+    background:#3366CC;cursor:pointer;color:#FFF
+}
+.closewindow
+{
+    float:right;margin:-5px 5px 0 0
+}
+.morelinkinside
+{
+    padding:10px;border-bottom:solid 1px #ccc;border-top:solid 1px #ccc;overflow:hidden; height:16px; left:16px
+}
+.morelinkinside strong
+{
+    float:left; margin-right:5px; *margin-top:2px
+}
+.morelinkinside li
+{
+    float:left; margin-right:10px; list-style-type:none
+}
+#footer .bg
+{
+    padding:10px;text-align:center; line-height:180%
+}
+#footer #flink
+{
+    margin-top:5px; line-height:20px
+}
+#footer a
+{
+    color:#585858
+}
+#contact a
+{
+    margin-right:10px
+}
+.morelinkinside a,#flink a
+{
+    margin-right:5px
+}
+.c_b,.c_b2
+{
+    width:172px;overflow:hidden;padding:0 17px 0px 10px; float:left;line-height:280%;color:#999;overflow:hidden;font-size:11px
+}
+.c_b2
+{
+    width:374px
+}
+.c_b2 .c_b
+{
+    padding:0 25px 0px 0px; _padding:0 20px 0px 0px; width:174px
+}
+.c_b h2,.c_b2 h2
+{
+    font-size:14px;padding:3px 0px;margin:15px 0 5px 0;color:#333; border-bottom:1px solid #ddd
+}
+.c_b h2 span.fr,.c_b2 h2 span.fr,.c_b h2 span.fr a,.c_b2 h2 span.fr a
+{
+    font-weight:lighter; font-size:12px
+}
+.c_b h2 span.fr,.c_b2 h2 span.fr
+{
+    padding-right:2px
+}
+.c_b h2.btno
+{
+    border-bottom:none
+}
+.prpx
+{
+    padding-right:112px
+}
+.cb h3
+{
+    padding:20px 10px 5px 10px; margin-bottom:5px; margin-top:20px; border-top:1px solid #ddd
+}
+.cb_ul
+{
+    width:422px;padding:2px 0px 0px 0px; margin-top:0px; margin-bottom:18px; height:178px; display:inline-block; float:left; line-height:180%; color:#999; overflow:hidden
+}
+.cb_ul li
+{
+    float:left; width:180px; padding:0 5px 0 13px; *padding:0 4px 0 14px
+}
+.c_b.pr0
+{
+    padding-right:0px; margin-right:0px
+}
+.cb_ul2
+{
+    width:198px;padding:2px 0px 0px 0px; margin-bottom:8px; height:128px; float:left; line-height:180%; color:#999; overflow:hidden
+}
+.cb_ul2 li
+{
+    float:left; width:180px; padding:0 5px 0 13px; *padding:0 4px 0 14px
+}
+.cb_ul a,.cb_ul2 a
+{
+    font-size:12px
+}
+.c_b a,.c_b h2 a,.cb_ul h1 a,.cb h3
+{
+    font-size:14px
+}
+#toptuanad1
+{
+    vertical-align:top
+}
+.cb_ul h1,#toptuanad1 h1,.c_b h1
+{
+    font-size:14px;padding:10px 0px 0 0px;margin:20px 0 10px 0;color:#000; line-height:200%; border-top:1px solid #ddd
+}
+#toptuanad1 h1
+{
+    overflow:hidden; white-space:nowrap
+}
+#toptuanad1 h1,.cb_ul h1
+{
+    padding-left:10px
+}
+#tjinfo
+{
+    padding-right:0px; margin-right:0px; padding-left:0; text-align:left; line-height:260%; overflow:hidden
+}
+#tjinfo h1
+{
+    width:100%; margin-bottom:3px; overflow:hidden
+}
+#tjinfo a
+{
+    padding-left:13px
+}
+.tuanpic
+{
+    margin:10px; height:102px; overflow:hidden; line-height:240%
+}
+.timg
+{
+    width:256px; height:102px; line-height:100px; text-align:left; table-layout:fixed; float:left; text-align:center; font-size:14px; overflow:hidden
+}
+.timg a
+{
+    display:table-cell; display:inline\9; vertical-align:middle;width:256px;height:102px
+}
+.timg a img 
+{
+    width:256px; height:102px; overflow:hidden; float:none; text-align:center; border:none
+}
+.tuanpic
+{
+    position:relative; width:580px
+}
+.tuanpic .price
+{
+    float:left; color:#000; font-size:14px; height:92px; padding:8px 0px 0 10px; border:1px solid #f1f1f1; border-right:none; margin-left:10px; overflow:hidden;position:absolute;top:0px; right:121px; width:182px; white-space:nowrap
+}
+.tuanpic .price b
+{
+    color:#666; font-size:16px; margin:0 5px
+}
+.tuanpic .price b.time
+{
+    color:#169b00
+}
+.tuanpic .price b.yuan
+{
+    text-decoration:line-through
+}
+.tuanpic .ygm 
+{
+    padding:15px 10px 0 10px; position:absolute;top:0px; right:0px; text-align:center; height:85px; overflow:hidden; border:1px solid #f1f1f1; border-left:none
+}
+.tuanpic .ygm b
+{
+    font-size:32px; color:#f00; font-style:italic; line-height:120%
+}
+.tuanpic .ygm input
+{
+    width:100px; height:33px; display:inline-block; font-size:14px; font-weight:bold; text-decoration:none; line-height:33px
+}
+#tuanpic
+{
+    text-align:center; margin-top:15px; display:none
+}

@@ -1,0 +1,83 @@
+﻿(function ($) {
+    if ($.f == null) {
+        $.f = {};
+    }
+    $.f.date = {
+        toJson: function (date, aspNet) {
+            if (aspNet) {//if(undefined):假;if(null):假
+                date.setHours(date.getHours() + 8); //提交到asp.net时反系列化出来的时间要少8小时.
+            }
+            return "\/Date(" + Date.parse(date.toString()) + ")\/"
+        },
+        parseJson: function (jsonDate) {
+            if (jsonDate == null) {
+                return null;
+            }
+            return eval("new " + jsonDate.substr(1, jsonDate.length - 2) + "")
+        }
+    };
+    $.f.utils = {
+        clone: function (source) {
+            //if(null==undefined):true
+            if (source == null) {
+                return null;
+            }
+            var objClone;
+            if (source.constructor == Object) {
+                objClone = new source.constructor();
+            }
+            else {
+                objClone = new source.constructor(source.valueOf());
+            }
+            for (var key in source) {
+                if (objClone[key] != source[key]) {
+                    if (typeof (source[key]) == 'object') {
+                        objClone[key] = this.clone(source[key]); // source[key].Clone();
+                    }
+                    else {
+                        objClone[key] = source[key];
+                    }
+                }
+            }
+            objClone.toString = source.toString;
+            objClone.valueOf = source.valueOf;
+            return objClone;
+        },
+        //isArray:function(v){return Object.prototype.toString.apply(v)==='[object Array]'},
+        isObject:function(v){return v&&typeof v=="object"},
+        isPrimitive:function(v){var t=typeof v;return t=='string'||t=='number'||t=='boolean'},
+        //isFunction:function(v){return typeof v=="function"},
+        isDefined:function(v){return typeof v!=='undefined'},
+        isDate:function(v){return toString.apply(v)==='[object Date]'},
+        isObject:function(v){return!!v&&Object.prototype.toString.call(v)==='[object Object]'},
+        isPrimitive:function(v){return fe.isString(v)||fe.isNumber(v)||fe.isBoolean(v)},
+        //isFunction:function(v){return toString.apply(v)==='[object Function]'},
+        isNumber:function(v){return typeof v==='number'&&isFinite(v)},
+        isString:function(v){return typeof v==='string'},
+        isBoolean:function(v){return typeof v==='boolean'}
+    };
+})(jQuery)
+
+//Clone
+//Object.prototype.Clone = function () {
+//    var objClone;
+//    if (this.constructor == Object) {
+//        objClone = new this.constructor();
+//    }
+//    else {
+//        objClone = new this.constructor(this.valueOf());
+//    }
+//    for (var key in this) {
+//        if (objClone[key] != this[key]) {
+//            if (typeof (this[key]) == 'object') {
+//                objClone[key] = this[key].Clone();
+//            }
+//            else {
+//                objClone[key] = this[key];
+//            }
+//        }
+//    }
+//    objClone.toString = this.toString;
+//    objClone.valueOf = this.valueOf;
+//    return objClone;
+//}

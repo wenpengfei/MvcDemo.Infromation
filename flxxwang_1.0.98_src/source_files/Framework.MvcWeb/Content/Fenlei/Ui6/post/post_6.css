@@ -1,0 +1,97 @@
+﻿/* CSS Document */
+body,dl,ol,ul,li,dt,dd,p,h1,h2,h3,h4{margin:0;padding:0;list-style:none;-webkit-text-size-adjust:none;}
+body{font:12px/1.2 Arial, Tahoma, "宋体", sans-serif;color:#1a1a1a;}
+a{color:#0000cc;text-decoration:none} 
+a:hover { color:#FF0000; text-decoration:underline;} 
+img {border:none; vertical-align:middle;}
+select,input{font:100% Tahoma,Helvetica,Arial,sans-serif}
+.hc{display:none}.sc{display:block}.f24{font-size:24px}
+.clearfix:after { content:"."; display:block; height:0; clear:both; visibility:hidden; }
+.clearfix { display:inline-block; }
+/* Hide from IE Mac \*/ 
+.clearfix { display:block; }
+/* End hide from IE Mac */ 
+.fix{width:100%;height:0;overflow:hidden;clear:both;float:none;}
+#footer{text-align:center; line-height:24px; padding:10px 0 30px; font-size:12px}
+#warper{ width:980px; margin:0 auto;}
+
+/* header */
+#header{ height:92px; position:relative; }
+#logo,#cityname,#logintext{position:absolute}
+#headerinside{background:url(/content/fenlei/images/h_bg.gif) repeat-x;height:60px}
+#logo{left:0px;top:24px;}
+#logo img{ display:block;}
+#cityname{ height:39px;border-left:#e6e6e6 1px solid; top:30px;left:180px; padding-left:15px;}
+#cityname span{font:24px/2 "微软雅黑","黑体", sans-serif; color:#666;}
+#login{ position:absolute; right:160px;bottom:21px;}
+#logintext{right:10px; bottom:21px; color:#ccc;}
+#logintext a{margin:0 14px; color:#666;}
+#logintext a:hover{ color:#ff0000; text-decoration:underline;}
+/*content*/
+.win440{ width:440px; margin:0 auto;}
+.win500{ width:500px; margin:0 auto;}
+.content{ border:#f0f0f0 1px solid; background-color:#fcfcfc; padding:90px 0 50px; }
+h1{font:30px/1 "微软雅黑","黑体", sans-serif; position:relative; }
+h1 span,a.post-btn-a,a.post-btn-a span, ul.share li .fx.hover, .shadow-t, .shadow-b{background:url(/content/fenlei/ui6/my/images/psot_6.gif) 0 0 no-repeat;}
+ul.share li.s a,.box ul.list li, ul.share li .fx,.zd strong{ background:url(/content/fenlei/ui6/my/images/psot_6_icon.gif) 0 0px no-repeat;}
+h1 span{ position:absolute; display:block; width:67px; height:60px; left:-88px; top:0;  }
+h1 span.success-icon{ background-position:0 0; height:53px; }
+h1 span.shenhe-icon{ background-position:0 -53px;  }
+.box{ padding:0 0 0 88px;}
+.box ul.list { padding:12px 0 0 0; }
+.box ul.list li{ padding:0 0 0 18px; line-height:28px; font-size:14px; background-position:0 5px;}
+.post-btn{ padding:32px 0 0 0; }
+.post-btn em{ position:relative; top:8px; font-style:normal; margin-left:12px;}.post-btn em a{ color:#4d4d4d;}.post-btn em a:hover{ color:#f00;}
+a.post-btn-a{ display:block; float:left; background-position:0 -126px; padding:0 0 0 10px; color:#4d4d4d; text-decoration:none; margin-right:6px; }
+a.post-btn-a span{ display:block; background-position:100% -157px; padding:7px 10px 9px 0; padding:9px 10px 7px 0\0; *padding:9px 10px 7px 0;_padding:9px 10px 7px 0;cursor:pointer; font-weight:bold; }
+a.post-btn-a:hover{background-position:0 -188px; text-decoration:none;}
+a.post-btn-a:hover span{background-position:100% -219px; color:#fff; }
+.tip{ font-size:14px; padding:10px 0 2px 0 ;}
+ul.share{ border-top:#ebebeb 1px solid; padding:0px 0 0 2px; width:880px; margin:74px auto 0; color:#808080; }
+ul.share li{ float:left; padding-top:4px; font-size:14px;  } ul.share li.line{ background:#fff; height:1px; overflow:hidden; width:820px; padding:0; float:none; clear:both;}
+ul.share li.s{line-height:1.1;line-height:1.2\0; *line-height:1.2; _line-height:1.2;padding-top:10px;}
+ul.share li.s a{ display:block; padding:0 10px 0 26px; color:#1a1a1a; margin:0 0 0 5px;}
+ul.share li.s a:hover{ color:#e65c17; text-decoration:none; }
+ul.share li .fx{padding:5px 10px 5px 26px;width:56px; position:relative; cursor:pointer; background-position:7px -19px; margin-left:10px;}
+ul.share li .fx.hover{background:url(/content/fenlei/ui6/my/images/psot_6.gif) 0px -250px no-repeat;color:#e65c17; }
+ul.share li.s a.gl{ background-position:7px -75px;}ul.share li.s a.gl:hover{ background-position:7px -101px;}
+ul.share li.s a.xg{ background-position:7px -126px;}ul.share li.s a.xg:hover{ background-position:7px -151px;}
+ul.share li.s a.zpt{ background-position:7px -176px;}ul.share li.s a.zpt:hover{ background-position:7px -201px;}
+.hover .hc{display:block; top:26px; position:absolute; left:0; background:url(/content/fenlei/ui6/my/images/psot_w-bg.gif) repeat-y;}
+#sharebox{ width:211px;}
+.hover .hc ul{ padding:0 0 16px 0;}
+.hover .hc ul li{ float:left;padding:10px 0 0 28px; width:70px; font-size:12px;}
+.hover .hc ul li a{ color:#4d4d4d; }.hover .hc ul li a:hover{ color:#f00; }
+.shadow-t, .shadow-b{ position:absolute; display:block; height:6px; overflow:hidden; width:210px; }
+.shadow-t{ top:0; background-position:0 -281px;}.shadow-b{ bottom:0; background-position:0 -291px;}
+.zd{ width:820px; margin:30px auto 0;}
+.zd strong{ background-position:0 -226px; font-size:14px; color:#4d4d4d; padding:0 0 0 20px; }
+.win560{ float:left; width:420px; display:inline; margin:90px 0 0 40px;}
+.boxdf{ width:340px; float:right; position:relative; padding-right:20px;}
+.boxdf .df{ position:relative; height:170px; text-align:right;}
+.boxdf .fp{position:relative; z-index:10; font-size:12px; line-height:200%; color:#4c4c4c; text-align:right; padding:0 20px 0 0 ; }
+.tip-menu{ position:relative; color:#0000ff; cursor:pointer; padding-bottom:3px; }
+.tip-menu span{ display:none; text-align:left; position:absolute; right:10px;top:25px; *top:20px;_right:40px;  padding:5px 10px; background-color:#ffffe5; border:#ffcc7f 1px solid; color:#4c4c4c; line-height:200%; } 
+.tip-menu span em{ display:block; width:13px; height:8px;  background:url(/content/fenlei/ui6/my/images/psot_6_icon.gif) 0 -256px no-repeat; position:absolute; top:-8px; right:40px; }
+.tip-menu span a{  color:#0000ff; text-decoration:underline;}
+.tip-menu span a.a-right{display:block; text-align:right; color:#0000ff; text-decoration:underline;}
+.tip-menu.hover span{ display:block;}
+.tip-menu span p{ line-height:200%;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

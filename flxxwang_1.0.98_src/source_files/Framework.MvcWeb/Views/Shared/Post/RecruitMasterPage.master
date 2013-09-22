@@ -1,0 +1,675 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/Post/poststep.Master" Inherits="System.Web.Mvc.ViewMasterPage" %>
+<%@ Import Namespace="Infomation.Core.Mvc" %>
+<%@ Import Namespace="Framework.Extensions" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script src="/Content/Fenlei/Scripts/user.js" type="text/javascript"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server" />
+</asp:Content>
+
+<asp:Content ID="Content4" ContentPlaceHolderID="PublishCount" runat="server">
+    <asp:ContentPlaceHolder ID="PublishCount" runat="server" />
+</asp:Content>
+<asp:Content ID="Content5" ContentPlaceHolderID="TopMsg" runat="server">
+    <font color="#000000">
+    1、同一类别请勿发布重复信息，否则删除。<br>
+    2、<b>严禁冒用名企发布，严禁向应聘者收费，否则删除，并锁定账户！<br></b>
+    3、职位描述中不能包含电话、QQ、邮箱等联系方式，否则删除信息！<b><br></b>
+    </font>
+</asp:Content>
+<asp:Content ID="Content6" ContentPlaceHolderID="Main" runat="server">
+    <%
+        var WorkType = (WorkType)this.ViewData["WorkType"];
+        var ViewTag = ViewData["ViewTag"] as ViewTag;
+    %>
+    <table cellpadding="0" cellspacing="0" class="box1"> 
+    <tr> 
+        <td class="t"> <b class="red">*</b> 职位类别： </td> 
+        <td> 
+            <%--<asp:ContentPlaceHolder ID="Zhiwei" runat="server" />--%>
+            <select name="xiaozhiwei" id="xiaozhiwei" f="{0}"> 
+                <option selected="selected" value="">请选择职位类别</option>  
+                <%
+                    foreach (var item in ViewTag.Interface.ObjectTypeCollection)
+                    {
+                        %>
+                            <option value='<%=item.Id %>' ><%=item.Name %></option>
+                        <%
+                    }
+                %>  
+            </select>
+            &nbsp;&nbsp;
+        <b class="red">*</b> 职位名称： <input type="text" name="Title" id="Title" f="{0}" value='' class="text2"  maxLength=12 /> <span id="xiaozhiwei_Tip"></span> </td> 
+    </tr> 
+    <tr>
+        <td class="t"> <b class="red">*</b> 招聘人数： </td> 
+        <td>
+            <input type="text" name="zhaopinrenshu" id="zhaopinrenshu" value='若干' class="text3 gray"  Except='若干'  maxLength=3 /> 人 &nbsp;&nbsp;
+            学历要求： 
+            <select name="xueliyaoqiu" relationid="tagul" id="xueliyaoqiu" f="{0}">  
+                <option value='0' >不限</option>
+                <option value='1' >技校</option>  
+                <option value='2' >高中</option>  
+                <option value='3' >中专</option>  
+                <%--<option value='4' > 中专</option> --%> 
+                <option value='4' >大专</option>  
+                <option value='5' >本科</option>  
+                <option value='6' >硕士</option>  
+                <option value='7' >博士</option>
+            </select> 以上 &nbsp;&nbsp;
+            <%
+                if (WorkType == WorkType.Full)
+                {
+                    %>
+                    工作年限：
+                    <select name="gongzuonianxian" relationid="tagul" id="gongzuonianxian" f="{0}"> 
+                        <option value='0-0' > 不限</option>  
+                        <option value='0-1' > 1年以下</option>  
+                        <option value='1-2' > 1-2年</option>  
+                        <option value='3-5' > 3-5年</option>  
+                        <option value='6-7' > 6-7年</option>  
+                        <option value='8-10' > 8-10年</option>  
+                        <option value='10-0' > 10年以上</option>  
+                    </select>
+                    <%
+                }
+                else
+                {
+                    %>
+                        <b class="red">*</b> 性别要求：
+                        <select name="xingbieyaoqiu" relationid="tagul" id="xingbieyaoqiu" f="{0}">
+                            <option value="">请选择</option>
+                            <option value='1' >不限</option>
+                            <option value='2' >男</option>
+                            <option value='3' >女</option>  
+                        </select>
+                    <%
+                }
+            %>
+            <span id="zhaopinrenshu_Tip"></span> 
+        </td> 
+    </tr> 
+    <tr> 
+        <td class="t"> <b class="red">*</b> 薪资水平： </td> 
+        <td> 
+            <input type="text" id="minxinzi" f="{0}元/月" value='面议' class="text3 gray"  Except='面议'  maxLength=5 />
+            <%
+                if (WorkType == WorkType.Full)
+                {
+                    %>
+                     - <input type="text" id="maxxinzi" f="{0}元/月" value='面议' class="text3 gray"  maxLength=5 />
+                    <%
+                }
+            %>
+            <input type="hidden" value="面议" name="minxinzi" id="hidprice" />
+            <%
+                if (WorkType == WorkType.Full)
+                {
+                    %>
+                    元/月
+                    <%
+                }
+                else
+                {
+                    %>
+                    元/天
+                    <%
+                }
+            %>
+             
+            <span id="minxinzi_Tip"></span> 
+        </td> 
+    </tr>
+    <%
+        if (WorkType == WorkType.Part)
+        {
+            %>
+            <tr>
+                <td class="t">
+                    <b class="red">*</b> 工作时间：
+                </td>
+                <td>
+                    <label><input type="checkbox" id='gongzuoshijian_1' value='1' name="gongzuoshijian_view"  />星期一</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label><input type="checkbox" id='gongzuoshijian_2' value='2' name="gongzuoshijian_view"  />星期二</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label><input type="checkbox" id='gongzuoshijian_3' value='3' name="gongzuoshijian_view"  />星期三</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label><input type="checkbox" id='gongzuoshijian_4' value='4' name="gongzuoshijian_view"  />星期四</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label><input type="checkbox" id='gongzuoshijian_5' value='5' name="gongzuoshijian_view"  />星期五</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label><input type="checkbox" id='gongzuoshijian_6' value='6' name="gongzuoshijian_view"  />星期六</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label><input type="checkbox" id='gongzuoshijian_7' value='7' name="gongzuoshijian_view"  />星期日</label>&nbsp;&nbsp;&nbsp;&nbsp; 
+                    <span id="gongzuoshijian_Tip"></span> 
+                    <input type="hidden" id="gongzuoshijian" name="gongzuoshijian" value='' />
+                </td>
+            </tr>
+
+            <%
+        }
+    %> 
+    <tr> 
+        <td class="t"> <b class="red">*</b> 职位要求： </td> 
+        <td> 
+            <textarea name="Content" class="textarea2" id="Content"  maxLength=2000></textarea> 
+            <span id="Content_Tip"></span> 
+        </td> 
+    </tr> 
+    <tr> 
+        <td class="t"> </td> 
+        <td> 
+            <div id="uploadPic" value=""></div> 
+            <script type="text/javascript">
+                $info.Uploader.init();
+            </script> 
+        </td> 
+    </tr> 
+    <tr> 
+        <td class="t"> <b class="red">*</b> 联系人： </td> 
+        <td> <input type="text" name="goblianxiren" id="goblianxiren" value='' class="text2"  maxLength=6 /> <span id="goblianxiren_Tip"></span> </td> 
+    </tr> 
+    <tr> 
+        <td class="t"> <b class="red">*</b> 手机或电话： </td> <td> <input class="text2" type="text" id="Phone" name="Phone" value=''   /><span id="Phone_Tip"></span> </td> 
+    </tr> 
+    <tr> 
+        <td class="t"> 接收简历邮箱： </td> 
+        <td> 
+            <input class="text2" type="text" id="Email" value='liliesheng@yahoo.com.cn' name="Email"  Except='null'   />
+            <input type="hidden" name="jieshouyouxiang" id="jieshouyouxiang" value='' /> 
+            <span id="Email_Tip"></span> 
+        </td> 
+    </tr>
+</table>
+
+<%
+    if (!string.IsNullOrWhiteSpace(Framework.Utility.CookieManager.GetCookie("userId")))
+    {
+        var userid = Convert.ToInt32(Framework.Utility.CookieManager.GetCookie("userId"));
+        //var company = Company.Select(new {UserId=userid});
+        var company = Company.Select(item=>item.UserId==userid);
+        string companyName = string.Empty;
+        string companyName2 = string.Empty;
+        int? TradeId = null;
+        var TradeName = string.Empty;
+        int? TypeId = null;
+        var TypeName = string.Empty;
+        int? SizeId = null;
+        var SizeName = string.Empty;
+        var Phone = string.Empty;
+        var Address = string.Empty;
+        var Content = string.Empty;
+        if (company != null)
+        {
+            companyName = company.CompanyName;
+            companyName2 = company.CompanyName2;
+            TradeId = company.TradeId;
+            TypeId = company.TypeId;
+            SizeId = company.SizeId;
+            Phone = company.Phone;
+            Address = company.Address;
+            Content = company.Content;
+
+            TradeName = company.Trade.Name;
+            TypeName = company.Type.Name;
+            SizeName = company.Size.DisplayName;
+        }
+    %>
+        <div class="a1" id="a1"  style="width: 935px; border-top: 1px solid #eee; display:<%=(company==null?"\'\'":"none") %>;">
+        <table class="box1" width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td class="t">
+                    <b class="red">*</b> 公司名称：
+                </td>
+                <td>
+                    <input type="text"  class="textstyle" style="width: 202px;"  value='<%=companyName %>' id="enterpriseName"  name="enterpriseName"  maxlength="30" />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <b class="red">*</b>  公司别称：
+                    <input type="text" class="textstyle" style="width: 202px;"  value='<%=companyName2 %>' id="enterpriseAlias" name="enterpriseAlias" maxlength="30" />
+                    &nbsp;<span id="enterpriseName_Tip"></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="t">
+                    <b class="red">*</b> 所属行业：
+                </td>
+                <td>
+                    <select id="enterpriseTrade"  name="enterpriseTrade" >
+                        <%
+                            if (TradeId == null)
+                            {
+                                %>
+                                <option value="-1" selected="selected">请选择</option>
+                                <%
+                            }
+                            else
+                            {
+                                %>
+                                <option value="-1">请选择</option>
+                                <%
+                            }
+                            foreach (var item in Infomation.Core.CompanyTrade.Trades)
+                            {
+                                if (item.Id == TradeId)
+                                {
+                                    %>
+                                    <option value="<%=item.Id %>" selected="selected"><%=item.Name %></option>
+                                    <%
+                                }
+                                else
+                                {
+                                    %>
+                                    <option value="<%=item.Id %>" ><%=item.Name %></option>
+                                    <%
+                                }
+                            }
+                         %>
+                    </select> 
+		            <select id="enterpriseType"  name="enterpriseType">
+                        <%
+                            if (TypeId == null)
+                            {
+                                %>
+                                <option value="-1" selected="selected">请选择</option>
+                                <%
+                            }
+                            else
+                            {
+                                %>
+                                <option value="-1">请选择</option>
+                                <%
+                            }
+                            foreach (var item in Infomation.Core.CompanyType.Types)
+                            {
+                                if (item.Id == TypeId)
+                                {
+                                    %>
+                                    <option value="<%=item.Id %>" selected="selected"><%=item.Name %></option>
+                                    <%
+                                }
+                                else
+                                {
+                                    %>
+                                    <option value="<%=item.Id %>"><%=item.Name %></option>
+                                    <%
+                                }
+                            }
+                        %>
+                    </select>
+               	    <select id="enterpriseSize"  name="enterpriseSize" >
+                        <%
+                            if (SizeId == null)
+                            {
+                                %>
+                                <option value="-1" selected="selected">请选择</option>
+                                <%
+                            }
+                            else
+                            {
+                                %>
+                                <option value="-1">请选择</option>
+                                <%
+                            }
+                            foreach (var item in Infomation.Core.CompanySize.Sizes)
+                            {
+                                if (item.Id == SizeId)
+                                {
+                                    %>
+                                    <option value="<%=item.Id %>" selected="selected"><%=item.Min %>-<%=item.Max %>人</option>
+                                    <%
+                                }
+                                else
+                                {
+                                    %>
+                                    <option value="<%=item.Id %>"><%=item.DisplayName %></option>
+                                    <%
+                                }
+                            }
+                        %>
+                    </select>
+                     <span id="enterpriseTrade_Tip"></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="t">
+                    <b class="red">*</b> 联系电话：
+                </td>
+                <td>
+                    <input name="gsPhone" class="textstyle" type="text"  id="gsPhone"  style="width:160px"   value='<%=Phone %>' />
+                    <span id="gsPhone_Tip"></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="t" style="vertical-align:top">
+                    <b class="red">*</b> 公司地址：
+                </td>
+                <td>
+                    <input type="text" class="textstyle" tyle="width: 202px;" id="address" name="address" maxlength="24" style="width:160px" value='<%=Address %>'   />
+                    <span id="address_Tip"></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="t">
+                    <b class="red">*</b> 公司简介：
+                </td>
+                <td>
+                    <textarea class="textstyle" style="width: 500px; height: 100px;" id="intro" name="intro">
+                    <%=Content %>
+                    </textarea><br />
+                    <span id="intro_Tip"></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="t">
+                </td>
+                <td>
+               
+                </td>
+            </tr>
+        </table>
+    <script language="javascript" type="text/javascript">
+        $(function () {
+            $("#enterpriseName")
+		    .formValidator({ tipid: 'enterpriseName_Tip', onfocus: "2-30个字，只能填写汉字、数字、字母和（）", q2b: true })
+		    .inputValidator({ onerror: "请输入公司名称" })
+		    .regexValidator({ regexp: "^[\u4e00-\u9fa5|A-Za-z0-9\（）\(\)]{2,30}$", onerror: "2-30个字，只能填汉字,字母,数字及括号" })
+		    .groupValidator({ groupName: 'e1', nextgroupid: 'enterpriseAlias' });
+            $("#enterpriseAlias")
+		    .formValidator({ tipid: 'enterpriseName_Tip', onfocus: "2-30个字，只能填写汉字、数字、字母和（）", q2b: true })
+		    .inputValidator({ onerror: "请输入公司别名" })
+		    .regexValidator({ regexp: "^[\u4e00-\u9fa5|A-Za-z0-9\（）\(\)]{2,30}$", onerror: "2-30个字，只能填汉字,字母,数字及括号" })
+		    .groupValidator({ groupName: 'e1', nextgroupid: 'enterpriseName' });
+            $("#enterpriseTrade")
+		    .formValidator({ tipid: 'enterpriseTrade_Tip', onfocus: "请选择企业行业。", q2b: true })
+		    .inputValidator({ onerror: "请选择企业行业" })
+		    .functionValidator({ fun: function () { return (jQuery("#enterpriseTrade").val() != '-1'); }, onerror: "对不起,没有选择企业行业。" })
+		    .groupValidator({ groupName: 't1', nextgroupid: 'enterpriseType' });
+
+            $("#enterpriseType")
+		    .formValidator({ tipid: 'enterpriseTrade_Tip', onfocus: "请选择企业性质。", q2b: true })
+		    .inputValidator({ onerror: "请选择企业性质" })
+		    .functionValidator({ fun: function () { return (jQuery("#enterpriseType").val() != '-1'); }, onerror: "对不起,没有选择企业性质。" })
+		    .groupValidator({ groupName: 't1', nextgroupid: 'enterpriseSize' });
+            $("#enterpriseSize")
+		    .formValidator({ tipid: 'enterpriseTrade_Tip', onfocus: "请选择企业规模。", q2b: true })
+		    .inputValidator({ onerror: "请选择企业规模" })
+		    .functionValidator({ fun: function () { return (jQuery("#enterpriseSize").val() != '-1'); }, onerror: "对不起,没有选择企业规模。" })
+		    .groupValidator({ groupName: 't1', nextgroupid: 'enterpriseTrade' });
+            $("#gsPhone")
+		    .formValidator({ onfocus: "请输入联系电话。", q2b: true })
+		    .inputValidator({ onerror: "请输入联系电话" })
+	        .regexValidator({ regexp: "(^(1[0-9]|14[0-9]|15[0-9]|18[0-9])\\d{9}$)|(^(\\d{3,4})?[-]?\\d{7,8}(-\\d{1,4})?$)", onerror: "请输入正确联系电话,如:13811775858,010-11111111。" });
+            $("#address")
+		    .formValidator({ onfocus: "请输入公司地址。" })
+		    .inputValidator({ onerror: "请输入公司地址" })
+		    .regexValidator({ regexp: "[\\w\\u4e00-\\u9fa5]{10,24}", onerror: "对不起,公司地址格式不对(10-24个字)。" });
+            $("#intro")
+		    .formValidator({ onfocus: "50-800字，不能填写电话、QQ等联系方式。" })
+		    .inputValidator({ onerror: "50-800字，不能填写电话、QQ等联系方式。" })
+		    .regexValidator({ regexp: "^[\\s\\S]{50,800}$", onerror: "对不起,公司简介最多输入50-800字，不能填写电话、QQ等联系方式。" });
+        });
+    </script>
+    </div>
+
+        <div  id="a0"  style="width:935px;border-top:1px solid #eee;position:relative;padding-top:15px; top: 0px; left: 0px; display:<%=(company!=null?"\'\'":"none") %>">
+        <table class="box1" cellpadding="0" cellspacing="0" style="width:98%;">
+                <tr>
+                    <td class="t">
+                        <strong>公司名称：</strong>
+                    </td>
+                    <td>
+                        <%=companyName %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>公司别称：</strong><%=companyName2 %>
+                        <a href="javascript:modifyCompanInfo();" class="line12">修改公司信息</a>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td class="t">
+                        <strong>所属行业：</strong>
+                    </td>
+                    <td>
+                        <%=TradeName %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>公司性质：</strong><%=TypeName %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>公司规模：</strong><%=SizeName %>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="t">
+                        <strong>公司电话：</strong>
+                    </td>
+                    <td>
+                       <%=Phone %>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="t">
+                        <strong>公司地址：</strong>
+                    </td>
+                    <td>
+                        <%=Address %>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="t">
+                        <strong>公司简介：</strong>
+                    </td>
+                    <td>
+                       <%=Content %>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    <%
+    }
+    
+%>
+
+<table cellpadding="0" cellspacing="0" class="box1" style="margin-top: 10px;"> <tr> <td class="t"> </td> <td> <input type="submit" id="fabu" class="fabu1" value="　　发布　　" ct="submit" />  </td> </tr> </table>
+</asp:Content>
+<asp:Content ID="Content7" ContentPlaceHolderID="PostScript" runat="server">
+    <%
+        var ViewTag = ViewData["ViewTag"] as ViewTag;
+        var recruit = ViewTag.Interface as Recruit;
+    %>
+    
+    <script type="text/javascript">
+        $("#mydear").hide();
+        var workType=<%=Convert.ToInt32(this.ViewData["WorkType"]) %>;
+        function FillData(obj) {
+            if (obj == null) {
+                return;
+            }
+            obj.JobType =<%=Convert.ToInt32(recruit.JobType) %>;
+            obj.ObjectType = parseInt($("#xiaozhiwei").val(), 10);
+            obj.JobName = $("#Title").val();
+
+            obj.RecruitCount = $("#zhaopinrenshu").val();
+            if (obj.RecruitCount == "" || obj.RecruitCount == "若干") {
+                obj.RecruitCount = 0;
+            }
+            else {
+                obj.RecruitCount = parseInt(obj.RecruitCount, 10);
+            }
+
+            obj.Education = parseInt($("#xueliyaoqiu").val(), 10);
+            var strWorkYear = $("#gongzuonianxian").val();
+            if(workType==1)//全职
+            {
+                obj.WorkYearStart = parseInt(strWorkYear.split("-")[0], 10);
+                obj.WorkYearEnd = parseInt(strWorkYear.split("-")[1], 10);
+            }
+            else
+            {
+                obj.WorkYearStart = 0;
+                obj.WorkYearEnd = 0;
+                var sexRequire=$("#xingbieyaoqiu").val();
+                if(sexRequire=="1")
+                {
+                    obj.SexRequire=null;
+                }
+                if(sexRequire=="2")
+                {
+                    obj.SexRequire=true;
+                }
+                if(sexRequire=="3")
+                {
+                    obj.SexRequire=false;
+                }
+            }
+
+            obj.WageMin = $("#minxinzi").val();
+            if (obj.WageMin == "" || obj.WageMin == "面议") {
+                obj.WageMin = 0;
+            }
+            else {
+                obj.WageMin = parseInt(obj.WageMin, 10);
+            }
+            if(workType==1)//全职
+            {
+                obj.WageMax = $("#maxxinzi").val();
+                if (obj.WageMax == "" || obj.WageMax == "面议") {
+                    obj.WageMax = 0;
+                }
+                else {
+                    obj.WageMax = parseInt(obj.WageMax, 10);
+                }
+            }
+            else
+            {
+                obj.WageMax=0;
+            }
+            if(workType==2)//兼职
+            {
+                var workArray=[];
+                $(":checkbox[name='gongzuoshijian_view']:checked").each(function(i,e){
+                    workArray.push(e.value);
+                });
+                obj.WorkTimes=$f.toJson(workArray);
+            }
+            obj.JobDescription = $("#Content").val();
+            obj.ContactPerson = $("#goblianxiren").val();
+            obj.Phone = $("#Phone").val();
+            obj.RecvEmail = $("#Email").val();
+
+            obj.UserId = GetUserId();
+            obj.WorkType=workType;
+            obj.CityId = GetCityId();
+            obj.RegionId = GetRegionId();
+            obj.CircleId = GetCircleId();
+            obj.TId = GetTId();
+            if ($("#Pic").val() != "") {
+                obj.Pictures = $("#Pic").val();
+            }
+        }
+    //    function clearPicValue() {//保留
+    //        var c = $("#pdv:hidden"); if (c.length > 0) {
+    //            $('#Pic').val(''); $('#PicDesc').val('');
+    //        }
+    //    }
+        function InsertOrUpdateCompanyInfo(onSuccess, onFailed, userContext) {
+            var company = new Company();
+            company.Id = -1;
+            company.UserId = GetUserId();
+            company.CompanyName = $("#enterpriseName").val();
+            company.CompanyName2 = $("#enterpriseAlias").val();
+            company.Address = $("#address").val();
+            company.TradeId = $("#enterpriseTrade").val();
+            company.TypeId = $("#enterpriseType").val();
+            company.SizeId = $("#enterpriseSize").val();
+            company.Phone = $("#gsPhone").val();
+            company.Content = $("#intro").val();
+            company.DateCreated = new Date().toJson(true);
+            company.DateModified = new Date().toJson(true);
+            if ($("#a1").css("display") != "none") {
+                company.Insert(onSuccess, onFailed, userContext);
+            }
+            else {
+                if (onSuccess != null) {
+                    onSuccess();
+                }
+            }
+        }
+    </script>
+
+<asp:ContentPlaceHolder ID="PostScript" runat="server" />
+    <script id="postScript" type="text/javascript">
+        $().ready(function () {
+            $('#Content').attr('focus_height', 150).focus($.c.common.set_focus_height).blur($.c.common.set_blur_height);
+            $.c.Disabletor.initValue("hidprice", "minxinzi", "maxxinzi", 0);
+            $('#xiaozhiwei').formValidator({ tipid: 'xiaozhiwei_Tip', onfocus: '' }).functionValidator({ fun: function (val, elem) { return val != ''; }, onerror: '职位类别不能为空。' }).groupValidator({ groupName: 'L1', nextgroupid: 'Title' }); $('#Title').formValidator({ tipid: 'xiaozhiwei_Tip', onfocus: '准确描述招聘职位的具体名称，2-12个字。', q2b: true }).inputValidator({ onerror: '职位名称不能为空' }).regexValidator({ regexp: "^[\\s\\S]{2,}$#^(.){2,12}$", onerror: "标题不足2个字符#2-12个字，不允许出现特殊字符。" }).functionValidator({ fun: function (val, elem) { return $.formValidator.checkZhaopinTitle(val); }, onerror: '' }).groupValidator({ groupName: 'L1', nextgroupid: 'xiaozhiwei' });
+
+            <%var WorkType = (WorkType)this.ViewData["WorkType"]; %>
+            <%
+            if (WorkType == WorkType.Full)
+            {
+                %>
+                    $('#gongzuonianxian').formValidator({tipid:'zhaopinrenshu_Tip'}).functionValidator({fun:function(val,elem){ return val != ''}, onerror:'请选择工作年限'}).groupValidator({groupName:'lineXz', nextgroupid:'zhaopinrenshu' });
+                <%
+            }
+            %>
+
+            $('#zhaopinrenshu').formValidator({ tipid: 'zhaopinrenshu_Tip', onfocus: '只能填写整数。', q2b: true, 'defaultvalue': '若干' }).regexValidator({ regexp: "^[1-9]\\d{0,2}$", onerror: "招聘人数为1～3位整数，且不能为0。" });
+            
+            
+            <%
+            if (WorkType == WorkType.Full)
+            {
+                %>
+                $('#minxinzi').formValidator({ tipid: 'minxinzi_Tip', onfocus: '只能填写整数，最多可填5位数。', q2b: true, 'defaultvalue': '面议' }).regexValidator({ regexp: "^[1-9]\\d{0,4}$", onerror: "薪资为1～5位整数，且不能为0。" }).compareValidator({ desid: "maxxinzi", operateor: "<=", onerror: "薪资必须是整数，且最低薪资不能大于最高薪资", datatype: "number" }).groupValidator({ groupName: 'linePrice', nextgroupid: 'maxxinzi' });
+                $('#maxxinzi').formValidator({ tipid: 'minxinzi_Tip', onfocus: '只能填写整数，最多可填5位数。', q2b: true, 'defaultvalue': '面议' }).regexValidator({ regexp: "^[1-9]\\d{0,4}$", onerror: "薪资为1～5位整数，且不能为0。" }).compareValidator({ desid: "minxinzi", operateor: ">=", onerror: "薪资必须是整数，且最低薪资不能大于最高薪资", datatype: "number" }).groupValidator({ groupName: 'linePrice', nextgroupid: 'minxinzi' });
+                <%
+            }
+            %>
+            <%
+            if (WorkType == WorkType.Part)
+            {
+                %>
+                $('#minxinzi').formValidator({ tipid: 'minxinzi_Tip', onfocus: '只能填写整数，最多可填5位数。', q2b: true, 'defaultvalue': '面议' }).regexValidator({ regexp: "^[1-9]\\d{0,4}$", onerror: "薪资为1～5位整数，且不能为0。" });
+                <%
+            }
+            %>
+            $('#Content').formValidator({ tipid: 'Content_Tip', onfocus: '20~2000个字之间，不能填写电话、QQ等联系方式' }).regexValidator({ regexp: "^[\\s\\S]*$#^[\\s\\S]{20,}$#^([\\s\\S]){20,2000}$", onerror: "请输入内容#内容不足20个字#内容应在20~2000个字之间，不能填写电话、QQ等联系方式" }).functionValidator({ fun: function (val, elem) { return $.formValidator.IsSimple(val); }, onerror: '内容太过简单' });
+            $('#Phone').formValidator({ tipid: 'Phone_Tip', onfocus: '请输入电话号码', q2b: true }).inputValidator({ onerror: '电话不能为空。' }).regexValidator({ regexp: "(^(0\\d{2,3})?-?([2-9]\\d{6,7})(-\\d{1,5})?$)|(^((\\(\\d{3}\\))|(\\d{0}))?(13|14|15|18)\\d{9}$)|(^(400|800)\\d{7}(-\\d{1,5})?$)|(^(95013)\\d{6,8}$)", onerror: "电话填写错误。<br/>请参照格式填写：87654321-001或138********" });
+            $('#Email').formValidator({ tipid: 'Email_Tip', onfocus: '应聘简历将会同时被投递到您在此处填写的邮箱', q2b: true, 'empty': true }).inputValidator({ onerror: '邮箱不能为空。' }).regexValidator({ regexp: "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*", onerror: "Email格式不正确" });
+
+            
+            <%
+            if (WorkType == WorkType.Part)
+            {
+                %>
+                    $(':checkbox[name=gongzuoshijian_view]').formValidator({ tipid:'gongzuoshijian_Tip', onfocus: '' }).functionValidator({ fun: function(val, elem) { return $(':checkbox[name=gongzuoshijian_view]:checked').length > 0; }, onerror: '请选择工作时间' });
+                <%
+            }
+            %>
+
+            $('#goblianxiren').formValidator({ tipid: 'goblianxiren_Tip', onfocus: '2～6个字，不能填写电话和特殊符号', q2b: true }).regexValidator({ regexp: "\\S+#^(.){2,6}$#^[\\w\\d\\s\\u4e00-\\u9fa5]*$", onerror: "请输入联系人#联系人不足2个字#联系人不能填写特殊符号" });
+
+            <%
+            if (WorkType == WorkType.Part)
+            {
+                %>
+                    $('#xingbieyaoqiu').formValidator({ tipid: 'zhaopinrenshu_Tip', onfocus: '' }).functionValidator({ fun: function (val, elem) { return val != '' }, onerror: '请选择性别要求' }).groupValidator({ groupName: 'lineXz', nextgroupid: 'zhaopinrenshu' });
+                <%
+            }
+            %>
+        }); 
+    </script>
+    
+    <script type="text/javascript">
+        var oWnd = $create(Telerik.Web.UI.RadWindow, { "skin": "Default" }, null, null, $get("radWindow"));
+        $(function () {
+            if (!$info.isLogin()) {
+                oWnd.setSize(800, 600);
+                oWnd.setUrl('<%=Url.Action("poplogin","my") %>');
+                oWnd.set_visibleTitlebar(false);
+                oWnd.set_visibleStatusbar(false);
+                oWnd.set_modal(true);
+                oWnd.add_close(OnClientClose);
+                oWnd.Show();
+            }
+        });
+        function OnClientClose(oWnd, eventArgs) {
+            var arg = eventArgs.get_argument();
+            if (arg==true) {
+                location.href = location.href;
+            }
+        }
+        function modifyCompanInfo() {
+            $("#a0").hide(500);
+            $("#a1").show(500);
+        }        
+    </script>
+</asp:Content>

@@ -1,0 +1,37 @@
+/* CSS Document */
+	body{background:#fff; margin:0; padding:0; font-size:12px; font-family:Arial, Helvetica, sans-serif; line-height:190%;}
+	a{ color:#0000CC; text-decoration:none}a:hover{ color:#f00;}
+	.red{ color:#f00}
+	.gray{ color:#666}
+	.login-reg{ width:470px; padding:20px 20px 0; background:#fff;}
+	.login-reg input{ vertical-align:middle}
+	.login-reg-tab{ border-bottom:1px solid #3C8FE0; height:28px; padding-left:5px; margin-bottom:30px; position:relative}
+	.login-reg-tab a{ display:block; float:left; border:1px solid #3C8FE0; background:#F6F9FF; font-size:14px; font-weight:bold; height:27px; line-height:27px; padding:0 8px; margin-right:2px; position:relative; _top:1px;}
+	.login-reg-tab a.ac{ color:#000; text-decoration:none; background:#fff; border-bottom-color:#fff}
+	.login-reg-con{ width:100%;}
+	.login-reg-con td{ padding-bottom:20px; vertical-align:top; text-align:left}
+	.login-reg-con td img{ vertical-align:top;}
+	.login-reg-con td.tt{ width:90px; text-align:right; padding-right:5px;}
+	.width1{ width:170px; height:20px; line-height:20px; border:1px solid #7F9DB9; vertical-align:middle; margin-right:3px;}
+	.denglu1{ width:80px; height:30px; vertical-align:middle; margin-right:5px;}
+	.width2{ width:70px; height:20px; line-height:20px; border:1px solid #7F9DB9; vertical-align:middle; margin-right:3px;}
+	.denglu2{ width:150px; height:30px; vertical-align:middle; margin-right:5px;}
+	.xiy textarea{ width:350px; height:80px; font-size:13px}
+	.chenggong{ display:inline-block; height:19px; line-height:19px; background:url(../../images/post/background.gif) no-repeat -162px -79px; padding:0 5px 0 23px; vertical-align:middle; margin-left:5px;}
+	.action{ display:inline-block; min-height:22px; _height:22px; background:#dce8fa url(../../images/post/background.gif) no-repeat -158px -121px;  padding:1px 5px 0 27px; vertical-align:middle;}
+	.wrong,.v_false{ display:inline-block; height:22px; background:#ffc6c6 url(../../images/post/background.gif) no-repeat -158px -163px; padding:1px 5px 0 27px; vertical-align:middle;}
+	.xiy{ padding-left:95px; *padding-left:93px;}
+	select{ margin-right:3px;}
+	.change_login_reg{ height:25px; padding-left:20px; border-bottom:1px solid #a1a1a1; margin-bottom:25px;}
+	.change_login_reg a{ display:inline-block; font-size:14px; text-decoration:none; padding:6px 10px 4px;line-height:1; margin-right:3px; background:#EBF3FE; border:1px solid #a1a1a1; _position:relative; _top:1px;}
+	.change_login_reg a.active{ background:#fff; border-bottom:1px solid #fff; color:#000}
+	.yanzhengma{ width:70px; height:20px; line-height:20px; border:1px solid #7F9DB9; vertical-align:middle; margin-right:3px;}
+	.kanbuqing{ vertical-align:middle; margin-left:5px;}
+	.login-reg-con .action td{ padding-bottom:0; line-height:normal;}
+	.mima_a,.mima_b,.mima_c,.mima_d {width:90px; height:6px; border:1px solid #ccc; padding:1px; line-height:1%; font-size:1%;}
+	.mima_a p,.mima_b p,.mima_c p,.mima_d p { height:6px; font-size:1%; line-height:1%; padding:0;}
+	.mima_a p {width:25%;background:#FF3300;}
+	.mima_b p {width:50%; background:#FF9933; }
+	.mima_c p {width:75%; background:#B8D96A; }
+	.mima_d p {width:100%; background:#009933;}
+	.fred {color:#ff0508;} .fgreen {color:#009900;} .fora {color:#FF9933;} .flv {color:#B8D96A;}

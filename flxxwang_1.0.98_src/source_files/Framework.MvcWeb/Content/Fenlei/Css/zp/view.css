@@ -1,0 +1,72 @@
+@charset "utf-8";         
+/* 58.com CopyRight All Reserved By Wendy */
+body,dl,ol,ul,li,dt,dd,p,h2,h3,form{margin:0;padding:0;list-style:none}
+body{color:#333;font-family:Verdana,"宋体";font-size:12px}
+a{cursor:pointer;color:#00C;text-decoration:none}a:hover{color:#FF0508;text-decoration:underline}
+img{border:none}.f12{font-size:12px}.f14{font-size:14px}a.lb{color:#585858;font-size:12px;text-decoration:underline}a.lb:hover{color:#FF0508}.c_999{color:#999}.c_g{color:green}.c_r{color:#FF0508}.select a,a.select{color:#000;font-weight:700;text-decoration:none}
+.u{text-decoration:underline}.unline{text-decoration:none;border:none}.hc{display:none}.sc{display:block}
+.clear,.line{clear:both;font-size:0;height:0;overflow:hidden}.tc,.center{text-align:center}.tr{text-align:right}
+label input{vertical-align:middle;margin:0;*margin-bottom:3px}
+/* header */
+#header{white-space:nowrap;background:url(http://pic2.58.com/n/images/h_bg.gif) repeat-x;width:100%;padding:0}
+#headerinside{width:990px;margin:0 auto;clear:both;padding:0 5px;height:60px;position:relative}
+#logo{position:absolute;left:20px;top:8px}#logintext{position:absolute;right:20px;top:1px;z-index:999}#logintext a{margin-left:5px}
+#logintext .red{background:none;color:#0000cc;font-family:Arial;margin:0;line-height:1}
+#footer{width:990px;margin:0 auto;clear:both;padding:10px 5px;text-align:center;border-top:1px solid #ccc;}
+
+#view{width:795px;margin:30px auto;padding:20px 0 20px 20px;background:#fff;border:1px solid #dfdfdf;position:relative;}
+.v1,.v2,.v3,.v4{position:absolute;display:block;width:5px;height:5px;background:url(http://pic2.58.com/n/images/zp/yuanjiao.gif) no-repeat;overflow:hidden}.v1{top:-1px;left:-1px;background-position:0 0;}.v2{top:-1px;right:-1px;background-position:-5px 0;}.v3{left:-1px;bottom:-1px;background-position:0 -5px;}.v4{right:-1px;bottom:-1px;background-position:-5px -5px;}
+.sample{position:relative;width:795px;}.s_info li{line-height:24px;}.s_info li.title{padding-bottom:15px;font-size:14px;}.s_info li.title strong{font-size:20px;}.s_info i{font-style:normal;color:#585858;width:105px;text-align:right;display:inline-block;padding-right:8px;font-weight:bold}.s_info li.padt{padding-top:10px;}.editorpic{position:absolute;top:0;right:30px;}.editorpic p{text-align:right;line-height:24px;padding-bottom:20px;}.pic{display:block;width:400px;}.pic li{float:right;padding:0 0 5px 5px;width:82px;height:62px;}.pic li img{border:1px solid #DFDFDF}
+.box{margin:20px 0;padding-top:20px;border-top:1px solid #dfdfdf;width:775px;}.box h2{font-size:12px;font-weight:lighter;color:#169603;background:url(http://pic2.58.com/n/images/zp/suess.gif) no-repeat 0 center;padding:2px 0 0 20px;}.box h3{padding:10px 0 10px 20px;font-size:12px}.box h3 span{font-weight:normal;color:#585858;}
+.box_table{width:100%;margin-top:10px;}.box_table th{width:105px;font-weight:normal;text-align:right;padding:0 10px 10px 0;line-height:24px;vertical-align:top}.box_table b{color:#f00}.box_table td{padding-bottom:10px;}.buttoncss{*padding-top:5px;}
+.box_table select{height:22px;}.box_table textarea{font-size:13px;vertical-align:top;border:1px solid #A5ACB2}
+.worklist{padding:5px 10px;line-height:24px;display:block;}.worklist span{color:#999;padding-right:3px;}.editdisplay{float:right;margin-right:10px;}.overcolor{background:#f7f7f7;}.buttonok{padding:5px;font-size:16px;font-weight:bold;margin-top:30px;}.textstyle{height:17px;padding:3px 2px 0;vertical-align:middle;border:1px solid #A5ACB2;}select{vertical-align:middle}
+/*分类信息*/
+.area_b{height:27px; padding-top:5px; width:100%; clear:both; position:relative; overflow:hidden}
+.area_nav{ padding-left:10px; height:26px; border-bottom:1px solid #89a8d1; *overflow:hidden;}
+.area_nav li{ float:left; margin-right:2px; border:1px solid #ddd; border-bottom:none; padding:6px 4px 5px 6px; height:14px; line-height:14px; position:relative; font-size:14px;color:#0000cc; overflow:hidden}
+.area_nav li a{ text-decoration:none;font-size:14px;  color:#0000cc; }
+.area_nav li a:hover{color:#f00; text-decoration:none}
+.area_nav .selected,.area_navsc .selected{color:#000; font-weight:bold; background:#f5f8ff; border-color:#89a8d1; height:15px; position:relative; overflow:hidden}
+.area_nav .selected aarea_navsc .selected a{ color:#000;}
+.chuangjian{width:818px;margin:0 auto;padding-bottom:30px;}.view_edit{width:100%;}.view_edit th,.view_edit td{padding:6px 0;}
+.view_edit th{font-weight:normal;width:105px;text-align:right;padding-right:10px;}.view_edit b{color:#f00}.depart div{border-bottom:1px solid #dfdfdf;font-weight:bold;height:15px;}.view_edit td.noword{padding:0 0 12px 0}.view_edit td.word{padding:12px 0 12px 0}.view_edit textarea{width:410px;font-size:13px;vertical-align:top;border:1px solid #A5ACB2}.view_edit select{height:22px;}.sbutton{height:30px;line-height:27px;padding:0 15px;font-weight:bold}h1{font-size:16px}.view_edit .box{margin-bottom:0;}
+#view_per{position:absolute;right:10px;top:4px;}#view_per span{display:block;width:95px;height:4px;border:1px solid #dfdfdf;padding:1px;vertical-align:middle}#view_per i{display:block;height:4px;background:#009900;margin:0;font-style:normal}
+/*图片上传*/
+.uploadPic ul { list-style-type:none; margin:0px; padding:0px; }
+.uploadPic li { float:left; width:82px; height:88px; margin:0 5px 5px 0; padding-bottom:3px; overflow:hidden; background:#eee; position:relative}
+.uploadPic .displayimg { width:80px; height:60px; border:1px solid #ccc; overflow:hidden; background:#fff}
+.previous{ display:inline-block; width:13px; height:12px; background:url(http://pic2.58.com/n/images/post/pre-next-delete.gif) no-repeat 0 -7px; line-height:100px; vertical-align:middle; overflow:hidden; margin:7px 33px 0 12px;}
+.previous:hover{ background:url(http://pic2.58.com/n/images/post/pre-next-delete.gif) no-repeat 0 -19px;}
+.previous:active{ background:url(http://pic2.58.com/n/images/post/pre-next-delete.gif) no-repeat 0 -7px;}
+.next{ display:inline-block; width:13px; height:12px; background:url(http://pic2.58.com/n/images/post/pre-next-delete.gif) no-repeat -14px -7px; line-height:100px;vertical-align:middle; overflow:hidden; margin:7px 0 0;}
+.next:hover{ background:url(http://pic2.58.com/n/images/post/pre-next-delete.gif) no-repeat -14px -19px;}
+.next:active{ background:url(http://pic2.58.com/n/images/post/pre-next-delete.gif) no-repeat -14px -7px;}
+.delete{ display:block; width:13px; height:12px; background:url(http://pic2.58.com/n/images/post/closeyes.gif) no-repeat 0 0; line-height:100px; overflow:hidden; position:absolute; top:3px; right:3px; z-index:9}
+.delete:hover{ background:url(http://pic2.58.com/n/images/post/close-hover.gif) no-repeat 0 0;}
+.front-cover{ position:absolute; bottom:5px; *bottom:0px; left:30px; color:#666}
+.uploadPic div { clear:both; }
+.uploadPic input.picDesc { width:80px; *width:78px; text-align:center; margin:0; border:1px solid #7F9DB9; margin-top:2px; display:none;}
+.uploadPic span.upload_error { background-color:#FFD7D7; color:#000; padding:4px; font-family:Tahoma; line-height:24px;}
+.cls_divUploader {height:24px; background-color:Transparent;}
+.loadbutton{ width:74px; height:21px; background:url(http://pic2.58.com/n/images/post/loadbutton.gif); display:inline-block; position:relative; overflow:hidden; vertical-align:middle; float:left; margin-right:5px}
+.fileUploadInput { position:absolute; top:-2px; right:-2px; font-size:36px; filter:alpha(opacity:0); opacity: 0;z-index:0;}
+.upload_ok{ font-family:Tahoma}#selPosCate2{z-index:10;}#selPosCate1{z-index:20;}
+.cjcg{width:800px;margin:0 auto;padding-top:30px;}.cjcg h2{background:url(http://pic2.58.com/n/images/detail/right-img.gif) no-repeat scroll 0 0;color: #479D06;font-size: 26px;padding: 0 0 0 40px;height:29px;line-height:26px;}.cjcg p{padding:10px 0 0 40px;line-height:24px;font-size:12px;}
+
+.jianli{width:400px;margin:0 auto;font-size:14px;line-height:30px;text-align:center;}.jianli h2{font-size:16px;padding:20px 0;}.jianli h2 span{display:inline-block;width:29px;height:29px;margin-right:10px;vertical-align:middle}.red{color:#f00}.w{ background:url(http://pic2.58.com/n/images/detail/shibai-bg.gif) no-repeat}.gongneng{padding-top:10px;}.gongneng a{display:inline-block;margin:0 10px;text-decoration:underline}.jianli p{text-indent:28px;line-height:24px;}.green{color:#169B04}.r{ background:url(http://pic2.58.com/n/images/detail/right-img.gif) no-repeat}.waifa{width:600px;margin:0 auto;padding:20px 0;}.waifacon{width:100%;}
+.waifacon th{width:80px;font-weight:normal;text-align:right;padding-right:10px;padding-bottom:10px;}.waifacon td{padding-bottom:10px;}
+
+.choose{position:relative;display:block;float:left;width:140px;margin-right:7px;}.setboxline{height:3px;background:#fff;position:absolute;top:19px;left:1px;width:100%;z-index:1000}
+.choose span{display:block;width:137px;height:17px;line-height:15px;padding:3px 0 0 3px;border:1px solid #A5ACB2;margin-right:5px;background:#fff url(http://pic2.58.com/n/images/list/downarrow.gif) no-repeat right center;cursor:pointer;}
+.setbox{position:absolute;top:20px;left:0;background:#fff;border:1px solid #A5ACB2;padding:5px 12px 5px 12px;z-index:1000;}
+.setbox td{padding:10px 0 5px;}.linetwo{border-bottom:1px solid #A5ACB2}
+.fl{display:block;float:left}.blacklink{color:#000}
+/*时间控件*/
+.dingweiyong{position:relative;}.zp_datediv{position:absolute;top:25px;left:0;border:1px solid #ccc;font-size:12px;background:#fff;display:none;}.zp_datediv a{text-decoration:none}.zp_datediv_title{text-align:center;height:20px;line-height:22px;position:relative;background:#f7f7f7;border-bottom:1px solid #ccc;}.zp_datediv_title a{display:block;width:13px;height:9px; line-height:20px; overflow:hidden; position:absolute;top:6px;}.pre{ background:url(http://pic2.58.com/n/images/zp/pre.gif) no-repeat;left:16px;}.next1{ background:url(http://pic2.58.com/n/images/zp/next.gif) no-repeat;right:16px;}.pre_none{ background:url(http://pic2.58.com/n/images/zp/pre_none.gif) no-repeat;left:16px;}.next_none{ background:url(http://pic2.58.com/n/images/zp/next_none.gif) no-repeat;right:16px;}.zp_datediv_content{width:222px;height:79px;overflow:hidden;margin:10px 0;}.zp_datediv_hidden{width:2000px;height:79px;position:relative;}.zp_datediv_list{width:220px;float:left;overflow:hidden;margin:3px;display:none;}.current {display:block;}.zp_datediv_list a{display:block;width:54px;height:25px;line-height:25px;float:left;text-align:center;font-family:Arial, Helvetica, sans-serif;background:#fff;}.zp_datediv_list a:hover{background:#f7f7f7;}.year{width:222px;}.c{clear:both}.zp_datediv_bottom{text-align:center;height:20px;line-height:20px;}.month{width:181px;}.month .zp_datediv_list{width:180px;}.month .zp_datediv_list a{width:44px;}
+
+.wrong,.action{width:150px;height:21px;display:inline-block;vertical-align:top;position:relative;background:url(http://pic2.58.com/n/images/zp/verification-view.gif) no-repeat 0 0;}.wrong{background-position:0 -190px}
+.wrong .action_po,.action .action_po{position:absolute;left:29px;top:0;}
+.wrong .action_po_top,.action .action_po_top{display:inline-block;width:191px;padding:5px 4px 1px 6px;background:url(http://pic2.58.com/n/images/zp/verification-view.gif) no-repeat -29px 0;}.wrong .action_po_top{background-position:-29px -190px}
+.wrong .action_po_bot,.action .action_po_bot{display:block;width:201px;height:5px;background:url(http://pic2.58.com/n/images/zp/verification-view.gif) no-repeat -29px -185px;overflow:hidden;}.wrong .action_po_bot{background-position:-29px -375px}
+.wrongborder,.view_edit textarea.wrongborder,.box_table textarea.wrongborder{border-color:#E40000;background:#fdf8f8}.actionborder,.view_edit textarea.actionborder,.box_table textarea.actionborder{border-color:#006bd7;background:#fafafa}select{border:1px solid #A5ACB2}

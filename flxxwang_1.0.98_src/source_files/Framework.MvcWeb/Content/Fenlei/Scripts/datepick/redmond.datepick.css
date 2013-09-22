@@ -1,0 +1,24 @@
+.datepick-trigger,.datepick-cmd-next{display:none}
+.datepick{color:#000;font-size:12px;line-height:17px;font:12px/17px Tahoma;margin-top:-16px;*margin-top:-15px}
+.datepick-popup{z-index:1000}
+.datepick-popup a{color:#00c;text-decoration:none;position:relative;z-index:999}
+.datepick a.datepick-disabled,.datepick-cmd-today{color:#ccc;display:none}.datepick-cmd:hover{color:red}
+.datepick-nav{width:100%;height:15px;line-height:1}
+.datepick-nav{text-align:right}
+.datepick-cmd{margin-left:1em}
+.datepick-month{float:left;width:15em;border:1px solid #9db0bc;text-align:center;background:#fff}
+.datepick-month-header{border-bottom:solid 1px #9db0bc;background:#f0f3f5;height:27px;line-height:27px;font-weight:700}
+.datepick-month table{width:100%;border-collapse:collapse}
+.datepick-month thead{border-bottom:solid 1px #9db0bc}
+.datepick-month th,.datepick-month td{font-weight:400;text-align:center;line-height:21px}
+.datepick-month a{display:block;width:100%;background:#E6E6FA;text-decoration:none;color:#07679c}.datepick-month a:hover{color:red}
+.datepick-month td span{color:#999}
+.datepick-month td .datepick-today{background:#ff4500;color:#fff}
+.datepick-month td .datepick-highlight,.datepick-month td .datepick-selected{background:#ff4500!important;color:#fff!important}
+.datepick-clear-fix{clear:both}
+.datepick-cover{display:none;display/**/:block;position:absolute;z-index:-1;top:-1px;left:-1px;_margin:2px 0 0 2px}
+
+/* rewrite by chen 2011-01-19 */
+a.datepick-cmd-next{ display:block !important; position:absolute; right:0px; top:5px; margin-right:1px;}
+a.datepick-cmd-prev{ display:block !important; position:absolute; left:0px; top:5px; margin-left:1px;}
+a.datepick-cmd-close{ display:none !important;}

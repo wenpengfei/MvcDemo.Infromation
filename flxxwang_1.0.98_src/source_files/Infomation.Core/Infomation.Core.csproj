@@ -1,0 +1,331 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{271FE1A9-4BD4-4AC7-987D-A9BE822AA85B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Infomation.Core</RootNamespace>
+    <AssemblyName>Infomation.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=5.0.414.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RefDLL\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data, Version=5.0.414.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RefDLL\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Ad\UnionAd.cs" />
+    <Compile Include="Car\CarAccompany.cs" />
+    <Compile Include="Car\CarBase.cs" />
+    <Compile Include="Car\CarBicycle.cs" />
+    <Compile Include="Car\CarBuy.cs" />
+    <Compile Include="Car\CarFitting.cs" />
+    <Compile Include="Car\CarMotor.cs" />
+    <Compile Include="Car\CarOther.cs" />
+    <Compile Include="Car\Carpool.cs" />
+    <Compile Include="Car\CarRent.cs" />
+    <Compile Include="Car\CarSecondHand.cs" />
+    <Compile Include="Car\CarService.cs" />
+    <Compile Include="Car\ICar.cs" />
+    <Compile Include="Data\Car\CarAccompanyDataAccess.cs" />
+    <Compile Include="Data\Car\CarBicycleDataAccess.cs" />
+    <Compile Include="Data\Car\CarBuyDataAccess.cs" />
+    <Compile Include="Data\Car\CarFittingDataAccess.cs" />
+    <Compile Include="Data\Car\CarMotorDataAccess.cs" />
+    <Compile Include="Data\Car\CarOtherDataAccess.cs" />
+    <Compile Include="Data\Car\CarpoolDataAccess.cs" />
+    <Compile Include="Data\Car\CarRentDataAccess.cs" />
+    <Compile Include="Data\Car\CarSecondHandDataAccess.cs" />
+    <Compile Include="Data\Car\CarServiceDataAccess.cs" />
+    <Compile Include="Data\Education\EduAbroadDataAccess.cs" />
+    <Compile Include="Data\Education\EduBabyDataAccess.cs" />
+    <Compile Include="Data\Education\EduDesignDataAccess.cs" />
+    <Compile Include="Data\Education\EduEducationDataAccess.cs" />
+    <Compile Include="Data\Education\EduITDataAccess.cs" />
+    <Compile Include="Data\Education\EduLanguageDataAccess.cs" />
+    <Compile Include="Data\Education\EduMBADataAccess.cs" />
+    <Compile Include="Data\Education\EduOtherDataAccess.cs" />
+    <Compile Include="Data\Education\EduProfessionDataAccess.cs" />
+    <Compile Include="Data\Education\EduSpecialDataAccess.cs" />
+    <Compile Include="Data\Education\EduTutorDataAccess.cs" />
+    <Compile Include="Data\Friend\FriendActivityDataAccess.cs" />
+    <Compile Include="Data\Friend\FriendHomeDataAccess.cs" />
+    <Compile Include="Data\Friend\FriendInterestDataAccess.cs" />
+    <Compile Include="Data\Friend\FriendSexDataAccess.cs" />
+    <Compile Include="Data\Friend\FriendSkillDataAccess.cs" />
+    <Compile Include="Data\House\HouseBedDataAccess.cs" />
+    <Compile Include="Data\House\HouseHireDataAccess.cs" />
+    <Compile Include="Data\House\HouseOfficeDataAccess.cs" />
+    <Compile Include="Data\House\HouseOtherDataAccess.cs" />
+    <Compile Include="Data\House\HouseRentDataAccess.cs" />
+    <Compile Include="Data\House\HouseSecondDataAccess.cs" />
+    <Compile Include="Data\House\HouseShareDataAccess.cs" />
+    <Compile Include="Data\House\HouseShopDataAccess.cs" />
+    <Compile Include="Data\House\HouseShortDataAccess.cs" />
+    <Compile Include="Data\JobSeek\JobApplyDataAccess.cs" />
+    <Compile Include="Data\JobSeek\JobSeekDataAccess.cs" />
+    <Compile Include="Data\JobSeek\ResumeDataAccess.cs" />
+    <Compile Include="Data\JobSeek\ResumeDataAccessX.cs" />
+    <Compile Include="Data\Other\AutotaskDataAccess.cs" />
+    <Compile Include="Data\Other\CompanySizeDataAccess.cs" />
+    <Compile Include="Data\Other\CompanyTradeDataAccess.cs" />
+    <Compile Include="Data\Other\CompanyTypeDataAccess.cs" />
+    <Compile Include="Data\Other\PicPhoneDataAccess.cs" />
+    <Compile Include="Data\Pet\PetBirdDataAccess.cs" />
+    <Compile Include="Data\Pet\PetCatDataAccess.cs" />
+    <Compile Include="Data\Pet\PetDogDataAccess.cs" />
+    <Compile Include="Data\Pet\PetFoodDataAccess.cs" />
+    <Compile Include="Data\Pet\PetGiveDataAccess.cs" />
+    <Compile Include="Data\Pet\PetServiceDataAccess.cs" />
+    <Compile Include="Data\Recruit\CompanyDataAccess.cs" />
+    <Compile Include="Data\Recruit\InterviewDataAccess.cs" />
+    <Compile Include="Data\Recruit\RecruitDataAccess.cs" />
+    <Compile Include="Data\Recruit\ResumeFavoriteDataAccess.cs" />
+    <Compile Include="Data\Sale\SaleArtDataAccess.cs" />
+    <Compile Include="Data\Sale\SaleAthleticsDataAccess.cs" />
+    <Compile Include="Data\Sale\SaleBabyDataAccess.cs" />
+    <Compile Include="Data\Sale\SaleBookDataAccess.cs" />
+    <Compile Include="Data\Sale\SaleClothingDataAccess.cs" />
+    <Compile Include="Data\Sale\SaleCommunicationDataAccess.cs" />
+    <Compile Include="Data\Sale\SaleComputerDataAccess.cs" />
+    <Compile Include="Data\Sale\SaleDigitalDataAccess.cs" />
+    <Compile Include="Data\Sale\SaleElectricDataAccess.cs" />
+    <Compile Include="Data\Sale\SaleEquipmentDataAccess.cs" />
+    <Compile Include="Data\Sale\SaleFacialDataAccess.cs" />
+    <Compile Include="Data\Sale\SaleGameDataAccess.cs" />
+    <Compile Include="Data\Sale\SaleHomeDataAccess.cs" />
+    <Compile Include="Data\Sale\SaleMobileDataAccess.cs" />
+    <Compile Include="Data\Sale\SaleMobileNumberDataAccess.cs" />
+    <Compile Include="Data\Sale\SaleOfficeDataAccess.cs" />
+    <Compile Include="Data\Sale\SaleOtherDataAccess.cs" />
+    <Compile Include="Data\Sale\SaleServiceDataAccess.cs" />
+    <Compile Include="Data\Sale\SaleSwapDataAccess.cs" />
+    <Compile Include="Data\Search\KeywordDataAccess.cs" />
+    <Compile Include="Data\Search\KeywordStatDataAccess.cs" />
+    <Compile Include="Data\Stat\StatClickDataAccess.cs" />
+    <Compile Include="Data\Ticket\TicketAirplaneDataAccess.cs" />
+    <Compile Include="Data\Ticket\TicketCardDataAccess.cs" />
+    <Compile Include="Data\Ticket\TicketOtherDataAccess.cs" />
+    <Compile Include="Data\Ticket\TicketPerformDataAccess.cs" />
+    <Compile Include="Data\Ticket\TicketPleasureDataAccess.cs" />
+    <Compile Include="Data\Ticket\TicketTrainDataAccess.cs" />
+    <Compile Include="Data\Users\ProfileDataAccess.cs" />
+    <Compile Include="Data\YellowPage\YellowPageDataAccess.cs" />
+    <Compile Include="Data\YellowPage\YellowTranslateDataAccess.cs" />
+    <Compile Include="Education\EduAbroad.cs" />
+    <Compile Include="Education\EduBaby.cs" />
+    <Compile Include="Education\EducationBase.cs" />
+    <Compile Include="Education\EduDesign.cs" />
+    <Compile Include="Education\EduEducation.cs" />
+    <Compile Include="Education\EduIT.cs" />
+    <Compile Include="Education\EduLanguage.cs" />
+    <Compile Include="Education\EduMBA.cs" />
+    <Compile Include="Education\EduOther.cs" />
+    <Compile Include="Education\EduProfession.cs" />
+    <Compile Include="Education\EduSpecial.cs" />
+    <Compile Include="Education\EduTutor.cs" />
+    <Compile Include="Education\IEducation.cs" />
+    <Compile Include="Exception\PropertyAccessException.cs" />
+    <Compile Include="Extensions\DateTimeExtensions.cs" />
+    <Compile Include="Extensions\EducationExtensions.cs" />
+    <Compile Include="Extensions\ObjectExtension.cs" />
+    <Compile Include="Extensions\UrlExtensions.cs" />
+    <Compile Include="Extensions\YellowPageTypeExtensions.cs" />
+    <Compile Include="Friend\FriendActivity.cs" />
+    <Compile Include="Friend\FriendBase.cs" />
+    <Compile Include="Friend\FriendHome.cs" />
+    <Compile Include="Friend\FriendInterest.cs" />
+    <Compile Include="Friend\FriendSex.cs" />
+    <Compile Include="Friend\FriendSkill.cs" />
+    <Compile Include="Friend\IFriend.cs" />
+    <Compile Include="Helper.cs" />
+    <Compile Include="Helper\BrandSeries.cs" />
+    <Compile Include="Helper\InfoStatistics.cs" />
+    <Compile Include="Helper\PagerHelper.cs" />
+    <Compile Include="Helper\SEO.cs" />
+    <Compile Include="Helper\ViewTag.cs" />
+    <Compile Include="Helper\WebUtils.cs" />
+    <Compile Include="Helper\WorkType.cs" />
+    <Compile Include="House\HouseBase.cs" />
+    <Compile Include="House\HouseBed.cs" />
+    <Compile Include="House\HouseHire.cs" />
+    <Compile Include="House\HouseOffice.cs" />
+    <Compile Include="House\HouseOther.cs" />
+    <Compile Include="House\HouseRent.cs" />
+    <Compile Include="House\HouseSecond.cs" />
+    <Compile Include="House\HouseShare.cs" />
+    <Compile Include="House\HouseShop.cs" />
+    <Compile Include="House\HouseShort.cs" />
+    <Compile Include="House\IHouse.cs" />
+    <Compile Include="IInfo.cs" />
+    <Compile Include="InfoBase.cs" />
+    <Compile Include="InfoCategory\CarCategory.cs" />
+    <Compile Include="InfoCategory\EduCategory.cs" />
+    <Compile Include="InfoCategory\FriendCategory.cs" />
+    <Compile Include="InfoCategory\HouseCategory.cs" />
+    <Compile Include="InfoCategory\InfoCategory.cs" />
+    <Compile Include="InfoCategory\InfoType.cs" />
+    <Compile Include="InfoCategory\JobCategory.cs" />
+    <Compile Include="InfoCategory\JobType.cs" />
+    <Compile Include="InfoCategory\PetCategory.cs" />
+    <Compile Include="InfoCategory\SaleCategory.cs" />
+    <Compile Include="InfoCategory\TicketCategory.cs" />
+    <Compile Include="InfoCategory\YellowPageCategory.cs" />
+    <Compile Include="InfoCategory\YellowPageType.cs" />
+    <Compile Include="InfoDetail.cs" />
+    <Compile Include="InfoLink.cs" />
+    <Compile Include="InfoNull.cs" />
+    <Compile Include="InfoTag.cs" />
+    <Compile Include="JobSeek\enum\Certificate.cs" />
+    <Compile Include="JobSeek\enum\EduBackground.cs" />
+    <Compile Include="JobSeek\enum\Education.cs" />
+    <Compile Include="JobSeek\enum\FreeTime.cs" />
+    <Compile Include="JobSeek\enum\LanguageSkill.cs" />
+    <Compile Include="JobSeek\enum\PublicState.cs" />
+    <Compile Include="JobSeek\enum\WorkExperience.cs" />
+    <Compile Include="JobSeek\IJobSeek.cs" />
+    <Compile Include="JobSeek\JobApply.cs" />
+    <Compile Include="JobSeek\JobSeek.cs" />
+    <Compile Include="JobSeek\Resume.cs" />
+    <Compile Include="Manage\KeywordStatUpdate.cs" />
+    <Compile Include="Manage\KeywordUpdate.cs" />
+    <Compile Include="Mvc\ActionLink.cs" />
+    <Compile Include="Mvc\ExceptionFilter.cs" />
+    <Compile Include="Mvc\InfoBaseViewMasterPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Mvc\LoginFilterAttribute.cs" />
+    <Compile Include="Mvc\PostFilterAttribute.cs" />
+    <Compile Include="Mvc\SpiderFilterAttribute.cs" />
+    <Compile Include="Mvc\UrlTools.cs" />
+    <Compile Include="MyDemo\TestMasterPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ObjectType.cs" />
+    <Compile Include="Other\Action.cs" />
+    <Compile Include="Other\Autotask.cs" />
+    <Compile Include="Other\CompanySize.cs" />
+    <Compile Include="Other\CompanyTrade.cs" />
+    <Compile Include="Other\CompanyType.cs" />
+    <Compile Include="Other\PicPhone.cs" />
+    <Compile Include="Other\SiteInfo.cs" />
+    <Compile Include="Other\State.cs" />
+    <Compile Include="Other\UrlForwarding.cs" />
+    <Compile Include="Pet\IPet.cs" />
+    <Compile Include="Pet\PetBase.cs" />
+    <Compile Include="Pet\PetBird.cs" />
+    <Compile Include="Pet\PetCat.cs" />
+    <Compile Include="Pet\PetDog.cs" />
+    <Compile Include="Pet\PetFood.cs" />
+    <Compile Include="Pet\PetGive.cs" />
+    <Compile Include="Pet\PetService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Recruit\Company.cs" />
+    <Compile Include="Recruit\Interview.cs" />
+    <Compile Include="Recruit\IRecruit.cs" />
+    <Compile Include="Recruit\Recruit.cs" />
+    <Compile Include="Recruit\ResumeFavorite.cs" />
+    <Compile Include="Sale\ISale.cs" />
+    <Compile Include="Sale\SaleArt.cs" />
+    <Compile Include="Sale\SaleAthletics.cs" />
+    <Compile Include="Sale\SaleBaby.cs" />
+    <Compile Include="Sale\SaleBase.cs" />
+    <Compile Include="Sale\SaleBook.cs" />
+    <Compile Include="Sale\SaleClothing.cs" />
+    <Compile Include="Sale\SaleCommunication.cs" />
+    <Compile Include="Sale\SaleComputer.cs" />
+    <Compile Include="Sale\SaleDigital.cs" />
+    <Compile Include="Sale\SaleElectric.cs" />
+    <Compile Include="Sale\SaleEquipment.cs" />
+    <Compile Include="Sale\SaleFacial.cs" />
+    <Compile Include="Sale\SaleGame.cs" />
+    <Compile Include="Sale\SaleHome.cs" />
+    <Compile Include="Sale\SaleMobile.cs" />
+    <Compile Include="Sale\SaleMobileNumber.cs" />
+    <Compile Include="Sale\SaleOffice.cs" />
+    <Compile Include="Sale\SaleOther.cs" />
+    <Compile Include="Sale\SaleService.cs" />
+    <Compile Include="Sale\SaleSwap.cs" />
+    <Compile Include="Search\Keyword.cs" />
+    <Compile Include="Search\KeywordStat.cs" />
+    <Compile Include="Other\StaticVar.cs" />
+    <Compile Include="SEO\SeoUitls.cs" />
+    <Compile Include="Stat\StatClick.cs" />
+    <Compile Include="SubCategory.cs" />
+    <Compile Include="Ticket\ITicket.cs" />
+    <Compile Include="Ticket\TicketAirplane.cs" />
+    <Compile Include="Ticket\TicketBase.cs" />
+    <Compile Include="Ticket\TicketCard.cs" />
+    <Compile Include="Ticket\TicketOther.cs" />
+    <Compile Include="Ticket\TicketPerform.cs" />
+    <Compile Include="Ticket\TicketPleasure.cs" />
+    <Compile Include="Ticket\TicketTrain.cs" />
+    <Compile Include="Users\Profile.cs" />
+    <Compile Include="Users\User.cs" />
+    <Compile Include="Utils.cs" />
+    <Compile Include="YellowPage\IYellowPage.cs" />
+    <Compile Include="YellowPage\YellowPage.cs" />
+    <Compile Include="YellowPage\YellowTranslate.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Framework\Framework.csproj">
+      <Project>{5B8F1536-608A-4F73-9239-9407D1379CD7}</Project>
+      <Name>Framework</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

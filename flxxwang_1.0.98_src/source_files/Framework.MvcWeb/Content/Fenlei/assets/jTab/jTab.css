@@ -1,0 +1,29 @@
+.jTab_links {
+	border-top:1px solid white;
+}
+.jTab_links a {
+	display: block;
+	float: left;
+	border:1px solid #ccc;
+	border-width: 1px 0 0 1px;
+	padding: 5px 10px;
+}
+.jTab_links a:hover {
+	background-color: #f5f5f5;
+	text-decoration: none;
+	color: #777;
+}
+.jTab_links a.first {
+	margin-left: 15px;
+}
+.jTab_links a.last {
+	border-right-width: 1px;
+}
+.jTab_links a.active {
+	background-color: #eee;
+	color: #777;
+}
+.jTab {
+	border: 1px solid #ccc;
+	padding: 10px;
+}

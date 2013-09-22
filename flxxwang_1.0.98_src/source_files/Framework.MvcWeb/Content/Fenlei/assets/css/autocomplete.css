@@ -1,0 +1,43 @@
+﻿/* workarounds */
+* html .ui-autocomplete { width:1px; } /* without this, the menu expands to 100% in IE6 */
+.ui-autocomplete  
+{
+    position: absolute; 
+    cursor: default;
+    border:1px solid #10ace5;
+    background:#fcfcfc;
+    
+}
+.ui-autocomplete li a
+{
+    cursor:default;
+    text-decoration:none;
+}
+.ui-autocomplete table
+{
+    width:555px;
+    border-collapse:collapse;
+}
+.ui-autocomplete table tr td.left
+{
+    text-align:left;
+}
+.ui-autocomplete table tr td .q
+{
+    color:#10ace5;
+}
+.ui-autocomplete table tr td.right
+{
+    color: #009933;
+    font-family: 黑体;
+    font-style: italic;
+    text-align:right;
+}
+
+.ui-autocomplete tr:hover
+{
+    background:#ddd;
+}
+
+
+

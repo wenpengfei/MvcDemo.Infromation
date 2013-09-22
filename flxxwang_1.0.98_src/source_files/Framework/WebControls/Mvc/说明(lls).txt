@@ -1,0 +1,12 @@
+﻿下载地址:
+http://www.webdiyer.com/
+
+////////////////////////
+PagerBuilder.cs中private RouteValueDictionary GetCurrentRouteValues(ViewContext viewContext)这个
+函数中，
+原来的：
+var routeValues = _routeValues ?? new RouteValueDictionary();
+我修改为：
+var routeValues = _routeValues ?? new RouteValueDictionary(viewContext.RouteData.Values);//by lls
+
+如果不修改，生成的url会丢失信息.

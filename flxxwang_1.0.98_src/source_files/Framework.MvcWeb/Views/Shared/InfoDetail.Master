@@ -1,0 +1,178 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewMasterPage" %>
+<%@ Import Namespace="Infomation.Core.Mvc" %>
+
+<asp:Content ID="ContentHead" ContentPlaceHolderID="Head" runat="server">
+    
+    <%var ViewTag = ViewData["ViewTag"] as ViewTag; %>
+    <title><%=ViewTag.Info.PageTitle%></title>
+    <meta name="description" content="<%=ViewTag.Info.PageDescription %>" />
+    <meta name="keywords" content="<%=string.IsNullOrEmpty(ViewTag.SEO.Keywords)?"":ViewTag.SEO.Keywords+" " %><%=ViewTag.Info.PageKeywords %>" />
+    <link href="/Content/Fenlei/ui6/detail/detail.css?v20110101" rel="Stylesheet" type="text/css" />
+    <script src="/Scripts/jquery.tools.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="/Content/scrollable/gallery/scrollable-horizontal.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/scrollable/gallery/scrollable-buttons.css" />
+    <style type="text/css">
+    .scrollable,.items div,#image_wrap
+    {
+        width:600px;
+    }
+    #image_wrap
+    {
+        height:450px;
+	    margin:15px 0 15px 40px;
+	    /*padding:15px 0;*/
+	    text-align:center;
+	    /* some "skinning" */
+	    background-color:#efefef;
+	    border:2px solid #fff;
+	    outline:1px solid #ddd;
+	    -moz-ouline-radius:4px;
+    }
+    #image_wrap img
+    {
+        width:600px; 
+        height:450px;
+    }
+    .scrollable,.items div
+    {
+        height:100px;
+    }
+    .scrollable img 
+    {
+        width:100px;
+        height:75px;
+        margin:12px 5px 12px 21px;
+    }
+    </style>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+
+<asp:Content ID="ContentMain" ContentPlaceHolderID="Main" runat="server">
+    <%
+        var ViewTag = ViewData["ViewTag"] as ViewTag; 
+        var Info=ViewTag.Info;
+    %>
+    <div class="w" id="header">
+        <a href="<%=Url.Action("Default","Home") %>" id="minlogo" title="返回<%=SiteInfo.Name%>首页"><%=SiteInfo.Name%></a>
+        <span>
+            <%
+                foreach (var p in ViewTag.Info.InfoPath)
+                {
+                    %>
+                    <%=p.Link(Html) %>
+                    <%
+                }
+            %>
+        </span>
+    </div>
+    <div id="action"></div>
+    <div class="w headline">
+        <h1>
+            <%=ViewTag.Info.TitleDisplay %>
+        </h1>
+        <div class="other">
+            <%=Info.DateCreated.ToString("yyyy-MM-dd") %>
+            <%--<span id="edit"></span>
+            <span>|</span>
+            <a href="#">修改</a>
+            <span>|</span>
+            <a href="#">删除</a>
+            <span>|</span>
+            <a href="#">浏览<b class="red" id="totalcount">0</b>次</a>--%>
+        </div>
+    </div>
+
+    <asp:ContentPlaceHolder ID="TopInfoMsg" runat="server"/>
+
+    <asp:ContentPlaceHolder ID="Main" runat="server"/>
+
+    <div class="w guanggao">
+        <div id="googlead_bottom">
+            <%--广告位置--%>
+
+            <%
+                if (SiteInfo.IsTaojen)
+                {
+                    %>
+                    <%--300*250中等矩形--%>
+                    <%=UnionAd.Baidu_300_250.Code %>
+                    <%
+                }
+                else
+                {
+                    %>
+                    <%--300 x 250 - 中矩形--%>
+                    <%=UnionAd.Google_300_250.Code %>
+                    <%    
+                }
+            %>
+        </div>
+        <div id="baiduad">
+            <%--广告位置--%>
+
+            <%
+                if (SiteInfo.IsTaojen)
+                {
+                    %>
+                    <%--300*250中等矩形--%>
+                    <%=UnionAd.Baidu_300_250.Code %>
+                    <%
+                }
+                else
+                {
+                    %>
+                    <%--300 x 250 - 中矩形--%>
+                    <%=UnionAd.Google_300_250.Code %>
+                    <%    
+                }
+            %>
+        </div>
+    </div>
+    <div class="w footer">
+        &copy; 2011 &nbsp;flxxwang.com &nbsp;
+        <%--<a href="http://flxxwang.com/about" target="_blank">与taojen对话</a>--%>
+    </div>
+
+<script type="text/javascript">
+    $(function () {
+        $(".scrollable").scrollable();
+        $(".items img").click(function () {
+
+            // see if same thumb is being clicked
+            if ($(this).hasClass("active")) { return; }
+
+            // calclulate large image's URL based on the thumbnail URL (flickr specific)
+            var url = $(this).attr("src").replace("_t", "");
+
+            // get handle to element that wraps the image and make it semi-transparent
+            var wrap = $("#image_wrap").fadeTo("medium", 0.5);
+
+            // the large image from www.flickr.com
+            var img = new Image();
+
+
+            // call this function after it's loaded
+            img.onload = function () {
+
+                // make wrapper fully visible
+                wrap.fadeTo("fast", 1);
+
+                // change the image
+                wrap.find("img").attr("src", url);
+
+            };
+
+            // begin loading the image from www.flickr.com
+            img.src = url;
+
+            // activate item
+            $(".items img").removeClass("active");
+            $(this).addClass("active");
+
+            // when page loads simulate a "click" on the first image
+        }).filter(":first").click();
+    });
+</script>
+
+</asp:Content>

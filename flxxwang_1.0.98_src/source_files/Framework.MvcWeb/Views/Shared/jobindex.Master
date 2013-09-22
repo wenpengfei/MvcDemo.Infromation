@@ -1,0 +1,405 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/jobBaseIndex.Master" Inherits="System.Web.Mvc.ViewMasterPage" %>
+<%@ Import Namespace="Framework.Common" %>
+
+<asp:Content ID="ContentHead" ContentPlaceHolderID="Head" runat="server">
+<%--<script type="text/javascript" src="/Content/Fenlei/Scripts/v6/source/4fd65d7f222c38e66aa84b7472f175d5.js"></script>--%>
+</asp:Content>
+
+<asp:Content ID="ContentMain" ContentPlaceHolderID="Rows" runat="server">
+<%
+    var routeData = (HttpContext.Current.Handler as MvcHandler).RequestContext.RouteData;
+    var controller = routeData.Values["controller"].ToString().ToLower();
+    var city = ViewData["City"] as City;
+%>
+
+<style type="text/css">
+    .types p,.types2 .types li p
+    {
+        height:auto
+    }
+</style>
+
+<!---招聘热门职位--->
+<div class="wrap">
+<%
+    if (controller == "zhaopin")
+    {
+        %>
+        <div class="cbleft" id="jobgg" style="margin-top:10px">
+            <div id="types">
+                <h2 class="whtxt" style="margin-top:10px; border-bottom:none">
+                    <%=city.ShortName %>招聘热门职位
+                    <%--<a href="http://qy.flxxwang.com/famous/" target="_blank" style=" padding-left:16px; padding-right:2px;color:#f00">名企招聘</a>
+                    <i class="hotpic"></i>--%>
+                </h2>
+        <%
+    }
+%>
+            <ul class="hotcategory"<%=controller=="qiuzhi"?" style='padding-top:10px'":"" %>>
+                <li><a href="<%=Url.Action("yewu", new {objecttype=1 })%>">销售代表</a><%--<cite>(39540)</cite>--%></li>
+                <li><a href="<%=Url.Action("lvyoujiudian", new {objecttype=5 })%>" class="red">服务员</a><%--<cite>(11879)</cite>--%></li>
+                <li><a href="<%=Url.Action("siji")%>">司机</a><%--<cite>(0)</cite>--%></li>
+                <li><a href="<%=Url.Action("meirongjianshen",new{objecttype=12}) %>">足疗保健</a><%--<cite>(6696)</cite>--%></li>
+                <li><a href="<%=Url.Action("renli",new{objecttype=10}) %>">文员</a><%--<cite>(15293)</cite>--%></li>
+                <li><a href="<%=Url.Action("jiaoyupeixun",new{objecttype=1}) %>">教师/助教</a><%--<cite>(3653)</cite>--%></li>
+                <li><a href="<%=Url.Action("yewu", new {objecttype=5 })%>">电话销售</a><%--<cite>(39540)</cite>--%></li>
+                <li><a href="<%=Url.Action("chaoshishangye",new{objecttype=6}) %>">收银员</a><%--<cite>(7837)</cite>--%></li>
+                <li><a class="red" href="<%=Url.Action("shengchankaifa",new{objecttype=6}) %>">普工</a><%--<cite>(7850)</cite>--%></li>
+                <li><a href="<%=Url.Action("meirongjianshen",new{objecttype=9}) %>">推拿按摩</a><%--<cite>(6696)</cite>--%></li>
+                <li><a href="<%=Url.Action("renli",new{objecttype=1}) %>">前台</a><%--<cite>(15293)</cite>--%></li>
+                <li><a href="<%=Url.Action("jiaoyupeixun",new{objecttype=3}) %>">幼教</a><%--<cite>(3653)</cite>--%></li>
+                <li><a href="<%=Url.Action("yewu",new{objecttype=7}) %>">房产经纪人</a><%--<cite>(39540)</cite>--%></li>
+                <li><a href="<%=Url.Action("lvyoujiudian",new{objecttype=1}) %>">配菜/打荷</a><%--<cite>(11879)</cite>--%></li>
+                <li><a href="<%=Url.Action("shengchankaifa",new{objecttype=3}) %>">电工</a><%--<cite>(7850)</cite>--%></li>
+                <li><a class="red" href="<%=Url.Action("wentiyingshi",new{objecttype=8}) %>">酒吧服务员</a><%--<cite>(5368)</cite>--%></li>
+                <li><a href="<%=Url.Action("kefu") %>">客服</a><%--<cite>(10942)</cite>--%></li>
+                <li><a href="<%=Url.Action("yiyuanyiliao",new{objecttype=11}) %>">医生</a><%--<cite>(1529)</cite>--%></li>
+                <li><a class="red" href="<%=Url.Action("chaoshishangye",new{objecttype=5}) %>">营业员</a><%--<cite>(7837)</cite>--%></li>
+                <li><a class="red" href="<%=Url.Action("lvyoujiudian",new{objecttype=3}) %>">厨师</a><%--<cite>(11879)</cite>--%></li>
+                <li><a href="<%=Url.Action("shengchankaifa",new{objecttype=7}) %>">切割/焊工</a><%--<cite>(7850)</cite>--%></li>
+                <li><a href="<%=Url.Action("meirongjianshen",new{objecttype=5}) %>">发型师</a><%--<cite>(6696)</cite>--%></li>
+                <li><a href="<%=Url.Action("renli",new{objecttype=2}) %>">人事专员/助理</a><%--<cite>(15293)</cite>--%></li>
+                <li><a class="red" href="<%=Url.Action("yiyuanyiliao",new{objecttype=3}) %>">护士/护理</a><%--<cite>(1529)</cite>--%></li>
+                <li><a href="<%=Url.Action("chaoshishangye",new{objecttype=4}) %>">导购员</a><%--<cite>(7837)</cite>--%></li>
+                <li><a href="<%=Url.Action("lvyoujiudian",new{objecttype=9}) %>">迎宾/接待</a><%--<cite>(11879)</cite>--%></li>
+                <li><a href="<%=Url.Action("shengchankaifa",new{objecttype=8}) %>">综合维修工</a><%--<cite>(7850)</cite>--%></li>
+                <li><a class="red" href="<%=Url.Action("meirongjianshen",new{objecttype=3}) %>">美发助理/学徒</a><%--<cite>(6696)</cite>--%></li>
+                <li><a href="<%=Url.Action("renli",new{objecttype=9}) %>">经理助理/秘书</a><%--<cite>(15293)</cite>--%></li>
+                <li><a href="<%=Url.Action("guanggao",new{objecttype=9}) %>">平面设计</a><%--<cite>(9135)</cite>--%></li>
+                <li><a href="<%=Url.Action("yewu",new{objecttype=2}) %>">销售助理</a><%--<cite>(39540)</cite>--%></li>
+                <li><a href="<%=Url.Action("lvyoujiudian",new{objecttype=12}) %>">餐饮/酒店管理</a><%--<cite>(11879)</cite>--%></li>
+                <li><a href="<%=Url.Action("shengchankaifa",new{objecttype=9}) %>">车床/磨床/铣床</a><%--<cite>(7850)</cite>--%></li>
+                <li><a href="<%=Url.Action("meirongjianshen",new{objecttype=7}) %>">美容师</a><%--<cite>(6696)</cite>--%></li>
+                <li><a href="<%=Url.Action("renli",new{objecttype=4}) %>">行政专员</a><%--<cite>(15293)</cite>--%></li>
+                <li><a href="<%=Url.Action("jisuanji",new{objecttype=13}) %>">网页设计/制作</a><%--<cite>(6961)</cite>--%></li>
+                <li><a href="<%=Url.Action("yewu",new{objecttype=8}) %>">保险经纪人</a><%--<cite>(39540)</cite>--%></li>
+                <li><a href="<%=Url.Action("jiazhengbaojie",new{objecttype=2}) %>">保洁</a><%--<cite>(2442)</cite>--%></li>
+                <li><a href="<%=Url.Action("jiazhengbaojie",new{objecttype=1}) %>">保安</a><%--<cite>(2442)</cite>--%></li>
+                <li><a href="<%=Url.Action("qiche",new{objecttype=3}) %>">汽车修理</a><%--<cite>(1753)</cite>--%></li>
+                <li><a class="red" href="<%=Url.Action("caiwushenji") %>">会计/出纳</a><%--<cite>(5336)</cite>--%></li>
+                <li><a href="<%=Url.Action("jisuanji",new{objecttype=3}) %>">软件工程师</a><%--<cite>(6961)</cite>--%></li>
+                <li><a href="<%=Url.Action("shichang",new{objecttype=8}) %>">市场专员</a><%--<cite>(2267)</cite>--%></li>
+                <li><a href="<%=Url.Action("jiazhengbaojie",new{objecttype=3}) %>">保姆</a><%--<cite>(2442)</cite>--%></li>
+                <li><a class="red" href="<%=Url.Action("wuliucangchu",new{objecttype=10}) %>">快递员</a><%--<cite>(3239)</cite>--%></li>
+                <li><a href="<%=Url.Action("qiche",new{objecttype=4}) %>">汽车美容</a><%--<cite>(1753)</cite>--%></li>
+                <li><a href="<%=Url.Action("xiezuochuban",new{objecttype=4}) %>">排版/印刷</a><%--<cite>(896)</cite>--%></li>
+                <li><a href="<%=Url.Action("jisuanji",new{objecttype=8}) %>">技术支持/维护</a><%--<cite>(6961)</cite>--%></li>
+            </ul>
+            <div class="clear"></div>
+            <h2 class="whtxt"><%=controller == "zhaopin" ? ""+city.ShortName+"招聘分类" : ""%></h2>
+            <div class="types">
+                <%
+                    var jobCategory=InfoCategory.GetCategory<JobCategory>();
+                    var jobCategories = jobCategory.Children.Where(item => item.Code != null && !item.Code.ToLower().StartsWith("jianzhi"));
+                    for (var i = 0; i < jobCategories.Count(); i++)
+                    {
+                        var category = jobCategories.ElementAt(i);
+                        if (i % 2 == 0)
+                        {
+                            %>
+                            <ul>
+                            <%
+                        }
+                        %>
+                        <li>
+                            <h2><a href="<%=Url.Action(category.Code) %>"><%=category.Name %></a></h2>
+                            <p>
+                                <%
+                                for (var j = 0; j < category.ObjectTypeCollection.Count; j++)
+                                {
+                                    var objType = category.ObjectTypeCollection[j];
+                                    %>
+                                    <a href="<%=Url.Action(category.Code,new{objecttype=objType.Id}) %>"><%=objType.Name%></a>
+                                    <%
+                                    if (j < category.ObjectTypeCollection.Count - 1)
+                                    {
+                                        %>
+                                        <cite>|</cite>
+                                        <%
+                                    }
+                                }
+                                %>
+                                <%--<a href="/xiaoshouyuan/">销售代表</a><cite>|</cite>
+                                <a href="/xiaoshouzhuli/">销售助理</a><cite>|</cite>
+                                <a href="/xiaoshoujingli/">销售经理/主管</a><cite>|</cite>
+                                <a href="/xiaoshouzongjian/">销售总监</a><cite>|</cite>
+                                <a href="/dianhuaxiaoshou/">电话销售</a><cite>|</cite>
+                                <a href="/xiaoshougongchengshi/">销售支持</a><cite>|</cite>
+                                <a href="/fangdichan/">房产经纪人</a><cite>|</cite>
+                                <a href="/baoxian/">保险经纪人</a><cite>|</cite>
+                                <a href="/qichexiaoshou/">汽车销售</a><cite>|</cite>
+                                <a href="/yiyaodaibiao/">医疗代表</a><cite>|</cite>
+                                <a href="/yiliaoqixie/">医疗器械销售</a><cite>|</cite>
+                                <a href="/wangluoxiaoshouyuan/">网络销售</a><cite>|</cite>
+                                <a href="/quyuxiaoshou/">区域销售</a><cite>|</cite>
+                                <a href="/qudaorenyuan/">渠道专员</a><cite>|</cite>
+                                <a href="/qudaojingli/">渠道经理/总监</a><cite>|</cite>
+                                <a href="/kehujingli/">客户经理/主管</a><cite>|</cite>
+                                <a href="/dakehujingli/">大客户经理</a><cite>|</cite>
+                                <a href="/tuangouxiaoshou/">团购业务员/经理</a>--%>
+                            </p>
+                        </li>
+                        <%
+                        if (i % 2 == 1||i==jobCategories.Count()-1)
+                        {
+                            %>
+                            </ul>
+                            <div class="clear"></div>
+                            <%
+                        }
+                    }
+                %>
+                <%--<ul>
+                    <li>
+                        <h2><a href="/yewu/">销售</a></h2>
+                        <p>
+                            <a href="/xiaoshouyuan/">销售代表</a><cite>|</cite>
+                            <a href="/xiaoshouzhuli/">销售助理</a><cite>|</cite>
+                            <a href="/xiaoshoujingli/">销售经理/主管</a><cite>|</cite>
+                            <a href="/xiaoshouzongjian/">销售总监</a><cite>|</cite>
+                            <a href="/dianhuaxiaoshou/">电话销售</a><cite>|</cite>
+                            <a href="/xiaoshougongchengshi/">销售支持</a><cite>|</cite>
+                            <a href="/fangdichan/">房产经纪人</a><cite>|</cite>
+                            <a href="/baoxian/">保险经纪人</a><cite>|</cite>
+                            <a href="/qichexiaoshou/">汽车销售</a><cite>|</cite>
+                            <a href="/yiyaodaibiao/">医疗代表</a><cite>|</cite>
+                            <a href="/yiliaoqixie/">医疗器械销售</a><cite>|</cite>
+                            <a href="/wangluoxiaoshouyuan/">网络销售</a><cite>|</cite>
+                            <a href="/quyuxiaoshou/">区域销售</a><cite>|</cite>
+                            <a href="/qudaorenyuan/">渠道专员</a><cite>|</cite>
+                            <a href="/qudaojingli/">渠道经理/总监</a><cite>|</cite>
+                            <a href="/kehujingli/">客户经理/主管</a><cite>|</cite>
+                            <a href="/dakehujingli/">大客户经理</a><cite>|</cite>
+                            <a href="/tuangouxiaoshou/">团购业务员/经理</a>
+                        </p>
+                    </li>
+                    <li>
+                        <h2><a href="/kefu/">客服</a></h2>
+                        <p>
+                            <a href="/kefuzhuanyuan/">客服专员/助理</a><cite>|</cite>
+                            <a href="/kefujingli/">客服经理/主管</a><cite>|</cite>
+                            <a href="/kefuzongjian/">客服总监</a><cite>|</cite>
+                            <a href="/shouhoufuwu/">售前/售后服务</a><cite>|</cite>
+                            <a href="/kehuzixun/">电话客服</a><cite>|</cite>
+                            <a href="/kehuguanxi/">客户关系管理</a>
+                        </p>
+                    </li>
+                </ul>
+                <div class="clear"></div>
+
+                <ul>
+                    <li>
+                        <h2><a href="/renli/">人事/行政/后勤</a></h2>
+                        <p>
+                            <a href="/wenziluru/">文员</a><cite>|</cite>
+                            <a href="/qiantai/">前台/总机/接待</a><cite>|</cite>
+                            <a href="/zhaopinjingli/">人事专员/助理</a><cite>|</cite>
+                            <a href="/renshizhuguan/">人事经理/主管</a><cite>|</cite>
+                            <a href="/renshizongjian/">人事总监</a><cite>|</cite>
+                            <a href="/xingzhengzhuanyuan/">行政专员/助理</a><cite>|</cite>
+                            <a href="/xingzhengjingli/">行政经理/主管</a><cite>|</cite>
+                            <a href="/xingzhengzongjian/">行政总监</a><cite>|</cite>
+                            <a href="/mishu/">经理助理/秘书</a><cite>|</cite>
+                            <a href="/xinzifuli/">薪酬/绩效/员工关系</a><cite>|</cite>
+                            <a href="/lietouguwen/">猎头顾问</a><cite>|</cite>
+                            <a href="/houqin/">后勤</a><cite>|</cite>
+                            <a href="/peixunzhuanyuan/">培训专员/助理</a><cite>|</cite>
+                            <a href="/peixunjingli/">培训经理/主管</a><cite>|</cite>
+                            <a href="/zhaopinzhuanyuan/">招聘专员/助理</a><cite>|</cite>
+                            <a href="/zhaopinzhuguan/">招聘经理/主管</a>
+                        </p>
+                    </li>
+                    <li>
+                        <h2><a href="/zplvyoujiudian/">酒店/餐饮/旅游</a></h2>
+                        <p>
+                            <a href="/cantfwy/">服务员</a><cite>|</cite>
+                            <a href="/canguan/">厨师/厨师长</a><cite>|</cite>
+                            <a href="/houchuczg/">后厨</a><cite>|</cite>
+                            <a href="/chuancaiyuan/">传菜员</a><cite>|</cite>
+                            <a href="/chufangqiepei/">配菜/打荷</a><cite>|</cite>
+                            <a href="/xiwangong/">洗碗工</a><cite>|</cite>
+                            <a href="/miandianshi/">面点师</a><cite>|</cite>
+                            <a href="/chayi/">茶艺师</a><cite>|</cite>
+                            <a href="/qiantjd/">迎宾/接待</a><cite>|</cite>
+                            <a href="/xingliyuan/">行李员</a><cite>|</cite>
+                            <a href="/lingban/">大堂经理/领班</a><cite>|</cite>
+                            <a href="/jiudianjl/">餐饮/酒店管理</a><cite>|</cite>
+                            <a href="/lvyouguwen/">旅游顾问</a><cite>|</cite>
+                            <a href="/dyao/">导游/计调</a><cite>|</cite>
+                            <a href="/jiushengyuan/">救生员</a><cite>|</cite>
+                            <a href="/qianzheng/">签证专员</a>
+                        </p>
+                    </li>
+                </ul>
+                <div class="clear"></div> 
+
+                <ul>
+                    <li>
+                        <h2><a href="/meirongjianshen/">美容/美发/保健/健身</a></h2>
+                        <p>
+                            <a href="/faxingshi/">发型师</a><cite>|</cite>
+                            <a href="/meifaxuetu/">美发助理/学徒</a><cite>|</cite>
+                            <a href="/xitougong/">洗头工</a><cite>|</cite>
+                            <a href="/meirongshi/">美容师</a><cite>|</cite>
+                            <a href="/meirongzhuli/">美容助理/学徒</a><cite>|</cite>
+                            <a href="/huazhuangshizg/">化妆师</a><cite>|</cite>
+                            <a href="/meitishi/">美甲师</a><cite>|</cite>
+                            <a href="/chongwumr/">宠物美容</a><cite>|</cite>
+                            <a href="/meifadianz/">美容店长</a><cite>|</cite>
+                            <a href="/meirongguwen/">美容/瘦身顾问</a><cite>|</cite>
+                            <a href="/jianshenguwen/">运动/健身教练</a><cite>|</cite>
+                            <a href="/yujiawudaolaoshi/">瑜伽/舞蹈老师</a><cite>|</cite>
+                            <a href="/baojiananmozuliao/">足疗保健</a><cite>|</cite>
+                            <a href="/zhenjiuzg/">推拿按摩</a><cite>|</cite>
+                            <a href="/caizhuangpeixun/">彩妆培训师</a>
+                        </p>
+                    </li>
+                    <li>
+                        <h2><a href="/shichang/">市场营销/公关媒介</a></h2>
+                        <p>
+                            <a href="/yingxiaozhuanyuan/">市场专员/助理</a><cite>|</cite>
+                            <a href="/shichangzongjian/">市场经理/总监</a><cite>|</cite>
+                            <a href="/shichangzhuanyuan/">市场拓展</a><cite>|</cite>
+                            <a href="/shichangdiaoyan/">市场调研</a><cite>|</cite>
+                            <a href="/qihua/">市场策划</a><cite>|</cite>
+                            <a href="/shichangcehuagongguanmeijie/">媒介专员/助理</a><cite>|</cite>
+                            <a href="/meijiejingli/">媒介经理/主管</a><cite>|</cite>
+                            <a href="/huiwujingli/">会务会展会员/经理</a><cite>|</cite>
+                            <a href="/pinpaijingli/">品牌专员/经理</a><cite>|</cite>
+                            <a href="/gongguanzhuanyuan/">公关专员/助理</a><cite>|</cite>
+                            <a href="/gongguanjingli/">公关经理/主管</a><cite>|</cite>
+                            <a href="/qihuajingli/">企划经理/主管</a>
+                        </p>
+                    </li>
+                </ul>
+                <div class="clear"></div>
+
+                <ul>
+                    <li>
+                        <h2><a href="/zpfangchanjianzhu/">建筑/房产/装修/物业</a></h2>
+                        <p>
+                            <a href="/jianzhugongcheng/">工程项目管理</a><cite>|</cite>
+                            <a href="/gongchengjianli/">工程监理</a><cite>|</cite>
+                            <a href="/jianzhugongchengshi/">建筑工程师/总工</a><cite>|</cite>
+                            <a href="/jiegoutumu/">土木/土建工程师</a><cite>|</cite>
+                            <a href="/gongchengzhaojia/">造价师/预算师</a><cite>|</cite>
+                            <a href="/muqiang/">幕墙工程师</a><cite>|</cite>
+                            <a href="/jianzhuanfang/">安防工程师</a><cite>|</cite>
+                            <a href="/jzanquanguanli/">安全管理/安全员</a><cite>|</cite>
+                            <a href="/gongluqiaoliang/">道路桥梁技术</a><cite>|</cite>
+                            <a href="/geipaishui/">给排水/制冷/暖通</a><cite>|</cite>
+                            <a href="/cehuiceliang/">测绘/测量</a><cite>|</cite>
+                            <a href="/fangdichankaifa/">房地产开发/策划</a><cite>|</cite>
+                            <a href="/fangwusj/">园林/景观设计</a><cite>|</cite>
+                            <a href="/wuye/">物业管理员</a><cite>|</cite>
+                            <a href="/zonghewuyeweixiugong/">物业维修</a><cite>|</cite>
+                            <a href="/wuyejingli/">物业经理/主管</a><cite>|</cite>
+                            <a href="/jzhetong/">合同管理</a><cite>|</cite>
+                            <a href="/ziliao/">资料员</a><cite>|</cite>
+                            <a href="/fczhaoshang/">招商经理/主管</a>
+                        </p>
+                    </li> 
+                    <li>
+                        <h2><a href="/zpshengchankaifa/">普工/技工/生产</a></h2>
+                        <p><a href="/pugong/">普工</a><cite>|</cite><a href="/weixiugongchengshi/">综合维修工</a><cite>|</cite><a href="/nuantonggong/">制冷/水暖工</a><cite>|</cite><a href="/dianzi/">电工</a><cite>|</cite><a href="/mugong/">木工</a><cite>|</cite><a href="/qiangong/">钳工</a><cite>|</cite><a href="/maohangong/">切割/焊工</a><cite>|</cite><a href="/banjin/">钣金工</a><cite>|</cite><a href="/youqigong/">油漆工</a><cite>|</cite><a href="/fengrengong/">缝纫工</a><cite>|</cite><a href="/gulugong/">锅炉工</a><cite>|</cite><a href="/shukongjichuang/">车床/磨床/铣床</a><cite>|</cite><a href="/chachegong/">铲车/叉车工</a><cite>|</cite><a href="/mojugong/">铸造/注塑/模具工</a><cite>|</cite><a href="/jsgysheji/">工艺设计</a><cite>|</cite><a href="/huayan/">化验/检验</a><cite>|</cite><a href="/zhiliangbaozhengqa/">质量管理</a><cite>|</cite><a href="/gcsbguanli/">设备管理维护</a><cite>|</cite><a href="/jihuatiaodu/">生产计划</a><cite>|</cite><a href="/zonggongchengshi/">总工程师/副总工程师</a><cite>|</cite><a href="/changzhang/">厂长/副厂长</a><cite>|</cite><a href="/shengchanjingli/">车间主任</a><cite>|</cite><a href="/shengchanzongjian/">生产总监</a><cite>|</cite><a href="/shengchanzhuguan/">生产主管/组长</a><cite>|</cite><a href="/jishugongcheng/">技术工程师</a><cite>|</cite><a href="/zhizaogongchengshi/">制造工程师</a><cite>|</cite><a href="/weixiugong/">维修工程师</a><cite>|</cite><a href="/gongyegcs/">工业工程师</a><cite>|</cite><a href="/baozhuanggcs/">包装工程师</a><cite>|</cite><a href="/cailiaogcs/">材料工程师</a></p>
+                    </li>
+                </ul>
+                <div class="clear"></div>
+                              
+                <ul><li><h2><a href="/tech/">计算机/网络/通信</a></h2>
+                    <p><a href="/jishuzongjian/">技术总监/经理</a><cite>|</cite><a href="/jishuzhichi/">技术支持/维护</a><cite>|</cite><a href="/jszhuanyuan/">技术专员/助理</a><cite>|</cite><a href="/ruanjiangong/">软件工程师</a><cite>|</cite><a href="/chengxuyuan/">程序员</a><cite>|</cite><a href="/yingjiangong/">硬件工程师</a><cite>|</cite><a href="/zhilianggongcheng/">质量工程师</a><cite>|</cite><a href="/yingjiancs/">测试员</a><cite>|</cite><a href="/xitongjichengfenxi/">系统架构师</a><cite>|</cite><a href="/shujukukaifa/">数据库管理/DBA</a><cite>|</cite><a href="/youxisheji/">游戏设计/开发</a><cite>|</cite><a href="/wangzhanmeigong/">网页设计/制作</a><cite>|</cite><a href="/cadsheji/">语言/视频/图形</a><cite>|</cite><a href="/xiangmuzongjian/">项目经理/主管</a><cite>|</cite><a href="/wangzhanchanpin/">产品经理/专员</a><cite>|</cite><a href="/wangzhanyunying/">网站运营</a><cite>|</cite><a href="/wangzhanyingyun/">网站编辑</a><cite>|</cite><a href="/wangzhancehua/">网站策划</a><cite>|</cite><a href="/wangluogongchengshi/">网络管理员</a><cite>|</cite><a href="/wangluoanquan/">网络与信息安全工程师</a><cite>|</cite><a href="/tongxinwuxian/">通信技术工程师</a></p></li> 
+                    <li><h2><a href="/zpqiche/">汽车制造/服务</a></h2>
+   				    <p><a href="/qichesheji/">汽车设计工程师</a><cite>|</cite><a href="/zhuangpeigongyi/">装配工艺工程师</a><cite>|</cite><a href="/qichewx/">汽车/摩托车修理</a><cite>|</cite><a href="/qichejixie/">汽车机械工程师</a><cite>|</cite><a href="/qichedianzi/">汽车电子工程师</a><cite>|</cite><a href="/qcfsweixiu/">4S店管理</a><cite>|</cite><a href="/jianyanjiance/">汽车检验/检测</a><cite>|</cite><a href="/qichemeirong/">汽车美容</a><cite>|</cite><a href="/qcpinggushi/">二手车评估师</a><cite>|</cite><a href="/qczozhuang/">发动机/总装工程师</a><cite>|</cite><a href="/qcanquanxingneng/">安全性能工程师</a><cite>|
+                    </cite><a href="/qclipei/">理赔专员/顾问</a></p></li>
+                </ul><div class="clear"></div>
+           
+                <ul><li><h2><a href="/chaoshishangye/">零售/促销</a></h2>
+                    <p><a href="/yingyeyuan/">店员/营业员</a><cite>|</cite><a href="/shouying/">收银员</a><cite>|</cite><a href="/cuxiao/">促销/导购员</a><cite>|</cite><a href="/lihuoyuan/">理货员/陈列员</a><cite>|</cite><a href="/fangsunyuan/">防损员/内保</a><cite>|</cite><a href="/dianzhang/">店长/卖场经理</a><cite>|</cite><a href="/zhaoshangjingli/">招商经理/主管</a><cite>|</cite><a href="/shechipinyewu/">奢侈品业务</a><cite>|</cite><a href="/pinleiguanli/">品类管理</a><cite>|</cite><a href="/shipinjiagong/">食品加工/处理</a></p></li>
+                    <li><h2><a href="/zpcaiwushenji/">财务/审计/统计</a></h2> 
+                <p><a href="/caiwujingli/">财务经理/主管</a><cite>|</cite><a href="/caiwuzongjian/">财务总监</a><cite>|</cite><a href="/caiwu/" >会计/会计师</a><cite>|</cite><a href="/caiwuzhuli/">财务/会计助理</a><cite>|</cite><a href="/chuna/">出纳</a><cite>|</cite><a href="/tongjishenji/">审计专员/助理</a><cite>|</cite><a href="/shenjijingli/">审计经理/主管</a><cite>|</cite><a href="/tongjiyuan/">统计员</a><cite>|</cite><a href="/shuiwuzhuanyuan/">税务专员/助理</a><cite>|</cite><a href="/shuiwujingli/">税务经理/主管</a><cite>|</cite><a href="/caiwufenxi/">财务分析员</a></p></li></ul><div class="clear"></div>
+                                         
+                <ul><li><h2><a href="/jiazhengbaojiexin/">家政保洁/安保</a></h2> 
+                <p><a href="/baojieyuan/">保洁</a><cite>|</cite><a href="/baomuxin/">保姆</a><cite>|</cite><a href="/yuesaoyuying/">月嫂</a><cite>|</cite><a href="/yuying/">育婴师/保育员</a><cite>|</cite><a href="/xiyifang/">洗衣工</a><cite>|</cite><a href="/zhdiang/">钟点工</a><cite>|</cite><a href="/baoanl/">保安</a></p></li>
+			    <li><h2><a href="/siji/">司机</a></h2>	  
+                    <p><a href="/shangwujiaochesiji/">商务司机</a><cite>|</cite><a href="/changtukeyuansiji/">客运司机</a><cite>|</cite><a href="/sonhuosiji/">货运司机</a><cite>|</cite><a href="/chuzuchesiji/">出租车司机</a><cite>|</cite><a href="/gongjiaobanchesiji/">班车司机</a><cite>|</cite><a href="/gongjiaosiji/">公交/地铁司机</a><cite>|</cite><a href="/tezhongchesiji/">特种车司机</a><cite>|</cite><a href="/jiaoxiaojiaolian/">驾校教练/陪练</a></p></li></ul><div class="clear"></div>
+             
+    		    <ul><li><h2><a href="/zpxiezuochuban/">编辑/出版/印刷</a></h2> 
+                <p><a href="/cbzhubian/">总编/副总编/主编</a><cite>|</cite><a href="/bianji/">编辑/撰稿</a><cite>|</cite><a href="/jizhe/">记者/采编</a><cite>|</cite><a href="/cbjiaodui/">校对/录入</a><cite>|</cite><a href="/cbchuban/">出版/发行</a><cite>|</cite><a href="/cbyishua/">排版设计/制作</a><cite>|</cite><a href="/cbyinshuacaozuo/">印刷操作</a><cite>|</cite><a href="/zhuangdingyuan/">装订/烫金</a></p></li>
+                <li><h2><a href="/zhuanye/">教育培训</a></h2> 
+                <p><a href="/jiaoshi/">教师/助教</a><cite>|</cite><a href="/jiajiaolaoshi/" >家教</a><cite>|</cite><a href="/youerjiaoshi/">幼教</a><cite>|</cite><a href="/jypeixunshi/">培训师/讲师</a><cite>|</cite><a href="/peixuncehua/">培训策划</a><cite>|</cite><a href="/peixunzhuli/">培训助理</a><cite>|</cite><a href="/jiaowu/">教学/教务管理</a><cite>|</cite><a href="/jiaoyukaifa/">教育产品开发</a><cite>|</cite><a href="/jykeyuanrenyuan/">学术研究/科研</a><cite>|</cite><a href="/jyzhaosheng/">招生/课程顾问</a><cite>|</cite><a href="/xiaozhang/">校长</a></p></li></ul><div class="clear"></div>
+            
+                <ul><li><h2><a href="/fanyizhaopin/">翻译</a></h2> 
+                <p><a href="/yingyufanyi/" >英语翻译</a><cite>|</cite><a href="/riyufanyi/">日语翻译</a><cite>|</cite><a href="/hanyu/">韩语翻译</a><cite>|</cite><a href="/fayufanyi/">法语翻译</a><cite>|</cite><a href="/eyufanyi/">俄语翻译</a><cite>|</cite><a href="/deyufanyi/">德语翻译</a><cite>|</cite><a href="/xibanyayu/">西班牙语翻译</a><cite>|</cite><a href="/yidaliyu/">意大利语翻译</a><cite>|</cite><a href="/putaoyayu/">葡萄牙语翻译</a><cite>|</cite><a href="/alaboyu/">阿拉伯语翻译</a><cite>|</cite><a href="/jyxiaoyuzhongfanyi/">小语种翻译</a></p></li>
+                <li><h2><a href="/zpwentiyingshi/">影视/娱乐/KTV</a></h2> 
+                <p><a href="/jiubagzy/">酒吧服务员</a><cite>|</cite><a href="/wtliyi/">礼仪/迎宾</a><cite>|</cite><a href="/wtzhuchiren/">主持人</a><cite>|</cite><a href="/tiaojiushi/">调酒师</a><cite>|</cite><a href="/wtluying/">音效师</a><cite>|</cite><a href="/wtxieying/">摄影师/摄像师</a><cite>|</cite><a href="/yingshicehua/">影视/后期制作</a><cite>|</cite><a href="/peiyin/">配音员</a><cite>|</cite><a href="/fangyingyuan/">放映员</a>
+                </p></li>
+                </ul>
+                <div class="clear"></div>
+
+                <ul><li><h2><a href="/zpguanggao/">广告/设计/咨询</a></h2> 
+                <p><a href="/wenan/">广告文案</a><cite>|</cite><a href="/shejichuangyi/">广告创意</a><cite>|</cite><a href="/chuangyizongjian/">创意指导/总监</a><cite>|</cite><a href="/fengmiansj/">广告设计/制作</a><cite>|</cite><a href="/sheji/">平面设计</a><cite>|</cite><a href="/meibian/">美编/美术设计</a><cite>|</cite><a href="/meishuzhidao/">美术指导</a><cite>|</cite><a href="/duomeiti/">多媒体/动画设计</a><cite>|</cite><a href="/zhanshizhuanghuang/">店面/陈列/展览设计</a><cite>|</cite><a href="/huizhancehua/">会展策划/设计</a><cite>|</cite><a href="/shineisheji/">装修装潢设计</a><cite>|</cite><a href="/jiajusj/">家具/家居用品设计</a><cite>|</cite><a href="/fuzhuangsj/">服装设计</a><cite>|</cite><a href="/gongyisheji/">工艺/珠宝设计</a><cite>|</cite><a href="/baozhuangsheji/">产品/包装设计</a><cite>|</cite><a href="/shejizhitu/">CAD设计/制图</a><cite>|</cite><a href="/zixunshi/">咨询顾问</a><cite>|</cite><a href="/zixunjingli/">咨询经理/主管</a></p></li>
+
+                <li><h2><a href="/jinrongtouzi/">金融/银行/证券/投资</a></h2> 
+                <p><a href="/jingjiren/">证券/期货/外汇经纪人</a><cite>|</cite><a href="/zhengquanjingli/">证券经理/总监</a><cite>|</cite><a href="/zhengquanfenxi/">证券分析/金融研究</a><cite>|</cite><a href="/yinhangyewu/">信用卡/银行卡业务</a><cite>|</cite><a href="/yinhangjingli/">银行经理/主任</a><cite>|</cite><a href="/yinhangkuaiji/">银行会计/柜员</a><cite>|</cite><a href="/zichanpinggu/">信贷管理/资信评估</a><cite>|</cite><a href="/zcpinggu/">资产评估</a><cite>|</cite><a href="/danbaopaimai/">担保/拍卖/典当</a><cite>|</cite><a href="/paimaishi/">拍卖师</a><cite>|</cite><a href="/waihuijingli/">外汇/基金/国债经理人</a><cite>|</cite><a href="/jinrong/">投资/理财顾问</a><cite>|</cite><a href="/rongzizhuanyuan/">融资专员</a><cite>|</cite><a href="/rongzijingli/">融资经理/总监</a><cite>|</cite><a href="/fengxiankongzhi/">风险管理/控制</a><cite>|</cite><a href="/caopanshou/">股票/期货操盘手</a></p></li></ul><div class="clear"></div>
+    
+                <ul><li><h2><a href="/zpjinrongbaoxian/">保险</a></h2> 
+                <p><a href="/baoxianjingli/">项目经理/主管</a><cite>|</cite><a href="/baoxianguwen/">保险顾问/规划师</a><cite>|</cite><a href="/baoxianlipei/">保险核保/理赔</a><cite>|</cite><a href="/baoxianneiqin/">保险内勤</a><cite>|</cite><a href="/baoxianjingsuan/">保险精算师</a><cite>|</cite><a href="/baoxianjchanpin/">保险产品开发/策划</a><cite>|</cite><a href="/baoxianxuqi/">保险续期管理</a><cite>|</cite><a href="/baoxianpeixun/">保险培训师</a><cite>|</cite><a href="/chubeijingli/">储备经理人</a><cite>|</cite><a href="/qiyueguanli/">契约管理</a></p></li>
+
+                <li><h2><a href="/zpshangwumaoyi/">贸易/采购/商务</a></h2> 
+                <p><a href="/waimaozhuanyuan/">外贸专员/助理</a><cite>|</cite><a href="/waimaojingli/">外贸经理/主管</a><cite>|</cite><a href="/caigouyuan/">采购员</a><cite>|</cite><a href="/caigouzhuli/">采购助理</a><cite>|</cite><a href="/caigouguanli/">采购经理/总监</a><cite>|</cite><a href="/danzhengbaoguan/">报关员</a><cite>|</cite><a href="/yewugendan/">业务跟单</a><cite>|</cite><a href="/shangwuzhuanyuan/">商务专员/经理</a><cite>|</cite><a href="/maishou/">买手</a></p></li></ul><div class="clear"></div>
+       
+                <ul><li><h2><a href="/zpwuliucangchu/">仓储/物流</a></h2> 
+			    <p><a href="/maoyi/">物流专员/助理</a><cite>|</cite><a href="/wuliujingli/">物流经理/主管</a><cite>|</cite><a href="/wuliuzongjian/">物流总监</a><cite>|</cite><a href="/diaodu/">调度员</a><cite>|</cite><a href="/sudiyuan/">快递员</a><cite>|</cite><a href="/cangku/">仓库管理员</a><cite>|</cite><a href="/cangkujingli/">仓库经理/主管</a><cite>|</cite><a href="/banyungong/">装卸/搬运工</a><cite>|</cite><a href="/gongyinglianguanli/">供应链管理</a><cite>|</cite><a href="/danzhengyuan/">单证员</a></p></li>
+			    <li><h2><a href="/zpfalvzixun/">法律</a></h2> 
+                <p><a href="/lvshizhaopin/">律师/法律顾问</a><cite>|</cite><a href="/lvshizhuli/">律师助理</a><cite>|</cite><a href="/lfawurenyuan/">法务专员/助理</a><cite>|</cite><a href="/fawujingli/">法务经理/主管</a><cite>|</cite><a href="/zhuanliguwen/">产权/专利顾问</a><cite>|</cite><a href="/heguiguanli/">合规管理</a></p></li></ul><div class="clear"></div>
+                                    
+                <ul>            <li><h2><a href="/zpyiyuanyiliao/">医疗/制药/生物</a></h2> 
+                <p><a href="/yiliao/">医生</a><cite>|</cite><a href="/yyxinliyisheng/">心理医生</a><cite>|</cite><a href="/hushi/">护士/护理</a><cite>|</cite><a href="/hushizhang/">护理主任/护士长</a><cite>|</cite><a href="/yyyaokuzhuren/">药剂师</a><cite>|</cite><a href="/yyliliaoshi/">理疗师</a><cite>|</cite><a href="/yyyiyaoxuejianyan/">医药质检</a><cite>|</cite><a href="/yyyiyuan/">医疗管理</a><cite>|</cite><a href="/yymeirongzhengxing/">美容整形师</a><cite>|</cite><a href="/yanguangshi/">验光师</a><cite>|</cite><a href="/yyyingyangshi/">营养师</a><cite>|</cite><a href="/chongwuyisheng/">宠物护理/兽医</a><cite>|</cite><a href="/linchuangyanjiu/">临床研究/协调</a><cite>|</cite><a href="/yiyaoyanfa/">医药研发/生产/注册</a><cite>|</cite><a href="/yiliaoyanfa/">医疗器械研发/维修</a><cite>|</cite><a href="/shengwugongcheng/">生物工程/生物制药</a></p></li>
+                <li><h2><a href="/zpjixieyiqi/">电子/电气/仪器仪表</a></h2> 
+                <p><a href="/zidonghua/">自动化工程师</a><cite>|</cite><a href="/dianzidianqigcs/">电子/电气工程师</a><cite>|</cite><a href="/didianqigongchengshi/">电路工程师/技术员</a><cite>|</cite><a href="/jxjixiegongchengshi/">机电/机械工程师</a><cite>|</cite><a href="/jxyiqigongcheng/">仪器/仪表/计量</a><cite>|</cite><a href="/wuxiandiangcs/">无线电工程师</a><cite>|</cite><a href="/ceshigcs/">测试/可靠性工程师</a><cite>|</cite><a href="/gongyigcs/">产品工艺/规划工程师</a><cite>|</cite><a href="/bantushejigcs/">版图设计工程师</a><cite>|</cite><a href="/yinpinshipingcs/">音频/视频工程师</a><cite>|</cite><a href="/zhaomingsheji/">灯光/照明设计工程师</a><cite>|</cite><a href="/yanfagcs/">研发工程师</a><cite>|</cite><a href="/dianzidianqiwx/">电子/电器维修</a></p></li></ul><div class="clear"></div>
+
+			    <ul><li><h2><a href="/zhikonganfang/">质控/安防</a></h2> 
+                <p><a href="/zhiliangguanli/">质量管理/测试经理</a><cite>|</cite><a href="/zhijianyuan/">质量检验员/测试员</a><cite>|</cite><a href="/ceshigongchengshi/">测试工程师</a><cite>|</cite><a href="/anquanxiaofang/">安全消防</a><cite>|</cite><a href="/renzhengyuan/">认证工程师/审核员</a><cite>|</cite><a href="/anquanguanli/">安全管理</a></p></li>
+			    <li><h2><a href="/zpguanli/">高级管理</a></h2>
+                <p><a href="/zpzongcai/">CEO/总裁/总经理</a><cite>|</cite><a href="/shouxiyunying/">首席运营官COO</a><cite>|</cite><a href="/shouxicaiwu/">首席财务官CFO</a><cite>|</cite><a href="/shouxijishu/">首席技术官CTO</a><cite>|</cite><a href="/fuzongcai/">副总裁/副总经理</a><cite>|</cite><a href="/zongcaizhuli/">总裁助理/总经理助理</a><cite>|</cite><a href="/zongjian/">总监</a><cite>|</cite><a href="/fengongsijingli/">分公司经理</a><cite>|</cite><a href="/hehuoren/">合伙人</a></p></li></ul><div class="clear"></div>
+
+			    <ul><li><h2><a href="/xiaofeipin/">服装/纺织/食品</a></h2>
+                <p><a href="/fuzhuangsheji/">服装/纺织设计</a><cite>|</cite><a href="/fuzhuangdayang/">服装打样/制版</a><cite>|</cite><a href="/shengchanguanli/">生产管理</a><cite>|</cite><a href="/yangyigong/">样衣工</a><cite>|</cite><a href="/shipinyanfa/">食品/饮料研发/检验</a><cite>|</cite><a href="/chugeshi/">板房/底格出格师</a><cite>|</cite><a href="/fangmayuan/">电脑放码员</a><cite>|</cite><a href="/zhiyangshi/">纸样师/车板工</a></p></li>
+			    <li><h2><a href="/huanbao/">环境科学/环保</a></h2>
+                <p><a href="/wushuichuli/">污水处理工程师</a><cite>|</cite><a href="/hjgongchengjishu/">环境工程技术</a><cite>|</cite><a href="/hjguanli/">环境管理/保护</a><cite>|</cite><a href="/huanbaojishu/">环保技术</a><cite>|</cite><a href="/ehsguanli/">EHS管理</a><cite>|</cite><a href="/huanbaoshi/">环保工程师</a><cite>|</cite><a href="/huanbaojiance/">环保检测</a><cite>|</cite><a href="/shuizhijiance/">水质检测员</a></p></li></ul><div class="clear"></div>
+
+			    <ul><li><h2><a href="/nonglinmuyu/">农/林/牧/渔业</a></h2>
+                <p><a href="/siliao/">饲料业务</a><cite>|</cite><a href="/yangzhi/">养殖人员</a><cite>|</cite><a href="/nongyishi/">农艺师</a><cite>|</cite><a href="/xumushi/">畜牧师</a><cite>|</cite><a href="/nongchangzhu/">场长</a><cite>|</cite><a href="/yangzhizhuguan/">养殖部主管</a><cite>|</cite><a href="/siliaoyanfa/">动物营养/饲料研发</a></p></li>
+                <li><h2><a href="/zhaopin/">其他职能</a></h2> 
+                <p><a href="/cgqitazhiwei/">其他职位</a></p></li>
+               </ul>--%>
+            </div>
+            <div class="clear"></div>
+<%
+    if (controller == "zhaopin")
+    {
+        %>
+        </div>
+    </div>
+        <%
+    }
+%>
+<%
+    if (controller == "zhaopin")
+    {
+        %>
+        <!---广告--->
+        <div class="cbright" id="rightAdframe" style="display:none;">
+            <div id="ad1" class="crpic"></div>
+            <div id="ad2" class="crpic"></div>
+        </div>
+        <%
+    }
+%>
+</div>
+<div class="clear"></div>
+
+<asp:ContentPlaceHolder ID="Rows" runat="server">
+</asp:ContentPlaceHolder>
+
+</asp:Content>

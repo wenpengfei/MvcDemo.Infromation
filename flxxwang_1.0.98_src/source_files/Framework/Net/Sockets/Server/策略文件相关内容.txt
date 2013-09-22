@@ -1,0 +1,15 @@
+﻿socket连接建立时，Flash会主动向Socket发送crossdomain请求，数据内容为"<policy-file-request/>"，并紧接一个内容为NULL的字节，当服务端接收到类似的内容时，服务器返回crossdomain，内容和http crossdomain一样，以下是主策略文件的样例：
+
+对于Socket，主策略文件是指843端口的策略文件，非843端口无需设置site-control，设置了flashplayer也会忽略。
+
+如果843端口没有crossdomain，或者site-control为"all"，则请求当前所请求的socket端口或者从指定端口请求；
+
+如果843端口存在crossdomain，如果site-control是none，则flashplayer直接拒绝socket请求
+
+如果843端口存在crossdomain，而site-control为"master-only"，则应用主策略文件
+
+<?xml version="1.0"?>
+<cross-domain-policy>
+   <site-control permitted-cross-domain-policies="master-only"/>
+   <allow-access-from domain="swf.example.com" to-ports="10000" />
+</cross-domain-policy>

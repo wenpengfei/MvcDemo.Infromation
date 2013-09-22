@@ -1,0 +1,19 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/Post/TourMasterPage.Master" Inherits="System.Web.Mvc.ViewMasterPage" %>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="PublishCount" runat="server">
+    <asp:ContentPlaceHolder ID="PublishCount" runat="server" />
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="ObjectTypeRow" runat="server">
+<tr> 
+    <td class="t"> <b class="red">*</b> 类 别： </td> 
+    <td> 
+        <asp:ContentPlaceHolder ID="ObjectType" runat="server" /> 
+    </td> 
+    </tr>
+</asp:Content>
+<asp:Content ID="Content4" ContentPlaceHolderID="InfoTag" runat="server">
+    <asp:ContentPlaceHolder ID="InfoTag" runat="server" />
+</asp:Content>
+<asp:Content ID="Content5" ContentPlaceHolderID="PostScript" runat="server">
+    <asp:ContentPlaceHolder ID="PostScript" runat="server" />
+</asp:Content>

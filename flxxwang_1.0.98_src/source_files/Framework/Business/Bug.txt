@@ -1,0 +1,43 @@
+﻿int? a = null;
+a.a.GetType()此时出错。未将对象引用设置到对象的实现
+///////////
+int? a = 11;
+a.a.GetType()//类型是System.Int32
+////////////////////
+typeof(int?).ToDbType()//出错，无法转换为DbType类型
+///////////////////
+int? a = null;
+SqlParameter p = new SqlParameter();
+p.ParameterName = "@aa";
+p.Value = a;
+Response.Write(p.DbType.ToString());
+//a为null时，DbType为String，否则为Int32.(对于其他泛型类型也是一样，如果为null则DbType为String，否则为泛型的Value对应的DbType)
+
+结论：
+1、添加DbParameter时，基类型不要用 值.GetType(),因为如果值为null就报错了。
+2、 泛型版值类型DbType设置为DbType.String.如：
+db.AddInParameter(cmd, "@ParentId", DbType.String, category.ParentId);(用这种就行了。通用性好。)
+或：
+db.AddInParameter(cmd, "@ParentId", DbType.String, category.ParentId == null ? DBNull.Value : (object)category.ParentId.Value);
+
+其中ParentId定义为int? 类型。
+(DbType的作用就是将Value转换为DbType类型，再写入数据库)
+
+///////////////////
+数据类型转换：
+1：String与Uri之间不能相互隐式转换：
+db.AddInParameter(cmd, "@BlogUrl", DbType.String, Roll.BlogUrl!=null?(object)Roll.BlogUrl.ToString():DBNull.Value);
+
+2：
+数据库字段类型   DataTable列的类型
+     real             single
+	 float            double
+所以，以下的定义会出现转换错误：
+     数据库中的字段为float,类中属性定义为float,此时会出现double无法转换为single,可以定义为：数据库real,类中属性float,
+	 如果数据库中定义为float,那么类中属性应定义为double类型。
+ 
+
+///////////////////
+对DbParameter直接进行赋值时，不用设置DbType，它会根据所赋的值Value自动设置DbType,如：
+Parameter.ParameterName = "@UserId";
+Parameter.Value = Guid.NewGuid();//此时Parameter的DbType会自动设置为Guid

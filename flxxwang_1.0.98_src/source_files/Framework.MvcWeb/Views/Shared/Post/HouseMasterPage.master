@@ -1,0 +1,99 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/post/poststep.Master" Inherits="System.Web.Mvc.ViewMasterPage" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <asp:ContentPlaceHolder ID="head" runat="server" />
+</asp:Content>
+<asp:Content ID="Content4" ContentPlaceHolderID="PublishCount" runat="server">
+    <asp:ContentPlaceHolder ID="PublishCount" runat="server" />
+</asp:Content>
+<asp:Content ID="Content5" ContentPlaceHolderID="TopMsg" runat="server">
+</asp:Content>
+<asp:Content ID="Content6" ContentPlaceHolderID="Main" runat="server">
+    <table cellpadding="0" cellspacing="0" class="box1" id="formTb">
+    <asp:ContentPlaceHolder ID="FormRows" runat="server" />
+        <tr> 
+            <td class="t"> <b class="red">*</b> 补充说明： </td> 
+            <td> 
+            <textarea name="Content" class="textarea2" id="Content"  maxLength=2000></textarea> 
+            <span id="Content_Tip"></span> 
+            </td> 
+        </tr> 
+        <tr id="pdv">
+            <td class="t"> </td> 
+            <td><div id="uploadPic" value=""></div> 
+            <script type="text/javascript">
+                $info.Uploader.init();
+            </script>
+        </td>
+        </tr> 
+        <tr> 
+            <td class="t"> <b class="red">*</b> 联系人： </td> 
+            <td> <input type="text" name="goblianxiren" id="goblianxiren" value='' class="text2"  maxLength=6 /> &nbsp;<span>
+            <input class="base" type="checkbox" value="1" id="IsBiz" name="IsBiz"  />我是经纪人</span> 
+            <span class="jingjiren" id="id_agent_tip">
+            <div id="agent_tip" class="jingjirencon" style="display:none;"> 
+            <span name="biz_shenfen">您已被系统判定为经纪人身份</span> <p>什么是个人身份？</p> <span>1、业主直接出租/出售<br />2、个人转租</span> <p>什么是经纪人身份？</p> <span>1、房产经纪公司、代理公司的经纪人(与是否有中介费无关)<br />2、二房东<br />3、进行直租/直售的物业公司、开发商</span> 
+            </div> 
+            </span> 
+            <span id="goblianxiren_Tip"></span> 
+            </td> 
+        </tr> 
+        <tr> 
+            <td class="t"> <b class="red">*</b> 手机或电话： </td> 
+            <td> <input class="text2" type="text" id="Phone" name="Phone" value=''  /> <span id="Phone_Tip"></span> </td> 
+        </tr>  
+        <tr> 
+            <td class="t"> </td> 
+            <td> <input type="submit" id="fabu" class="fabu1" value="　　发布　　" ct="submit" />  </td> 
+        </tr>
+    </table>
+</asp:Content>
+<asp:Content ID="Content7" ContentPlaceHolderID="PostScript" runat="server">
+    <asp:ContentPlaceHolder ID="PostScript" runat="server" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#Phone").formValidator({ tipid: "Phone_Tip", onfocus: "请正确填写电话号码，分机可以用“-”分开", q2b: true }).inputValidator({ onerror: "请填手机或电话" }).regexValidator({ regexp: "(^(0\\d{2,3})?-?([2-9]\\d{6,7})(-\\d{1,5})?$)|(^((\\(\\d{3}\\))|(\\d{0}))?(13|14|15|18)\\d{9}$)|(^(400|800)\\d{7}(-\\d{1,5})?$)|(^(95013)\\d{6,8}$)", onerror: "电话填写错误。<br/>请参照格式填写：87654321-001或138********" });
+            $('#goblianxiren').formValidator({ tipid: 'goblianxiren_Tip', onfocus: '2～6个字，不能填写电话和特殊符号。', q2b: true }).regexValidator({ regexp: "\\S+#^(.){2,6}$#^[\\w\\d\\s\\u4e00-\\u9fa5]*$", onerror: "请输入联系人#联系人不足2个字#联系人不能填写特殊符号" });
+        });
+
+        function FillData(obj) {
+            if (obj == null) {
+                return;
+            }
+            obj.Content = $("#Content").val();
+            obj.ContactPerson = $("#goblianxiren").val();
+            obj.Phone = $("#Phone").val();
+            obj.IsBiz = $("#IsBiz").attr("checked");
+
+            obj.UserId = GetUserId();
+            
+            obj.CityId = GetCityId();
+            obj.RegionId = GetRegionId();
+            obj.CircleId = GetCircleId();
+            obj.TId = GetTId();
+            if ($("#Pic").val() != "") {
+                obj.Pictures = $("#Pic").val();
+            }
+        }
+        //    function clearPicValue() {//保留
+        //        var c = $("#pdv:hidden"); if (c.length > 0) {
+        //            $('#Pic').val(''); $('#PicDesc').val('');
+        //        }
+        //    }
+        //        function GetContent() {
+        //            return $("#Content").val();
+        //        }
+        //        function GetContactPerson() {
+        //            return $("#goblianxiren").val();
+        //        }
+        //        function GetPhone() {
+        //            return $("#Phone").val();
+        //        }
+        //        function IsBiz() {
+        //            return $("#IsBiz").attr("checked");
+        //        }
+
+        $("#topinfomsg").hide();
+        $("#mydear").hide();
+
+    </script>
+</asp:Content>

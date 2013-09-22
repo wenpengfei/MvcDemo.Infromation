@@ -1,0 +1,5 @@
+﻿http://msdn.microsoft.com/zh-cn/library/bb546158(v=VS.90).aspx
+
+http://www.codeproject.com/script/Articles/MemberArticles.aspx?amid=4829645
+
+http://msdn.microsoft.com/zh-cn/library/bb546136.aspx

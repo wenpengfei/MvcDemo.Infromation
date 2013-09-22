@@ -1,0 +1,237 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/Post/poststep.Master" Inherits="System.Web.Mvc.ViewMasterPage" %>
+<%@ Import Namespace="Infomation.Core.Mvc" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <asp:ContentPlaceHolder ID="head" runat="server" />
+</asp:Content>
+
+<asp:Content ID="Content4" ContentPlaceHolderID="PublishCount" runat="server">
+    <%--<asp:ContentPlaceHolder ID="PublishCount" runat="server" />--%>
+</asp:Content>
+
+<asp:Content ID="Content5" ContentPlaceHolderID="TopMsg" runat="server">
+<font color="#000000">
+    <STRONG>提示：</strong>
+    发布重复信息或灌水信息，信息将会被删除，严重者将锁定帐户。
+    <a href="http://about.flxxwang.com/89.html?categid=1#b" target="_blank"><U>查看版规 </U></a>
+</font>
+</asp:Content>
+
+<asp:Content ID="Content6" ContentPlaceHolderID="Main" runat="server">
+    <%
+        var routeData = (HttpContext.Current.Handler as MvcHandler).RequestContext.RouteData;
+        var ViewTag = ViewData["ViewTag"] as ViewTag; 
+    %>
+    <table cellpadding="0" cellspacing="0" class="box1" id="formTb"> 
+        <tr> 
+            <td class="t"> <b class="red">*</b> 标 题： </td> 
+            <td>
+                <input type="text" name="Title" f="{0}" id="Title" value='' class="text1"  maxLength=25 />
+                <span id="Title_Tip"></span>
+            </td> 
+        </tr>
+        <%bool showObjectTypRow = ViewTag.Interface.ObjectTypeCollection != null&&ViewTag.Interface.ObjectTypeCollection.Count > 0;%> 
+        <%var smallcategory=routeData.Values["smallcategory"].ToString().ToLower(); %>
+        <tr id="trObjectType" <%=showObjectTypRow?"":"style='display:none'" %>> 
+            <td class="t"> <b class="red">*</b> 类 别： </td> 
+            <td>
+             <%
+                 if (smallcategory != "huoyun")
+                 {
+                     %>
+                        <select name="ObjectType" id="ObjectType" f="{0}"> 
+                            <option selected="selected" value="">请选择</option>  
+                            <%
+                                foreach (var item in ViewTag.Interface.ObjectTypeCollection)
+                                {
+                                    %>
+                                    <option value='<%=item.Id %>' ><%=item.Name %></option>
+                                    <%
+                                }
+                            %>  
+                        </select>
+                    <%
+                 }
+             %>
+                <asp:ContentPlaceHolder ID="ObjectTypePlaceHolder" runat="server" />
+                <span id="ObjectType_Tip"></span> 
+            </td> 
+        </tr>
+
+        <%var showTag=ViewTag.Interface.TagCollection!=null&&ViewTag.Interface.TagCollection.Count>0; %>
+        <tr id="tt" <%=showTag?"":"style='display: none'" %>> 
+            <td class="t"> 标签： </td> 
+            <td>
+                <ul class="tag3" id="tagul">
+                    <%
+                        if (ViewTag.Interface.TagCollection != null)
+                        {
+                            foreach (var item in ViewTag.Interface.TagCollection)
+                            {
+                            %>
+                                <li><input name="Tag" id="Tag_<%=item.Id %>" type="checkbox" value="<%=item.Id %>" t="<%=item.ObjectTypeId %>"/><%=item.Name%></li>
+                                <%--input的id不能省,否则表单验证会出错.--%>
+                            <%    
+                            }
+                        }
+                    %> 
+                </ul>
+                <span id="infotag_Tip"></span> 
+            </td> 
+        </tr>
+
+        <asp:ContentPlaceHolder ID="AfterInfoTagRow" runat="server" /> 
+        <tr> 
+            <td class="t"> 详细地址： </td> 
+            <td> <input class="text1" type="text" id="dizhi" name="dizhi" f="{0}" value=''  Except='null'  maxLength=50 /> <span id="dizhi_Tip"></span> </td> 
+        </tr> 
+        <tr> 
+            <td class="t"> <b class="red">*</b> 补充说明： </td> 
+            <td> <textarea name="Content" class="textarea2" id="Content"  maxLength=2000></textarea> <span id="Content_Tip"></span> </td> 
+        </tr> 
+        <tr>
+            <td class="t"> </td> 
+            <td>
+                <div id="uploadPic" value=""></div> 
+                <script type="text/javascript">
+                    $info.Uploader.init();
+                </script>
+            </td>
+        </tr> 
+        <tr> 
+            <td class="t"> <b class="red">*</b> 联系人： </td> 
+            <td> <input type="text" name="goblianxiren" id="goblianxiren" value='' class="text2"  maxLength=6 /> <span id="goblianxiren_Tip"></span> </td> 
+        </tr> 
+        <tr> 
+            <td class="t"> <b class="red">*</b> 手机或电话： </td> 
+            <td> <input class="text2" type="text" id="Phone" name="Phone" value=''   /> <span id="Phone_Tip"></span> </td> 
+        </tr>
+        <tr>
+            <td class="t">QQ或MSN：</td>
+            <td><input class="text2" type="text" qtb="true" value='' id="IM" name="IM" /> <span id="IM_Tip"></span></td>
+        </tr>  
+        <tr> 
+            <td class="t"> </td> 
+            <td> <input type="submit" id="fabu" class="fabu1" value="　　发布　　" ct="submit" />  </td> 
+        </tr> 
+    </table>
+</asp:Content>
+<asp:Content ID="Content7" ContentPlaceHolderID="PostScript" runat="server">
+    <%
+        var ViewTag = ViewData["ViewTag"] as ViewTag;
+        var YellowPage=ViewTag.Interface as YellowPage;
+    %>
+    <script type="text/javascript">
+        $("#mydear").hide();
+        $().ready(function () {
+//            $.formValidator.initConfig({ formid: "aspnetForm", errorfocus: true, btnid: 'fabu', fun: function () {
+//                posting();
+//                post();
+//                return false;
+//            }
+//            });
+            $("#Title").formValidator({ tipid: "Title_Tip", onfocus: "6-25个字，不能填写电话和特殊符号<br/>标题将被展示在详情页和列表页最醒目的位置", q2b: true }).regexValidator({ regexp: "^[\\s\\S]*$#^[\\s\\S]{6,}$#^(.){6,25}$", onerror: "请输入标题#标题不足6个字#6-25个字，不能填写电话和特殊符号！" }).functionValidator({ fun: function (val, elem) { return $.formValidator.IsSimple(val); }, onerror: '太过简单' });
+            $('#dizhi').formValidator({ tipid: 'dizhi_Tip', onfocus: '请输入详细地址', q2b: true, 'empty': true }).regexValidator({ regexp: "^(.){2,50}$#^([^\\s]\\s{0,3}(?!([0-9０１２３４５６７８９零一二三四五六七八九壹贰叁肆伍陆柒捌玖]{6})))+$#^[\\w\\[\\]\\(\\)\\{\\}\\.\\s,\\-\\*，。（）【】“”—‘’\\u4e00-\\u9fa5]*$", onerror: "地址不足2个字#地址里不能填写电话#地址里不能填写特殊字符" });
+            $('#Content').formValidator({ tipid: 'Content_Tip', onfocus: '10~2000个字之间，不能填写电话、QQ等联系方式或特殊符号，否则信息将会被删除' }).regexValidator({ regexp: "^[\\s\\S]*$#^[\\s\\S]{10,}$#^([\\s\\S]){10,2000}$", onerror: "请填写补充说明#补充说明不足10个字#补充说明应在10~2000个字之间，不能填写电话、QQ等联系方式" }).functionValidator({ fun: function (val, elem) { return $.formValidator.IsSimple(val); }, onerror: '内容太过简单' });
+            $('#goblianxiren').formValidator({ tipid: 'goblianxiren_Tip', onfocus: '2~6个字，不能填写电话和联系方式', q2b: true }).regexValidator({ regexp: "\\S+#^(.){2,6}$#^[\\w\\d\\s\\u4e00-\\u9fa5]*$", onerror: "请输入联系人#联系人不足2个字#联系人不能填写特殊符号" });
+            $('#Phone').formValidator({ tipid: 'Phone_Tip', onfocus: '请正确填写电话号码，分机可以用“-”分开。', q2b: true }).regexValidator({ regexp: "(^(0\\d{2,3})?-?([2-9]\\d{6,7})(-\\d{1,5})?$)|(^((\\(\\d{3}\\))|(\\d{0}))?(13|14|15|18)\\d{9}$)|(^(400|800)\\d{7}(-\\d{1,5})?$)|(^(95013)\\d{6,8}$)", onerror: "电话填写错误。<br/>请参照格式填写：87654321-001或138********" });
+            $('#IM').formValidator({ tipid: 'IM_Tip', onfocus: '只能填写一个qq或msn。<br>格式如：123456 或 myname@flxxwang.com', q2b: true, 'empty': true }).regexValidator({ regexp: "(^[1-9]\\d{4,9}$)|(^\\w+((-\\w+)|(\\.\\w+))*\\@[A-Za-z0-9]+((\\.|-)[A-Za-z0-9]+)*\\.[A-Za-z0-9]+$)", onerror: "QQ或MSN输入错误" });
+
+            <%bool showObjectTypRow= ViewTag.Interface.ObjectTypeCollection != null&&ViewTag.Interface.ObjectTypeCollection.Count>0;%>
+            var showObjectType=<%=showObjectTypRow.ToString().ToLower() %>;
+            if(showObjectType)
+            {
+                $('#ObjectType').formValidator({ tipid: 'ObjectType_Tip', onfocus: '' }).functionValidator({ fun: function (val, elem) { return val != ''; }, onerror: '类别是必选项' });
+            }
+
+        }); 
+    </script>
+    <asp:ContentPlaceHolder ID="PostScript" runat="server" />
+    <script type="text/javascript">
+        function FillData(obj) {
+            if (obj == null) {
+                return;
+            }
+            obj.Title = $("#Title").val();
+            obj.ObjectType = parseInt($("#ObjectType").val(), 10);
+            var Tags = $(':checkbox[name="Tag"]:checked');
+            if (Tags.length >= 1) {
+                obj.Tag1 = parseInt($(Tags[0]).val(), 10);
+            }
+            if (Tags.length >= 2) {
+                obj.Tag2 = parseInt($(Tags[1]).val(), 10);
+            }
+            if (Tags.length >= 3) {
+                obj.Tag3 = parseInt($(Tags[2]).val(), 10);
+            }
+            if (Tags.length >= 4) {
+                obj.Tag4 = parseInt($(Tags[3]).val(), 10);
+            }
+            if (Tags.length >= 5) {
+                obj.Tag5 = parseInt($(Tags[4]).val(), 10);
+            }
+            if (Tags.length >= 6) {
+                obj.Tag6 = parseInt($(Tags[5]).val(), 10);
+            }
+            if (Tags.length >= 7) {
+                obj.Tag7 = parseInt($(Tags[6]).val(), 10);
+            }
+            if (Tags.length >= 8) {
+                obj.Tag8 = parseInt($(Tags[7]).val(), 10);
+            }
+            if (Tags.length >= 9) {
+                obj.Tag9 = parseInt($(Tags[8]).val(), 10);
+            }
+            if (Tags.length >= 10) {
+                obj.Tag10 = parseInt($(Tags[9]).val(), 10);
+            }
+            if (Tags.length >= 11) {
+                obj.Tag11 = parseInt($(Tags[10]).val(), 10);
+            }
+            if (Tags.length >= 12) {
+                obj.Tag12 = parseInt($(Tags[11]).val(), 10);
+            }
+            obj.Address = $("#dizhi").val();
+            obj.Content = $("#Content").val();
+            obj.ContactPerson = $("#goblianxiren").val();
+            obj.Phone = $("#Phone").val();
+            obj.QQOrMSN = $("#IM").val();
+            //            obj.IsBiz = $("#IsBiz").attr("checked");
+
+            obj.YellowPageType =<%=Convert.ToInt32(YellowPage.YellowPageType) %>;
+
+            obj.UserId = GetUserId();
+            
+            obj.CityId = GetCityId();
+            obj.RegionId = GetRegionId();
+            obj.CircleId = GetCircleId();
+            obj.TId = GetTId();
+            if ($("#Pic").val() != "") {
+                obj.Pictures = $("#Pic").val();
+            }
+        }
+        //    function clearPicValue() {//保留
+        //        var c = $("#pdv:hidden"); if (c.length > 0) {
+        //            $('#Pic').val(''); $('#PicDesc').val('');
+        //        }
+        //    }
+</script>
+
+    <script type="text/javascript">
+        <%var showTag=ViewTag.Interface.TagCollection!=null&&ViewTag.Interface.TagCollection.Count>0; %>
+       var showTag=<%=showTag.ToString().ToLower() %>;
+        $(document).ready(function () {
+            if(showTag)
+            {
+                $('#ObjectType').get(0).onchange = function () {
+                    $info.gettag("ObjectType", "tt", "tagul");
+                    setTimeout($.j.initTagCheck, 1000);
+                    $('#infotag_Tip').html('').removeClass();
+                };
+                $info.gettag("ObjectType", "tt", "tagul");
+                setTimeout($.j.initTagCheck, 1000);
+            }
+        });
+    </script>
+    
+</asp:Content>

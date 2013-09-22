@@ -1,0 +1,96 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Views/Shared/post/poststep.Master" Inherits="System.Web.Mvc.ViewMasterPage" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <asp:ContentPlaceHolder ID="head" runat="server" />
+</asp:Content>
+<asp:Content ID="Content4" ContentPlaceHolderID="PublishCount" runat="server">
+    <asp:ContentPlaceHolder ID="PublishCount" runat="server" />
+</asp:Content>
+<asp:Content ID="Content5" ContentPlaceHolderID="TopMsg" runat="server">
+1、同一只宠物狗请不要<b>跨城市</b>发布，否则将会被删除。<br>
+2、信息标题<b><font class="Apple-style-span" color="#FF0000">关键字堆砌将被删除</font></b>。如“哪里有XX犬”、“XX犬价格等”。<br>
+3、联系方式中填写虚假电话，信息将会被删除，严重者冻结账户。<br>
+4、请不要把卖狗的信息发到<b>赠送</b>里面，否则将会被删除。
+</asp:Content>
+<asp:Content ID="Content6" ContentPlaceHolderID="Main" runat="server">
+    <table cellpadding="0" cellspacing="0" class="box1" id="formTb">
+<asp:ContentPlaceHolder ID="FormRows" runat="server" />
+
+<tr> 
+    <td class="t"> <b class="red">*</b> 联系人： </td> 
+    <td>
+        <input type="text" name="goblianxiren" id="goblianxiren" value='' class="text2"  maxLength=6 /> &nbsp; 
+        <input class="base" type="checkbox" value="1" id="IsBiz" name="IsBiz"  />我是商家 <span id="goblianxiren_Tip"></span> 
+    </td> 
+</tr> 
+<tr> 
+    <td class="t"> <b class="red">*</b> 手机或电话： </td> 
+    <td> <input class="text2" type="text" id="Phone" name="Phone" value=''   /> <span id="Phone_Tip"></span> </td> 
+</tr> 
+<tr>
+    <td class="t">QQ或MSN：</td><td><input class="text2" type="text" qtb="true" value='' id="IM" name="IM" /> <span id="IM_Tip"></span></td>
+</tr>  
+<tr> 
+    <td class="t"> </td> 
+    <td> <input type="submit" id="fabu" class="fabu1" value="　　发布　　" ct="submit" />  </td> 
+</tr>
+</table>
+</asp:Content>
+<asp:Content ID="Content7" ContentPlaceHolderID="PostScript" runat="server">
+    <asp:ContentPlaceHolder ID="PostScript" runat="server" />
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#IM').formValidator({ tipid: 'IM_Tip', onfocus: '只能填写一个qq或msn。<br>格式如：123456 或 myname@flxxwang.com', q2b: true, 'empty': true }).regexValidator({ regexp: "(^[1-9]\\d{4,9}$)|(^\\w+((-\\w+)|(\\.\\w+))*\\@[A-Za-z0-9]+((\\.|-)[A-Za-z0-9]+)*\\.[A-Za-z0-9]+$)", onerror: "QQ或MSN输入错误" });
+        $("#Phone").formValidator({ tipid: "Phone_Tip", onfocus: "请正确填写电话号码，分机可以用“-”分开", q2b: true }).inputValidator({ onerror: "请填写电话号码" }).regexValidator({ regexp: "(^(0\\d{2,3})?-?([2-9]\\d{6,7})(-\\d{1,5})?$)|(^((\\(\\d{3}\\))|(\\d{0}))?(13|14|15|18)\\d{9}$)|(^(400|800)\\d{7}(-\\d{1,5})?$)|(^(95013)\\d{6,8}$)", onerror: "电话填写错误。<br/>请参照格式填写：87654321-001或138********" });
+        $('#goblianxiren').formValidator({ tipid: 'goblianxiren_Tip', onfocus: '2~6个字，不能填写电话和联系方式', q2b: true }).regexValidator({ regexp: "\\S+#^(.){2,6}$#^[\\w\\d\\s\\u4e00-\\u9fa5]*$", onerror: "请输入联系人#联系人不足2个字#联系人不能填写特殊符号" });
+    });
+</script>
+<script type="text/javascript">
+    $("#mydear").hide();
+    function FillData(obj) {
+        if (obj == null) {
+            return;
+        }
+        obj.Title = $("#Title").val();
+        obj.Type = parseInt(getRadioValue("type"), 10);  //+ 1;
+        obj.ObjectType = parseInt($("#ObjectType").val(), 10);
+        obj.Content = $("#Content").val();
+        obj.Price = $("#MinPrice").val();
+        if (obj.Price == "" || obj.Price == "面议") {
+            obj.Price = 0;
+        }
+        else {
+            obj.Price = parseInt(obj.Price, 10);
+        }
+
+        var Tags = $(':checkbox[name="Tag"]:checked');
+        if (Tags.length >= 1) {
+            obj.Tag1 = parseInt($(Tags[0]).val(), 10);
+        }
+        if (Tags.length >= 2) {
+            obj.Tag2 = parseInt($(Tags[1]).val(), 10);
+        }
+        if (Tags.length >= 3) {
+            obj.Tag3 = parseInt($(Tags[2]).val(), 10);
+        }
+        if (Tags.length >= 4) {
+            obj.Tag4 = parseInt($(Tags[3]).val(), 10);
+        }
+        if (Tags.length >= 5) {
+            obj.Tag5 = parseInt($(Tags[4]).val(), 10);
+        }
+
+        obj.ContactPerson = $("#goblianxiren").val();
+        obj.Phone = $("#Phone").val();
+        obj.QQOrMSN = $("#IM").val();
+        obj.IsBiz = $("#IsBiz").attr("checked");
+
+        obj.UserId = GetUserId();
+        
+        obj.CityId = GetCityId();
+        obj.RegionId = GetRegionId();
+        obj.CircleId = GetCircleId();
+        obj.TId = GetTId();
+    }
+    
+</script>
+</asp:Content>

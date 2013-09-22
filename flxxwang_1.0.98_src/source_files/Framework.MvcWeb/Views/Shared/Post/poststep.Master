@@ -1,0 +1,410 @@
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+<%@ Import Namespace="Framework.Common" %>
+<%@ Import Namespace="Infomation.Core.Mvc" %>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <%
+        var routeData = (HttpContext.Current.Handler as MvcHandler).RequestContext.RouteData;
+        var ViewTag = ViewData["ViewTag"] as ViewTag;
+    %>
+    <title>发布<%=ViewTag.Interface.City.ShortName %><%=ViewTag.Interface.Category.Name%>信息-<%=ViewTag.Interface.City.ShortName %><%=SiteInfo.Name%></title>
+    <link href="/Telerik.Web.UI/Skins/Window.css" type="text/css" rel="Stylesheet" />
+    <link href="/Telerik.Web.UI/Skins/Default/Window/Default.css" type="text/css" rel="Stylesheet" />
+    <script type="text/javascript" src="/Scripts/MicrosoftAjax.js"></script>
+    <script type="text/javascript" src="/Telerik.Web.UI/Common/Core.js"></script>
+    <script type="text/javascript" src="/Telerik.Web.UI/Common/Popup/PopupScripts.js"></script>
+    <script type="text/javascript" src="/Scripts/jquery-1.5.1.min.js"></script>
+    <script type="text/javascript" src="/Telerik.Web.UI/Common/jQueryPlugins.js"></script>
+    <script type="text/javascript" src="/Telerik.Web.UI/Window/RadWindowScripts.js"></script>
+
+    <script type="text/javascript" src="/Content/Fenlei/Scripts/comm_js/1.js"></script>
+
+    <script type="text/javascript" src="/Content/Fenlei/Scripts/7b/3.js"></script>
+    <script type="text/javascript" src="/Content/Fenlei/Scripts/c8/28.js"></script>
+
+    <script src="/Scripts/framework/framework.js" type="text/javascript"></script>
+    <script src="/Scripts/framework/Area/city_debug.js" type="text/javascript"></script>
+    <script src="/Scripts/framework/cookie.js" type="text/javascript"></script>
+    <script src="/Scripts/framework/db.js" type="text/javascript"></script>
+
+    <script src="/Content/Fenlei/Scripts/post/formValidator.js?v20110101" type="text/javascript"></script>
+
+    <script src="/Content/Fenlei/Scripts/post/j.js" type="text/javascript"></script>
+
+    <script type="text/javascript" src="/Content/Fenlei/Scripts/Infomation.js?v20120501"></script>
+    <script src="/Content/Fenlei/Scripts/fileupload/upload.js?v20110101" type="text/javascript"></script>
+    <script type="text/javascript">
+        var __jsoninfo = { city: '<%=routeData.Values["city"] %>', tid: '<%=routeData.Values["tid"] %>' };
+    </script>
+
+    <script type="text/javascript" src="/Content/Fenlei/Scripts/comm_js/boot_postpage_version.js"></script>
+
+    <script type="text/javascript" src="/content/fenlei/scripts/model.js"></script>
+
+    <link rel="shortcut icon" href="/content/fenlei/assets/images/favicon.ico" />
+    <link href="/Content/Fenlei/css/post/post.css?version=20110627" type="text/css" rel="stylesheet" />
+
+    <asp:ContentPlaceHolder ID="head" runat="server" />
+</head>
+<body>
+<div id="header">
+	<a href="<%=Url.Action("Default","Home") %>" id="logo" target="_blank">
+        <img src="/Content/Fenlei/assets/images/logo/logo.gif"  title="<%=SiteInfo.Name%>" alt="flxxwang.com" />
+    </a>
+	<div class="bar_city">
+        <h2><%=ViewTag.City.ShortName %></h2>
+    </div>
+    <div class="post_login">
+      	<div id="login">
+            <a target="_self" href="<%=Url.Action("Login","My") %>">登录</a><span class="gap">|</span>
+            <a target="_self" href="<%=Url.Action("Reg","My") %>">注册</a>
+        </div>
+    </div>
+</div>
+<%
+    var stepNum = 0;
+    var action=routeData.Values["action"].ToString().ToLower();
+    if (action == "index")
+    {
+        stepNum = 1;
+    }
+    else if (action == "s2"||action=="s2_job"||action=="s2_jobjz")
+    {
+        stepNum = 2;
+    }
+    else if (action == "s3")
+    {
+        stepNum = 3;
+    }
+    else if (action == "s4")
+    {
+        stepNum = 4;
+    }
+    else if (action == "post")
+    {
+        stepNum = 5;
+    }
+    IEnumerable<InfoCategory> infoCategories = null;
+    InfoCategory infoCategory = null;
+    Region region = null;
+    Circle circle = null;
+    if (stepNum > 1)
+    {
+        infoCategories = this.ViewData["categories"] as IEnumerable<InfoCategory>;
+    }
+    if (stepNum > 2)
+    {
+        infoCategory = this.ViewData["category"] as InfoCategory;
+    }
+    if (stepNum > 3)
+    {
+        region = this.ViewData["Region"] as Region;
+    }
+    if (stepNum > 4)
+    {
+        circle = this.ViewData["Circle"] as Circle;
+    }
+%>
+
+
+<div class="flow_step_no<%=stepNum %>">
+    <!-- s --> 
+    <div class="flow_step">
+        <ol class="cols5">
+            <li class="step_1"><div><i>1</i>
+                <%
+                    if (stepNum == 1)
+                    {
+                        %>
+                        选择大类
+                        <%
+                    }
+                    else if(stepNum==2)
+                    {
+                        %>
+                            <%=Html.ActionLink(infoCategories.First().Parent.Name, "Index", "post")%>
+                        <%
+                    }
+                    else if (stepNum > 2)
+                    {
+                        %>
+                            <%=Html.ActionLink(infoCategory.Parent.Name,"Index","post") %>
+                        <%
+                    }
+                %>
+                <span></span></div><em class="f1"></em>
+            </li>
+            <li class="step_2"><div><i>2</i>
+                <%
+                    if (stepNum == 2)
+                    {
+                        %>
+                        选择小类
+                        <%
+                    }
+                    else if(stepNum>2)
+                    {
+                        %>
+                            <%=Html.ActionLink(infoCategory.Name, "s2","post", new { values = this.ViewData["ParentCode"] },null)%>
+                        <%
+                    }
+                %>
+                <span></span></div>
+            </li>
+            <li class="step_3"><div><i>3</i>
+                <%
+                    if (stepNum == 3)
+                    {
+                        %>
+                        选择区域
+                        <%
+                    }
+                    else if(stepNum>3)
+                    {
+                        if (region != null)
+                        {
+                            %>
+                            <%=Html.ActionLink(region.Name, "s3","post", new { values = this.ViewData["ParentCode"] + "/" + this.ViewData["ChildCode"] },null)%>
+                            <%
+                        }
+                        else
+                        {
+                            %>
+                            <%=Html.ActionLink("全"+City.GetCityByCode(routeData.Values["city"].ToString()).ShortName, "s3", "post", new { values = this.ViewData["ParentCode"] + "/" + this.ViewData["ChildCode"] }, null)%>
+                            <%
+                        }
+                        
+                    }
+                %>
+                <span></span></div>
+            </li>
+            <li class="step_4"><div><i>4</i>
+                <%
+                    if (stepNum == 4)
+                    {
+                        %>
+                        选择商圈
+                        <%
+                    }
+                    else if(stepNum>4)
+                    {
+                        if (circle != null)
+                        {
+                            %>
+                            <%=Html.ActionLink(circle.Name, "s4","post", new { values = this.ViewData["ParentCode"] + "/" + this.ViewData["ChildCode"]+"/"+region.Id },null)%>
+                            <%
+                        }
+                        else
+                        {
+                            if (region != null)
+                            {
+                                %>
+                                <%=Html.ActionLink("全"+region.Name, "s4", "post", new { values = this.ViewData["ParentCode"] + "/" + this.ViewData["ChildCode"] + "/" + region.Id }, null)%>
+                                <%
+                            }
+                            else
+                            {
+                                %>
+                                选择商圈
+                                <%
+                            }
+                        }
+                    }
+                %>
+                <span></span>
+                </div>
+            </li>
+            <li class="step_5"><div><i>5</i>填写信息<span></span></div><em class="f2"></em></li>
+        </ol>
+    </div>
+</div>
+
+<div class="minheightout w">
+    <div class="c"></div>
+    <div class="content">
+        <div id="toperro" class="hc"></div>
+        <div id="mydear" name="mydear">
+            <p class="ts1">
+                <span class="ietishi">无法发布？<a href="#" target="_blank">查看帮助</a></span>
+                &nbsp;亲爱的 <b> qdbhuiop</b>，你的信用值是 <b class="red">60</b>
+                <span name="leftcountspan" style="display:none">，今天在 
+                <b> 
+                    <%=ViewTag.Interface.Category.Name %>
+                </b> 你还可以发布 
+                <b name="leftcount" class="red">
+                    <asp:ContentPlaceHolder ID="PublishCount" runat="server" />
+                </b>条信息！</span>
+            </p>
+        </div> 
+        <div id="topinfomsg">
+            <%--为保护购买者权益，<%=SiteInfo.Name%>将对
+            <font color="#ff0000">商家冒充个人</font>
+            的行为加强识别和处理。
+            跳蚤市场具体版规，
+            <a href="http://about.flxxwang.com/89.html#tiaozao" target="_blank">请点此查看。</a>--%>
+            <asp:ContentPlaceHolder ID="TopMsg" runat="server" />
+        </div>
+        <form name="aspnetForm" method="post" target="formSubmit" id="aspnetForm" enctype="multipart/form-data">
+            <div id="main">
+                <asp:ContentPlaceHolder ID="Main" runat="server" />
+            </div>
+            <div>
+            
+            <%
+                if (SiteInfo.IsTaojen)
+                {
+                    %>
+                    <%--960*90首页横幅--%>
+                    <%=UnionAd.Baidu_960_90.Code %>
+                    <%
+                }
+                else
+                {
+                    %>
+                    <%--728 x 90 - 首页横幅--%>
+                    <%=UnionAd.Google_728_90.Code %>
+                    <%    
+                }
+            %>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="footer">
+    &copy; 2010 flxxwang.com 
+    <%--<a href="http://flxxwang.com/help/">帮助中心</a>--%>
+</div>
+
+<div>
+    <div style="display: none;" id="radWindow">
+        <div id="radWindow_C"></div>
+        <input id="radWindow_ClientState" name="radWindow_ClientState" type="hidden"/>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function formValidatorSuccess()//如果果子页面需要修改formValidatorSuccess的功能，只需要在子页面写一个这个函数.
+    {
+        posting();
+        post();
+        return false; //阻止表单提交.
+    }
+    // $(document).ready(function () {
+    //     $.formValidator.initConfig({ formID: "aspnetForm", errorFocus: true, theme: "ArrowSolidBox", submitOnce: true,
+    //         onSuccess: formValidatorSuccess
+    //     });
+    // });
+
+    $.formValidator.initConfig({ formid: "aspnetForm", errorfocus: true, btnid: 'fabu', fun: formValidatorSuccess
+    });
+
+    //     function setFabuState(isFabu) {
+    //         if (isFabu) {
+    //             $("#fabu").attr("disabled", "disabled");
+    //             $("#fabu").val("正在发布...");
+    //         }
+    //         else {
+    //             $("#fabu").attr("disabled", "");
+    //             $("#fabu").val("发布");
+    //         }
+    //     }
+    function onSuccess(data, textStatus, jqXHR) {
+        posted();
+
+        var url = '<%=Url.Action("detail", routeData.Values["controller"].ToString(), new { smallcategory=routeData.Values["smallcategory"],id="id-id" })%>';
+        url = url.replace("id-id", data.Id);
+
+        var successUrl = '<%=Url.Action("success", "post", new { values="values-values"})%>';
+        successUrl = successUrl.replace("values-values",url.substr(1));
+        location.href = successUrl;
+        //alert("发布成功!");
+    }
+    function onFailed(jqXHR, textStatus, errorThrown) {
+        posted();
+        alert(errorThrown);
+    }
+    function onFinished() {//比如表单验证不通过时调用.
+        posted();
+    }
+    function posting() {
+        $("#fabu").attr("disabled", "disabled");
+        $("#fabu").val("正在发布...");
+    }
+    function posted() {
+        $("#fabu").attr("disabled", "");
+        $("#fabu").val("发布");
+    }
+    function getRadioValue(name) {
+        var obj = $(':radio[name="' + name + '"]:checked');
+        return obj.attr('value');
+    }
+    function GetUserId() {
+        var _userId = $f.cookie.get("userId");
+        if (_userId == null || _userId == "") {
+            return null;
+        }
+        return parseInt(_userId, 10);
+    }
+    function GetCityId() {
+        var cityid = "<%=ViewTag.CityId %>";
+        if (cityid == "") {
+            return null;
+        }
+        return parseInt(cityid, 10);
+    }
+    function GetRegionId() {
+        var regionid = "<%=ViewTag.RegionId %>";
+        if (regionid == "") {
+            return null;
+        }
+        return parseInt(regionid, 10);
+    }
+    function GetCircleId() {
+        var circleid = "<%=ViewTag.CircleId %>";
+        if (circleid == "") {
+            return null;
+        }
+        return parseInt(circleid, 10);
+    }
+    function GetTId() {
+        var _tid = parseInt(__jsoninfo.tid.substr(1), 10);
+        if (_tid == 0) {
+            return null;
+        }
+        else {
+            return _tid;
+        }
+    }
+ </script>
+
+<asp:ContentPlaceHolder ID="PostScript" runat="server" />
+
+<script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-26929121-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function () {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+</script>
+
+<div style="display:none;">
+    <script type="text/javascript">
+            var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+            document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F6500c0b919d3d8e37db64dba3329109d' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+
+    <script language="javascript" type="text/javascript" src="http://js.users.51.la/3273253.js"></script>
+    <noscript><a href="http://www.51.la/?3273253" target="_blank"><img alt="<%=SiteInfo.Name%> -- taojen.com" src="http://img.users.51.la/3273253.asp" style="border:none" /></a></noscript>
+    <script type="text/javascript" src="/Areas/Tongji/Content/tongji.js"></script>
+</div>
+
+</body>
+</html>

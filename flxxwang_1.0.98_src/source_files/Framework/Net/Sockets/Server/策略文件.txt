@@ -1,0 +1,26 @@
+﻿
+Flash:
+<?xml version="1.0"?>
+<cross-domain-policy> 
+      <site-control permitted-cross-domain-policies="all"/>
+      <allow-access-from domain="*" to-ports="4505" />
+</cross-domain-policy>
+或
+<cross-domain-policy>   
+<allow-access-from domain="*" to-ports="*"/>   
+</cross-domain-policy>
+
+Silverlight:
+<?xml version="1.0" encoding ="utf-8"?>
+<access-policy>
+  <cross-domain-access>
+    <policy>
+      <allow-from>
+        <domain uri="*" />
+      </allow-from>
+      <grant-to>
+        <socket-resource port="4502-4534" protocol="tcp" />
+      </grant-to>
+    </policy>
+  </cross-domain-access>
+</access-policy>

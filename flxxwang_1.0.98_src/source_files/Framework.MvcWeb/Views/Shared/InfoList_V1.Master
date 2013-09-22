@@ -1,0 +1,786 @@
+﻿<%@ Master Language="C#" Inherits="Infomation.Core.Mvc.InfoListViewMasterPage" %>
+<%@ Import Namespace="Infomation.Core.Extensions" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title><%=Empty.PageTitle %></title>
+    <meta name="description" content="<%=Empty.PageDescription %>" />
+    <meta name="keywords" content="<%=Empty.PageKeywords %>" />
+    <link href="/Areas/fenlei/Content/ui6/list/list.css?v20110101" type="text/css" rel="Stylesheet" />
+    <script type="text/javascript" src="/Scripts/jquery-1.5.1-vsdoc.js"></script>
+    <script type="text/javascript" src="/Scripts/framework/framework.js?v20110101"></script>
+    <script type="text/javascript" src="/Scripts/framework/Area/city_debug.js"></script>
+    <%--<script type="text/javascript" src="/Scripts/framework/cookie.js?v20110101"></script>--%>
+    <script type="text/javascript" src="/Scripts/framework/urlhelper.js?v20110101"></script>
+    <%--<script type="text/javascript" src="/Scripts/area.js?v20110101"></script>--%>
+    <script type="text/javascript" src="/Areas/Fenlei/Scripts/Infomation.js?v20110101"></script>
+    <asp:ContentPlaceHolder ID="Head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <%--<form id="form1" runat="server">--%>
+
+    <div id="topbar"></div>
+
+    <div id="header">
+        <a href="/" id="minlogo">杭州58同城</a>
+        <span id="crumbs">
+            <%--<a href="/">杭州58同城</a>--%>
+            <%
+                foreach (var item in Empty.InfoPath)
+                {
+                    %>
+                    <%--<a href='<%=Url.Action(item.ActionName,item.ControllerName,item.RouteValues) %>'><%=item.LinkText %></a>--%>
+                    <%=item.Link(Html) %>
+                    <%
+                }
+            %>
+        </span>
+    </div>
+
+    <div id="selection">
+        <dl class="secitem">
+            <dt>类型：</dt>
+            <dd>
+                <%--<asp:ContentPlaceHolder ID="ObjectType" runat="server"/>--%>
+                <%
+                if (ObjectType == null)
+                {
+                    %>
+                        <%--<a href="" class='select' onclick="$info.setObjectType(location.href,null);return false;">全部</a>--%>
+                        <a href="<%=RemoveRouteValue("objecttype",true)%>" class='select'>全部</a>
+                    <%
+                }
+                else
+                {
+                    %>
+                        <a href="<%=RemoveRouteValue("objecttype",true)%>">全部</a>
+                    <%
+                }
+                %>
+    
+                <%
+                    foreach (var obj in ObjectTypeCollection)
+                    {
+                        if (ObjectType != null && ObjectType == obj.Id)
+                        {
+                            %>
+                            <a href="<%=AddRouteValue("objecttype",obj.Id,true) %>" class='select'><%=obj.Name%></a>
+                            <%
+                        }
+                        else
+                        {
+                            %>
+                            <a href="<%=AddRouteValue("objecttype",obj.Id,true) %>"><%=obj.Name%></a>
+                            <%
+                        }
+                    }
+                %>
+            </dd>
+        </dl>
+        <dl class="secitem">
+            <dt>区域：</dt>
+            <dd id="regions">
+                <%--<a href="/bangong/" class='select'>全杭州</a>
+                <a href="/xihuqu/bangong/">西湖</a>
+                <a href="/gongshu/bangong/">拱墅</a>
+                <a href="/jianggan/bangong/">江干</a>
+                <a href="/xiacheng/bangong/">下城</a>
+                <a href="/hzshangcheng/bangong/">上城</a>
+                <a href="/binjiang/bangong/">滨江</a>
+                <a href="/yuhang/bangong/">余杭</a>
+                <a href="/xiaoshan/bangong/">萧山</a>
+                <a href="/hangzhou/bangong/">杭州周边</a>--%>
+                
+                <%
+                    if (this.CurrentRegion == null)
+                    {
+                        %>
+                            <a href="<%=RemoveRouteValue("region",true)%>" class='select'>全<%=this.CurrentCity.ShortName%></a>
+                        <%
+                    }
+                    else
+                    {
+                         %>
+                            <a href="<%=RemoveRouteValue("region",true)%>">全<%=this.CurrentCity.ShortName%></a>
+                        <%
+                    }
+                 %>
+
+                 <%
+                     foreach (var region in this.Regions)
+                     {
+                         if (this.CurrentRegion != null && region.Id == this.CurrentRegion.Id)
+                         {
+                             %>
+                                <a href="<%=AddRouteValue("region",region.Id,true) %>" class='select'><%=region.Name%></a>
+                             <%
+                         }
+                         else
+                         {
+                             %>
+                                <a href="<%=AddRouteValue("region",region.Id,true) %>"><%=region.Name%></a>
+                             <%
+                         }
+                     }
+                  %>
+            </dd>
+        </dl>
+        <dl class="secitem">
+            <dt>价格：</dt>
+            <dd id="priceRange">
+                <%--<a href="http://hz.58.com/bangong/" class='select'>全部</a>
+                <a href="/bangong/e1/" >50元以下</a>
+                <a href="/bangong/e2/" >50-100元</a>
+                <a href="/bangong/e3/" >100-200元</a>
+                <a href="/bangong/e4/" >200-500元</a>
+                <a href="/bangong/e5/" >500-1500元</a>
+                <a href="/bangong/e6/" >2000-3000元</a>
+                <a href="/bangong/e7/" >3000元以上</a>--%>
+
+                <a href="" onclick="$info.setPriceRange(location.href,null);return false;">全部</a>
+                <a href="" onclick="$info.setPriceRange(location.href,1);return false;">50元以下</a>
+                <a href="" onclick="$info.setPriceRange(location.href,2);return false;">50-100元</a>
+                <a href="" onclick="$info.setPriceRange(location.href,3);return false;">100-200元</a>
+                <a href="" onclick="$info.setPriceRange(location.href,4);return false;">200-500元</a>
+                <a href="" onclick="$info.setPriceRange(location.href,5);return false;">500-1500元</a>
+                <a href="" onclick="$info.setPriceRange(location.href,6);return false;">2000-3000元</a>
+                <a href="" onclick="$info.setPriceRange(location.href,7);return false;">3000元以上</a>
+
+                
+                <span class="prifilter">
+                    <span class="text text2">
+                        <input id="minPrice" type="text" para="minprice" muti="1" size="3"  onkeyup="cknum(this)" min="0" name="b_q" /> 
+                        -  
+                        <input id="maxPrice" type="text" muti="1" para="minprice" size="3"  onkeyup="cknum(this)" min="0" name="b_q" />  
+                        元 
+                    </span>
+                    <span class="btn btn2">
+                        <%--<input type="button" value="价格筛选" onclick="b_query()" />--%>
+                        <input type="button" value="价格筛选" onclick="priceQuery()" />
+                        
+                    </span>
+                </span>
+            </dd>
+        </dl>
+        <div class="secitem" id="keyfilter">
+            <span class="text">
+                <%--<input type="text" para="key" name="b_q" id="keyword1" fdv="" class="keyword" onkeyup="win1.GetContentData();" value="" />--%>
+                <input type="text" para="key" name="b_q" id="keyword1" fdv="" class="keyword" value="" />
+            </span>
+            <span class="btn">
+                <%--<input type="button" id="searchbtn1" onclick="b_query('final=1&jump=2&searchtype=3')" value="搜索" />--%>
+                <%--<input type="button" id="searchbtn1" onclick="keywordQuery();" value="搜索" />--%>
+                <input type="button" id="searchbtn1" onclick="$info.keywordQuery(location.href,$('#keyword1').val());" value="搜索" />
+            </span>
+        </div>
+        <div id="selected" class="bar"></div>
+        <i class="shadow"></i>
+    </div>
+
+    <div id="filter">
+        <div class="tabs" id="tabs">
+            <a href="<%=Empty.PostLink.Url(Url) %>" target="_blank" class="pubbtn">免费发布<%=PostLinkText%>&raquo;</a>
+            <%--<asp:ContentPlaceHolder ID="Publish" runat="server"/>--%>
+            <a class='select' href="javascript:$info.bizOnly(location.href,null);"><span>全部物品</span></a>
+            <%if (this.RepeaterPersonal.DataSource != null)
+              { %>
+            <a  href="javascript:$info.bizOnly(location.href,0);"><span>个人闲置</span></a>
+            <%} %>
+            <%if (this.RepeaterBiz.DataSource != null)
+              { %>
+            <a  href="javascript:$info.bizOnly(location.href,1);"><span>商家出售</span></a>
+            <%} %>
+        </div>
+        <div class="filterbar">
+            <h1>
+                杭州<%--办公用品/设备--%>
+                <span name="curInfoType"></span>
+            </h1>
+            
+            <a href="http://about.58.com/zhiding.html" target="_blank" class="tip_ding"><span class="c_r">置顶</span>，让信息效果更好</a>
+            <a href="#" rel="nofollow" onclick="g2({selpic:1});return false" class="filterico toText"><span>切换到文本</span></a>
+            <span class="filterico selector"><span>发布日期</span>
+                <ul class="hc" style="width:79px">
+                    <%--<li><a href="#" rel="nofollow" name="b_s" para="postdate" cv="3" onclick="g2({postdate:3});return false">三天内</a></li>
+                    <li><a href="#" rel="nofollow" name="b_s" para="postdate" cv="7" onclick="g2({postdate:7});return false">一周内</a></li>
+                    <li><a href="#" rel="nofollow" name="b_s" para="postdate" cv="30" onclick="g2({postdate:30});return false">一月内</a></li>
+                    <li><a href="#" rel="nofollow" onclick="g2({postdate:null});return false">全部时间</a></li>--%>
+                    <li><a href="#" rel="nofollow" name="b_s" para="postdate" cv="3" onclick="dateQuery(3);return false">三天内</a></li>
+                    <li><a href="#" rel="nofollow" name="b_s" para="postdate" cv="7" onclick="dateQuery(7);return false">一周内</a></li>
+                    <li><a href="#" rel="nofollow" name="b_s" para="postdate" cv="30" onclick="dateQuery(30);return false">一月内</a></li>
+                    <li><a href="#" rel="nofollow" onclick="dateQuery(null);return false">全部时间</a></li>
+                    <i class="shadow"></i>
+                </ul>
+            </span>
+            <span class="checkbox">
+                <%--<input name="" type="checkbox" value="" id="ispic" onclick="click_Ispic(this)" />--%>
+                <input name="" type="checkbox" value="" id="ispic" onclick="isPicQuery(this)" />
+                <label for="ispic">有图</label>
+            </span>
+            <i class="clear"></i>
+        </div>
+    </div>
+
+    <div id="main">
+        <div id="infolist">
+            <table cellspacing="0" cellpadding="0" class="tbimg">
+                <col width="80" />
+                <col width="100" />
+                <col />
+                <col width="60" />
+
+                    <%if (this.RepeaterPersonal.DataSource != null)
+                      { %>
+                    <tr id="trPersonal"><td class="dev" colspan="4">杭州<%--办公用品/设备--%><span name="curInfoType"></span> - 个人信息 [<a href="javascript:$info.bizOnly(location.href,0);" title="只看个人信息">只看个人</a>]</td></tr>
+                    <%} %>
+
+                    <tr><td colspan="4" class="google"><div id="top_google_ad"></div></td></tr>
+                    
+                    <asp:Repeater ID="Repeater" runat="server">
+                        <ItemTemplate>
+                            <tr>
+                                <td class="img"><a href="<%#InfoUrl(Container.DataItem,Url) %>" target="_blank">
+                                    <img src="<%#Container.DataItem.Conver() %>" /></a>
+                                </td>
+                                <td class="tc"><%#PriceToString(Container.DataItem) %></td>
+                                <td class="t">
+                                    <a href="<%#InfoUrl(Container.DataItem,Url) %>" target="_blank" class="t"><%#Eval("Title") %></a>
+                                    <span class="ico area"><%#ArearLink(Container.DataItem) %></span>
+                                    <span class="ico tu" style="display:<%#PictureListToDisplay(Container.DataItem) %>"></span>
+                                </td>
+                                <td class="pd"><%#DateCreated(Container.DataItem,"MM-dd") %></td>
+                            </tr>
+                        </ItemTemplate>
+                      </asp:Repeater>
+        
+                    <%--<tr>
+                    <td class="img"><a href="http://hz.58.com/bangong/5551299507074x.shtml" target="_blank"><img src="http://pic2.58.com/n/images/list/noimg.gif" /></a></td>
+                    <td class="tc">面议</td>
+                    <td class="t"><a href="http://hz.58.com/bangong/5551299507074x.shtml" target="_blank" class="t">雷斯杰NX-500针式打印机转让</a><span class="ico area"><a href="/gongshu/bangong/">拱墅</a></span></td>
+                    <td class="pd">3小时</td>
+                    </tr>
+        
+                       <tr>
+                        <td class="img"><a href="http://hz.58.com/bangong/5273944626182x.shtml" target="_blank"><img src="http://pic2.58.com/n/images/list/noimg.gif" /></a></td>
+                        <td class="tc">面议</td>
+                        <td class="t"><a href="http://hz.58.com/bangong/5273944626182x.shtml" target="_blank" class="t">急转办公家具设备等</a><span class="ico area"><a href="/miqiao/bangong/">笕桥</a></span></td>
+                        <td class="pd">04-22</td>
+                      </tr>
+        
+                       <tr>
+                        <td class="img"><a href="http://hz.58.com/bangong/5560718669831x.shtml" target="_blank"><img src="http://3.pic.58control.cn/p1/tiny/n_10538958310148.jpg" /></a></td>
+                        <td class="tc"><b class='pri'>330</b> 元</td>
+                        <td class="t"><a href="http://hz.58.com/bangong/5560718669831x.shtml" target="_blank" class="t">热敏纸传真机</a><span class="ico area"><a href="/xihujingqu/bangong/">西湖</a>- <a href='?xiaoqu=333703'>玉古路</a></span><span class="ico tu"></span></td>
+                        <td class="pd">04-22</td>
+                      </tr>
+        
+                       <tr>
+                        <td class="img"><a href="http://hz.58.com/bangong/5551590352897x.shtml" target="_blank"><img src="http://pic2.58.com/n/images/list/noimg.gif" /></a></td>
+                        <td class="tc">面议</td>
+                        <td class="t"><a href="http://hz.58.com/bangong/5551590352897x.shtml" target="_blank" class="t">爱普生打印机</a><span class="ico area"><a href="/wangjianghz/bangong/">望江</a>- <a href='?xiaoqu=332844'>始版桥社区</a></span></td>
+                        <td class="pd">04-21</td>
+                      </tr>
+        
+                       <tr>
+                        <td class="img"><a href="http://hz.58.com/bangong/5550774333831x.shtml" target="_blank"><img src="http://pic2.58.com/n/images/list/noimg.gif" /></a></td>
+                        <td class="tc"><b class='pri'>350</b> 元</td>
+                        <td class="t"><a href="http://hz.58.com/bangong/5550774333831x.shtml" target="_blank" class="t">求购二手针式打印机</a><span class="ico area"><a href="/deshenghz/bangong/">德胜</a>- <a href='?xiaoqu=7357'>新青年广场</a></span></td>
+                        <td class="pd">04-21</td>
+                      </tr>
+        
+                       <tr>
+                        <td class="img"><a href="http://hz.58.com/bangong/5021293283330x.shtml" target="_blank"><img src="http://1.pic.58control.cn/p1/tiny/n_9460025811204.jpg" /></a></td>
+                        <td class="tc"><b class='pri'>120</b> 元</td>
+                        <td class="t"><a href="http://hz.58.com/bangong/5021293283330x.shtml" target="_blank" class="t">荣讯-RX600T无线固话机无线座机.移动3G无线</a><span class="ico area"><a href="/bangong/">杭州</a></span><span class="ico tu"></span></td>
+                        <td class="pd">04-21</td>
+                      </tr>
+        
+                       <tr>
+                        <td class="img"><a href="http://hz.58.com/bangong/5539546718727x.shtml" target="_blank"><img src="http://pic2.58.com/n/images/list/noimg.gif" /></a></td>
+                        <td class="tc">面议</td>
+                        <td class="t"><a href="http://hz.58.com/bangong/5539546718727x.shtml" target="_blank" class="t">08年买的扫描仪</a><span class="ico area"><a href="/puyan/bangong/">浦沿</a></span></td>
+                        <td class="pd">04-20</td>
+                      </tr>
+        
+                       <tr>
+                        <td class="img"><a href="http://hz.58.com/bangong/5538667659655x.shtml" target="_blank"><img src="http://pic2.58.com/n/images/list/noimg.gif" /></a></td>
+                        <td class="tc">面议</td>
+                        <td class="t"><a href="http://hz.58.com/bangong/5538667659655x.shtml" target="_blank" class="t">采购办公屏风</a><span class="ico area"><a href="/bangong/">杭州</a></span></td>
+                        <td class="pd">04-20</td>
+                      </tr>
+        
+                       <tr>
+                        <td class="img"><a href="http://hz.58.com/bangong/5538206227459x.shtml" target="_blank"><img src="http://1.pic.58control.cn/p1/tiny/n_10493946679556.jpg" /></a></td>
+                        <td class="tc"><b class='pri'>1350</b> 元</td>
+                        <td class="t"><a href="http://hz.58.com/bangong/5538206227459x.shtml" target="_blank" class="t">转让明基投影机 和 3米长电动幕布</a><span class="ico area"><a href="/wenyilu/bangong/">文一路</a></span><span class="ico tu"></span></td>
+                        <td class="pd">04-20</td>
+                      </tr>
+        
+                       <tr>
+                        <td class="img"><a href="http://hz.58.com/bangong/5485053473538x.shtml" target="_blank"><img src="http://pic2.58.com/n/images/list/noimg.gif" /></a></td>
+                        <td class="tc">面议</td>
+                        <td class="t"><a href="http://hz.58.com/bangong/5485053473538x.shtml" target="_blank" class="t">夏普1818复印机</a><span class="ico area"><a href="/baiyang/bangong/">白杨</a> - 下沙</span></td>
+                        <td class="pd">04-20</td>
+                      </tr>
+        
+                       <tr>
+                        <td class="img"><a href="http://hz.58.com/bangong/5529984986886x.shtml" target="_blank"><img src="http://pic2.58.com/n/images/list/noimg.gif" /></a></td>
+                        <td class="tc">面议</td>
+                        <td class="t"><a href="http://hz.58.com/bangong/5529984986886x.shtml" target="_blank" class="t">求购步步高113型HCD007113来电显示电话机</a><span class="ico area"><a href="/wensanlu/bangong/">文三路</a></span></td>
+                        <td class="pd">04-19</td>
+                      </tr>
+        
+                       <tr>
+                        <td class="img"><a href="http://hz.58.com/bangong/5528568110854x.shtml" target="_blank"><img src="http://pic2.58.com/n/images/list/noimg.gif" /></a></td>
+                        <td class="tc">面议</td>
+                        <td class="t"><a href="http://hz.58.com/bangong/5528568110854x.shtml" target="_blank" class="t">求购打印复印一体机</a><span class="ico area"><a href="/baiyang/bangong/">白杨</a></span></td>
+                        <td class="pd">04-19</td>
+                      </tr>
+        
+                       <tr>
+                        <td class="img"><a href="http://hz.58.com/bangong/5427418045830x.shtml" target="_blank"><img src="http://4.pic.58control.cn/p1/tiny/n_10272368762881.jpg" /></a></td>
+                        <td class="tc"><b class='pri'>150</b> 元</td>
+                        <td class="t"><a href="http://hz.58.com/bangong/5427418045830x.shtml" target="_blank" class="t">9成新大电脑桌五张1.3m*0.8m</a><span class="ico area"><a href="/puyan/bangong/">浦沿</a>- <a href='?xiaoqu=332477'>东冠新农村</a></span><span class="ico tu"></span></td>
+                        <td class="pd">04-19</td>
+                      </tr>
+        
+                       <tr>
+                        <td class="img"><a href="http://hz.58.com/bangong/5525711970818x.shtml" target="_blank"><img src="http://1.pic.58control.cn/p1/tiny/n_10468968174596.jpg" /></a></td>
+                        <td class="tc">面议</td>
+                        <td class="t"><a href="http://hz.58.com/bangong/5525711970818x.shtml" target="_blank" class="t">乘风点菜机2500元</a><span class="ico area"><a href="/xixing/bangong/">西兴</a>- <a href='?xiaoqu=13015'>春波小区</a></span><span class="ico tu"></span></td>
+                        <td class="pd">04-19</td>
+                      </tr>
+        
+                       <tr>
+                        <td class="img"><a href="http://hz.58.com/bangong/5497039213959x.shtml" target="_blank"><img src="http://3.pic.58control.cn/p1/tiny/n_10479868716292.jpg" /></a></td>
+                        <td class="tc"><b class='pri'>100</b> 元</td>
+                        <td class="t"><a href="http://hz.58.com/bangong/5497039213959x.shtml" target="_blank" class="t">超低价转让欧式屏风桌</a><span class="ico area"><a href="/bangong/">杭州</a> - 拱墅区,旧货...</span><span class="ico tu"></span></td>
+                        <td class="pd">04-19</td>
+                      </tr>
+        
+                       <tr>
+                        <td class="img"><a href="http://hz.58.com/bangong/5517654375171x.shtml" target="_blank"><img src="http://3.pic.58control.cn/p1/tiny/n_10452850015492.jpg" /></a></td>
+                        <td class="tc"><b class='pri'>1400</b> 元</td>
+                        <td class="t"><a href="http://hz.58.com/bangong/5517654375171x.shtml" target="_blank" class="t">出售8.5成新的投影机</a><span class="ico area"><a href="/bangong/">杭州</a></span><span class="ico tu"></span></td>
+                        <td class="pd">04-18</td>
+                      </tr>
+        
+                       <tr>
+                        <td class="img"><a href="http://hz.58.com/bangong/5486524725249x.shtml" target="_blank"><img src="http://1.pic.58control.cn/p1/tiny/n_10405784053764.jpg" /></a></td>
+                        <td class="tc"><b class='pri'>400</b> 元</td>
+                        <td class="t"><a href="http://hz.58.com/bangong/5486524725249x.shtml" target="_blank" class="t">办公桌4个座位带柜子和电脑主机位还有电脑桌</a><span class="ico area"><a href="/bangong/">杭州</a>- <a href='?xiaoqu=332531'>西溪花园</a></span><span class="ico tu"></span></td>
+                        <td class="pd">04-18</td>
+                      </tr>
+        
+                       <tr>
+                        <td class="img"><a href="http://hz.58.com/bangong/2563745688193x.shtml" target="_blank"><img src="http://pic2.58.com/n/images/list/noimg.gif" /></a></td>
+                        <td class="tc"><b class='pri'>500</b> 元</td>
+                        <td class="t"><a href="http://hz.58.com/bangong/2563745688193x.shtml" target="_blank" class="t">松下传真机出售</a><span class="ico area"><a href="/beigan/bangong/">北干</a></span></td>
+                        <td class="pd">04-17</td>
+                      </tr>
+        
+                       <tr>
+                        <td class="img"><a href="http://hz.58.com/bangong/5501527311875x.shtml" target="_blank"><img src="http://pic2.58.com/n/images/list/noimg.gif" /></a></td>
+                        <td class="tc"><b class='pri'>100</b> 元</td>
+                        <td class="t"><a href="http://hz.58.com/bangong/5501527311875x.shtml" target="_blank" class="t">转让封朔机一台</a><span class="ico area"><a href="/gongshuqu/bangong/">拱墅周边</a> - 新文村</span></td>
+                        <td class="pd">04-17</td>
+                      </tr>
+        
+                       <tr>
+                        <td class="img"><a href="http://hz.58.com/bangong/5499388163847x.shtml" target="_blank"><img src="http://pic2.58.com/n/images/list/noimg.gif" /></a></td>
+                        <td class="tc"><b class='pri'>350</b> 元</td>
+                        <td class="t"><a href="http://hz.58.com/bangong/5499388163847x.shtml" target="_blank" class="t">低价转让票据打印机送打印纸</a><span class="ico area"><a href="/wensanlu/bangong/">文三路</a></span></td>
+                        <td class="pd">04-16</td>
+                      </tr>--%>
+        
+
+
+                      <asp:Repeater ID="RepeaterPersonal" runat="server">
+                        <ItemTemplate>
+                            <tr>
+                                <td class="img"><a href="<%#InfoUrl(Container.DataItem,Url) %>" target="_blank">
+                                    <img src="<%#Container.DataItem.Conver() %>" /></a>
+                                </td>
+                                <td class="tc"><%#PriceToString(Container.DataItem) %></td>
+                                <td class="t">
+                                    <a href="<%#InfoUrl(Container.DataItem,Url) %>" target="_blank" class="t"><%#Eval("Title") %></a>
+                                    <span class="ico area"><%#ArearLink(Container.DataItem) %></span>
+                                    <span class='ico biz' style="display:<%#BizToDisplay(Container.DataItem) %>">商家</span>
+                                    <span class="ico tu" style="display:<%#PictureListToDisplay(Container.DataItem) %>"></span>
+                                </td>
+                                <td class="pd"><%#DateCreated(Container.DataItem,"MM-dd") %></td>
+                            </tr>
+                        </ItemTemplate>
+                      </asp:Repeater>
+
+                      <%if (this.RepeaterBiz.DataSource != null)
+                        { %>
+                      <tr id="trBiz"><td colspan="4" class="dev">杭州<%--办公用品/设备--%><span name="curInfoType"></span> - 商家信息 [<a href="javascript:$info.bizOnly(location.href,1);" title="只看商家信息">只看商家</a>]</td></tr>
+                      <%} %>  
+
+                      <asp:Repeater ID="RepeaterBiz" runat="server">
+                        <ItemTemplate>
+                            <tr>
+                                <td class="img"><a href="<%#InfoUrl(Container.DataItem,Url) %>" target="_blank">
+                                    <img src="<%#Container.DataItem.Conver() %>" /></a>
+                                </td>
+                                <td class="tc"><%#PriceToString(Container.DataItem) %></td>
+                                <td class="t">
+                                    <a href="<%#InfoUrl(Container.DataItem,Url) %>" target="_blank" class="t"><%#Eval("Title") %></a>
+                                    <span class="ico area"><%#ArearLink(Container.DataItem) %></span>
+                                    <span class='ico biz' style="display:<%#BizToDisplay(Container.DataItem) %>">商家</span>
+                                    <span class="ico tu" style="display:<%#PictureListToDisplay(Container.DataItem) %>"></span>
+                                </td>
+                                <td class="pd"><%#DateCreated(Container.DataItem,"MM-dd") %></td>
+                            </tr>
+                        </ItemTemplate>
+                        </asp:Repeater>  
+
+
+
+
+                      <%--<tr>
+                        <td class="img"><a href="http://hz.58.com/bangong/5572349238663x.shtml" target="_blank"><img src="http://pic2.58.com/n/images/list/noimg.gif" /></a></td>
+                        <td class="tc">面议</td>
+                        <td class="t"><a href="http://hz.58.com/bangong/5572349238663x.shtml" target="_blank" class="t">加粉、办公耗材批发,可送货上门,欢迎公司采购</a><span class="ico area"><a href="/bangong/">杭州</a> - 杭州百脑汇</span><span class='ico biz'>商家</span></td>
+                        <td class="pd">1小时</td>
+                      </tr>
+        
+                      <tr>
+                        <td class="img"><a href="http://hz.58.com/bangong/5156906196099x.shtml" target="_blank"><img src="http://2.pic.58control.cn/p1/tiny/n_9731224487428.jpg" /></a></td>
+                        <td class="tc">面议</td>
+                        <td class="t"><a href="http://hz.58.com/bangong/5156906196099x.shtml" target="_blank" class="t">办公家具 椅子 文件柜 大班台 屏风位</a><span class="ico area"><a href="/bangong/">杭州</a>- <a href='?xiaoqu=1296'>亲亲家园</a></span><span class='ico biz'>商家</span><span class="ico tu"></span></td>
+                        <td class="pd">4小时</td>
+                      </tr>
+        
+                      <tr>
+                        <td class="img"><a href="http://hz.58.com/bangong/5106351113473x.shtml" target="_blank"><img src="http://4.pic.58control.cn/p1/tiny/n_9630235464964.jpg" /></a></td>
+                        <td class="tc">面议</td>
+                        <td class="t"><a href="http://hz.58.com/bangong/5106351113473x.shtml" target="_blank" class="t">PSA变压吸附 空分 中 小型工业制氧机</a><span class="ico area"><a href="/fuyangshi/bangong/">富阳市</a> - 富阳</span><span class='ico biz'>商家</span><span class="ico tu"></span></td>
+                        <td class="pd">5小时</td>
+                      </tr>
+        
+                      <tr>
+                        <td class="img"><a href="http://hz.58.com/bangong/5466227365377x.shtml" target="_blank"><img src="http://4.pic.58control.cn/p1/tiny/n_10349847166466.jpg" /></a></td>
+                        <td class="tc"><b class='pri'>450</b> 元</td>
+                        <td class="t"><a href="http://hz.58.com/bangong/5466227365377x.shtml" target="_blank" class="t">杭州二手针式打印机开票打印机销售</a><span class="ico area"><a href="/bangong/">杭州</a></span><span class='ico biz'>商家</span><span class="ico tu"></span></td>
+                        <td class="pd">14小时</td>
+                      </tr>
+        
+                      <tr>
+                        <td class="img"><a href="http://hz.58.com/bangong/5472690682887x.shtml" target="_blank"><img src="http://3.pic.58control.cn/p1/tiny/n_10362901714433.jpg" /></a></td>
+                        <td class="tc">面议</td>
+                        <td class="t"><a href="http://hz.58.com/bangong/5472690682887x.shtml" target="_blank" class="t">杭州二手针式打印机传真机等销售</a><span class="ico area"><a href="/bangong/">杭州</a></span><span class='ico biz'>商家</span><span class="ico tu"></span></td>
+                        <td class="pd">14小时</td>
+                      </tr>
+        
+                      <tr>
+                        <td class="img"><a href="http://hz.58.com/bangong/5566311321607x.shtml" target="_blank"><img src="http://1.pic.58control.cn/p1/tiny/n_10550158490884.jpg" /></a></td>
+                        <td class="tc">面议</td>
+                        <td class="t"><a href="http://hz.58.com/bangong/5566311321607x.shtml" target="_blank" class="t">杭州二手打印机传真机.二手针式开票打印机销售</a><span class="ico area"><a href="/bangong/">杭州</a></span><span class='ico biz'>商家</span><span class="ico tu"></span></td>
+                        <td class="pd">14小时</td>
+                      </tr>
+        
+                      <tr>
+                        <td class="img"><a href="http://hz.58.com/bangong/3981940151811x.shtml" target="_blank"><img src="http://1.pic.58control.cn/p1/tiny/n_7381422683396.jpg" /></a></td>
+                        <td class="tc"><b class='pri'>750</b> 元</td>
+                        <td class="t"><a href="http://hz.58.com/bangong/3981940151811x.shtml" target="_blank" class="t">保修1年的杭州二手打印机,打印发票快递单出库单</a><span class="ico area"><a href="/bangong/">杭州</a></span><span class='ico biz'>商家</span><span class="ico tu"></span></td>
+                        <td class="pd">18小时</td>
+                      </tr>
+        
+                      <tr>
+                        <td class="img"><a href="http://hz.58.com/bangong/5474694756099x.shtml" target="_blank"><img src="http://3.pic.58control.cn/p1/tiny/n_10366792315906.jpg" /></a></td>
+                        <td class="tc">面议</td>
+                        <td class="t"><a href="http://hz.58.com/bangong/5474694756099x.shtml" target="_blank" class="t">出售日本四通二手发票打印机OKI5530</a><span class="ico area"><a href="/bangong/">杭州</a>- <a href='?xiaoqu=7427'>景芳三区</a></span><span class='ico biz'>商家</span><span class="ico tu"></span></td>
+                        <td class="pd">18小时</td>
+                      </tr>
+        
+                      <tr>
+                        <td class="img"><a href="http://hz.58.com/bangong/4105411124737x.shtml" target="_blank"><img src="http://3.pic.58control.cn/p1/tiny/n_7628296931074.jpg" /></a></td>
+                        <td class="tc"><b class='pri'>700</b> 元</td>
+                        <td class="t"><a href="http://hz.58.com/bangong/4105411124737x.shtml" target="_blank" class="t">全杭州最好的发票打印机/快递单打印机</a><span class="ico area"><a href="/bangong/">杭州</a></span><span class='ico biz'>商家</span><span class="ico tu"></span></td>
+                        <td class="pd">18小时</td>
+                      </tr>
+        
+                      <tr>
+                        <td class="img"><a href="http://hz.58.com/bangong/3981907474434x.shtml" target="_blank"><img src="http://3.pic.58control.cn/p1/tiny/n_7381297562882.jpg" /></a></td>
+                        <td class="tc"><b class='pri'>700</b> 元</td>
+                        <td class="t"><a href="http://hz.58.com/bangong/3981907474434x.shtml" target="_blank" class="t">全杭州最好的发票打印机</a><span class="ico area"><a href="/xiacheng/bangong/">下城</a></span><span class='ico biz'>商家</span><span class="ico tu"></span></td>
+                        <td class="pd">18小时</td>
+                      </tr>
+        
+                      <tr>
+                        <td class="img"><a href="http://hz.58.com/bangong/5474301534598x.shtml" target="_blank"><img src="http://4.pic.58control.cn/p1/tiny/n_10366125704705.jpg" /></a></td>
+                        <td class="tc">面议</td>
+                        <td class="t"><a href="http://hz.58.com/bangong/5474301534598x.shtml" target="_blank" class="t">萧山金属打标机南阳党山打标机闻堰打标机</a><span class="ico area"><a href="/bangong/">杭州</a></span><span class='ico biz'>商家</span><span class="ico tu"></span></td>
+                        <td class="pd">20小时</td>
+                      </tr>
+        
+                      <tr>
+                        <td class="img"><a href="http://hz.58.com/bangong/5561517424641x.shtml" target="_blank"><img src="http://2.pic.58control.cn/p1/tiny/n_10540569270020.jpg" /></a></td>
+                        <td class="tc"><b class='pri'>400</b> 元</td>
+                        <td class="t"><a href="http://hz.58.com/bangong/5561517424641x.shtml" target="_blank" class="t">急转二人屏风办公桌</a><span class="ico area"><a href="/xixing/bangong/">西兴</a></span><span class='ico biz'>商家</span><span class="ico tu"></span></td>
+                        <td class="pd">04-22</td>
+                      </tr>
+        
+                      <tr>
+                        <td class="img"><a href="http://hz.58.com/bangong/5572454220423x.shtml" target="_blank"><img src="http://pic2.58.com/n/images/list/noimg.gif" /></a></td>
+                        <td class="tc"><b class='pri'>9800</b> 元</td>
+                        <td class="t"><a href="http://hz.58.com/bangong/5572454220423x.shtml" target="_blank" class="t">GCC云豹刻字机 P3-60DX伺服进口刻绘机</a><span class="ico area"><a href="/bangong/">杭州</a></span><span class='ico biz'>商家</span></td>
+                        <td class="pd">04-22</td>
+                      </tr>
+        
+                      <tr>
+                        <td class="img"><a href="http://hz.58.com/bangong/3702601457026x.shtml" target="_blank"><img src="http://3.pic.58control.cn/p1/tiny/n_6822740371460.jpg" /></a></td>
+                        <td class="tc"><b class='pri'>6300</b> 元</td>
+                        <td class="t"><a href="http://hz.58.com/bangong/3702601457026x.shtml" target="_blank" class="t">DATAMAX4604打印头,DATAMAX打印头</a><span class="ico area"><a href="/bangong/">杭州</a></span><span class='ico biz'>商家</span><span class="ico tu"></span></td>
+                        <td class="pd">04-22</td>
+                      </tr>
+        
+                      <tr>
+                        <td class="img"><a href="http://hz.58.com/bangong/5068524872579x.shtml" target="_blank"><img src="http://2.pic.58control.cn/p1/tiny/n_9562392430084.jpg" /></a></td>
+                        <td class="tc">面议</td>
+                        <td class="t"><a href="http://hz.58.com/bangong/5068524872579x.shtml" target="_blank" class="t">厂家直销办公家 椅子  屏风  办公桌</a><span class="ico area"><a href="/wenxin/bangong/">文新</a>- <a href='?xiaoqu=1296'>亲亲家园</a></span><span class='ico biz'>商家</span><span class="ico tu"></span></td>
+                        <td class="pd">04-22</td>
+                      </tr>
+        
+                      <tr>
+                        <td class="img"><a href="http://hz.58.com/bangong/5520091759874x.shtml" target="_blank"><img src="http://3.pic.58control.cn/p1/tiny/n_10457590823428.jpg" /></a></td>
+                        <td class="tc"><b class='pri'>800</b> 元</td>
+                        <td class="t"><a href="http://hz.58.com/bangong/5520091759874x.shtml" target="_blank" class="t">七成新EPSON  激光彩打印机</a><span class="ico area"><a href="/wangjianghz/bangong/">望江</a>- <a href='?xiaoqu=333510'>望江家园</a></span><span class='ico biz'>商家</span><span class="ico tu"></span></td>
+                        <td class="pd">04-22</td>
+                      </tr>
+        
+                      <tr>
+                        <td class="img"><a href="http://hz.58.com/bangong/5109491520003x.shtml" target="_blank"><img src="http://4.pic.58control.cn/p1/tiny/n_9636518861316.jpg" /></a></td>
+                        <td class="tc"><b class='pri'>650</b> 元</td>
+                        <td class="t"><a href="http://hz.58.com/bangong/5109491520003x.shtml" target="_blank" class="t">出售日本四通二手发票打印机OKI5530</a><span class="ico area"><a href="/bangong/">杭州</a>- <a href='?xiaoqu=15337'>景芳一区</a></span><span class='ico biz'>商家</span><span class="ico tu"></span></td>
+                        <td class="pd">04-22</td>
+                      </tr>
+        
+                      <tr>
+                        <td class="img"><a href="http://hz.58.com/bangong/5519808973314x.shtml" target="_blank"><img src="http://2.pic.58control.cn/p1/tiny/n_10457154794756.jpg" /></a></td>
+                        <td class="tc"><b class='pri'>600</b> 元</td>
+                        <td class="t"><a href="http://hz.58.com/bangong/5519808973314x.shtml" target="_blank" class="t">二手大型施洛复印机  A4 B5 A3纸都能复印</a><span class="ico area"><a href="/wangjianghz/bangong/">望江</a>- <a href='?xiaoqu=333510'>望江家园</a></span><span class='ico biz'>商家</span><span class="ico tu"></span></td>
+                        <td class="pd">04-22</td>
+                      </tr>
+        
+                      <tr>
+                        <td class="img"><a href="http://hz.58.com/bangong/5520000768518x.shtml" target="_blank"><img src="http://1.pic.58control.cn/p1/tiny/n_10457539956228.jpg" /></a></td>
+                        <td class="tc"><b class='pri'>300</b> 元</td>
+                        <td class="t"><a href="http://hz.58.com/bangong/5520000768518x.shtml" target="_blank" class="t">二手佳能 激光打印机</a><span class="ico area"><a href="/wangjianghz/bangong/">望江</a>- <a href='?xiaoqu=333510'>望江家园</a></span><span class='ico biz'>商家</span><span class="ico tu"></span></td>
+                        <td class="pd">04-22</td>
+                      </tr>
+        
+                      <tr>
+                        <td class="img"><a href="http://hz.58.com/bangong/5554506595079x.shtml" target="_blank"><img src="http://2.pic.58control.cn/p1/tiny/n_10526540539140.jpg" /></a></td>
+                        <td class="tc">面议</td>
+                        <td class="t"><a href="http://hz.58.com/bangong/5554506595079x.shtml" target="_blank" class="t">杭州二手打印机传真机针式开票打印机一体机</a><span class="ico area"><a href="/bangong/">杭州</a></span><span class='ico biz'>商家</span><span class="ico tu"></span></td>
+                        <td class="pd">04-21</td>
+                      </tr>--%>
+        
+                      <tr><td colspan="4" class="google"><div id="taobao"></div></td></tr> 
+                      <tr><td colspan="4" class="google"><div id="bottom_google_ad"></div></td></tr>
+                </table>
+
+            <div class="pager">
+                <%--<strong><span>1</span></strong>&nbsp;
+                <a href="/bangong/pn2/"><span>2</span></a>&nbsp;
+                <a href="/bangong/pn3/"><span>3</span></a>&nbsp;
+                <a href="/bangong/pn4/"><span>4</span></a>&nbsp;
+                <a href="/bangong/pn5/"><span>5</span></a>&nbsp;
+                <a href="/bangong/pn6/"><span>6</span></a>&nbsp;
+                <a href="/bangong/pn7/"><span>7</span></a>&nbsp;
+                <a href="/bangong/pn8/"><span>8</span></a>&nbsp;
+                <a href="/bangong/pn9/"><span>9</span></a>&nbsp;
+                <a href="/bangong/pn10/"><span>10</span></a>&nbsp;
+                <a href="/bangong/pn11/"><span>11</span></a>&nbsp;
+                <a class="next" href="/bangong/pn2/"><span>下一页</span></a>&nbsp; --%>
+                <%--<asp:ContentPlaceHolder ID="Pager" runat="server"/>--%>
+                <webdiyer:AspNetPager ID="AspNetPager" runat="server" PageSize="20" 
+                    ShowPageIndexBox="Always" UrlPaging="True" LayoutType="Div"
+                    AlwaysShow="True" style="vertical-align:middle" HorizontalAlign="Right" 
+                      onpagechanged="AspNetPager_PageChanged">
+                </webdiyer:AspNetPager>
+            </div>
+
+            <div id="infocont">
+                <a href="<%=Empty.PostLink.Url(Url) %>" target="_blank">马上发布一条<%=PostLinkText%>信息&raquo;</a>
+            </div>
+        </div>
+        <div id="rightframe"><div id="ad19"></div></div>
+    </div>
+
+    <div id="links">
+        <i class="line"></i>
+        <div class="links">
+            杭州二手<%=PostLinkText%>频道为您提供杭州二手<%=PostLinkText%>信息，在此有大量杭州二手<%=PostLinkText%>信息供您选择，您可以免费查看和发布<a href="http://www.58.com/bangong/" name="pubLink" target="_blank">二手<%=PostLinkText%></a>信息。<%=PostLinkText%>板块内的信息内容系用户自行发布，其真实性、合法性由发布人负责，flxxwang.com不提供任何保证，亦不承担任何法律责任。
+        </div>
+        <i class="line"></i>
+        <ul class="links">
+            <%
+                                                              foreach (var link in Empty.CityLinks)
+                                                              {
+                    %>
+                    <%--<li><a href='<%=link.Url %>' target="_self"><%=link.Text%></a></li>--%>
+                    <li><%=link.Link(Html) %></li>
+                    <%
+                                                              }
+             %>
+        </ul>
+        <i class='line'></i>
+        <div class='links'>
+            <strong>友情链接</strong>:
+            <%--<a href='http://www.mjbuy.com' target='_blank'>IT商城</a>&nbsp;--%>
+            <%
+                                                              foreach (var item in Empty.FriendLinks)
+                                                              {
+                    %>
+                    <%--<a href='<%=Url.Action(item.ActionName,item.ControllerName,item.RouteValues) %>' target='_blank'><%=item.LinkText%></a>&nbsp;--%>
+                    <%=item.Link(Html, new { target = "_blank" })%>&nbsp;
+                    <%
+                }
+            %>
+            <a href="/link.html" target="_blank">更多>></a>
+            <a href="http://link.58control.cn/AppCateLink.aspx?PlaceID=5&CityID=79&CateID=38" target="_blank">自动申请链接</a>
+        </div>
+    </div>
+
+    <div id="footer">
+        &copy; 58.com <a id="askicon" target="_blank" title="有问题请与58客服进行对话" href="http://about.58.com/v5/">与58对话</a>
+    </div>
+
+    <%--</form>--%>
+
+    <script type="text/javascript">
+        //hover效果
+        $(".haschild").each(function () {
+            $(this).hover(function () { $(this).addClass("hover") }, function () { $(this).removeClass("hover") });
+        })
+
+        $(function () {
+            $("#infolist tr").each(function () {
+                $(this).hover(function () { $(this).addClass("bg") }, function () { $(this).removeClass("bg") });
+            })
+        })
+        $(".selector").each(function () {
+            $(this).hover(function () { $(this).addClass("hover") }, function () { $(this).removeClass("hover") });
+        })
+    </script>
+    <script type="text/javascript">
+        var curInfoType = null;
+        var pubLink = null;
+        $(document).ready(function () {
+            //            $('span[name="curInfoType"]').text(curInfoType);
+            //            $('a[name="pubLink"]').attr("href", pubLink);
+            //            $('a[name="pubLink"]').html(curInfoType);
+            //            $("#publish").attr("href", pubLink);
+            //            $("#publish").html("免费发布" + curInfoType + "&raquo;");
+
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var biz = $f.url.getUrlParam(location.href, "isbiz");
+            if (biz == null || biz == '') {
+                $("#trPersonal").css("display", "");
+                $("#trBiz").css("display", "");
+            }
+            else {
+                $("#trPersonal").css("display", "none");
+                $("#trBiz").css("display", "none");
+            }
+
+            if (biz==null||biz== '') {
+                $("#tabs a:eq(1)").addClass("select");
+                $("#tabs a:eq(2)").removeClass("select");
+                $("#tabs a:eq(3)").removeClass("select");
+
+            }
+            else if (biz == "1") {
+                $("#tabs a:eq(1)").removeClass("select");
+                $("#tabs a:eq(2)").removeClass("select");
+                $("#tabs a:eq(3)").addClass("select");
+            }
+            else {
+                $("#tabs a:eq(1)").removeClass("select");
+                $("#tabs a:eq(2)").addClass("select");
+                $("#tabs a:eq(3)").removeClass("select");
+            }
+
+        });
+
+        $(document).ready(function () {
+            var priceRange = $f.url.getUrlParam(location.href, "pricerange");
+            var minPrice = $f.url.getUrlParam(location.href, "minprice");
+            var maxPrice = $f.url.getUrlParam(location.href, "maxprice");
+            $("#minPrice").val(minPrice);
+            $("#maxPrice").val(maxPrice);
+            if (priceRange == "" && minPrice == "" && maxPrice == "") {
+                $("#priceRange a:eq(0)").addClass("select");
+            }
+            else {
+
+                if (priceRange == 1) {
+                    $("#priceRange a:eq(1)").addClass("select");
+                }
+                else if (priceRange == 2) {
+                    $("#priceRange a:eq(2)").addClass("select");
+                }
+                else if (priceRange == 3) {
+                    $("#priceRange a:eq(3)").addClass("select");
+                }
+                else if (priceRange == 4) {
+                    $("#priceRange a:eq(4)").addClass("select");
+                }
+                else if (priceRange == 5) {
+                    $("#priceRange a:eq(5)").addClass("select");
+                }
+                else if (priceRange == 6) {
+                    $("#priceRange a:eq(6)").addClass("select");
+                }
+                else if (priceRange == 7) {
+                    $("#priceRange a:eq(7)").addClass("select");
+                }
+            }
+
+            var ispic = $f.url.getUrlParam(location.href, "ispic");
+            if (ispic == "1") {
+                $("#ispic").attr("checked", "true");
+            }
+            $("#keyword1").val($f.url.getUrlParam(location.href, "wd"));
+        });
+
+        function priceQuery() {
+            var minPrice = $("#minPrice").val();
+            var maxPrice = $("#maxPrice").val();
+            var url = $f.url.addUrlParam(location.href, "minprice", minPrice);
+            url = $f.url.addUrlParam(url, "maxprice", maxPrice);
+            url = $f.url.removeUrlParam(url, "pricerange");
+            location.href = url;
+        }
+        function isPicQuery(sender) {
+            if ($(sender).attr("checked")) {
+                location.href =$f.url.addUrlParam(location.href,"ispic", 1);
+            }
+            else {
+                location.href = $f.url.removeUrlParam(location.href,"ispic");
+            }
+
+        }
+        function dateQuery(days) {
+            if (days == null) {
+                location.href = $f.url.removeUrlParam(location.href, "days");
+            }
+            else {
+                location.href = $f.url.addUrlParam(location.href, "days", days);
+            }
+
+        }
+    </script>
+    <asp:ContentPlaceHolder ID="Scripts" runat="server"/>
+</body>
+</html>

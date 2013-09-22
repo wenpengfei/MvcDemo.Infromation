@@ -1,0 +1,1 @@
+﻿http://plugins.jquery.com/project/Pager
